@@ -1,0 +1,1013 @@
+// Supabase Configuration
+const SUPABASE_URL = 'https://cznbsgilnxwanzcixnvq.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_UpQY7XuEBbRDr_7zDdJFwg_eXaNqBTV';
+const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const data = {
+    costs: {
+        airbnbTotal: 460.10,
+        carRentalTotal: 168.64,
+        parkingTotal: 67.00,
+        disneyTicket: 190.00,
+        universalTicket: 142.00
+    },
+    people: {
+        Jackie: { headcount: 1, isAdult: true },
+        Alex: { headcount: 1, isAdult: true },
+        Crystal: { headcount: 1, isAdult: true },
+        Erica: { headcount: 4, isAdult: true, includesKids: true, kidsNames: ['Allyson', 'Caroline', 'Mackenzie'] }
+    },
+    custom: { Jackie: [], Alex: [], Crystal: [], Erica: [] },
+    payments: {},
+    itinerary: []
+};
+
+let currentActivePerson = 'Jackie';
+let itineraryEditMode = false;
+let isMagicMode = false;
+let tinkClicks = 0;
+let tinkTimer = null;
+
+window.initApp = async function () {
+    // Identity check removed for global visibility
+    // checkIdentity(); 
+    initMagicTrigger();
+    restoreAdminMode(); // Restore admin status from localStorage
+    await Promise.all([
+        fetchExpenses(),
+        fetchItinerary(),
+        fetchPayments()
+    ]);
+    // Default showBreakdown to currentActivePerson 
+    showBreakdown(currentActivePerson);
+    renderItinerary();
+    setupSubscriptions();
+};
+
+function restoreAdminMode() {
+    if (localStorage.getItem('disney_admin_mode') === 'true') {
+        isMagicMode = true;
+        document.body.classList.add('admin-active');
+        const indicator = document.getElementById('admin-indicator');
+        if (indicator) indicator.style.display = 'block';
+    }
+}
+
+function initMagicTrigger() {
+    const tink = document.getElementById('tinkerbell-header');
+    if (!tink) return;
+
+    tink.style.cursor = 'pointer'; // Hint it's interactive
+    tink.addEventListener('click', () => {
+        tinkClicks++;
+        clearTimeout(tinkTimer);
+
+        if (tinkClicks === 3) {
+            const password = prompt("Enter Magic Password ✨");
+            if (password === '1004') {
+                alert("Access Granted! Magic Unlocked. 🏰");
+                isMagicMode = true;
+                localStorage.setItem('disney_admin_mode', 'true'); // Persist admin status
+
+                // Toggle UI state for CSS override
+                document.body.classList.add('admin-active');
+
+                // Show Indicator
+                const indicator = document.getElementById('admin-indicator');
+                if (indicator) indicator.style.display = 'block';
+
+                showBreakdown(currentActivePerson); // Refresh to show admin toggles
+            } else {
+                alert("Incorrect Password. Try again if you have the magic! ✨");
+            }
+            tinkClicks = 0;
+        }
+
+        tinkTimer = setTimeout(() => {
+            tinkClicks = 0;
+        }, 2000);
+    });
+}
+
+// --- IDENTITY LOGIC (Disabled for Global Access) ---
+/*
+function checkIdentity() {
+    // 1. Check URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const userParam = urlParams.get('user');
+
+    if (userParam && data.people[userParam]) {
+        saveUser(userParam);
+        return;
+    }
+
+    // 2. Check localStorage
+    // Updated key to v2 to force a reset for everyone
+    const savedUser = localStorage.getItem('disney_user_v2');
+    if (savedUser && data.people[savedUser]) {
+        currentActivePerson = savedUser;
+        // User is locked in, nothing else needed
+        return;
+    }
+
+    // 3. No user found, show overlay
+    showIdentityOverlay();
+}
+
+window.showIdentityOverlay = function () {
+    const overlay = document.getElementById('identity-overlay');
+    if (overlay) overlay.style.display = 'flex';
+};
+
+window.selectUser = function (name) {
+    const confirmation = confirm(`Are you sure you are ${name}? ✨\n\nYou won't be able to change this later.`);
+    if (confirmation) {
+        saveUser(name);
+        const overlay = document.getElementById('identity-overlay');
+        if (overlay) overlay.style.display = 'none';
+    }
+};
+
+function saveUser(name) {
+    localStorage.setItem('disney_user_v2', name);
+    currentActivePerson = name;
+    if (typeof showBreakdown === 'function') showBreakdown(name);
+}
+*/
+
+// --- EXPENSES LOGIC ---
+async function fetchExpenses() {
+    const { data: expenses, error } = await _supabase.from('disney_expenses').select('*');
+    if (error) console.error('Error fetching expenses:', error);
+    else {
+        Object.keys(data.custom).forEach(key => data.custom[key] = []);
+        expenses.forEach(exp => {
+            if (data.custom[exp.person_name]) {
+                data.custom[exp.person_name].push(exp);
+            }
+        });
+        showBreakdown(currentActivePerson);
+    }
+}
+
+window.addCustomExpense = async function () {
+    const nameInput = document.getElementById('item-name');
+    const priceInput = document.getElementById('item-price');
+    const name = nameInput.value.trim();
+    const price = parseFloat(priceInput.value);
+
+    if (name && !isNaN(price)) {
+        const { error } = await _supabase.from('disney_expenses').insert([
+            { person_name: currentActivePerson, item_name: name, price: price }
+        ]);
+        if (error) alert("Error saving to database!");
+        nameInput.value = '';
+        priceInput.value = '';
+    }
+};
+
+window.deleteExpense = async function (id) {
+    if (!confirm("Remove this purchase? This cannot be undone.")) return;
+    const { error } = await _supabase.from('disney_expenses').delete().eq('id', id);
+    if (error) console.error('Error deleting expense:', error);
+};
+
+// --- PAYMENTS LOGIC ---
+async function fetchPayments() {
+    const { data: payments, error } = await _supabase.from('disney_payments').select('*');
+    if (error) console.error('Error fetching payments:', error);
+    else {
+        data.payments = {};
+        payments.forEach(p => {
+            if (!data.payments[p.person_name]) data.payments[p.person_name] = {};
+            data.payments[p.person_name][p.category] = p.is_paid;
+        });
+        showBreakdown(currentActivePerson);
+    }
+}
+
+window.togglePayment = async function (category) {
+    // 1. Optimistic Update (Immediate visual feedback)
+    const isPaidNow = !(data.payments[currentActivePerson] && data.payments[currentActivePerson][category]);
+
+    // Update local state immediately
+    if (!data.payments[currentActivePerson]) data.payments[currentActivePerson] = {};
+    data.payments[currentActivePerson][category] = isPaidNow;
+
+    // Re-render immediately to show the change
+    showBreakdown(currentActivePerson);
+
+    // 2. Perform Network Request
+    try {
+        const { error } = await _supabase.from('disney_payments').upsert({
+            person_name: currentActivePerson,
+            category: category,
+            is_paid: isPaidNow,
+            updated_at: new Date().toISOString()
+        }, { onConflict: 'person_name,category' });
+
+        if (error) throw error;
+
+        // Success feedback (optional, maybe a small toast? For now, silence is golden if it worked)
+        console.log(`Payment for ${category} updated to ${isPaidNow}`);
+
+    } catch (err) {
+        // Revert local state on error
+        console.error('Error toggling payment:', err);
+        data.payments[currentActivePerson][category] = !isPaidNow;
+        showBreakdown(currentActivePerson);
+        alert("❌ Failed to save payment status! The database table might be missing. Please run the setup SQL in Supabase.");
+    }
+};
+
+// --- ITINERARY LOGIC ---
+const INITIAL_ITINERARY = [
+    { day_index: 0, day_name: 'Sunday, Jan 11: Arrival & Travel Day', time: '7:00 AM', activity: 'Wake up.' },
+    { day_index: 0, day_name: 'Sunday, Jan 11: Arrival & Travel Day', time: '7:30 AM', activity: 'Hit the road for McAllen International Airport (MFE) (20-30 min drive).' },
+    { day_index: 0, day_name: 'Sunday, Jan 11: Arrival & Travel Day', time: '8:00 AM', activity: 'Arrive at MFE (2 hours before flight).' },
+    { day_index: 0, day_name: 'Sunday, Jan 11: Arrival & Travel Day', time: '10:11 AM', activity: 'Flight departs for Sanford (SFB).' },
+    { day_index: 0, day_name: 'Sunday, Jan 11: Arrival & Travel Day', time: '1:41 PM', activity: 'Arrive at SFB Airport.' },
+    { day_index: 0, day_name: 'Sunday, Jan 11: Arrival & Travel Day', time: '2:30 PM', activity: 'Pick up rental car.' },
+    { day_index: 0, day_name: 'Sunday, Jan 11: Arrival & Travel Day', time: '3:30 PM', activity: 'Arrive at Airbnb area. (Explore/Grocery run for 30-60 mins).' },
+    { day_index: 0, day_name: 'Sunday, Jan 11: Arrival & Travel Day', time: '4:00 PM - 4:30 PM', activity: 'Check into Airbnb.' },
+    { day_index: 1, day_name: 'Monday, Jan 12: Disney World (Magic Kingdom)', time: '6:20 AM', activity: 'Wake up.' },
+    { day_index: 1, day_name: 'Monday, Jan 12: Disney World (Magic Kingdom)', time: '6:20 AM - 7:40 AM', activity: 'Get ready and eat breakfast at the Airbnb.' },
+    { day_index: 1, day_name: 'Monday, Jan 12: Disney World (Magic Kingdom)', time: '7:40 AM', activity: 'Out the door.' },
+    { day_index: 1, day_name: 'Monday, Jan 12: Disney World (Magic Kingdom)', time: '8:00 AM', activity: 'Arrive at Disney World Parking (Updated).' },
+    { day_index: 1, day_name: 'Monday, Jan 12: Disney World (Magic Kingdom)', time: '9:00 AM - 11:00 PM', activity: 'All day at Magic Kingdom.' },
+    { day_index: 1, day_name: 'Monday, Jan 12: Disney World (Magic Kingdom)', time: '11:30 PM', activity: 'Arrive back at Airbnb.' },
+    { day_index: 1, day_name: 'Monday, Jan 12: Disney World (Magic Kingdom)', time: 'Midnight', activity: 'Late dinner at the Airbnb and sleep.' },
+    { day_index: 2, day_name: 'Tuesday, Jan 13: Explore & Recovery Day', time: 'Wake up', activity: 'TBD (Sleep in!).' },
+    { day_index: 2, day_name: 'Tuesday, Jan 13: Explore & Recovery Day', time: 'Daytime', activity: 'Relax at the Airbnb pool or explore Disney Springs (free entry/parking).' },
+    { day_index: 2, day_name: 'Tuesday, Jan 13: Explore & Recovery Day', time: 'Evening', activity: 'Relax and have dinner at the Airbnb to prep for Universal.' },
+    { day_index: 3, day_name: 'Wednesday, Jan 14: Universal Orlando', time: '7:40 AM', activity: 'Wake up (2 hours before leaving).' },
+    { day_index: 3, day_name: 'Wednesday, Jan 14: Universal Orlando', time: '7:40 AM - 9:20 AM', activity: 'Get ready and eat breakfast.' },
+    { day_index: 3, day_name: 'Wednesday, Jan 14: Universal Orlando', time: '9:20 AM', activity: 'Out the door (30 min drive + walking).' },
+    { day_index: 3, day_name: 'Wednesday, Jan 14: Universal Orlando', time: '10:00 AM - 9:00 PM', activity: 'Universal Studios.' },
+    { day_index: 3, day_name: 'Wednesday, Jan 14: Universal Orlando', time: '9:30 PM', activity: 'Head back to Airbnb.' },
+    { day_index: 3, day_name: 'Wednesday, Jan 14: Universal Orlando', time: '10:00 PM', activity: 'Dinner at Airbnb and pack bags for the early flight.' },
+    { day_index: 4, day_name: 'Thursday, Jan 15: Departure Day', time: '3:00 AM', activity: 'Wake up.' },
+    { day_index: 4, day_name: 'Thursday, Jan 15: Departure Day', time: '3:45 AM', activity: 'Hit the road (Check-out of Airbnb).' },
+    { day_index: 4, day_name: 'Thursday, Jan 15: Departure Day', time: '4:45 AM', activity: 'Arrive at Sanford Airport (SFB).' },
+    { day_index: 4, day_name: 'Thursday, Jan 15: Departure Day', time: '5:00 AM', activity: 'Drop off rental car.' },
+    { day_index: 4, day_name: 'Thursday, Jan 15: Departure Day', time: '5:15 AM', activity: 'Inside terminal / Security.' },
+    { day_index: 4, day_name: 'Thursday, Jan 15: Departure Day', time: '6:25 AM', activity: 'Boarding.' },
+    { day_index: 4, day_name: 'Thursday, Jan 15: Departure Day', time: '7:00 AM', activity: 'Flight departs home.' }
+];
+
+async function fetchItinerary() {
+    const { data: items, error } = await _supabase.from('disney_itinerary').select('*').order('day_index', { ascending: true }).order('created_at', { ascending: true });
+    if (error) console.error('Error fetching itinerary:', error);
+    else {
+        const grouped = [];
+        items.forEach(item => {
+            let dayObj = grouped.find(d => d.day === item.day_name);
+            if (!dayObj) {
+                dayObj = { day: item.day_name, items: [], index: item.day_index };
+                grouped.push(dayObj);
+            }
+            dayObj.items.push(item);
+        });
+        data.itinerary = grouped.sort((a, b) => a.index - b.index);
+        renderItinerary();
+    }
+}
+
+window.restoreInitialItinerary = async function () {
+    if (!confirm("This will overwrite your current itinerary with the original plan. Continue? ✨")) return;
+
+    // Delete all current items
+    await _supabase.from('disney_itinerary').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+
+    // Insert initials
+    const { error } = await _supabase.from('disney_itinerary').insert(INITIAL_ITINERARY);
+    if (!error) {
+        alert("Magic restored! 🏰✨");
+        closePlanner();
+    } else {
+        alert("Error restoring data. Please check connection.");
+    }
+};
+
+let activePlannerDay = null;
+
+window.toggleItineraryEdit = function () {
+    // Password removed as button is only visible in Admin Mode
+    openDaySelector();
+};
+
+function openDaySelector() {
+    const modal = document.getElementById('planner-modal');
+    const body = document.getElementById('planner-body');
+    const title = document.getElementById('planner-title');
+    const footer = document.getElementById('planner-footer');
+
+    title.innerText = "Select a Day to Plan ⚙️";
+    footer.style.display = "none";
+    modal.style.display = "flex";
+
+    body.innerHTML = `
+        <div class="planner-day-select-screen">
+            ${data.itinerary.map((day, idx) => `
+                <div class="planner-day-card" onclick="openDayPlanner(${idx})">
+                    <span class="planner-day-name">${day.day}</span>
+                    <span>Edit ➜</span>
+                </div>
+            `).join('')}
+            <button class="add-btn" style="margin-top:20px; background:rgba(239,68,68,0.2); color:#f87171;" onclick="restoreInitialItinerary()">
+                ⚠️ Restore Original Itinerary
+            </button>
+        </div>
+    `;
+}
+
+window.openDayPlanner = function (dayIndex) {
+    activePlannerDay = dayIndex;
+    const body = document.getElementById('planner-body');
+    const title = document.getElementById('planner-title');
+    const footer = document.getElementById('planner-footer');
+    const day = data.itinerary[dayIndex];
+
+    title.innerText = `Planning: ${day.day}`;
+    footer.style.display = "flex";
+
+    // Helper to convert time string to minutes from midnight
+    const toMin = (t) => {
+        try {
+            let [time, period] = t.split(' ');
+            let [h, m] = time.split(':');
+            h = parseInt(h); m = parseInt(m || 0);
+            if (period === 'PM' && h !== 12) h += 12;
+            if (period === 'AM' && h === 12) h = 0;
+            return h * 60 + m;
+        } catch (e) { return 9999; }
+    };
+
+    // 1. Standard hours to fill gaps
+    const standardHours = ["7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM"];
+
+    // 2. Combine existing with standards
+    let plannerItems = [...day.items];
+    standardHours.forEach(h => {
+        const standardMin = toMin(h);
+        // Check if this hour is already "represented" by any item in the same hour block
+        const hourFilled = plannerItems.some(item => {
+            const itemMin = toMin(item.time);
+            return itemMin >= standardMin && itemMin < standardMin + 60;
+        });
+        if (!hourFilled) plannerItems.push({ time: h, activity: "", isPlaceholder: true });
+    });
+
+    // Sort by time
+    plannerItems.sort((a, b) => toMin(a.time) - toMin(b.time));
+
+    body.innerHTML = `
+        <div id="planner-rows-container">
+            ${plannerItems.map(item => `
+                <div class="planner-row">
+                    <input type="text" class="planner-time" value="${item.time}" placeholder="Time">
+                    <input type="text" class="planner-task" value="${item.activity}" placeholder="What's happening?">
+                    <button class="delete-btn" onclick="this.parentElement.remove()">✕</button>
+                </div>
+            `).join('')}
+        </div>
+        <button class="add-row-btn" onclick="addBlankRow()">+ Add Specific Time Slot</button>
+    `;
+};
+
+window.addBlankRow = function () {
+    const container = document.getElementById('planner-rows-container');
+    const div = document.createElement('div');
+    div.className = 'planner-row';
+    div.innerHTML = `
+        <input type="text" class="planner-time" value="" placeholder="e.g. 7:15 AM">
+        <input type="text" class="planner-task" value="" placeholder="Activity...">
+        <button class="delete-btn" onclick="this.parentElement.remove()">✕</button>
+    `;
+    container.appendChild(div);
+};
+
+window.saveDay = async function () {
+    const rows = document.querySelectorAll('.planner-row');
+    const day = data.itinerary[activePlannerDay];
+    const newItems = [];
+    const saveBtn = document.querySelector('.planner-footer button');
+
+    // UI Loading State
+    if (saveBtn) {
+        saveBtn.innerText = "Saving... ⏳";
+        saveBtn.disabled = true;
+    }
+
+    rows.forEach(row => {
+        const time = row.querySelector('.planner-time').value.trim();
+        const activity = row.querySelector('.planner-task').value.trim();
+        if (time && activity) { // Only save rows with BOTH time AND activity
+            newItems.push({
+                day_index: day.index,
+                day_name: day.day,
+                time: time,
+                activity: activity
+            });
+        }
+    });
+
+    try {
+        // Batch update: Delete old, Insert new
+        const { error: delError } = await _supabase.from('disney_itinerary').delete().eq('day_name', day.day);
+        if (delError) throw delError;
+
+        if (newItems.length > 0) {
+            const { error: insError } = await _supabase.from('disney_itinerary').insert(newItems);
+            if (insError) throw insError;
+        }
+
+        // FORCE REFRESH LOCAL DATA
+        await fetchItinerary(); // Re-fetch absolute truth
+        renderItinerary(); // Re-draw UI
+
+        // Also explicitly update the day view if it's currently showing
+        const activeTabIdx = document.querySelector('.day-tab-btn.active')?.id?.split('-')[1];
+        if (activeTabIdx) selectDay(parseInt(activeTabIdx));
+
+        alert("Schedule Updated! ✅");
+        closePlanner();
+    } catch (e) {
+        console.error(e);
+        alert("❌ Save failed! Please check your internet connection.");
+    } finally {
+        if (saveBtn) {
+            saveBtn.innerText = "Save Changes ✨";
+            saveBtn.disabled = false;
+        }
+    }
+};
+
+window.closePlanner = function () {
+    const modal = document.getElementById('planner-modal');
+    if (modal) modal.style.display = 'none';
+};
+
+window.openCarModal = function () {
+    const modal = document.getElementById('car-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.classList.add('no-scroll');
+    }
+};
+
+window.closeCarModal = function () {
+    const modal = document.getElementById('car-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.classList.remove('no-scroll');
+    }
+};
+
+window.openDiningModal = function () {
+    const modal = document.getElementById('dining-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.classList.add('no-scroll');
+    }
+};
+
+window.closeDiningModal = function () {
+    const modal = document.getElementById('dining-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.classList.remove('no-scroll');
+    }
+};
+
+window.openAirbnbModal = function () {
+    const modal = document.getElementById('airbnb-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.classList.add('no-scroll');
+    }
+};
+
+window.closeAirbnbModal = function () {
+    const modal = document.getElementById('airbnb-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.classList.remove('no-scroll');
+    }
+};
+
+window.openLightbox = function (src) {
+    const modal = document.getElementById('lightbox-modal');
+    const img = document.getElementById('lightbox-img');
+    if (modal && img) {
+        img.src = src;
+        modal.style.display = 'flex';
+        document.body.classList.add('no-scroll');
+    }
+};
+
+window.closeLightbox = function () {
+    const modal = document.getElementById('lightbox-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        // Only remove no-scroll if no other modal is open
+        const airbnb = document.getElementById('airbnb-modal');
+        const car = document.getElementById('car-modal');
+        if ((!airbnb || airbnb.style.display === 'none') && (!car || car.style.display === 'none')) {
+            document.body.classList.remove('no-scroll');
+        }
+    }
+};
+
+function setupSubscriptions() {
+    _supabase.channel('cloud-sync')
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'disney_expenses' }, payload => {
+            fetchExpenses();
+        })
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'disney_itinerary' }, payload => {
+            fetchItinerary();
+        })
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'disney_payments' }, payload => {
+            fetchPayments();
+        })
+        .subscribe();
+}
+
+// --- UI RENDERING ---
+function renderItinerary() {
+    const container = document.getElementById('itinerary-container');
+
+    // Safety check
+    if (!data.itinerary || data.itinerary.length === 0) {
+        container.innerHTML = `
+            <div style='text-align: center; color: var(--text-dim); padding: 40px;'>
+                <p>Your itinerary is currently empty. ✨</p>
+                <button class="add-btn" style="margin-top: 15px;" onclick="restoreInitialItinerary()">Restore Original Itinerary +</button>
+            </div>
+        `;
+        return;
+    }
+
+    // 1. Create Tabs HTML
+    const tabsHtml = `
+        <div class="day-tabs-container">
+            ${data.itinerary.map((day, idx) => {
+        // Short Day Name (e.g. "Sunday, Jan 11..." -> "Sun 11")
+        // Parsing depends on format. Assuming "Sunday, Jan 11: ..."
+        const shortName = day.day.split(':')[0].split(',')[0].substr(0, 3) + ' ' + day.day.split(' ')[2];
+        return `<button class="day-tab-btn" onclick="selectDay(${idx})" id="tab-${idx}">${shortName}</button>`;
+    }).join('')}
+        </div>
+        <div id="active-day-view" class="day-active-view">
+            <!-- Content Injected Here -->
+        </div>
+    `;
+
+    container.innerHTML = tabsHtml;
+
+    // 2. Select Current Day Default
+    selectCurrentDay();
+}
+
+window.selectDay = function (index) {
+    const view = document.getElementById('active-day-view');
+    const day = data.itinerary[index];
+
+    // Update Active Tab State
+    document.querySelectorAll('.day-tab-btn').forEach(btn => btn.classList.remove('active'));
+    const activeBtn = document.getElementById(`tab-${index}`);
+    if (activeBtn) activeBtn.classList.add('active');
+
+    if (!day) return;
+
+    // Helper to convert time string to minutes from midnight for sorting
+    const toMin = (t) => {
+        try {
+            // Handle special cases like "Midnight", "Wake up", "Daytime", etc.
+            if (!t || t.toLowerCase().includes('wake') || t.toLowerCase().includes('daytime') || t.toLowerCase().includes('evening')) return 9999;
+            if (t.toLowerCase() === 'midnight') return 1440;
+
+            let [time, period] = t.split(' ');
+            if (!period) return 9999;
+            let [h, m] = time.split(':');
+            h = parseInt(h); m = parseInt(m || 0);
+            if (period.toUpperCase() === 'PM' && h !== 12) h += 12;
+            if (period.toUpperCase() === 'AM' && h === 12) h = 0;
+            return h * 60 + m;
+        } catch (e) { return 9999; }
+    };
+
+    // Sort items by time
+    const sortedItems = [...day.items].sort((a, b) => toMin(a.time) - toMin(b.time));
+
+    // Find next day's wake up time
+    const nextDay = data.itinerary[index + 1];
+    let nextWakeUp = null;
+    if (nextDay) {
+        const wakeUpItem = nextDay.items.find(item => item.activity.toLowerCase().includes('wake up'));
+        if (wakeUpItem) nextWakeUp = wakeUpItem.time;
+    }
+
+    // Render the sorted list
+    view.innerHTML = `
+        <div style="background: rgba(255, 255, 255, 0.03); border-radius: 24px; padding: 25px; border: 1px solid var(--glass-border);">
+            <div class="day-title" style="font-size: 1.3rem; margin-bottom: 20px;">${day.day}</div>
+            
+            <ul class="highlight-list">
+                ${sortedItems.map(item => `
+                    <li class="highlight-item">
+                        <span class="highlight-time">${item.time}</span>
+                        <span class="highlight-activity">${item.activity}</span>
+                    </li>
+                `).join('')}
+            </ul>
+
+            ${nextWakeUp ? `
+                <div class="next-day-preview" style="margin-top: 25px;">
+                    Tomorrow's Wake Up: ${nextWakeUp}
+                </div>
+            ` : ''}
+        </div>
+    `;
+};
+
+function selectCurrentDay() {
+    const today = new Date();
+    // Trip Dates (Hardcoded matching existing logic): Jan 11 = Index 0
+    const tripStart = new Date('2026-01-11T00:00:00');
+    const diffTime = today.getTime() - tripStart.getTime();
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    let targetIndex = 0;
+    if (diffDays >= 0 && diffDays < data.itinerary.length) {
+        targetIndex = diffDays;
+    } else if (diffDays >= data.itinerary.length) {
+        targetIndex = data.itinerary.length - 1;
+    }
+
+    selectDay(targetIndex);
+}
+
+function initSortable() {
+    const el = document.getElementById('itinerary-container');
+    if (!el) return;
+
+    // Destroy previous instance if it exists
+    if (window.itinerarySortable) window.itinerarySortable.destroy();
+
+    window.itinerarySortable = new Sortable(el, {
+        animation: 150,
+        handle: '.drag-handle',
+        ghostClass: 'sortable-ghost',
+        dragClass: 'sortable-drag',
+        onEnd: async function (evt) {
+            const cards = Array.from(el.children);
+            const updates = [];
+
+            for (let i = 0; i < cards.length; i++) {
+                const dayName = cards[i].querySelector('.day-title').innerText;
+
+                // Update day_index for all items with this day_name
+                const { data: dayItems } = await _supabase
+                    .from('disney_itinerary')
+                    .select('id')
+                    .eq('day_name', dayName);
+
+                if (dayItems) {
+                    dayItems.forEach(item => {
+                        updates.push(_supabase.from('disney_itinerary').update({ day_index: i }).eq('id', item.id));
+                    });
+                }
+            }
+
+            await Promise.all(updates);
+        }
+    });
+}
+
+window.showBreakdown = function (name) {
+    currentActivePerson = name;
+    document.querySelectorAll('.person-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.innerText.includes(name));
+    });
+
+    const person = data.people[name];
+    const content = document.getElementById('breakdown-content');
+    const selector = document.querySelector('.person-selector');
+    const payments = data.payments[name] || {};
+
+    // Preserve details visibility state before re-render
+    const existingDetails = document.getElementById('expense-details');
+    const wasDetailsVisible = existingDetails && existingDetails.style.display !== 'none';
+
+    if (selector) selector.style.display = 'flex';
+
+    // Helper for Admin Toggles
+    const getAdminBtn = (category) => {
+        if (!isMagicMode) return '';
+        const isPaid = !!payments[category];
+        return `<button class="admin-toggle-btn ${isPaid ? 'paid' : ''}" onclick="event.stopPropagation(); togglePayment('${category}')">${isPaid ? '✓ Paid' : 'Mark Paid'}</button>`;
+    };
+
+    // Calculate portions
+    // Erica has a special Airbnb amount (partial payment made)
+    let airbnbShareOrig = (data.costs.airbnbTotal / 7) * person.headcount;
+    if (name === 'Erica') {
+        airbnbShareOrig = 221.82; // Erica's remaining Airbnb balance
+    }
+    const carShare = person.isAdult ? (data.costs.carRentalTotal / 4) : 0;
+    const parkingShare = person.isAdult ? (data.costs.parkingTotal / 4) : 0;
+
+    // Check paid states
+    const airbnbPaid = !!payments['AirBnB'];
+    const carPaid = !!payments['Car Rental'];
+    const parkingPaid = !!payments['Parking'];
+    const disneyPaid = !!payments['Disney'];
+    const universalPaid = !!payments['Universal'];
+
+    // Disney Tickets Logic (Covered by Erica check)
+    const coveredByErica = ['Jackie', 'Alex', 'Crystal'];
+    let finalDisneyTotal = data.costs.disneyTicket * person.headcount;
+    let isCovered = coveredByErica.includes(name);
+
+    let disneyRowContent = `
+        <td class="${disneyPaid ? 'is-paid' : ''}">Magic Kingdom Ticket (x${person.headcount}) ${getAdminBtn('Disney')}</td>
+        <td style="text-align: right" class="${disneyPaid ? 'is-paid' : ''}">$${finalDisneyTotal.toFixed(2)}</td>`;
+
+    if (isCovered) {
+        finalDisneyTotal = 0;
+        disneyRowContent = `
+            <td>Magic Kingdom Ticket (x${person.headcount})</td>
+            <td style="text-align: right; color: var(--text-dim);">
+                <span style="text-decoration: line-through;">$${(data.costs.disneyTicket * person.headcount).toFixed(2)}</span>
+                <br><span style="font-size: 0.8em; color: var(--accent);">Paid by Erica ✨</span>
+            </td>`;
+    } else if (name === 'Erica') {
+        const extraTicketsCost = data.costs.disneyTicket * 3;
+        finalDisneyTotal += extraTicketsCost;
+        disneyRowContent = `
+            <td class="${disneyPaid ? 'is-paid' : ''}">Magic Kingdom (x${person.headcount} + 3 others) ${getAdminBtn('Disney')}</td>
+            <td style="text-align: right" class="${disneyPaid ? 'is-paid' : ''}">$${finalDisneyTotal.toFixed(2)}</td>`;
+    }
+
+    const universalTicketsTotal = data.costs.universalTicket * person.headcount;
+    const customItems = data.custom[name] || [];
+    const customTotal = customItems.reduce((sum, item) => sum + item.price, 0);
+
+    // Calculate Owed Total (Only items NOT paid)
+    let totalOwed = 0;
+    if (!airbnbPaid) totalOwed += airbnbShareOrig;
+    if (!carPaid) totalOwed += carShare;
+    if (!parkingPaid) totalOwed += parkingShare;
+    if (!isCovered && !disneyPaid) totalOwed += finalDisneyTotal;
+    if (!universalPaid) totalOwed += universalTicketsTotal;
+    totalOwed += customTotal;
+
+    let customRows = customItems.map((item) => `
+        <tr>
+            <td>Purchase</td>
+            <td>${item.item_name} ${isMagicMode ? `<button class="delete-btn" onclick="deleteExpense('${item.id}')">🗑️</button>` : ''}</td>
+            <td style="text-align: right">$${parseFloat(item.price).toFixed(2)}</td>
+        </tr>
+    `).join('');
+
+    content.innerHTML = `
+        <div style="animation: fadeInDown 0.4s ease-out">
+            <h3 style="text-align:center; margin-bottom:10px;">${name}'s Contribution</h3>
+            
+            <div class="expense-summary-card">
+                <div class="summary-label">Total Amount ${totalOwed <= 0 ? 'Settled ✨' : 'Owed'}</div>
+                <div class="summary-amount">$${totalOwed.toFixed(2)}</div>
+                ${person.includesKids ? `<div style="font-size:0.8rem; color:var(--text-dim);">Includes ${person.kidsNames.join(', ')}</div>` : ''}
+                
+                <div class="quick-links-container" style="margin-top: 15px;">
+                    <div class="icon-btn-wrapper">
+                        <button class="icon-btn btn-details" onclick="toggleDetails()">🧾</button>
+                        <span class="icon-label" id="details-label">View Details</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="expense-details" style="display: none;">
+                <table class="breakdown-table">
+                    <thead>
+                        <tr><th>Category</th><th>Details</th><th style="text-align: right">Amount</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="${airbnbPaid ? 'is-paid' : ''}">AirBnB ${getAdminBtn('AirBnB')}</td>
+                            <td class="${airbnbPaid ? 'is-paid' : ''}">$460.10 split 7 ways (x${person.headcount})</td>
+                            <td style="text-align: right" class="${airbnbPaid ? 'is-paid' : ''}">$${airbnbShareOrig.toFixed(2)}</td>
+                        </tr>
+                        <tr>
+                            <td class="${carPaid ? 'is-paid' : ''}">Car Rental ${getAdminBtn('Car Rental')}</td>
+                            <td class="${carPaid ? 'is-paid' : ''}">$168.64 split 4 adults</td>
+                            <td style="text-align: right" class="${carPaid ? 'is-paid' : ''}">$${carShare.toFixed(2)}</td>
+                        </tr>
+                        <tr>
+                            <td class="${parkingPaid ? 'is-paid' : ''}">Parking ${getAdminBtn('Parking')}</td>
+                            <td class="${parkingPaid ? 'is-paid' : ''}">Theme parks total split 4 adults</td>
+                            <td style="text-align: right" class="${parkingPaid ? 'is-paid' : ''}">$${parkingShare.toFixed(2)}</td>
+                        </tr>
+                        <tr>
+                            <td>Disney World</td>
+                            ${disneyRowContent}
+                        </tr>
+                        <tr>
+                            <td class="${universalPaid ? 'is-paid' : ''}">Universal ${getAdminBtn('Universal')}</td>
+                            <td class="${universalPaid ? 'is-paid' : ''}">Studios Ticket (x${person.headcount})</td>
+                            <td style="text-align: right" class="${universalPaid ? 'is-paid' : ''}">$${universalTicketsTotal.toFixed(2)}</td>
+                        </tr>
+                        ${customRows}
+                    </tbody>
+                </table>
+
+                <div class="payment-info-box" style="margin-top: 20px;">
+                    <div class="payment-title">Payment Options 💸</div>
+                    <div class="payment-subtitle">Please send payments to Jackie</div>
+                    <div class="payment-methods">
+                        <div class="payment-method">
+                            <span class="method-label">Cash App</span>
+                            <span class="method-value">$Jackyjacx14</span>
+                        </div>
+                        <div class="payment-method">
+                            <span class="method-label">Zelle</span>
+                            <span class="method-value">956-246-3634</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Restore details visibility if it was open before re-render
+    if (wasDetailsVisible) {
+        const newDetails = document.getElementById('expense-details');
+        const newLabel = document.getElementById('details-label');
+        if (newDetails) newDetails.style.display = 'block';
+        if (newLabel) newLabel.innerText = 'Hide Details';
+    }
+};
+
+window.toggleItinerarySection = function () {
+    const itinSection = document.getElementById('itinerary-section');
+    const expSection = document.getElementById('expenses-section');
+    const btn = document.querySelector('.btn-schedule');
+    const expBtn = document.querySelector('.btn-expenses');
+
+    if (itinSection.style.display === 'none') {
+        itinSection.style.display = 'block';
+        if (btn) btn.classList.add('active');
+
+        // Auto-close expenses
+        if (expSection) expSection.style.display = 'none';
+        if (expBtn) expBtn.classList.remove('active');
+
+        renderItinerary();
+        // Scroll to content so user sees it
+        itinSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+        itinSection.style.display = 'none';
+        if (btn) btn.classList.remove('active');
+    }
+};
+
+window.toggleExpensesSection = function () {
+    const itinSection = document.getElementById('itinerary-section');
+    const expSection = document.getElementById('expenses-section');
+    const btn = document.querySelector('.btn-expenses');
+    const itinBtn = document.querySelector('.btn-schedule');
+
+    if (expSection.style.display === 'none') {
+        expSection.style.display = 'block';
+        if (btn) btn.classList.add('active');
+
+        // Auto-close itinerary
+        if (itinSection) itinSection.style.display = 'none';
+        if (itinBtn) itinBtn.classList.remove('active');
+
+        if (!document.getElementById('breakdown-content').innerHTML.trim()) {
+            showBreakdown(currentActivePerson || 'Jackie');
+        }
+        // Scroll to content
+        expSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+        expSection.style.display = 'none';
+        if (btn) btn.classList.remove('active');
+    }
+};
+
+window.toggleDetails = function () {
+    const el = document.getElementById('expense-details');
+    const label = document.getElementById('details-label');
+    const form = document.getElementById('expense-form-container');
+
+    if (el.style.display === 'none') {
+        el.style.display = 'block';
+        if (form) form.classList.add('visible'); // Show form
+        if (label) label.innerText = 'Hide Details';
+    } else {
+        el.style.display = 'none';
+        if (form) form.classList.remove('visible'); // Hide form
+        if (label) label.innerText = 'View Details';
+    }
+};
+
+// Countdown Logic
+const flightTime = new Date('January 11, 2026 10:11:00').getTime();
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = flightTime - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    const dEl = document.getElementById('days');
+    const hEl = document.getElementById('hours');
+    const mEl = document.getElementById('minutes');
+    const sEl = document.getElementById('seconds');
+
+    if (dEl) dEl.innerText = String(days).padStart(2, '0');
+    if (hEl) hEl.innerText = String(hours).padStart(2, '0');
+    if (mEl) mEl.innerText = String(minutes).padStart(2, '0');
+    if (sEl) sEl.innerText = String(seconds).padStart(2, '0');
+
+    if (distance < 0) {
+        clearInterval(countdownTimer);
+        const el = document.getElementById('flight-countdown');
+        if (el) el.innerHTML = "<h3>It's Disney Time! ✨✈️✨</h3>";
+    }
+}
+
+const countdownTimer = setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// Pixie Dust Animation
+const canvas = document.getElementById('pixie-dust');
+if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 0.5;
+            this.speedX = Math.random() * 0.5 - 0.25;
+            this.speedY = Math.random() * 0.5 - 0.25;
+            this.opacity = Math.random();
+            this.opacityChange = Math.random() * 0.02 + 0.01;
+        }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            this.opacity += this.opacityChange;
+            if (this.opacity > 1 || this.opacity < 0) this.opacityChange *= -1;
+
+            if (this.x > canvas.width) this.x = 0;
+            if (this.x < 0) this.x = canvas.width;
+            if (this.y > canvas.height) this.y = 0;
+            if (this.y < 0) this.y = canvas.height;
+        }
+
+        draw() {
+            ctx.fillStyle = `rgba(251, 191, 36, ${Math.max(0, this.opacity * 0.6)})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    function init() {
+        for (let i = 0; i < 80; i++) {
+            particles.push(new Particle());
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+        requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+}
+
+// Global start
+window.initApp();
