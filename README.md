@@ -5,10 +5,11 @@ Roteiro e rastreador de despesas da viagem a Orlando (Disney World), 11–15 de 
 App web mobile-first com:
 
 - Countdown até a viagem
-- Guia rápido: Airbnb, carro, dining, schedule, custos
+- Guia rápido: Airbnb, lotação dos parques, dining, schedule, custos
+- Calendário de crowds por parque (dados observados + estimativas)
 - Itinerário diário sincronizado (Supabase)
 - Divisão de custos por pessoa (Jackie, Alex, Crystal, Erica & Kids)
-- Galeria do Airbnb e detalhes do carro alugado
+- Galeria do Airbnb
 - Modo admin (edição de itinerário e marcar pagamentos)
 
 ## Stack

@@ -877,9 +877,9 @@ h2::before {
     color: #ff5a5f;
 }
 
-.icon-btn:not(.active).btn-car {
-    border-color: rgba(239, 68, 68, 0.5);
-    color: #ef4444;
+.icon-btn:not(.active).btn-crowds {
+    border-color: rgba(52, 211, 153, 0.5);
+    color: #34d399;
 }
 
 .icon-btn:not(.active).btn-dining {
@@ -1668,4 +1668,200 @@ body.admin-active #edit-btn-wrapper {
     background: rgba(239, 68, 68, 0.2) !important;
     border-color: rgba(239, 68, 68, 0.4) !important;
     transform: scale(1.1);
+}
+
+/* --- Park Crowds Calendar --- */
+.crowds-intro {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin: 0 0 16px;
+    line-height: 1.45;
+}
+
+.park-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.park-chip {
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-dim);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.park-chip.active,
+.park-chip:hover {
+    background: rgba(52, 211, 153, 0.18);
+    border-color: rgba(52, 211, 153, 0.55);
+    color: #6ee7b7;
+}
+
+.crowd-month-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.crowd-month-label {
+    margin: 0;
+    color: var(--accent);
+    font-size: 1.05rem;
+    text-align: center;
+    flex: 1;
+}
+
+.crowd-nav-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text);
+    font-size: 1.4rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.crowd-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    margin-bottom: 14px;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+}
+
+.crowd-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.crowd-legend .swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.crowd-legend .swatch.light { background: #34d399; }
+.crowd-legend .swatch.moderate { background: #fbbf24; }
+.crowd-legend .swatch.busy { background: #fb923c; }
+.crowd-legend .swatch.packed { background: #f87171; }
+
+.crowd-dow {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 6px;
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    font-weight: 600;
+}
+
+.crowd-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.crowd-cell {
+    aspect-ratio: 1;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.crowd-cell.empty {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.crowd-cell:not(.empty):hover {
+    transform: scale(1.06);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.crowd-cell.today {
+    box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.85);
+}
+
+.crowd-day-num {
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.crowd-level-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.crowd-cell.light {
+    background: rgba(52, 211, 153, 0.18);
+    color: #6ee7b7;
+}
+.crowd-cell.moderate {
+    background: rgba(251, 191, 36, 0.16);
+    color: #fcd34d;
+}
+.crowd-cell.busy {
+    background: rgba(251, 146, 60, 0.18);
+    color: #fdba74;
+}
+.crowd-cell.packed {
+    background: rgba(248, 113, 113, 0.2);
+    color: #fca5a5;
+}
+
+.crowd-cell.estimated {
+    opacity: 0.82;
+}
+
+.crowd-day-detail {
+    min-height: 2.6em;
+    margin: 16px 0 8px;
+    color: var(--text);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.crowd-source {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+}
+
+.crowds-attribution {
+    margin-top: 8px;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+}
+
+.crowds-attribution a {
+    color: #6ee7b7;
 }

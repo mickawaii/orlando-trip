@@ -83,8 +83,8 @@
                 <span class="icon-label">Airbnb</span>
             </div>
             <div class="icon-btn-wrapper">
-                <button class="icon-btn btn-car" onclick="openCarModal()">🚐</button>
-                <span class="icon-label">Car</span>
+                <button class="icon-btn btn-crowds" onclick="openCrowdsModal()">📊</button>
+                <span class="icon-label">Crowds</span>
             </div>
             <div class="icon-btn-wrapper">
                 <button class="icon-btn btn-dining" onclick="openDiningModal()">🍔</button>
@@ -189,19 +189,30 @@
         </div>
     </div>
 
-    <!-- Car Modal -->
-    <div id="car-modal" class="modal-overlay">
+    <!-- Crowds Modal -->
+    <div id="crowds-modal" class="modal-overlay">
         <div class="modal-content-wide">
             <div class="modal-header">
-                <h2 style="margin:0; font-size:1.4rem;">Our Rental Car 🚐</h2>
-                <button class="back-modal-btn" onclick="closeCarModal()">← Back</button>
+                <h2 style="margin:0; font-size:1.4rem;">Park Crowds 📊</h2>
+                <button class="back-modal-btn" onclick="closeCrowdsModal()">← Back</button>
             </div>
-            <div class="modal-body-scroll">
-                <img src="images/car_details_1.jpg"
-                    style="width: 100%; border-radius: 12px; margin-bottom: 15px; cursor: pointer;"
-                    alt="Car Price Details" onclick="openLightbox(this.src)">
-                <img src="images/car_details_2.jpg" style="width: 100%; border-radius: 12px; cursor: pointer;"
-                    alt="Car Model Details" onclick="openLightbox(this.src)">
+            <div class="modal-body-scroll" id="crowds-body">
+                <p class="crowds-intro">Pick a park to see which days are lighter or packed. Green = quieter, red = busiest.</p>
+                <div class="park-chip-row" id="park-chip-row"></div>
+                <div class="crowd-month-nav">
+                    <button type="button" class="crowd-nav-btn" onclick="shiftCrowdMonth(-1)" aria-label="Previous month">‹</button>
+                    <h3 id="crowd-month-label" class="crowd-month-label"></h3>
+                    <button type="button" class="crowd-nav-btn" onclick="shiftCrowdMonth(1)" aria-label="Next month">›</button>
+                </div>
+                <div class="crowd-legend">
+                    <span><i class="swatch light"></i>Light</span>
+                    <span><i class="swatch moderate"></i>Moderate</span>
+                    <span><i class="swatch busy"></i>Busy</span>
+                    <span><i class="swatch packed"></i>Packed</span>
+                </div>
+                <div class="crowd-calendar" id="crowd-calendar"></div>
+                <p id="crowd-day-detail" class="crowd-day-detail"></p>
+                <p class="crowds-attribution">Observed days from <a href="https://ropedropnews.com" target="_blank" rel="noopener">Rope Drop News</a> (CC BY 4.0). Future days are estimates for planning.</p>
             </div>
         </div>
     </div>

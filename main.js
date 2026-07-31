@@ -448,16 +448,19 @@ window.closePlanner = function () {
     if (modal) modal.style.display = 'none';
 };
 
-window.openCarModal = function () {
-    const modal = document.getElementById('car-modal');
+window.openCrowdsModal = async function () {
+    const modal = document.getElementById('crowds-modal');
     if (modal) {
         modal.style.display = 'flex';
         document.body.classList.add('no-scroll');
+        await ensureCrowdData();
+        renderParkChips();
+        renderCrowdCalendar();
     }
 };
 
-window.closeCarModal = function () {
-    const modal = document.getElementById('car-modal');
+window.closeCrowdsModal = function () {
+    const modal = document.getElementById('crowds-modal');
     if (modal) {
         modal.style.display = 'none';
         document.body.classList.remove('no-scroll');
@@ -512,8 +515,8 @@ window.closeLightbox = function () {
         modal.style.display = 'none';
         // Only remove no-scroll if no other modal is open
         const airbnb = document.getElementById('airbnb-modal');
-        const car = document.getElementById('car-modal');
-        if ((!airbnb || airbnb.style.display === 'none') && (!car || car.style.display === 'none')) {
+        const crowds = document.getElementById('crowds-modal');
+        if ((!airbnb || airbnb.style.display === 'none') && (!crowds || crowds.style.display === 'none')) {
             document.body.classList.remove('no-scroll');
         }
     }
@@ -1007,6 +1010,209 @@ if (canvas) {
 
     init();
     animate();
+}
+
+// --- PARK CROWD CALENDAR ---
+const CROWD_PARKS = [
+    { slug: 'magic-kingdom', name: 'Magic Kingdom', short: 'MK' },
+    { slug: 'epcot', name: 'EPCOT', short: 'EPCOT' },
+    { slug: 'hollywood-studios', name: "Hollywood Studios", short: 'DHS' },
+    { slug: 'animal-kingdom', name: 'Animal Kingdom', short: 'AK' },
+    { slug: 'epic-universe', name: 'Epic Universe', short: 'Epic' },
+    { slug: 'islands-of-adventure', name: 'Islands of Adventure', short: 'IoA' }
+];
+
+const CROWD_LEVEL_ORDER = { Light: 1, Moderate: 2, Busy: 3, Packed: 4 };
+const CROWD_LEVEL_FROM_SCORE = (score) => {
+    if (score <= 2.4) return 'Light';
+    if (score <= 3.3) return 'Moderate';
+    if (score <= 4.2) return 'Busy';
+    return 'Packed';
+};
+
+let crowdState = {
+    parkSlug: 'magic-kingdom',
+    year: new Date().getFullYear(),
+    month: new Date().getMonth(), // 0-indexed
+    observed: {}, // slug -> { 'YYYY-MM-DD': { level, avgWait, samples } }
+    loaded: false
+};
+
+const PARK_WEEKDAY_BIAS = {
+    'magic-kingdom': [2.6, 2.2, 2.4, 2.5, 2.8, 3.6, 3.8],
+    'epcot': [2.8, 2.5, 2.6, 2.7, 2.9, 3.4, 3.5],
+    'hollywood-studios': [3.2, 3.0, 3.1, 3.2, 3.4, 3.8, 3.9],
+    'animal-kingdom': [2.4, 2.1, 2.2, 2.3, 2.5, 3.1, 3.2],
+    'epic-universe': [3.8, 3.6, 3.7, 3.7, 3.9, 4.3, 4.4],
+    'islands-of-adventure': [2.9, 2.6, 2.7, 2.8, 3.0, 3.5, 3.6]
+};
+
+function isoDate(d) {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
+}
+
+function parseCrowdCsv(text) {
+    const map = {};
+    const lines = text.trim().split(/\r?\n/).slice(1);
+    for (const line of lines) {
+        if (!line.trim()) continue;
+        const [date, level, avg, samples] = line.split(',');
+        if (!date || !level) continue;
+        map[date] = {
+            level: level.trim(),
+            avgWait: avg ? Number(avg) : null,
+            samples: samples ? Number(samples) : null,
+            source: 'observed'
+        };
+    }
+    return map;
+}
+
+async function fetchParkCrowd(slug) {
+    const urls = [`/api/crowd/${slug}`, `data/${slug}.csv`];
+    for (const url of urls) {
+        try {
+            const res = await fetch(url);
+            if (!res.ok) continue;
+            const text = await res.text();
+            if (!text.includes('crowd_level')) continue;
+            return parseCrowdCsv(text);
+        } catch (_) { /* try next */ }
+    }
+    return {};
+}
+
+async function ensureCrowdData() {
+    if (crowdState.loaded) return;
+    const results = await Promise.all(CROWD_PARKS.map(p => fetchParkCrowd(p.slug)));
+    CROWD_PARKS.forEach((p, i) => {
+        crowdState.observed[p.slug] = results[i];
+    });
+    crowdState.loaded = true;
+}
+
+function holidayBoost(d) {
+    const m = d.getMonth() + 1;
+    const day = d.getDate();
+    const md = m * 100 + day;
+    // US holiday / peak travel spikes (approximate)
+    const spikes = [
+        [101, 105],   // New Year
+        [115, 120],   // MLK weekend window
+        [212, 217],   // Presidents Day
+        [310, 331],   // Spring break stretch
+        [401, 415],   // Easter window (approx)
+        [522, 531],   // Memorial Day
+        [628, 707],   // July 4 week
+        [829, 907],   // Labor Day
+        [1120, 1130], // Thanksgiving
+        [1218, 1231]  // Christmas / NY
+    ];
+    for (const [a, b] of spikes) {
+        if (md >= a && md <= b) return 1.1;
+    }
+    // Summer boost
+    if (m === 6 || m === 7 || (m === 8 && day <= 15)) return 0.55;
+    // Early Sep / mid Jan quieter
+    if ((m === 9 && day >= 8 && day <= 25) || (m === 1 && day >= 6 && day <= 14)) return -0.55;
+    return 0;
+}
+
+function estimateCrowd(slug, d) {
+    const bias = PARK_WEEKDAY_BIAS[slug] || PARK_WEEKDAY_BIAS['magic-kingdom'];
+    let score = bias[d.getDay()] + holidayBoost(d);
+    // Cap
+    score = Math.max(1.2, Math.min(4.8, score));
+    return {
+        level: CROWD_LEVEL_FROM_SCORE(score),
+        avgWait: null,
+        samples: null,
+        source: 'estimate',
+        score
+    };
+}
+
+function getCrowdForDay(slug, dateStr) {
+    const observed = crowdState.observed[slug] && crowdState.observed[slug][dateStr];
+    if (observed) return observed;
+    const [y, m, day] = dateStr.split('-').map(Number);
+    return estimateCrowd(slug, new Date(y, m - 1, day));
+}
+
+function renderParkChips() {
+    const row = document.getElementById('park-chip-row');
+    if (!row) return;
+    row.innerHTML = CROWD_PARKS.map(p => `
+        <button type="button" class="park-chip ${p.slug === crowdState.parkSlug ? 'active' : ''}"
+            onclick="selectCrowdPark('${p.slug}')">${p.short}</button>
+    `).join('');
+}
+
+window.selectCrowdPark = function (slug) {
+    crowdState.parkSlug = slug;
+    renderParkChips();
+    renderCrowdCalendar();
+    const detail = document.getElementById('crowd-day-detail');
+    if (detail) detail.textContent = '';
+};
+
+window.shiftCrowdMonth = function (delta) {
+    let m = crowdState.month + delta;
+    let y = crowdState.year;
+    if (m < 0) { m = 11; y -= 1; }
+    if (m > 11) { m = 0; y += 1; }
+    crowdState.month = m;
+    crowdState.year = y;
+    renderCrowdCalendar();
+};
+
+window.selectCrowdDay = function (dateStr) {
+    const info = getCrowdForDay(crowdState.parkSlug, dateStr);
+    const park = CROWD_PARKS.find(p => p.slug === crowdState.parkSlug);
+    const detail = document.getElementById('crowd-day-detail');
+    if (!detail) return;
+    const wait = info.avgWait != null ? ` · avg wait ~${Math.round(info.avgWait)} min` : '';
+    const src = info.source === 'observed' ? 'Observed' : 'Estimate';
+    detail.innerHTML = `<strong>${dateStr}</strong> · ${park.name}<br>${info.level}${wait} <span class="crowd-source">(${src})</span>`;
+};
+
+function renderCrowdCalendar() {
+    const cal = document.getElementById('crowd-calendar');
+    const label = document.getElementById('crowd-month-label');
+    if (!cal || !label) return;
+
+    const y = crowdState.year;
+    const m = crowdState.month;
+    const monthName = new Date(y, m, 1).toLocaleString('en-US', { month: 'long', year: 'numeric' });
+    label.textContent = monthName;
+
+    const firstDow = new Date(y, m, 1).getDay();
+    const daysInMonth = new Date(y, m + 1, 0).getDate();
+    const todayStr = isoDate(new Date());
+
+    let html = `<div class="crowd-dow">${['S','M','T','W','T','F','S'].map(d => `<span>${d}</span>`).join('')}</div><div class="crowd-grid">`;
+
+    for (let i = 0; i < firstDow; i++) {
+        html += `<div class="crowd-cell empty"></div>`;
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${y}-${String(m + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const info = getCrowdForDay(crowdState.parkSlug, dateStr);
+        const levelClass = info.level.toLowerCase();
+        const isToday = dateStr === todayStr ? ' today' : '';
+        const estimated = info.source === 'estimate' ? ' estimated' : '';
+        html += `<button type="button" class="crowd-cell ${levelClass}${isToday}${estimated}" onclick="selectCrowdDay('${dateStr}')" title="${info.level}">
+            <span class="crowd-day-num">${day}</span>
+            <span class="crowd-level-dot"></span>
+        </button>`;
+    }
+
+    html += '</div>';
+    cal.innerHTML = html;
 }
 
 // Global start
