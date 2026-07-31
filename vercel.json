@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/crowd/:slug",
+      "destination": "https://ropedropnews.com/parks/:slug/crowd-calendar.csv"
+    }
+  ]
+}

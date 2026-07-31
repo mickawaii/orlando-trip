@@ -1,0 +1,16 @@
+{
+    "name": "Disney World Magic",
+    "short_name": "Disney2026",
+    "background_color": "#0f172a",
+    "theme_color": "#0f172a",
+    "display": "standalone",
+    "orientation": "portrait",
+    "start_url": ".",
+    "icons": [
+        {
+            "src": "images/tinkerbell.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}

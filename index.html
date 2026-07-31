@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disney World 2026 Tracker</title>
+    <meta name="description"
+        content="Your magical real-time itinerary and expense tracker for the 2026 Disney World trip.">
+
+    <!-- Open Graph / Link Preview Tags -->
+    <meta property="og:title" content="Orlando Trip Info - Click Here! 🏰">
+    <meta property="og:description" content="Click to view our itinerary, expenses, and countdown! ✨">
+    <meta property="og:image" content="https://orlando-trip.vercel.app/images/trio.png">
+    <meta property="og:url" content="https://orlando-trip.vercel.app">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Tags (Helps with large image display in some apps) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Orlando Trip Info - Click Here! 🏰">
+    <meta name="twitter:description" content="Click to view our itinerary, expenses, and countdown! ✨">
+    <meta name="twitter:image" content="https://orlando-trip.vercel.app/images/trio.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Poppins:wght@700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="style.css">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+</head>
+
+<body>
+    <div id="orientation-lock">
+        <div class="lock-content">
+            <div class="lock-icon">📱</div>
+            <h2>Please Rotate to Portrait</h2>
+            <p>This experience is optimized for vertical viewing.</p>
+        </div>
+    </div>
+    <canvas id="pixie-dust"></canvas>
+    <div class="container">
+        <header>
+            <div id="admin-indicator"
+                style="display: none; color: #34d399; font-size: 0.85rem; font-weight: 700; text-align: center; margin-bottom: 10px; text-shadow: 0 0 10px rgba(52, 211, 153, 0.6);">
+                🟢 Admin Mode Active
+            </div>
+            <img src="images/tinkerbell.png" id="tinkerbell-header" class="character-img" alt="Tinker Bell">
+            <img src="images/trio.png" id="trio-hero" class="character-img" alt="Mickey Trio">
+            <div class="dates">January 11 - 15, 2026</div>
+            <h1>Disney World Magic</h1>
+
+            <div class="countdown-container" style="margin: 15px 0;">
+                <div class="countdown-item">
+                    <span class="countdown-value" id="days">00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="hours">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="minutes">00</span>
+                    <span class="countdown-label">Mins</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="seconds">00</span>
+                    <span class="countdown-label">Secs</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- PERMANENT NAVIGATION HEADER -->
+        <h2
+            style="text-align: center; margin-bottom: 20px; font-size: 1.8rem; text-shadow: 0 0 10px rgba(251, 191, 36, 0.3); margin-top: 0;">
+            Trip Guide</h2>
+        <div class="quick-links-container" style="position: relative; z-index: 20; margin-bottom: 25px;">
+            <div class="icon-btn-wrapper">
+                <button class="icon-btn btn-airbnb" onclick="openAirbnbModal()">🏠</button>
+                <span class="icon-label">Airbnb</span>
+            </div>
+            <div class="icon-btn-wrapper">
+                <button class="icon-btn btn-crowds" onclick="openCrowdsModal()">📊</button>
+                <span class="icon-label">Crowds</span>
+            </div>
+            <div class="icon-btn-wrapper">
+                <button class="icon-btn btn-dining" onclick="openDiningModal()">🍔</button>
+                <span class="icon-label">Dining</span>
+            </div>
+            <div class="icon-btn-wrapper">
+                <button class="icon-btn btn-schedule" onclick="toggleItinerarySection()">🗓️</button>
+                <span class="icon-label">Schedule</span>
+            </div>
+            <div class="icon-btn-wrapper">
+                <button class="icon-btn btn-expenses" onclick="toggleExpensesSection()">💰</button>
+                <span class="icon-label">Costs</span>
+            </div>
+            <div class="icon-btn-wrapper edit-btn-wrapper" id="edit-btn-wrapper">
+                <button class="icon-btn btn-edit" onclick="toggleItineraryEdit()">⚙️</button>
+                <span class="icon-label">Edit</span>
+            </div>
+        </div>
+
+        <!-- DYNAMIC CONTENT AREA -->
+        <div id="content-area" style="position: relative; z-index: 10;">
+
+            <!-- Itinerary Section -->
+            <section id="itinerary-section" class="glass-card" style="display: none; width: 100%; margin-bottom: 20px;">
+                <img src="images/pluto.png" id="pluto-itinerary" class="character-img" alt="Pluto">
+                <h3 style="margin-bottom: 20px; color: var(--accent);">Daily Schedule</h3>
+                <div class="itinerary-grid" id="itinerary-container">
+                    <!-- Itinerary injected here -->
+                </div>
+            </section>
+
+            <!-- Expenses Section -->
+            <section id="expenses-section" class="glass-card" style="display: none; width: 100%; margin-bottom: 20px;">
+                <img src="images/goofy.png" id="goofy-expenses" class="character-img" alt="Goofy">
+                <h3 style="margin-bottom: 5px; color: var(--accent);">Your Contributions</h3>
+                <p style="margin-bottom: 20px; color: var(--text-dim);">Select a person to see their individualized cost
+                    breakdown.</p>
+
+                <div class="person-selector" style="gap: 15px; margin-bottom: 25px;">
+                    <button class="person-btn active" style="padding: 12px 20px; font-size: 1rem;"
+                        onclick="showBreakdown('Jackie')">Jackie</button>
+                    <button class="person-btn" style="padding: 12px 20px; font-size: 1rem;"
+                        onclick="showBreakdown('Alex')">Alex</button>
+                    <button class="person-btn" style="padding: 12px 20px; font-size: 1rem;"
+                        onclick="showBreakdown('Crystal')">Crystal</button>
+                    <button class="person-btn" style="padding: 12px 20px; font-size: 1rem;"
+                        onclick="showBreakdown('Erica')">Erica & Kids</button>
+                </div>
+
+                <div id="breakdown-content">
+                    <!-- Javascript will inject here -->
+                </div>
+
+                <!-- Custom Expense Form (Dynamically toggled) -->
+                <div class="custom-expense-form" id="expense-form-container">
+                    <h4 style="width: 100%; margin-bottom: 5px; font-size: 0.9rem; color: var(--accent);">Add Florida
+                        Purchase ✨</h4>
+                    <input type="text" id="item-name" placeholder="Item name (e.g. Lightsaber)">
+                    <input type="number" id="item-price" placeholder="Price ($)" step="0.01">
+                    <button class="add-btn" onclick="addCustomExpense()">Add to Total</button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Identity Overlay -->
+    <div id="identity-overlay" class="identity-overlay" style="display: none;">
+        <div class="identity-card-container">
+            <h1 class="identity-title">Who's visiting the Magic Kingdom today? ✨</h1>
+            <div class="identity-grid">
+                <button class="identity-btn" onclick="selectUser('Jackie')">
+                    <div class="identity-avatar">J</div>
+                    <span>Jackie</span>
+                </button>
+                <button class="identity-btn" onclick="selectUser('Alex')">
+                    <div class="identity-avatar">A</div>
+                    <span>Alex</span>
+                </button>
+                <button class="identity-btn" onclick="selectUser('Crystal')">
+                    <div class="identity-avatar">C</div>
+                    <span>Crystal</span>
+                </button>
+                <button class="identity-btn" onclick="selectUser('Erica')">
+                    <div class="identity-avatar">E</div>
+                    <span>Erica & Kids</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Planner Modal -->
+    <div id="planner-modal" class="modal-overlay">
+        <div class="modal-header">
+            <h2 id="planner-title" style="margin:0; font-size:1.4rem;">Day Planner ✨</h2>
+            <button class="close-modal-btn" onclick="closePlanner()">✕</button>
+        </div>
+        <div id="planner-body" class="modal-body">
+            <!-- Day Selection or Hourly Timeline will be injected here -->
+        </div>
+        <div id="planner-footer" class="modal-footer" style="display:none;">
+            <button class="save-day-btn" onclick="saveDay()">Save Day 💾</button>
+        </div>
+    </div>
+
+    <!-- Crowds Modal -->
+    <div id="crowds-modal" class="modal-overlay">
+        <div class="modal-content-wide">
+            <div class="modal-header">
+                <h2 style="margin:0; font-size:1.4rem;">Park Crowds 📊</h2>
+                <button class="back-modal-btn" onclick="closeCrowdsModal()">← Back</button>
+            </div>
+            <div class="modal-body-scroll" id="crowds-body">
+                <p class="crowds-intro">Pick a park to see which days are lighter or packed. Green = quieter, red = busiest.</p>
+                <div class="park-chip-row" id="park-chip-row"></div>
+                <div class="crowd-month-nav">
+                    <button type="button" class="crowd-nav-btn" onclick="shiftCrowdMonth(-1)" aria-label="Previous month">‹</button>
+                    <h3 id="crowd-month-label" class="crowd-month-label"></h3>
+                    <button type="button" class="crowd-nav-btn" onclick="shiftCrowdMonth(1)" aria-label="Next month">›</button>
+                </div>
+                <div class="crowd-legend">
+                    <span><i class="swatch light"></i>Light</span>
+                    <span><i class="swatch moderate"></i>Moderate</span>
+                    <span><i class="swatch busy"></i>Busy</span>
+                    <span><i class="swatch packed"></i>Packed</span>
+                </div>
+                <div class="crowd-calendar" id="crowd-calendar"></div>
+                <p id="crowd-day-detail" class="crowd-day-detail"></p>
+                <p class="crowds-attribution">Observed days from <a href="https://ropedropnews.com" target="_blank" rel="noopener">Rope Drop News</a> (CC BY 4.0). Future days are estimates for planning.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dining Modal -->
+    <div id="dining-modal" class="modal-overlay">
+        <div class="modal-content-wide">
+            <div class="modal-header">
+                <h2 style="margin:0; font-size:1.4rem;">Dining Ideas 🍔</h2>
+                <button class="back-modal-btn" onclick="closeDiningModal()">← Back</button>
+            </div>
+            <div class="modal-body-scroll">
+                <div style="padding: 10px;">
+                    <h3 style="color: var(--accent); margin-bottom: 15px;">Breakfast 🍳</h3>
+                    <p style="margin-bottom: 25px; color: var(--text-dim);">Eggs, Cereal, Bacon, Milk, Pancakes, Bagels.
+                    </p>
+
+                    <h3 style="color: var(--accent); margin-bottom: 15px;">Lunch Ideas 🥪</h3>
+                    <ul style="margin-bottom: 25px; color: var(--text-dim); padding-left: 20px; line-height: 1.8;">
+                        <li>Sandwich Lunch (1–2 lunches)</li>
+                        <li>Noodles</li>
+                        <li>Hot Pockets</li>
+                    </ul>
+
+                    <h3 style="color: var(--accent); margin-bottom: 15px;">Dinner Ideas 🍝</h3>
+                    <ul style="margin-bottom: 25px; color: var(--text-dim); padding-left: 20px; line-height: 1.8;">
+                        <li>Pasta Night (1 dinner)</li>
+                        <li>Burger Night (1 dinner)</li>
+                        <li>Taco Night (1 dinner)</li>
+                        <li>Frozen Pizza</li>
+                    </ul>
+
+                    <h3 style="color: var(--accent); margin-bottom: 15px;">Snacks 🥨</h3>
+                    <ul style="margin-bottom: 25px; color: var(--text-dim); padding-left: 20px; line-height: 1.8;">
+                        <li>Water</li>
+                        <li>Drinks for all dinners</li>
+                        <li>Chips</li>
+                        <li>Whatever girls pick at the store</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Airbnb Modal -->
+    <div id="airbnb-modal" class="modal-overlay">
+        <div class="modal-content-wide">
+            <div class="modal-header">
+                <h2 style="margin:0; font-size:1.4rem;">Airbnb Reservation 🏠</h2>
+                <button class="back-modal-btn" onclick="closeAirbnbModal()">← Back</button>
+            </div>
+            <div class="modal-body-scroll">
+                <h4 style="color: var(--accent); margin-bottom: 15px;">Airbnb Receipt 🧾</h4>
+                <img src="images/airbnb_receipt.png"
+                    style="width: 100%; border-radius: 12px; margin-bottom: 30px; cursor: pointer;" alt="Airbnb Receipt"
+                    onclick="openLightbox(this.src)">
+
+                <h4 style="color: var(--accent); margin-bottom: 25px;">House Highlights 🏠✨</h4>
+
+                <div class="gallery-section">
+                    <h5 class="room-title">Living Room 🛋️</h5>
+                    <div class="photo-gallery">
+                        <img src="images/house_living_1.png" class="gallery-item" alt="Living Room 1"
+                            onclick="openLightbox(this.src)">
+                        <img src="images/house_living_2.png" class="gallery-item" alt="Living Room 2"
+                            onclick="openLightbox(this.src)">
+                        <img src="images/house_living_3.png" class="gallery-item" alt="Living Room 3"
+                            onclick="openLightbox(this.src)">
+                        <img src="images/house_living_4.png" class="gallery-item" alt="Living Room 4"
+                            onclick="openLightbox(this.src)">
+                    </div>
+                </div>
+
+                <div class="gallery-section">
+                    <h5 class="room-title">Kitchen & Dining 🍳🍽️</h5>
+                    <div class="photo-gallery">
+                        <img src="images/house_kitchen_1.png" class="gallery-item" alt="Kitchen 1"
+                            onclick="openLightbox(this.src)">
+                        <img src="images/house_kitchen_2.png" class="gallery-item" alt="Kitchen 2"
+                            onclick="openLightbox(this.src)">
+                        <img src="images/house_dining_1.png" class="gallery-item" alt="Dining 1"
+                            onclick="openLightbox(this.src)">
+                        <img src="images/house_dining_2.png" class="gallery-item" alt="Dining 2"
+                            onclick="openLightbox(this.src)">
+                        <img src="images/house_dining_3.png" class="gallery-item" alt="Dining 3"
+                            onclick="openLightbox(this.src)">
+                    </div>
+                </div>
+
+                <div class="gallery-section">
+                    <h5 class="room-title">Bedroom 1 🛏️</h5>
+                    <div class="photo-gallery">
+                        <img src="images/house_bed1_1.png" class="gallery-item" alt="Bedroom 1-1"
+                            onclick="openLightbox(this.src)">
+                        <img src="images/house_bed1_2.png" class="gallery-item" alt="Bedroom 1-2"
+                            onclick="openLightbox(this.src)">
+                        <img src="images/house_bed1_3.png" class="gallery-item" alt="Bedroom 1-3"
+                            onclick="openLightbox(this.src)">
+                        <img src="images/house_bed1_4.png" class="gallery-item" alt="Bedroom 1-4"
+                            onclick="openLightbox(this.src)">
+                    </div>
+                </div>
+
+                <div class="gallery-section">
+                    <h5 class="room-title">Bedroom 2 🛌</h5>
+                    <div class="photo-gallery">
+                        <img src="images/house_bed2_1.png" class="gallery-item" alt="Bedroom 2"
+                            onclick="openLightbox(this.src)">
+                    </div>
+                </div>
+
+                <div class="gallery-section">
+                    <h5 class="room-title">Bedroom 3 🛌</h5>
+                    <div class="photo-gallery">
+                        <img src="images/house_bed3_1.png" class="gallery-item" alt="Bedroom 3-1"
+                            onclick="openLightbox(this.src)">
+                        <img src="images/house_bed3_2.png" class="gallery-item" alt="Bedroom 3-2"
+                            onclick="openLightbox(this.src)">
+                    </div>
+                </div>
+
+                <div class="gallery-section">
+                    <h5 class="room-title">Bathroom 1 🚿</h5>
+                    <div class="photo-gallery">
+                        <img src="images/house_bath1_1.png" class="gallery-item" alt="Bathroom 1-1"
+                            onclick="openLightbox(this.src)">
+                        <img src="images/house_bath1_2.png" class="gallery-item" alt="Bathroom 1-2"
+                            onclick="openLightbox(this.src)">
+                    </div>
+                </div>
+
+                <div class="gallery-section">
+                    <h5 class="room-title">Bathroom 2 🚿</h5>
+                    <div class="photo-gallery">
+                        <img src="images/house_bath2_1.png" class="gallery-item" alt="Bathroom 2"
+                            onclick="openLightbox(this.src)">
+                    </div>
+                </div>
+
+                <div class="gallery-section">
+                    <h5 class="room-title">Bathroom 3 🚿</h5>
+                    <div class="photo-gallery">
+                        <img src="images/house_bath3_1.png" class="gallery-item" alt="Bathroom 3"
+                            onclick="openLightbox(this.src)">
+                    </div>
+                </div>
+
+                <div class="gallery-section">
+                    <h5 class="room-title">Work & Laundry 💻🧺</h5>
+                    <div class="photo-gallery">
+                        <img src="images/house_workspace.png" class="gallery-item" alt="Workspace"
+                            onclick="openLightbox(this.src)">
+                        <img src="images/house_laundry.png" class="gallery-item" alt="Laundry Area"
+                            onclick="openLightbox(this.src)">
+                    </div>
+                </div>
+
+                <div class="gallery-section">
+                    <h5 class="room-title">Exterior & Pool 🏊‍♂️✨</h5>
+                    <div class="photo-gallery">
+                        <img src="images/house_exterior_1.png" class="gallery-item" alt="Exterior 1"
+                            onclick="openLightbox(this.src)">
+                        <img src="images/house_exterior_2.png" class="gallery-item" alt="Exterior 2"
+                            onclick="openLightbox(this.src)">
+                        <img src="images/house_exterior_3.jpg" class="gallery-item" alt="Exterior 3"
+                            onclick="openLightbox(this.src)">
+                        <img src="images/house_pool_1.png" class="gallery-item" alt="Pool 1"
+                            onclick="openLightbox(this.src)">
+                        <img src="images/house_pool_2.png" class="gallery-item" alt="Pool 2"
+                            onclick="openLightbox(this.src)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox-modal" class="modal-overlay" style="z-index: 3000;">
+        <div class="lightbox-content">
+            <button class="close-modal-btn lightbox-close" onclick="closeLightbox()">✕</button>
+            <img id="lightbox-img" src="" alt="Full Screen Image">
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>
+<!-- Sync: Alexvela1224@gmail.com -->
