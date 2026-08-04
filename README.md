@@ -7,7 +7,7 @@ App web mobile-first com:
 - Countdown até a viagem
 - Guia rápido: Airbnb, lotação dos parques, dining, schedule, custos
 - Calendário de crowds por parque (dados observados + estimativas)
-- Diárias do Universal Helios Grand Hotel (nov/dez 2026, scrape oficial)
+- Diárias do Universal Helios Grand Hotel (ago–dez 2026, scrape oficial)
 - Itinerário diário sincronizado (Supabase)
 - Divisão de custos por pessoa (Jackie, Alex, Crystal, Erica & Kids)
 - Galeria do Airbnb

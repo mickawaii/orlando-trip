@@ -1264,17 +1264,17 @@ function parseHeliosCsv(text) {
         const cols = parseLine(line);
         const obj = {};
         headers.forEach((h, i) => obj[h] = cols[i]);
-        obj.nightly_rate = parseFloat(obj.nightly_rate);
-        obj.taxes = parseFloat(obj.taxes);
-        obj.total = parseFloat(obj.total);
+        obj.nightly_rate = obj.nightly_rate === '' ? NaN : parseFloat(obj.nightly_rate);
+        obj.taxes = obj.taxes === '' ? NaN : parseFloat(obj.taxes);
+        obj.total = obj.total === '' ? NaN : parseFloat(obj.total);
         return obj;
-    }).filter(r => r.date && !Number.isNaN(r.nightly_rate));
+    }).filter(r => r.date);
 }
 
 async function ensureHeliosData() {
     if (heliosLoaded) return;
     try {
-        const res = await fetch('data/helios-nov-dec-2026.csv');
+        const res = await fetch('data/helios-aug-dec-2026.csv');
         if (!res.ok) throw new Error('CSV missing');
         heliosRows = parseHeliosCsv(await res.text());
         heliosLoaded = true;
@@ -1286,13 +1286,16 @@ async function ensureHeliosData() {
 
 window.filterHeliosMonth = function (monthKey) {
     heliosMonthFilter = monthKey;
+    const labels = {
+        all: 'All',
+        '2026-08': 'Aug',
+        '2026-09': 'Sep',
+        '2026-10': 'Oct',
+        '2026-11': 'Nov',
+        '2026-12': 'Dec'
+    };
     document.querySelectorAll('#helios-month-chips .park-chip').forEach(btn => {
-        const label = btn.textContent.trim();
-        const active =
-            (monthKey === 'all' && label === 'All') ||
-            (monthKey === '2026-11' && label === 'November') ||
-            (monthKey === '2026-12' && label === 'December');
-        btn.classList.toggle('active', active);
+        btn.classList.toggle('active', btn.textContent.trim() === labels[monthKey]);
     });
     renderHeliosRates();
 };
@@ -1312,11 +1315,21 @@ function renderHeliosRates() {
         return;
     }
 
-    const rates = rows.map(r => r.nightly_rate);
+    const priced = rows.filter(r => !Number.isNaN(r.nightly_rate) && r.nightly_rate > 0);
+    if (!priced.length) {
+        summary.innerHTML = `<div class="helios-stat"><span class="label">Days</span><span class="value">${rows.length}</span></div>`;
+        tbody.innerHTML = rows.map(r => `<tr>
+            <td>${r.date}</td>
+            <td>${(r.dow || '').slice(0, 3)}</td>
+            <td colspan="3">${r.status || 'unavailable'}</td>
+        </tr>`).join('');
+        return;
+    }
+
+    const rates = priced.map(r => r.nightly_rate);
     const min = Math.min(...rates);
     const max = Math.max(...rates);
     const avg = rates.reduce((a, b) => a + b, 0) / rates.length;
-    const cheapest = rows.find(r => r.nightly_rate === min);
 
     summary.innerHTML = `
         <div class="helios-stat"><span class="label">Cheapest</span><span class="value">$${min.toFixed(0)}</span></div>
@@ -1324,20 +1337,27 @@ function renderHeliosRates() {
         <div class="helios-stat"><span class="label">Highest</span><span class="value">$${max.toFixed(0)}</span></div>
     `;
 
-    // Thresholds for coloring within current filter
     const lowCut = min + (max - min) * 0.25;
     const highCut = min + (max - min) * 0.75;
 
     tbody.innerHTML = rows.map(r => {
+        const hasPrice = !Number.isNaN(r.nightly_rate) && r.nightly_rate > 0;
         const weekend = r.dow === 'Friday' || r.dow === 'Saturday' || r.dow === 'Sunday';
+        if (!hasPrice) {
+            return `<tr class="${weekend ? 'weekend' : ''}">
+                <td>${r.date}</td>
+                <td>${(r.dow || '').slice(0, 3)}</td>
+                <td colspan="3" style="color:var(--text-dim)">Unavailable</td>
+            </tr>`;
+        }
         const tier = r.nightly_rate <= lowCut ? 'cheap' : (r.nightly_rate >= highCut ? 'pricey' : '');
         const mark = r.nightly_rate === min ? ' ★' : '';
         return `<tr class="${tier} ${weekend ? 'weekend' : ''}">
             <td>${r.date}</td>
             <td>${r.dow.slice(0, 3)}</td>
             <td>$${r.nightly_rate.toFixed(0)}${mark}</td>
-            <td>$${r.taxes.toFixed(0)}</td>
-            <td>$${r.total.toFixed(0)}</td>
+            <td>$${(r.taxes || 0).toFixed(0)}</td>
+            <td>$${(r.total || 0).toFixed(0)}</td>
         </tr>`;
     }).join('');
 }
