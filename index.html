@@ -87,6 +87,10 @@
                 <span class="icon-label">Crowds</span>
             </div>
             <div class="icon-btn-wrapper">
+                <button class="icon-btn btn-helios" onclick="openHeliosModal()">🏨</button>
+                <span class="icon-label">Helios</span>
+            </div>
+            <div class="icon-btn-wrapper">
                 <button class="icon-btn btn-dining" onclick="openDiningModal()">🍔</button>
                 <span class="icon-label">Dining</span>
             </div>
@@ -186,6 +190,40 @@
         </div>
         <div id="planner-footer" class="modal-footer" style="display:none;">
             <button class="save-day-btn" onclick="saveDay()">Save Day 💾</button>
+        </div>
+    </div>
+
+    <!-- Helios Rates Modal -->
+    <div id="helios-modal" class="modal-overlay">
+        <div class="modal-content-wide">
+            <div class="modal-header">
+                <h2 style="margin:0; font-size:1.4rem;">Helios Rates 🏨</h2>
+                <button class="back-modal-btn" onclick="closeHeliosModal()">← Back</button>
+            </div>
+            <div class="modal-body-scroll" id="helios-body">
+                <p class="helios-intro">Official Flexible Rate (Standard 2 Queen, 2 adults) from Universal reservations — Nov &amp; Dec 2026.</p>
+                <div class="helios-summary" id="helios-summary">Loading…</div>
+                <div class="park-chip-row" id="helios-month-chips">
+                    <button type="button" class="park-chip active" onclick="filterHeliosMonth('all')">All</button>
+                    <button type="button" class="park-chip" onclick="filterHeliosMonth('2026-11')">November</button>
+                    <button type="button" class="park-chip" onclick="filterHeliosMonth('2026-12')">December</button>
+                </div>
+                <div class="helios-table-wrap">
+                    <table class="helios-table" id="helios-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Day</th>
+                                <th>Nightly</th>
+                                <th>Taxes</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="helios-tbody"></tbody>
+                    </table>
+                </div>
+                <p class="crowds-attribution">Source: <a href="https://reservations.universalorlando.com/ibe/default.aspx?hotelID=17424&amp;hgID=705&amp;lang=en-us" target="_blank" rel="noopener">reservations.universalorlando.com</a> · rates change; snapshot only.</p>
+            </div>
         </div>
     </div>
 

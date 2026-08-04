@@ -467,6 +467,24 @@ window.closeCrowdsModal = function () {
     }
 };
 
+window.openHeliosModal = async function () {
+    const modal = document.getElementById('helios-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.classList.add('no-scroll');
+        await ensureHeliosData();
+        renderHeliosRates();
+    }
+};
+
+window.closeHeliosModal = function () {
+    const modal = document.getElementById('helios-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.classList.remove('no-scroll');
+    }
+};
+
 window.openDiningModal = function () {
     const modal = document.getElementById('dining-modal');
     if (modal) {
@@ -516,7 +534,11 @@ window.closeLightbox = function () {
         // Only remove no-scroll if no other modal is open
         const airbnb = document.getElementById('airbnb-modal');
         const crowds = document.getElementById('crowds-modal');
-        if ((!airbnb || airbnb.style.display === 'none') && (!crowds || crowds.style.display === 'none')) {
+        const helios = document.getElementById('helios-modal');
+        const open = (el) => el && el.style.display !== 'none' && el.style.display !== '';
+        // display flex when open; empty/none when closed
+        const anyOpen = [airbnb, crowds, helios].some(el => el && el.style.display === 'flex');
+        if (!anyOpen) {
             document.body.classList.remove('no-scroll');
         }
     }
@@ -1213,6 +1235,111 @@ function renderCrowdCalendar() {
 
     html += '</div>';
     cal.innerHTML = html;
+}
+
+// --- HELIOS HOTEL RATES (scraped Flexible Rate) ---
+let heliosRows = [];
+let heliosMonthFilter = 'all';
+let heliosLoaded = false;
+
+function parseHeliosCsv(text) {
+    const lines = text.trim().split(/\r?\n/);
+    if (lines.length < 2) return [];
+    const headers = lines[0].split(',');
+    // Simple CSV parser handling quoted fields
+    const parseLine = (line) => {
+        const out = [];
+        let cur = '';
+        let q = false;
+        for (let i = 0; i < line.length; i++) {
+            const c = line[i];
+            if (c === '"') { q = !q; continue; }
+            if (c === ',' && !q) { out.push(cur); cur = ''; continue; }
+            cur += c;
+        }
+        out.push(cur);
+        return out;
+    };
+    return lines.slice(1).map(line => {
+        const cols = parseLine(line);
+        const obj = {};
+        headers.forEach((h, i) => obj[h] = cols[i]);
+        obj.nightly_rate = parseFloat(obj.nightly_rate);
+        obj.taxes = parseFloat(obj.taxes);
+        obj.total = parseFloat(obj.total);
+        return obj;
+    }).filter(r => r.date && !Number.isNaN(r.nightly_rate));
+}
+
+async function ensureHeliosData() {
+    if (heliosLoaded) return;
+    try {
+        const res = await fetch('data/helios-nov-dec-2026.csv');
+        if (!res.ok) throw new Error('CSV missing');
+        heliosRows = parseHeliosCsv(await res.text());
+        heliosLoaded = true;
+    } catch (e) {
+        console.error('Helios rates load failed', e);
+        heliosRows = [];
+    }
+}
+
+window.filterHeliosMonth = function (monthKey) {
+    heliosMonthFilter = monthKey;
+    document.querySelectorAll('#helios-month-chips .park-chip').forEach(btn => {
+        const label = btn.textContent.trim();
+        const active =
+            (monthKey === 'all' && label === 'All') ||
+            (monthKey === '2026-11' && label === 'November') ||
+            (monthKey === '2026-12' && label === 'December');
+        btn.classList.toggle('active', active);
+    });
+    renderHeliosRates();
+};
+
+function renderHeliosRates() {
+    const tbody = document.getElementById('helios-tbody');
+    const summary = document.getElementById('helios-summary');
+    if (!tbody || !summary) return;
+
+    const rows = heliosRows.filter(r =>
+        heliosMonthFilter === 'all' || r.date.startsWith(heliosMonthFilter)
+    );
+
+    if (!rows.length) {
+        summary.textContent = 'No rate data loaded.';
+        tbody.innerHTML = '';
+        return;
+    }
+
+    const rates = rows.map(r => r.nightly_rate);
+    const min = Math.min(...rates);
+    const max = Math.max(...rates);
+    const avg = rates.reduce((a, b) => a + b, 0) / rates.length;
+    const cheapest = rows.find(r => r.nightly_rate === min);
+
+    summary.innerHTML = `
+        <div class="helios-stat"><span class="label">Cheapest</span><span class="value">$${min.toFixed(0)}</span></div>
+        <div class="helios-stat"><span class="label">Average</span><span class="value">$${avg.toFixed(0)}</span></div>
+        <div class="helios-stat"><span class="label">Highest</span><span class="value">$${max.toFixed(0)}</span></div>
+    `;
+
+    // Thresholds for coloring within current filter
+    const lowCut = min + (max - min) * 0.25;
+    const highCut = min + (max - min) * 0.75;
+
+    tbody.innerHTML = rows.map(r => {
+        const weekend = r.dow === 'Friday' || r.dow === 'Saturday' || r.dow === 'Sunday';
+        const tier = r.nightly_rate <= lowCut ? 'cheap' : (r.nightly_rate >= highCut ? 'pricey' : '');
+        const mark = r.nightly_rate === min ? ' ★' : '';
+        return `<tr class="${tier} ${weekend ? 'weekend' : ''}">
+            <td>${r.date}</td>
+            <td>${r.dow.slice(0, 3)}</td>
+            <td>$${r.nightly_rate.toFixed(0)}${mark}</td>
+            <td>$${r.taxes.toFixed(0)}</td>
+            <td>$${r.total.toFixed(0)}</td>
+        </tr>`;
+    }).join('');
 }
 
 // Global start
