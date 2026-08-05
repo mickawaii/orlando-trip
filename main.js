@@ -29,19 +29,8 @@ let tinkClicks = 0;
 let tinkTimer = null;
 
 window.initApp = async function () {
-    // Identity check removed for global visibility
-    // checkIdentity(); 
     initMagicTrigger();
-    restoreAdminMode(); // Restore admin status from localStorage
-    await Promise.all([
-        fetchExpenses(),
-        fetchItinerary(),
-        fetchPayments()
-    ]);
-    // Default showBreakdown to currentActivePerson 
-    showBreakdown(currentActivePerson);
-    renderItinerary();
-    setupSubscriptions();
+    restoreAdminMode();
 };
 
 function restoreAdminMode() {
@@ -503,22 +492,6 @@ window.closeRoteiroModal = function () {
     }
 };
 
-window.openDiningModal = function () {
-    const modal = document.getElementById('dining-modal');
-    if (modal) {
-        modal.style.display = 'flex';
-        document.body.classList.add('no-scroll');
-    }
-};
-
-window.closeDiningModal = function () {
-    const modal = document.getElementById('dining-modal');
-    if (modal) {
-        modal.style.display = 'none';
-        document.body.classList.remove('no-scroll');
-    }
-};
-
 window.openAirbnbModal = function () {
     const modal = document.getElementById('airbnb-modal');
     if (modal) {
@@ -888,54 +861,6 @@ window.showBreakdown = function (name) {
         const newLabel = document.getElementById('details-label');
         if (newDetails) newDetails.style.display = 'block';
         if (newLabel) newLabel.innerText = 'Hide Details';
-    }
-};
-
-window.toggleItinerarySection = function () {
-    const itinSection = document.getElementById('itinerary-section');
-    const expSection = document.getElementById('expenses-section');
-    const btn = document.querySelector('.btn-schedule');
-    const expBtn = document.querySelector('.btn-expenses');
-
-    if (itinSection.style.display === 'none') {
-        itinSection.style.display = 'block';
-        if (btn) btn.classList.add('active');
-
-        // Auto-close expenses
-        if (expSection) expSection.style.display = 'none';
-        if (expBtn) expBtn.classList.remove('active');
-
-        renderItinerary();
-        // Scroll to content so user sees it
-        itinSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-        itinSection.style.display = 'none';
-        if (btn) btn.classList.remove('active');
-    }
-};
-
-window.toggleExpensesSection = function () {
-    const itinSection = document.getElementById('itinerary-section');
-    const expSection = document.getElementById('expenses-section');
-    const btn = document.querySelector('.btn-expenses');
-    const itinBtn = document.querySelector('.btn-schedule');
-
-    if (expSection.style.display === 'none') {
-        expSection.style.display = 'block';
-        if (btn) btn.classList.add('active');
-
-        // Auto-close itinerary
-        if (itinSection) itinSection.style.display = 'none';
-        if (itinBtn) itinBtn.classList.remove('active');
-
-        if (!document.getElementById('breakdown-content').innerHTML.trim()) {
-            showBreakdown(currentActivePerson || 'Jackie');
-        }
-        // Scroll to content
-        expSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-        expSection.style.display = 'none';
-        if (btn) btn.classList.remove('active');
     }
 };
 

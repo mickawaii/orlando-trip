@@ -94,107 +94,10 @@
                 <button class="icon-btn btn-roteiro" onclick="openRoteiroModal()">🗺️</button>
                 <span class="icon-label">Roteiro</span>
             </div>
-            <div class="icon-btn-wrapper">
-                <button class="icon-btn btn-dining" onclick="openDiningModal()">🍔</button>
-                <span class="icon-label">Dining</span>
-            </div>
-            <div class="icon-btn-wrapper">
-                <button class="icon-btn btn-schedule" onclick="toggleItinerarySection()">🗓️</button>
-                <span class="icon-label">Schedule</span>
-            </div>
-            <div class="icon-btn-wrapper">
-                <button class="icon-btn btn-expenses" onclick="toggleExpensesSection()">💰</button>
-                <span class="icon-label">Costs</span>
-            </div>
-            <div class="icon-btn-wrapper edit-btn-wrapper" id="edit-btn-wrapper">
-                <button class="icon-btn btn-edit" onclick="toggleItineraryEdit()">⚙️</button>
-                <span class="icon-label">Edit</span>
-            </div>
         </div>
 
         <!-- DYNAMIC CONTENT AREA -->
-        <div id="content-area" style="position: relative; z-index: 10;">
-
-            <!-- Itinerary Section -->
-            <section id="itinerary-section" class="glass-card" style="display: none; width: 100%; margin-bottom: 20px;">
-                <img src="images/pluto.png" id="pluto-itinerary" class="character-img" alt="Pluto">
-                <h3 style="margin-bottom: 20px; color: var(--accent);">Daily Schedule</h3>
-                <div class="itinerary-grid" id="itinerary-container">
-                    <!-- Itinerary injected here -->
-                </div>
-            </section>
-
-            <!-- Expenses Section -->
-            <section id="expenses-section" class="glass-card" style="display: none; width: 100%; margin-bottom: 20px;">
-                <img src="images/goofy.png" id="goofy-expenses" class="character-img" alt="Goofy">
-                <h3 style="margin-bottom: 5px; color: var(--accent);">Your Contributions</h3>
-                <p style="margin-bottom: 20px; color: var(--text-dim);">Select a person to see their individualized cost
-                    breakdown.</p>
-
-                <div class="person-selector" style="gap: 15px; margin-bottom: 25px;">
-                    <button class="person-btn active" style="padding: 12px 20px; font-size: 1rem;"
-                        onclick="showBreakdown('Jackie')">Jackie</button>
-                    <button class="person-btn" style="padding: 12px 20px; font-size: 1rem;"
-                        onclick="showBreakdown('Alex')">Alex</button>
-                    <button class="person-btn" style="padding: 12px 20px; font-size: 1rem;"
-                        onclick="showBreakdown('Crystal')">Crystal</button>
-                    <button class="person-btn" style="padding: 12px 20px; font-size: 1rem;"
-                        onclick="showBreakdown('Erica')">Erica & Kids</button>
-                </div>
-
-                <div id="breakdown-content">
-                    <!-- Javascript will inject here -->
-                </div>
-
-                <!-- Custom Expense Form (Dynamically toggled) -->
-                <div class="custom-expense-form" id="expense-form-container">
-                    <h4 style="width: 100%; margin-bottom: 5px; font-size: 0.9rem; color: var(--accent);">Add Florida
-                        Purchase ✨</h4>
-                    <input type="text" id="item-name" placeholder="Item name (e.g. Lightsaber)">
-                    <input type="number" id="item-price" placeholder="Price ($)" step="0.01">
-                    <button class="add-btn" onclick="addCustomExpense()">Add to Total</button>
-                </div>
-            </section>
-        </div>
-    </div>
-
-    <!-- Identity Overlay -->
-    <div id="identity-overlay" class="identity-overlay" style="display: none;">
-        <div class="identity-card-container">
-            <h1 class="identity-title">Who's visiting the Magic Kingdom today? ✨</h1>
-            <div class="identity-grid">
-                <button class="identity-btn" onclick="selectUser('Jackie')">
-                    <div class="identity-avatar">J</div>
-                    <span>Jackie</span>
-                </button>
-                <button class="identity-btn" onclick="selectUser('Alex')">
-                    <div class="identity-avatar">A</div>
-                    <span>Alex</span>
-                </button>
-                <button class="identity-btn" onclick="selectUser('Crystal')">
-                    <div class="identity-avatar">C</div>
-                    <span>Crystal</span>
-                </button>
-                <button class="identity-btn" onclick="selectUser('Erica')">
-                    <div class="identity-avatar">E</div>
-                    <span>Erica & Kids</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Planner Modal -->
-    <div id="planner-modal" class="modal-overlay">
-        <div class="modal-header">
-            <h2 id="planner-title" style="margin:0; font-size:1.4rem;">Day Planner ✨</h2>
-            <button class="close-modal-btn" onclick="closePlanner()">✕</button>
-        </div>
-        <div id="planner-body" class="modal-body">
-            <!-- Day Selection or Hourly Timeline will be injected here -->
-        </div>
-        <div id="planner-footer" class="modal-footer" style="display:none;">
-            <button class="save-day-btn" onclick="saveDay()">Save Day 💾</button>
-        </div>
+        <div id="content-area" style="position: relative; z-index: 10;"></div>
     </div>
 
     <!-- Roteiro Nov/Dez Modal -->
@@ -271,46 +174,6 @@
                 <div class="crowd-calendar" id="crowd-calendar"></div>
                 <p id="crowd-day-detail" class="crowd-day-detail"></p>
                 <p class="crowds-attribution">Observed days from <a href="https://ropedropnews.com" target="_blank" rel="noopener">Rope Drop News</a> (CC BY 4.0). Future days are estimates for planning.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Dining Modal -->
-    <div id="dining-modal" class="modal-overlay">
-        <div class="modal-content-wide">
-            <div class="modal-header">
-                <h2 style="margin:0; font-size:1.4rem;">Dining Ideas 🍔</h2>
-                <button class="back-modal-btn" onclick="closeDiningModal()">← Back</button>
-            </div>
-            <div class="modal-body-scroll">
-                <div style="padding: 10px;">
-                    <h3 style="color: var(--accent); margin-bottom: 15px;">Breakfast 🍳</h3>
-                    <p style="margin-bottom: 25px; color: var(--text-dim);">Eggs, Cereal, Bacon, Milk, Pancakes, Bagels.
-                    </p>
-
-                    <h3 style="color: var(--accent); margin-bottom: 15px;">Lunch Ideas 🥪</h3>
-                    <ul style="margin-bottom: 25px; color: var(--text-dim); padding-left: 20px; line-height: 1.8;">
-                        <li>Sandwich Lunch (1–2 lunches)</li>
-                        <li>Noodles</li>
-                        <li>Hot Pockets</li>
-                    </ul>
-
-                    <h3 style="color: var(--accent); margin-bottom: 15px;">Dinner Ideas 🍝</h3>
-                    <ul style="margin-bottom: 25px; color: var(--text-dim); padding-left: 20px; line-height: 1.8;">
-                        <li>Pasta Night (1 dinner)</li>
-                        <li>Burger Night (1 dinner)</li>
-                        <li>Taco Night (1 dinner)</li>
-                        <li>Frozen Pizza</li>
-                    </ul>
-
-                    <h3 style="color: var(--accent); margin-bottom: 15px;">Snacks 🥨</h3>
-                    <ul style="margin-bottom: 25px; color: var(--text-dim); padding-left: 20px; line-height: 1.8;">
-                        <li>Water</li>
-                        <li>Drinks for all dinners</li>
-                        <li>Chips</li>
-                        <li>Whatever girls pick at the store</li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
