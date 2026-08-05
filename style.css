@@ -1939,137 +1939,331 @@ body.admin-active #edit-btn-wrapper {
     background: rgba(251, 191, 36, 0.04);
 }
 
-/* --- Roteiro Nov/Dez --- */
+/* --- Roteiro Companheiro de Parque --- */
+.roteiro-shell {
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+}
+
+.roteiro-body-scroll {
+    padding-bottom: 72px !important;
+}
+
 .roteiro-loading {
     color: var(--text-dim);
 }
 
-.roteiro-hero {
-    margin-bottom: 18px;
-}
-
-.roteiro-hero h3 {
-    margin: 0 0 8px;
-    color: var(--accent);
-    font-size: 1.15rem;
-    line-height: 1.3;
-}
-
-.roteiro-meta {
-    color: var(--text-dim);
-    font-size: 0.88rem;
-    line-height: 1.5;
-    margin: 0 0 12px;
-}
-
-.roteiro-stat-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 14px;
-}
-
-.roteiro-pill-ok {
-    display: inline-block;
-    margin-top: 4px;
-    padding: 2px 8px;
-    border-radius: 999px;
-    font-size: 0.68rem;
-    font-weight: 700;
-    background: rgba(52, 211, 153, 0.18);
-    color: #6ee7b7;
-}
-
-.roteiro-tickets {
-    margin-bottom: 18px;
-    padding: 12px;
-    border: 1px solid var(--glass-border);
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.03);
-}
-
-.roteiro-tickets h4 {
+.roteiro-kicker {
     margin: 0 0 10px;
-    color: var(--accent);
-    font-size: 0.95rem;
+    font-size: 0.78rem;
+    color: var(--text-dim);
 }
 
-.roteiro-ticket-item {
-    margin-bottom: 10px;
-    font-size: 0.82rem;
-    color: var(--text);
-    line-height: 1.4;
+.roteiro-chip-row {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 2px 2px 12px;
+    margin: 0 -4px 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
 }
 
-.roteiro-ticket-item:last-child {
-    margin-bottom: 0;
-}
+.roteiro-chip-row::-webkit-scrollbar { display: none; }
 
-.roteiro-ticket-item strong {
-    color: #93c5fd;
-}
-
-.roteiro-day {
-    margin-bottom: 16px;
-    padding: 14px;
+.roteiro-chip {
+    flex: 0 0 auto;
+    width: 72px;
     border-radius: 16px;
     border: 1px solid var(--glass-border);
     background: rgba(255, 255, 255, 0.04);
+    color: var(--text);
+    padding: 10px 6px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+    font-family: inherit;
 }
 
-.roteiro-day-header {
+.roteiro-chip.active {
+    border-color: rgba(251, 191, 36, 0.7);
+    background: rgba(251, 191, 36, 0.12);
+    box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.25);
+}
+
+.roteiro-chip-emoji { font-size: 1.2rem; line-height: 1; }
+.roteiro-chip-short { font-size: 0.72rem; font-weight: 700; }
+.roteiro-chip-date { font-size: 0.65rem; color: var(--text-dim); }
+.roteiro-chip-bar {
+    margin-top: 6px;
+    width: 80%;
+    height: 3px;
+    border-radius: 99px;
+    background: rgba(255,255,255,0.08);
+    overflow: hidden;
+}
+.roteiro-chip-bar i {
+    display: block;
+    height: 100%;
+    background: #34d399;
+}
+
+.roteiro-day-panel {
+    --park: #fbbf24;
+    border: 1px solid color-mix(in srgb, var(--park) 35%, transparent);
+    background:
+        radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--park) 22%, transparent), transparent 55%),
+        rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    padding: 14px;
+}
+
+.roteiro-day-hero {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.roteiro-day-hero-text { flex: 1; min-width: 0; }
+.roteiro-day-when {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+}
+.roteiro-day-hero h3 {
+    margin: 0 0 6px;
+    font-size: 1.2rem;
+    line-height: 1.25;
+    color: var(--text);
+}
+.roteiro-day-hero p {
+    margin: 0;
+    font-size: 0.86rem;
+    color: var(--text-dim);
+    line-height: 1.45;
+}
+
+.roteiro-progress {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    border: 1px solid color-mix(in srgb, var(--park) 40%, transparent);
+    background: rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.roteiro-progress strong { font-size: 1rem; color: var(--park); }
+.roteiro-progress span { font-size: 0.62rem; color: var(--text-dim); }
+
+.roteiro-hours {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    background: rgba(0,0,0,0.28);
+    border: 1px solid var(--glass-border);
+    margin-bottom: 6px;
+}
+.roteiro-hour-block { text-align: center; flex: 1; }
+.roteiro-hour-block span {
+    display: block;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    margin-bottom: 2px;
+}
+.roteiro-hour-block strong {
+    font-size: 1.45rem;
+    color: #fde68a;
+    font-variant-numeric: tabular-nums;
+}
+.roteiro-hour-sep { color: var(--text-dim); font-size: 1.2rem; }
+.roteiro-hours-note {
+    margin: 0 0 12px;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+}
+
+.roteiro-address {
     display: flex;
     justify-content: space-between;
     gap: 10px;
-    align-items: flex-start;
-    margin-bottom: 8px;
-}
-
-.roteiro-day-date {
-    font-size: 0.72rem;
-    color: var(--text-dim);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-}
-
-.roteiro-day-rate {
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: #fdba74;
-    white-space: nowrap;
-}
-
-.roteiro-day h4 {
-    margin: 0 0 8px;
+    align-items: center;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255,255,255,0.04);
     color: var(--text);
-    font-size: 1.05rem;
-    line-height: 1.3;
+    text-decoration: none;
+    margin-bottom: 16px;
+    font-size: 0.82rem;
+    line-height: 1.35;
+}
+.roteiro-maps-cta {
+    flex-shrink: 0;
+    color: #93c5fd;
+    font-weight: 700;
+    font-size: 0.75rem;
 }
 
-.roteiro-day ul {
-    margin: 0 0 8px;
+.roteiro-section { margin-bottom: 18px; }
+.roteiro-section h4 {
+    margin: 0 0 10px;
+    font-size: 0.92rem;
+    color: var(--accent);
+}
+.roteiro-section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.roteiro-section-head h4 { margin: 0; }
+.roteiro-linkish {
+    border: 0;
+    background: transparent;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.roteiro-order { display: flex; flex-direction: column; gap: 8px; }
+.roteiro-attr {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    text-align: left;
+    width: 100%;
+    border-radius: 14px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255,255,255,0.04);
+    color: var(--text);
+    padding: 12px;
+    cursor: pointer;
+    font-family: inherit;
+}
+.roteiro-attr.first {
+    border-color: color-mix(in srgb, var(--park) 55%, transparent);
+    background: color-mix(in srgb, var(--park) 12%, transparent);
+}
+.roteiro-attr.checked {
+    opacity: 0.55;
+}
+.roteiro-attr.checked .roteiro-attr-body strong {
+    text-decoration: line-through;
+}
+.roteiro-attr-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+.roteiro-attr-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.roteiro-attr-body strong { font-size: 0.9rem; }
+.roteiro-attr-body em { font-style: normal; font-size: 0.72rem; color: color-mix(in srgb, var(--park) 80%, white); }
+.roteiro-attr-body small { font-size: 0.75rem; color: var(--text-dim); line-height: 1.35; }
+.roteiro-attr-check {
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    border: 1px solid var(--glass-border);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #34d399;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+.roteiro-attr.checked .roteiro-attr-check {
+    background: rgba(52, 211, 153, 0.2);
+    border-color: rgba(52, 211, 153, 0.5);
+}
+
+.roteiro-checklist { display: flex; flex-direction: column; gap: 8px; }
+.roteiro-check-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--glass-border);
+    font-size: 0.84rem;
+    color: var(--text);
+}
+.roteiro-check-item.checked { opacity: 0.55; }
+.roteiro-check-item input { margin-top: 2px; accent-color: #34d399; }
+
+.roteiro-meals { display: flex; flex-direction: column; gap: 8px; }
+.roteiro-meal {
+    padding: 12px;
+    border-radius: 14px;
+    border: 1px solid var(--glass-border);
+    background: rgba(0,0,0,0.2);
+}
+.roteiro-meal-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+    color: var(--accent);
+}
+.roteiro-meal-top strong { color: #fde68a; font-weight: 700; }
+.roteiro-meal-where { font-size: 0.88rem; font-weight: 700; color: var(--text); }
+.roteiro-meal-what { font-size: 0.8rem; color: var(--text-dim); margin-top: 2px; line-height: 1.35; }
+
+.roteiro-tips {
+    margin: 0;
     padding-left: 18px;
     color: var(--text-dim);
-    font-size: 0.86rem;
-    line-height: 1.55;
+    font-size: 0.82rem;
+    line-height: 1.5;
 }
 
-.roteiro-label {
-    display: block;
-    margin: 8px 0 4px;
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--accent);
+.roteiro-empty { color: var(--text-dim); font-size: 0.85rem; }
+
+.roteiro-next-bar {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    background: linear-gradient(180deg, transparent, rgba(15, 23, 42, 0.95) 28%);
+    border-top: 1px solid var(--glass-border);
+    color: var(--text);
+    font-size: 0.88rem;
+    z-index: 5;
+}
+.roteiro-next-label {
+    font-size: 0.68rem;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
+    color: #fbbf24;
+    font-weight: 700;
 }
+.roteiro-next-bar strong { font-size: 0.95rem; }
+.roteiro-next-bar em { font-style: normal; color: var(--text-dim); font-size: 0.78rem; }
 
-.roteiro-note {
-    margin: 8px 0 0;
-    font-size: 0.78rem;
-    color: #93c5fd;
-    line-height: 1.4;
-}
 
 

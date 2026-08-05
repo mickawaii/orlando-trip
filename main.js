@@ -1304,8 +1304,19 @@ function renderHeliosRates() {
     }).join('');
 }
 
-// --- ROTEIRO NOV/DEZ (cheapest Helios window) ---
+// --- ROTEIRO INTERATIVO (companheiro de parque) ---
 let roteiroData = null;
+let roteiroDayIndex = 0;
+const ROTEIRO_CHECK_KEY = 'orlando_park_checklist_v1';
+
+function loadChecklist() {
+    try { return JSON.parse(localStorage.getItem(ROTEIRO_CHECK_KEY) || '{}'); }
+    catch { return {}; }
+}
+function saveChecklist(map) {
+    localStorage.setItem(ROTEIRO_CHECK_KEY, JSON.stringify(map));
+}
+function checkKey(date, id) { return `${date}::${id}`; }
 
 async function ensureRoteiroData() {
     if (roteiroData) return;
@@ -1313,11 +1324,41 @@ async function ensureRoteiroData() {
         const res = await fetch('data/roteiro-nov-dez-2026.json');
         if (!res.ok) throw new Error('roteiro missing');
         roteiroData = await res.json();
+        // Default to "today" if within trip, else first park day
+        const today = new Date().toISOString().slice(0, 10);
+        const idx = roteiroData.days.findIndex(d => d.date === today);
+        roteiroDayIndex = idx >= 0 ? idx : 0;
     } catch (e) {
         console.error('Roteiro load failed', e);
         roteiroData = null;
     }
 }
+
+window.selectRoteiroDay = function (idx) {
+    roteiroDayIndex = idx;
+    renderRoteiro();
+    const body = document.getElementById('roteiro-body');
+    if (body) body.scrollTop = 0;
+};
+
+window.toggleRoteiroAttr = function (date, id) {
+    const map = loadChecklist();
+    const k = checkKey(date, id);
+    map[k] = !map[k];
+    saveChecklist(map);
+    renderRoteiroDayDetail();
+    renderRoteiroNextBar();
+};
+
+window.resetRoteiroDayChecks = function (date) {
+    if (!confirm('Limpar checklist deste dia?')) return;
+    const map = loadChecklist();
+    Object.keys(map).forEach(k => {
+        if (k.startsWith(date + '::')) delete map[k];
+    });
+    saveChecklist(map);
+    renderRoteiro();
+};
 
 function renderRoteiro() {
     const body = document.getElementById('roteiro-body');
@@ -1327,75 +1368,163 @@ function renderRoteiro() {
         return;
     }
 
-    const r = roteiroData;
-    const h = r.hotel;
-    const t = r.tickets;
-
-    const ticketBlock = (key, label) => {
-        const x = t[key];
-        const note = x.note ? `<br><em style="color:var(--text-dim)">${x.note}</em>` : '';
-        return `<div class="roteiro-ticket-item">
-            <strong>${label}</strong> — ${x.product}<br>
-            Uso: ${x.first_use} → ${x.last_use} (${x.span_days} dias / máx ${x.window_days})
-            <span class="roteiro-pill-ok">${x.ok ? '✓ OK' : '✗ Fora'}</span>${note}
-        </div>`;
-    };
-
-    const dayHtml = r.days.map(d => {
-        const rate = d.hotel_rate != null ? `$${d.hotel_rate}` : 'Checkout';
-        let sections = '';
-        if (d.blocks?.length) {
-            sections += `<span class="roteiro-label">Plano</span><ul>${d.blocks.map(i => `<li>${i}</li>`).join('')}</ul>`;
-        }
-        if (d.priorities?.length) {
-            sections += `<span class="roteiro-label">Prioridades</span><ul>${d.priorities.map(i => `<li>${i}</li>`).join('')}</ul>`;
-        }
-        if (d.extras?.length) {
-            sections += `<span class="roteiro-label">Extras</span><ul>${d.extras.map(i => `<li>${i}</li>`).join('')}</ul>`;
-        }
-        if (d.dining?.length) {
-            sections += `<span class="roteiro-label">Dining</span><ul>${d.dining.map(i => `<li>${i}</li>`).join('')}</ul>`;
-        }
-        if (d.sweets?.length) {
-            sections += `<span class="roteiro-label">Doces</span><ul>${d.sweets.map(i => `<li>${i}</li>`).join('')}</ul>`;
-        }
-        const note = d.notes ? `<p class="roteiro-note">${d.notes}</p>` : '';
-        return `<article class="roteiro-day">
-            <div class="roteiro-day-header">
-                <span class="roteiro-day-date">${d.dow} · ${d.date}</span>
-                <span class="roteiro-day-rate">${rate}</span>
-            </div>
-            <h4>${d.title}</h4>
-            ${sections}
-            ${note}
-        </article>`;
+    const days = roteiroData.days;
+    const chips = days.map((d, i) => {
+        const active = i === roteiroDayIndex ? 'active' : '';
+        const done = dayProgress(d);
+        const pct = done.total ? Math.round(100 * done.done / done.total) : 0;
+        return `<button type="button" class="roteiro-chip ${active}" onclick="selectRoteiroDay(${i})">
+            <span class="roteiro-chip-emoji">${d.emoji || '📅'}</span>
+            <span class="roteiro-chip-short">${d.short || d.dow.slice(0,3)}</span>
+            <span class="roteiro-chip-date">${d.date.slice(5)}</span>
+            <span class="roteiro-chip-bar"><i style="width:${pct}%"></i></span>
+        </button>`;
     }).join('');
 
     body.innerHTML = `
-        <div class="roteiro-hero">
-            <h3>${r.title}</h3>
-            <p class="roteiro-meta">
-                🏨 ${h.name}<br>
-                📅 ${h.checkin} → ${h.checkout} · ${h.nights} noites<br>
-                ✈️ ${r.flights.outbound}<br>
-                ✈️ ${r.flights.return}<br>
-                ${r.flights.vacation_days}
-            </p>
-            <div class="roteiro-stat-row">
-                <div class="helios-stat"><span class="label">Hospedagem</span><span class="value">$${h.nightly_total.toLocaleString('en-US')}</span></div>
-                <div class="helios-stat"><span class="label">Média/noite</span><span class="value">$${h.nightly_avg}</span></div>
-                <div class="helios-stat"><span class="label">Noites</span><span class="value">${h.nights}</span></div>
-            </div>
-            <p class="roteiro-meta">${h.note}</p>
+        <div class="roteiro-companion-top">
+            <p class="roteiro-kicker">${roteiroData.subtitle || 'Companheiro de parque'}</p>
+            <div class="roteiro-chip-row" id="roteiro-chip-row">${chips}</div>
         </div>
-        <div class="roteiro-tickets">
-            <h4>🎟️ Ingressos (janelas)</h4>
-            ${ticketBlock('universal', 'Universal')}
-            ${ticketBlock('disney', 'Disney')}
-            ${ticketBlock('seaworld_busch', 'SeaWorld + Busch')}
-        </div>
-        ${dayHtml}
+        <div id="roteiro-day-detail"></div>
     `;
+    renderRoteiroDayDetail();
+    renderRoteiroNextBar();
+}
+
+function dayProgress(day) {
+    const map = loadChecklist();
+    const items = [...(day.order || []), ...(day.mustDo || [])];
+    // unique by id
+    const seen = new Set();
+    const uniq = [];
+    items.forEach(a => {
+        if (!a?.id || seen.has(a.id)) return;
+        seen.add(a.id);
+        uniq.push(a);
+    });
+    const done = uniq.filter(a => map[checkKey(day.date, a.id)]).length;
+    return { done, total: uniq.length, items: uniq };
+}
+
+function renderRoteiroDayDetail() {
+    const host = document.getElementById('roteiro-day-detail');
+    if (!host || !roteiroData) return;
+    const d = roteiroData.days[roteiroDayIndex];
+    const p = d.parkInfo || {};
+    const map = loadChecklist();
+    const prog = dayProgress(d);
+    const color = p.color || '#fbbf24';
+
+    const hours = (p.opens && p.closes)
+        ? `<div class="roteiro-hours">
+            <div class="roteiro-hour-block"><span>Abre</span><strong>${p.opens}</strong></div>
+            <div class="roteiro-hour-sep">→</div>
+            <div class="roteiro-hour-block"><span>Fecha</span><strong>${p.closes}</strong></div>
+           </div>
+           <p class="roteiro-hours-note">Horário: ${p.hoursSource || 'confirmar no app'}</p>`
+        : '';
+
+    const address = p.address
+        ? `<a class="roteiro-address" href="${p.mapsUrl || '#'}" target="_blank" rel="noopener">
+            <span>📍 ${p.address}</span>
+            <span class="roteiro-maps-cta">Abrir mapa</span>
+           </a>`
+        : '';
+
+    const orderList = (d.order || []).map((a, i) => {
+        const checked = map[checkKey(d.date, a.id)] ? 'checked' : '';
+        const first = a.first ? 'first' : '';
+        return `<button type="button" class="roteiro-attr ${checked} ${first}" onclick="toggleRoteiroAttr('${d.date}','${a.id}')">
+            <span class="roteiro-attr-num">${i + 1}</span>
+            <span class="roteiro-attr-body">
+                <strong>${a.name}</strong>
+                ${a.land ? `<em>${a.land}</em>` : ''}
+                ${a.tip ? `<small>${a.tip}</small>` : ''}
+            </span>
+            <span class="roteiro-attr-check">${checked ? '✓' : ''}</span>
+        </button>`;
+    }).join('');
+
+    // mustDo checklist unique
+    const orderIds = new Set((d.order || []).map(a => a.id));
+    const extraMust = (d.mustDo || []).filter(a => a?.id && !orderIds.has(a.id));
+    const mustList = [...(d.order || []), ...extraMust].reduce((acc, a) => {
+        if (!a?.id || acc.find(x => x.id === a.id)) return acc;
+        acc.push(a); return acc;
+    }, []).map(a => {
+        const checked = map[checkKey(d.date, a.id)] ? 'checked' : '';
+        return `<label class="roteiro-check-item ${checked}">
+            <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleRoteiroAttr('${d.date}','${a.id}')" />
+            <span><strong>${a.name}</strong>${a.land ? ` · ${a.land}` : ''}</span>
+        </label>`;
+    }).join('');
+
+    const meals = d.meals || {};
+    const mealCard = (key, label, emoji) => {
+        const m = meals[key];
+        if (!m) return '';
+        return `<div class="roteiro-meal">
+            <div class="roteiro-meal-top"><span>${emoji} ${label}</span><strong>${m.when || ''}</strong></div>
+            <div class="roteiro-meal-where">${m.where || ''}</div>
+            <div class="roteiro-meal-what">${m.what || ''}</div>
+        </div>`;
+    };
+
+    const tips = (d.tips || []).map(t => `<li>${t}</li>`).join('');
+
+    host.innerHTML = `
+        <section class="roteiro-day-panel" style="--park:${color}">
+            <div class="roteiro-day-hero">
+                <div class="roteiro-day-hero-text">
+                    <span class="roteiro-day-when">${d.dow} · ${d.date}</span>
+                    <h3>${d.emoji || ''} ${d.title}</h3>
+                    <p>${d.strategy || ''}</p>
+                </div>
+                <div class="roteiro-progress" aria-label="Progresso">
+                    <strong>${prog.done}/${prog.total || 0}</strong>
+                    <span>feitos</span>
+                </div>
+            </div>
+            ${hours}
+            ${address}
+            <div class="roteiro-section">
+                <div class="roteiro-section-head">
+                    <h4>Ordem do dia</h4>
+                    <button type="button" class="roteiro-linkish" onclick="resetRoteiroDayChecks('${d.date}')">Reset</button>
+                </div>
+                <div class="roteiro-order">${orderList || '<p class="roteiro-empty">Sem ordem definida</p>'}</div>
+            </div>
+            <div class="roteiro-section">
+                <h4>Lista de atrações</h4>
+                <div class="roteiro-checklist">${mustList || '<p class="roteiro-empty">—</p>'}</div>
+            </div>
+            <div class="roteiro-section">
+                <h4>Comer</h4>
+                <div class="roteiro-meals">
+                    ${mealCard('lunch', 'Almoço', '🍽️')}
+                    ${mealCard('snack', 'Lanche', '🥨')}
+                    ${mealCard('dinner', 'Jantar', '🌙')}
+                </div>
+            </div>
+            ${tips ? `<div class="roteiro-section"><h4>Dicas do dia</h4><ul class="roteiro-tips">${tips}</ul></div>` : ''}
+        </section>
+    `;
+}
+
+function renderRoteiroNextBar() {
+    const bar = document.getElementById('roteiro-next-bar');
+    if (!bar || !roteiroData) return;
+    const d = roteiroData.days[roteiroDayIndex];
+    const map = loadChecklist();
+    const next = (d.order || []).find(a => a?.id && !map[checkKey(d.date, a.id)]);
+    if (!next) {
+        bar.style.display = 'flex';
+        bar.innerHTML = `<span>🎉 Dia completo — ou quase! Revisem a checklist.</span>`;
+        return;
+    }
+    bar.style.display = 'flex';
+    bar.innerHTML = `<span class="roteiro-next-label">Próxima</span><strong>${next.name}</strong>${next.land ? `<em>${next.land}</em>` : ''}`;
 }
 
 // Global start
