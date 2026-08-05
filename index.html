@@ -91,6 +91,10 @@
                 <span class="icon-label">Helios</span>
             </div>
             <div class="icon-btn-wrapper">
+                <button class="icon-btn btn-roteiro" onclick="openRoteiroModal()">🗺️</button>
+                <span class="icon-label">Roteiro</span>
+            </div>
+            <div class="icon-btn-wrapper">
                 <button class="icon-btn btn-dining" onclick="openDiningModal()">🍔</button>
                 <span class="icon-label">Dining</span>
             </div>
@@ -190,6 +194,19 @@
         </div>
         <div id="planner-footer" class="modal-footer" style="display:none;">
             <button class="save-day-btn" onclick="saveDay()">Save Day 💾</button>
+        </div>
+    </div>
+
+    <!-- Roteiro Nov/Dez Modal -->
+    <div id="roteiro-modal" class="modal-overlay">
+        <div class="modal-content-wide">
+            <div class="modal-header">
+                <h2 style="margin:0; font-size:1.25rem;">Roteiro Nov/Dez 🗺️</h2>
+                <button class="back-modal-btn" onclick="closeRoteiroModal()">← Back</button>
+            </div>
+            <div class="modal-body-scroll" id="roteiro-body">
+                <p class="roteiro-loading">Loading itinerary…</p>
+            </div>
         </div>
     </div>
 

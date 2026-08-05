@@ -1,0 +1,231 @@
+{
+  "title": "Orlando 2026 — Roteiro Helios Barato (Casal)",
+  "hotel": {
+    "name": "Universal Helios Grand Hotel, a Loews Hotel",
+    "checkin": "2026-11-29",
+    "checkout": "2026-12-10",
+    "nights": 11,
+    "room": "Standard 2 Queen Beds · Flexible Rate",
+    "currency": "USD",
+    "nightly_total": 5634,
+    "nightly_avg": 512,
+    "note": "Janela mais barata de 11 noites entre final de nov e 15/dez (snapshot scrape oficial). Evita pico de Thanksgiving (26–28/11)."
+  },
+  "flights": {
+    "outbound": "Partida BR ~28/11 (sáb à noite) → chegada MCO 29/11",
+    "return": "Partida MCO 10/12 (qui à noite) → chegada BR 11/12",
+    "vacation_days": "12–13 dias de férias (depende se trabalhar 28/11)"
+  },
+  "tickets": {
+    "universal": {
+      "product": "3-Day Park-to-Park + 2 Days Free",
+      "window_days": 7,
+      "parks_used": ["Epic Universe", "Universal Studios Florida", "Islands of Adventure"],
+      "first_use": "2026-11-30",
+      "last_use": "2026-12-02",
+      "span_days": 3,
+      "ok": true
+    },
+    "disney": {
+      "product": "4-Park Magic Ticket",
+      "window_days": 7,
+      "parks_used": ["EPCOT", "Hollywood Studios", "Animal Kingdom", "Magic Kingdom"],
+      "first_use": "2026-12-03",
+      "last_use": "2026-12-08",
+      "span_days": 6,
+      "ok": true
+    },
+    "seaworld_busch": {
+      "product": "SeaWorld + Busch Combo",
+      "window_days": 14,
+      "parks_used": ["SeaWorld Orlando", "Busch Gardens Tampa Bay"],
+      "first_use": "2026-12-07",
+      "last_use": "2026-12-09",
+      "span_days": 3,
+      "ok": true
+    }
+  },
+  "days": [
+    {
+      "date": "2026-11-29",
+      "dow": "Domingo",
+      "title": "✈️ Chegada Orlando + Helios",
+      "park": null,
+      "hotel_rate": 268,
+      "blocks": [
+        "Check-in no Helios",
+        "Explorar o hotel (Celestial Park / entrada dedicada Epic)",
+        "Piscina / jacuzzi",
+        "Rooftop bar",
+        "Descanso da viagem"
+      ],
+      "dining": ["Flora Taverna"],
+      "notes": "Chegada no domingo — dia leve. Igreja opcional se o voo permitir."
+    },
+    {
+      "date": "2026-11-30",
+      "dow": "Segunda",
+      "title": "🌌 Epic Universe",
+      "park": "Epic Universe",
+      "ticket": "universal",
+      "hotel_rate": 499,
+      "priorities": [
+        "Super Nintendo World",
+        "Ministry of Magic",
+        "Stardust Racers",
+        "Isle of Berk",
+        "Celestial Park"
+      ],
+      "dining": ["Atlantic", "Blue Dragon"]
+    },
+    {
+      "date": "2026-12-01",
+      "dow": "Terça",
+      "title": "🎢 Universal Studios Florida",
+      "park": "Universal Studios Florida",
+      "ticket": "universal",
+      "hotel_rate": 549,
+      "priorities": [
+        "Diagon Alley",
+        "Gringotts",
+        "Revenge of the Mummy",
+        "Men in Black",
+        "Transformers",
+        "Rip Ride Rockit"
+      ],
+      "extras": ["Hogwarts Express", "CityWalk à noite"],
+      "dining": ["Leaky Cauldron", "Finnegan's"]
+    },
+    {
+      "date": "2026-12-02",
+      "dow": "Quarta",
+      "title": "🦖 Islands of Adventure",
+      "park": "Islands of Adventure",
+      "ticket": "universal",
+      "hotel_rate": 549,
+      "priorities": [
+        "Hagrid's Magical Creatures Motorbike Adventure",
+        "VelociCoaster",
+        "The Incredible Hulk Coaster",
+        "The Amazing Adventures of Spider-Man",
+        "Jurassic Park River Adventure"
+      ],
+      "extras": ["Hogwarts Express novamente"],
+      "dining": ["Mythos"]
+    },
+    {
+      "date": "2026-12-03",
+      "dow": "Quinta",
+      "title": "🌐 EPCOT",
+      "park": "EPCOT",
+      "ticket": "disney",
+      "hotel_rate": 549,
+      "priorities": [
+        "Guardians of the Galaxy: Cosmic Rewind",
+        "Remy's Ratatouille Adventure",
+        "Frozen Ever After",
+        "Soarin'",
+        "World Showcase à noite"
+      ],
+      "dining": ["Space 220", "Takumi-Tei", "Via Napoli"],
+      "sweets": ["L'Artisan des Glaces", "Karamell-Küche"]
+    },
+    {
+      "date": "2026-12-04",
+      "dow": "Sexta",
+      "title": "🎬 Hollywood Studios",
+      "park": "Hollywood Studios",
+      "ticket": "disney",
+      "hotel_rate": 356,
+      "priorities": [
+        "Star Wars: Rise of the Resistance",
+        "Slinky Dog Dash",
+        "Tower of Terror",
+        "Mickey & Minnie's Runaway Railway"
+      ],
+      "dining": ["Sci-Fi Dine-In Theater"]
+    },
+    {
+      "date": "2026-12-05",
+      "dow": "Sábado",
+      "title": "🐘 Animal Kingdom",
+      "park": "Animal Kingdom",
+      "ticket": "disney",
+      "hotel_rate": 717,
+      "priorities": [
+        "Avatar Flight of Passage",
+        "Na'vi River Journey",
+        "Kilimanjaro Safaris",
+        "Expedition Everest"
+      ],
+      "dining": ["Satu'li Canteen", "Tiffins"],
+      "notes": "AK no sábado (noite Helios mais cara da janela). Mantido para fechar 3 dias Disney seguidos antes do domingo de igreja e ainda caber MK na janela de 7 dias."
+    },
+    {
+      "date": "2026-12-06",
+      "dow": "Domingo",
+      "title": "⛪ Igreja + Descanso",
+      "park": null,
+      "hotel_rate": 549,
+      "blocks": [
+        "Orlando International Christian Church (manhã)",
+        "Dormir mais",
+        "Piscina / jacuzzi do Helios",
+        "Café tranquilo",
+        "Descanso"
+      ],
+      "dining": ["Disney Springs — The Boathouse", "OU Wine Bar George"]
+    },
+    {
+      "date": "2026-12-07",
+      "dow": "Segunda",
+      "title": "🌊 SeaWorld",
+      "park": "SeaWorld Orlando",
+      "ticket": "seaworld_busch",
+      "hotel_rate": 549,
+      "priorities": ["Mako", "Pipeline", "Ice Breaker", "Infinity Falls"],
+      "dining": ["Sharks Underwater Grill"]
+    },
+    {
+      "date": "2026-12-08",
+      "dow": "Terça",
+      "title": "🏰 Magic Kingdom",
+      "park": "Magic Kingdom",
+      "ticket": "disney",
+      "hotel_rate": 549,
+      "priorities": [
+        "TRON Lightcycle / Run",
+        "Seven Dwarfs Mine Train",
+        "Haunted Mansion",
+        "Pirates of the Caribbean",
+        "Space Mountain"
+      ],
+      "dining": ["Be Our Guest", "Skipper Canteen"],
+      "notes": "Último dia Disney — 6º dia desde o 1º uso (03/12), dentro da janela de 7 dias."
+    },
+    {
+      "date": "2026-12-09",
+      "dow": "Quarta",
+      "title": "🦁 Busch Gardens Tampa",
+      "park": "Busch Gardens Tampa Bay",
+      "ticket": "seaworld_busch",
+      "hotel_rate": 500,
+      "priorities": ["Iron Gwazi", "Montu", "SheiKra", "Cheetah Hunt"],
+      "extras": ["Ônibus gratuito Busch Gardens (quando disponível)"],
+      "notes": "3º dia desde SeaWorld (07/12) — dentro da janela de 14 dias do combo."
+    },
+    {
+      "date": "2026-12-10",
+      "dow": "Quinta",
+      "title": "🛍️ Compras finais + Volta",
+      "park": null,
+      "hotel_rate": null,
+      "blocks": [
+        "Check-out Helios",
+        "Apple / Sephora / Best Buy / perfumes / lembranças",
+        "Aeroporto MCO"
+      ],
+      "notes": "Voo de volta à noite. Sem diária (checkout)."
+    }
+  ]
+}

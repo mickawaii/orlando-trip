@@ -485,6 +485,24 @@ window.closeHeliosModal = function () {
     }
 };
 
+window.openRoteiroModal = async function () {
+    const modal = document.getElementById('roteiro-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.classList.add('no-scroll');
+        await ensureRoteiroData();
+        renderRoteiro();
+    }
+};
+
+window.closeRoteiroModal = function () {
+    const modal = document.getElementById('roteiro-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.classList.remove('no-scroll');
+    }
+};
+
 window.openDiningModal = function () {
     const modal = document.getElementById('dining-modal');
     if (modal) {
@@ -535,9 +553,8 @@ window.closeLightbox = function () {
         const airbnb = document.getElementById('airbnb-modal');
         const crowds = document.getElementById('crowds-modal');
         const helios = document.getElementById('helios-modal');
-        const open = (el) => el && el.style.display !== 'none' && el.style.display !== '';
-        // display flex when open; empty/none when closed
-        const anyOpen = [airbnb, crowds, helios].some(el => el && el.style.display === 'flex');
+        const roteiro = document.getElementById('roteiro-modal');
+        const anyOpen = [airbnb, crowds, helios, roteiro].some(el => el && el.style.display === 'flex');
         if (!anyOpen) {
             document.body.classList.remove('no-scroll');
         }
@@ -1360,6 +1377,99 @@ function renderHeliosRates() {
             <td>$${(r.total || 0).toFixed(0)}</td>
         </tr>`;
     }).join('');
+}
+
+// --- ROTEIRO NOV/DEZ (cheapest Helios window) ---
+let roteiroData = null;
+
+async function ensureRoteiroData() {
+    if (roteiroData) return;
+    try {
+        const res = await fetch('data/roteiro-nov-dez-2026.json');
+        if (!res.ok) throw new Error('roteiro missing');
+        roteiroData = await res.json();
+    } catch (e) {
+        console.error('Roteiro load failed', e);
+        roteiroData = null;
+    }
+}
+
+function renderRoteiro() {
+    const body = document.getElementById('roteiro-body');
+    if (!body) return;
+    if (!roteiroData) {
+        body.innerHTML = '<p class="roteiro-loading">Could not load itinerary.</p>';
+        return;
+    }
+
+    const r = roteiroData;
+    const h = r.hotel;
+    const t = r.tickets;
+
+    const ticketBlock = (key, label) => {
+        const x = t[key];
+        return `<div class="roteiro-ticket-item">
+            <strong>${label}</strong> — ${x.product}<br>
+            Uso: ${x.first_use} → ${x.last_use} (${x.span_days} dias / máx ${x.window_days})
+            <span class="roteiro-pill-ok">${x.ok ? '✓ OK' : '✗ Fora'}</span>
+        </div>`;
+    };
+
+    const dayHtml = r.days.map(d => {
+        const rate = d.hotel_rate != null ? `$${d.hotel_rate}` : 'Checkout';
+        let sections = '';
+        if (d.blocks?.length) {
+            sections += `<span class="roteiro-label">Plano</span><ul>${d.blocks.map(i => `<li>${i}</li>`).join('')}</ul>`;
+        }
+        if (d.priorities?.length) {
+            sections += `<span class="roteiro-label">Prioridades</span><ul>${d.priorities.map(i => `<li>${i}</li>`).join('')}</ul>`;
+        }
+        if (d.extras?.length) {
+            sections += `<span class="roteiro-label">Extras</span><ul>${d.extras.map(i => `<li>${i}</li>`).join('')}</ul>`;
+        }
+        if (d.dining?.length) {
+            sections += `<span class="roteiro-label">Dining</span><ul>${d.dining.map(i => `<li>${i}</li>`).join('')}</ul>`;
+        }
+        if (d.sweets?.length) {
+            sections += `<span class="roteiro-label">Doces</span><ul>${d.sweets.map(i => `<li>${i}</li>`).join('')}</ul>`;
+        }
+        const note = d.notes ? `<p class="roteiro-note">${d.notes}</p>` : '';
+        return `<article class="roteiro-day">
+            <div class="roteiro-day-header">
+                <span class="roteiro-day-date">${d.dow} · ${d.date}</span>
+                <span class="roteiro-day-rate">${rate}</span>
+            </div>
+            <h4>${d.title}</h4>
+            ${sections}
+            ${note}
+        </article>`;
+    }).join('');
+
+    body.innerHTML = `
+        <div class="roteiro-hero">
+            <h3>${r.title}</h3>
+            <p class="roteiro-meta">
+                🏨 ${h.name}<br>
+                📅 ${h.checkin} → ${h.checkout} · ${h.nights} noites<br>
+                ✈️ ${r.flights.outbound}<br>
+                ✈️ ${r.flights.return}<br>
+                ${r.flights.vacation_days}
+            </p>
+            <div class="roteiro-stat-row">
+                <div class="helios-stat"><span class="label">Hospedagem</span><span class="value">$${h.nightly_total.toLocaleString('en-US')}</span></div>
+                <div class="helios-stat"><span class="label">Média/noite</span><span class="value">$${h.nightly_avg}</span></div>
+                <div class="helios-stat"><span class="label">Noites</span><span class="value">${h.nights}</span></div>
+            </div>
+            <p class="roteiro-meta">${h.note}</p>
+        </div>
+        <div class="roteiro-tickets">
+            <h4>🎟️ Ingressos (janelas)</h4>
+            ${ticketBlock('universal', 'Universal')}
+            ${ticketBlock('disney', 'Disney')}
+            ${ticketBlock('seaworld_busch', 'SeaWorld + Busch')}
+        </div>
+        ${dayHtml}
+    `;
 }
 
 // Global start
