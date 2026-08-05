@@ -1408,10 +1408,11 @@ function renderRoteiro() {
 
     const ticketBlock = (key, label) => {
         const x = t[key];
+        const note = x.note ? `<br><em style="color:var(--text-dim)">${x.note}</em>` : '';
         return `<div class="roteiro-ticket-item">
             <strong>${label}</strong> — ${x.product}<br>
             Uso: ${x.first_use} → ${x.last_use} (${x.span_days} dias / máx ${x.window_days})
-            <span class="roteiro-pill-ok">${x.ok ? '✓ OK' : '✗ Fora'}</span>
+            <span class="roteiro-pill-ok">${x.ok ? '✓ OK' : '✗ Fora'}</span>${note}
         </div>`;
     };
 
