@@ -4,10 +4,10 @@
   "hotel": {
     "name": "Universal Helios Grand Hotel, a Loews Hotel",
     "checkin": "2026-11-29",
-    "checkout": "2026-12-11",
-    "nights": 12,
-    "nightly_total": 6092,
-    "nightly_avg": 508,
+    "checkout": "2026-12-12",
+    "nights": 13,
+    "nightly_total": 6484.63,
+    "nightly_avg": 498.82,
     "address": "8505 S Kirkman Rd, Orlando, FL 32819",
     "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando"
   },
@@ -1280,12 +1280,13 @@
         "dinner": {
           "when": "18:00",
           "where": "volta Orlando / Helios",
-          "what": "Jantar leve — amanhã Tampa"
+          "what": "Jantar leve — amanhã Tampa (dia cheio)"
         }
       },
       "tips": [
         "Horários oficiais já puxados do calendário do parque",
-        "Amanhã sair cedo pro ônibus Busch"
+        "Amanhã Busch o dia todo — sem voo no mesmo dia",
+        "Confirmar ônibus gratuito Helios→Busch na véspera"
       ],
       "afterMain": [
         {
@@ -1324,9 +1325,9 @@
       "date": "2026-12-11",
       "dow": "Sexta",
       "emoji": "🦁",
-      "short": "Busch+Voo",
+      "short": "Busch",
       "type": "park",
-      "title": "Busch Gardens + Compras + Volta",
+      "title": "Busch Gardens Tampa Bay",
       "parkInfo": {
         "name": "Busch Gardens Tampa Bay",
         "address": "10165 N McKinley Dr, Tampa, FL 33612",
@@ -1336,21 +1337,14 @@
         "hoursSource": "ThemeParks Wiki",
         "color": "#fb923c"
       },
-      "strategy": "Saiam cedo do Helios. Iron Gwazi e Montu primeiro. Volta com margem pro aeroporto.",
+      "strategy": "Dia cheio em Tampa. Saiam cedo do Helios (ônibus gratuito se houver). Iron Gwazi e Montu primeiro; voltem à noite para o hotel — voo só amanhã.",
       "order": [
-        {
-          "id": "checkout",
-          "name": "Check-out Helios + bagagem",
-          "land": "Hotel",
-          "tip": "Guarde no carro/Uber strategy",
-          "first": true
-        },
         {
           "id": "bus",
           "name": "Ônibus gratuito Busch (se disponível)",
           "land": "Transfer",
-          "tip": "Confirmar horário na véspera",
-          "first": false
+          "tip": "Confirmar horário na véspera; senão Uber/carro cedo",
+          "first": true
         },
         {
           "id": "gwazi",
@@ -1381,10 +1375,10 @@
           "first": false
         },
         {
-          "id": "airport",
-          "name": "Deslocamento MCO + voo noite",
-          "land": "Aeroporto",
-          "tip": "Margem 3h+ antes do voo",
+          "id": "serengeti",
+          "name": "Serengeti Plain / animais",
+          "land": "Busch",
+          "tip": "Encaixem no meio do dia",
           "first": false
         }
       ],
@@ -1395,20 +1389,20 @@
           "what": "Almoço rápido no parque"
         },
         "snack": {
-          "when": "15:00",
-          "where": "caminho / outlet se der",
-          "what": "Lanche no deslocamento"
+          "when": "15:30",
+          "where": "no parque",
+          "what": "Água + snack"
         },
         "dinner": {
-          "when": "aeroporto",
-          "where": "MCO",
-          "what": "Jantar antes do embarque"
+          "when": "19:00–20:30",
+          "where": "volta Helios / CityWalk",
+          "what": "Jantar leve — amanhã é dia de voo"
         }
       },
       "tips": [
-        "Tampa ≈ 1h20 de carro",
-        "Se o voo for cedo à noite, cortem atrações e priorizem Iron Gwazi + Montu",
-        "Compras só se sobrar tempo real"
+        "Tampa ≈ 1h20 de carro / ônibus",
+        "Sem pressa de aeroporto — aproveitem o parque até o fim",
+        "Check-out e voo só amanhã (12/12)"
       ],
       "afterMain": [
         {
@@ -1430,10 +1424,93 @@
           "tip": "Se estiver calor"
         },
         {
-          "id": "serengeti",
-          "name": "Serengeti Plain viewing",
+          "id": "cobra",
+          "name": "Cobra's Curse",
           "land": "Busch",
-          "tip": "Se der tempo antes do aeroporto"
+          "tip": "Se a fila estiver boa"
+        },
+        {
+          "id": "shows_bg",
+          "name": "Show / animal encounter",
+          "land": "Busch",
+          "tip": "Conforme app do parque"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-12",
+      "dow": "Sábado",
+      "emoji": "✈️",
+      "short": "Volta",
+      "type": "travel",
+      "title": "Check-out + Compras + Voo",
+      "parkInfo": {
+        "name": "Helios → MCO",
+        "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+        "mapsUrl": "https://maps.google.com/?q=Orlando%20International%20Airport",
+        "opens": null,
+        "closes": null,
+        "hoursSource": "",
+        "color": "#94a3b8"
+      },
+      "strategy": "Manhã: check-out e bagagem. Se der tempo, compras leves perto do hotel/outlets. Margem generosa para o MCO — sem parque neste dia.",
+      "order": [
+        {
+          "id": "checkout",
+          "name": "Check-out Helios + bagagem",
+          "land": "Hotel",
+          "tip": "Peça late checkout se o voo for à noite",
+          "first": true
+        },
+        {
+          "id": "shop",
+          "name": "Compras (outlets / I-Drive) se der tempo",
+          "land": "Orlando",
+          "tip": "Só se sobrar janela real antes do aeroporto",
+          "first": false
+        },
+        {
+          "id": "airport",
+          "name": "Deslocamento MCO + voo",
+          "land": "Aeroporto",
+          "tip": "Margem 3h+ antes do voo internacional; 2h+ doméstico",
+          "first": false
+        }
+      ],
+      "meals": {
+        "lunch": {
+          "when": "conforme voo",
+          "where": "outlets / caminho / MCO",
+          "what": "Almoço leve"
+        },
+        "snack": {
+          "when": "tarde",
+          "where": "MCO",
+          "what": "Água + snack no terminal"
+        },
+        "dinner": {
+          "when": "voo / aeroporto",
+          "where": "MCO ou a bordo",
+          "what": "Conforme horário do voo"
+        }
+      },
+      "tips": [
+        "Sem parque hoje — ritmo calmo",
+        "Confirmar horário do shuttle/Uber com folga",
+        "Documentos e adapters na mala de mão"
+      ],
+      "afterMain": [
+        {
+          "id": "coffee",
+          "name": "Café da manhã no Helios",
+          "land": "Hotel",
+          "tip": "Se o check-out permitir"
+        },
+        {
+          "id": "souvenir",
+          "name": "Última lembrancinha no hotel/Celestial",
+          "land": "Helios",
+          "tip": "Só se for rápido"
         }
       ]
     }
