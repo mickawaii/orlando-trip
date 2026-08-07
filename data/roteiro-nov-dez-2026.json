@@ -29,11 +29,10 @@
       "note": "Usa os 5 dias do ingresso (3+2 free): IoA + Epic x3 + USF. Epic evita 30/11 (Packed)."
     },
     "disney": {
-      "product": "4-Park Magic Ticket",
+      "product": "3-Park Ticket (sem Magic Kingdom)",
       "window_days": 7,
       "parks_used": [
         "Animal Kingdom",
-        "Magic Kingdom",
         "Hollywood Studios",
         "EPCOT"
       ],
@@ -41,7 +40,7 @@
       "last_use": "2026-12-09",
       "span_days": 5,
       "ok": true,
-      "note": "AK no sábado (menos pesado); MK na segunda (Light)."
+      "note": "Sem MK: AK + DHS + EPCOT. Dia 7/12 livre. Comprar ingresso de 3 parques (não precisa do 4-Park)."
     },
     "seaworld_busch": {
       "product": "SeaWorld + Busch Combo",
@@ -858,12 +857,12 @@
         "dinner": {
           "when": "19:00",
           "where": "The Boathouse OU Wine Bar George (Disney Springs)",
-          "what": "Jantar leve — amanhã MK cedo"
+          "what": "Jantar leve — amanhã é dia livre"
         }
       },
       "tips": [
         "Manhã na igreja; tarde recuperação no Helios",
-        "Amanhã Magic Kingdom (segunda — estimativa Light)",
+        "Amanhã dia livre (sem Magic Kingdom)",
         "Lavem roupa / recarreguem power banks"
       ],
       "afterMain": [
@@ -884,122 +883,90 @@
     {
       "date": "2026-12-07",
       "dow": "Segunda",
-      "emoji": "🏰",
-      "short": "MK",
-      "type": "park",
-      "title": "Magic Kingdom",
+      "emoji": "🌴",
+      "short": "Livre",
+      "type": "rest",
+      "title": "Dia livre",
       "parkInfo": {
-        "name": "Magic Kingdom",
-        "address": "1180 Seven Seas Dr, Lake Buena Vista, FL 32830",
-        "mapsUrl": "https://maps.google.com/?q=Magic%20Kingdom%20Walt%20Disney%20World",
-        "opens": "09:00",
-        "closes": "22:00",
-        "hoursSource": "típico dez — confirme no app oficial",
-        "color": "#fbbf24"
+        "name": "Helios / Orlando",
+        "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+        "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+        "opens": null,
+        "closes": null,
+        "hoursSource": "",
+        "color": "#94a3b8"
       },
-      "strategy": "TRON e Seven Dwarfs cedo. Segunda costuma ser o dia mais leve do MK. Clássicos à tarde; fogos se tiver.",
+      "strategy": "Sem parque. Recuperar pernas, piscina, compras leves ou Disney Springs — amanhã volta DHS.",
       "order": [
         {
-          "id": "tron",
-          "name": "TRON Lightcycle / Run",
-          "land": "Tomorrowland",
-          "tip": "Rope drop / LL",
+          "id": "sleep",
+          "name": "Acordar sem alarme (se der)",
+          "land": "Hotel",
+          "tip": "Aproveitem o ritmo baixo",
           "first": true
         },
         {
-          "id": "7d",
-          "name": "Seven Dwarfs Mine Train",
-          "land": "Fantasyland",
+          "id": "pool",
+          "name": "Piscina / spa Helios",
+          "land": "Hotel",
           "tip": "",
           "first": false
         },
         {
-          "id": "space",
-          "name": "Space Mountain",
-          "land": "Tomorrowland",
+          "id": "errands",
+          "name": "Lavanderia / repor snacks / power banks",
+          "land": "Hotel",
           "tip": "",
           "first": false
         },
         {
-          "id": "haunt",
-          "name": "Haunted Mansion",
-          "land": "Liberty Square",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "pirates",
-          "name": "Pirates of the Caribbean",
-          "land": "Adventureland",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "fireworks",
-          "name": "Fogos / Encanto noturno se houver",
-          "land": "Main Street",
-          "tip": "Fechem o dia Disney",
+          "id": "optional_out",
+          "name": "Saída opcional: Disney Springs ou outlets",
+          "land": "Orlando",
+          "tip": "Só se tiverem vontade — sem obrigação",
           "first": false
         }
       ],
       "meals": {
         "lunch": {
-          "when": "12:00",
-          "where": "Skipper Canteen ou Be Our Guest (se reserva)",
-          "what": "Almoço temático"
+          "when": "12:00–14:00",
+          "where": "Helios / CityWalk / Springs",
+          "what": "Almoço tranquilo"
         },
         "snack": {
-          "when": "15:30",
-          "where": "Main Street",
-          "what": "Churro / sorvete"
+          "when": "tarde",
+          "where": "Hotel",
+          "what": "Café / fruta"
         },
         "dinner": {
-          "when": "após fogos / 20:00",
-          "where": "MK / volta hotel",
-          "what": "Jantar — amanhã DHS"
+          "when": "19:00–20:30",
+          "where": "Helios / CityWalk",
+          "what": "Jantar leve — amanhã DHS cedo"
         }
       },
       "tips": [
-        "Segunda = melhor crowd estimate do MK na viagem",
-        "TRON / Seven Dwarfs no rope drop",
-        "Amanhã Hollywood Studios"
+        "Sem Magic Kingdom nesta viagem — dia de folga de propósito",
+        "Hidratem e descansem os pés",
+        "Amanhã Hollywood Studios (Rise cedo)"
       ],
       "afterMain": [
         {
-          "id": "buzz",
-          "name": "Buzz Lightyear Space Ranger Spin",
-          "land": "Tomorrowland",
-          "tip": "Depois de TRON/Space"
-        },
-        {
-          "id": "peter",
-          "name": "Peter Pan's Flight",
-          "land": "Fantasyland",
-          "tip": "Clássico"
-        },
-        {
-          "id": "carousel",
-          "name": "Prince Charming Carrousel",
-          "land": "Fantasyland",
+          "id": "movie",
+          "name": "Filme no quarto / rooftop quieto",
+          "land": "Helios",
           "tip": ""
         },
         {
-          "id": "jungle",
-          "name": "Jungle Cruise",
-          "land": "Adventureland",
-          "tip": "Se a fila estiver ok"
+          "id": "photo",
+          "name": "Fotos no hotel / Celestial Park",
+          "land": "Helios",
+          "tip": "Sem fila"
         },
         {
-          "id": "peoplemover",
-          "name": "Tomorrowland Transit Authority",
-          "land": "Tomorrowland",
-          "tip": "Descanso sentado"
-        },
-        {
-          "id": "mainstreet",
-          "name": "Main Street browsing",
-          "land": "Main Street",
-          "tip": "Antes dos fogos"
+          "id": "springs",
+          "name": "Disney Springs (se quiserem ambiente Disney sem parque)",
+          "land": "Disney Springs",
+          "tip": "Lojas + jantar — sem ticket"
         }
       ]
     },
