@@ -1394,7 +1394,7 @@ function renderRoteiro() {
 
 function dayProgress(day) {
     const map = loadChecklist();
-    const items = [...(day.order || []), ...(day.mustDo || [])];
+    const items = [...(day.order || []), ...(day.afterMain || [])];
     // unique by id
     const seen = new Set();
     const uniq = [];
@@ -1446,17 +1446,18 @@ function renderRoteiroDayDetail() {
         </button>`;
     }).join('');
 
-    // mustDo checklist unique
+    // afterMain = extras after finishing order (never duplicates of principais)
     const orderIds = new Set((d.order || []).map(a => a.id));
-    const extraMust = (d.mustDo || []).filter(a => a?.id && !orderIds.has(a.id));
-    const mustList = [...(d.order || []), ...extraMust].reduce((acc, a) => {
-        if (!a?.id || acc.find(x => x.id === a.id)) return acc;
-        acc.push(a); return acc;
-    }, []).map(a => {
+    const afterMain = (d.afterMain || []).filter(a => a?.id && !orderIds.has(a.id));
+    const afterDone = afterMain.filter(a => map[checkKey(d.date, a.id)]).length;
+    const afterList = afterMain.map(a => {
         const checked = map[checkKey(d.date, a.id)] ? 'checked' : '';
         return `<label class="roteiro-check-item ${checked}">
             <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleRoteiroAttr('${d.date}','${a.id}')" />
-            <span><strong>${a.name}</strong>${a.land ? ` · ${a.land}` : ''}</span>
+            <span>
+                <strong>${a.name}</strong>${a.land ? ` · ${a.land}` : ''}
+                ${a.tip ? `<small class="roteiro-after-tip">${a.tip}</small>` : ''}
+            </span>
         </label>`;
     }).join('');
 
@@ -1490,14 +1491,18 @@ function renderRoteiroDayDetail() {
             ${address}
             <div class="roteiro-section">
                 <div class="roteiro-section-head">
-                    <h4>Ordem do dia</h4>
+                    <h4>Ordem do dia <span class="roteiro-section-tag">faça primeiro</span></h4>
                     <button type="button" class="roteiro-linkish" onclick="resetRoteiroDayChecks('${d.date}')">Reset</button>
                 </div>
                 <div class="roteiro-order">${orderList || '<p class="roteiro-empty">Sem ordem definida</p>'}</div>
             </div>
             <div class="roteiro-section">
-                <h4>Lista de atrações</h4>
-                <div class="roteiro-checklist">${mustList || '<p class="roteiro-empty">—</p>'}</div>
+                <div class="roteiro-section-head">
+                    <h4>Depois das principais</h4>
+                    <span class="roteiro-section-progress">${afterDone}/${afterMain.length}</span>
+                </div>
+                <p class="roteiro-after-hint">Só depois de terminar a ordem do dia — ou se sobrar tempo / fila curta.</p>
+                <div class="roteiro-checklist">${afterList || '<p class="roteiro-empty">Sem extras para este dia.</p>'}</div>
             </div>
             <div class="roteiro-section">
                 <h4>Comer</h4>
@@ -1517,14 +1522,21 @@ function renderRoteiroNextBar() {
     if (!bar || !roteiroData) return;
     const d = roteiroData.days[roteiroDayIndex];
     const map = loadChecklist();
-    const next = (d.order || []).find(a => a?.id && !map[checkKey(d.date, a.id)]);
-    if (!next) {
+    const nextMain = (d.order || []).find(a => a?.id && !map[checkKey(d.date, a.id)]);
+    if (nextMain) {
         bar.style.display = 'flex';
-        bar.innerHTML = `<span>🎉 Dia completo — ou quase! Revisem a checklist.</span>`;
+        bar.innerHTML = `<span class="roteiro-next-label">Próxima</span><strong>${nextMain.name}</strong>${nextMain.land ? `<em>${nextMain.land}</em>` : ''}`;
+        return;
+    }
+    const orderIds = new Set((d.order || []).map(a => a.id));
+    const nextAfter = (d.afterMain || []).find(a => a?.id && !orderIds.has(a.id) && !map[checkKey(d.date, a.id)]);
+    if (nextAfter) {
+        bar.style.display = 'flex';
+        bar.innerHTML = `<span class="roteiro-next-label">Depois</span><strong>${nextAfter.name}</strong>${nextAfter.land ? `<em>${nextAfter.land}</em>` : ''}`;
         return;
     }
     bar.style.display = 'flex';
-    bar.innerHTML = `<span class="roteiro-next-label">Próxima</span><strong>${next.name}</strong>${next.land ? `<em>${next.land}</em>` : ''}`;
+    bar.innerHTML = `<span>Dia completo — principais e extras feitos.</span>`;
 }
 
 // Global start
