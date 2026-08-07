@@ -1892,51 +1892,155 @@ body.admin-active #edit-btn-wrapper {
     color: #fdba74;
 }
 
-.helios-table-wrap {
-    overflow-x: auto;
-    border-radius: 12px;
+.helios-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    margin: 0 0 14px;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+}
+
+.helios-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.helios-legend .swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.helios-legend .swatch.cheap { background: #34d399; }
+.helios-legend .swatch.mid { background: #fbbf24; }
+.helios-legend .swatch.high { background: #fb923c; }
+.helios-legend .swatch.peak { background: #f87171; }
+
+.helios-calendars {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.helios-month-card {
+    background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 12px 10px 14px;
 }
 
-.helios-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.82rem;
+.helios-month-title {
+    margin: 0 0 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fdba74;
+    text-align: center;
 }
 
-.helios-table th,
-.helios-table td {
-    padding: 10px 8px;
-    text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+.helios-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
 }
 
-.helios-table th {
-    color: var(--accent);
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    background: rgba(0, 0, 0, 0.2);
-    position: sticky;
-    top: 0;
-}
-
-.helios-table td {
+.helios-day {
+    aspect-ratio: 1;
+    min-height: 0;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background: rgba(255, 255, 255, 0.04);
     color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 2px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.15s ease, border-color 0.15s ease;
 }
 
-.helios-table tr.cheap td:nth-child(3) {
+.helios-day.empty {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.helios-day:not(.empty):hover {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.helios-day.selected {
+    box-shadow: 0 0 0 2px rgba(253, 186, 116, 0.9);
+}
+
+.helios-day.cheapest {
+    box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.7);
+}
+
+.helios-day.cheapest.selected {
+    box-shadow: 0 0 0 2px rgba(253, 186, 116, 0.9);
+}
+
+.helios-day-num {
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.helios-day-price {
+    font-size: 0.62rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.helios-day.cheap {
+    background: rgba(52, 211, 153, 0.18);
     color: #6ee7b7;
-    font-weight: 700;
 }
-
-.helios-table tr.pricey td:nth-child(3) {
+.helios-day.mid {
+    background: rgba(251, 191, 36, 0.16);
+    color: #fcd34d;
+}
+.helios-day.high {
+    background: rgba(251, 146, 60, 0.18);
+    color: #fdba74;
+}
+.helios-day.peak {
+    background: rgba(248, 113, 113, 0.2);
     color: #fca5a5;
-    font-weight: 700;
+}
+.helios-day.none,
+.helios-day.empty-data {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-dim);
 }
 
-.helios-table tr.weekend {
-    background: rgba(251, 191, 36, 0.04);
+.helios-day-detail {
+    margin: 14px 0 0;
+    min-height: 2.6em;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.45;
+}
+
+.helios-day-detail:empty {
+    display: none;
+}
+
+@media (max-width: 420px) {
+    .helios-day-price { font-size: 0.55rem; }
+    .helios-day-num { font-size: 0.65rem; }
+    .helios-grid { gap: 3px; }
 }
 
 /* --- Roteiro Companheiro de Parque --- */

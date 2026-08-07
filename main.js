@@ -1181,8 +1181,19 @@ function renderCrowdCalendar() {
 
 // --- HELIOS HOTEL RATES (scraped Flexible Rate) ---
 let heliosRows = [];
+let heliosByDate = {};
 let heliosMonthFilter = 'all';
 let heliosLoaded = false;
+let heliosSelectedDate = null;
+
+const HELIOS_MONTHS = ['2026-08', '2026-09', '2026-10', '2026-11', '2026-12'];
+const HELIOS_MONTH_LABELS = {
+    '2026-08': 'Agosto 2026',
+    '2026-09': 'Setembro 2026',
+    '2026-10': 'Outubro 2026',
+    '2026-11': 'Novembro 2026',
+    '2026-12': 'Dezembro 2026'
+};
 
 function parseHeliosCsv(text) {
     const lines = text.trim().split(/\r?\n/);
@@ -1219,89 +1230,138 @@ async function ensureHeliosData() {
         const res = await fetch('data/helios-aug-dec-2026.csv');
         if (!res.ok) throw new Error('CSV missing');
         heliosRows = parseHeliosCsv(await res.text());
+        heliosByDate = {};
+        heliosRows.forEach(r => { heliosByDate[r.date] = r; });
         heliosLoaded = true;
     } catch (e) {
         console.error('Helios rates load failed', e);
         heliosRows = [];
+        heliosByDate = {};
     }
+}
+
+function heliosPriceTier(rate, min, max) {
+    if (Number.isNaN(rate) || rate <= 0) return 'none';
+    if (max <= min) return 'mid';
+    const t = (rate - min) / (max - min);
+    if (t <= 0.25) return 'cheap';
+    if (t <= 0.5) return 'mid';
+    if (t <= 0.75) return 'high';
+    return 'peak';
 }
 
 window.filterHeliosMonth = function (monthKey) {
     heliosMonthFilter = monthKey;
-    const labels = {
-        all: 'All',
-        '2026-08': 'Aug',
-        '2026-09': 'Sep',
-        '2026-10': 'Oct',
-        '2026-11': 'Nov',
-        '2026-12': 'Dec'
-    };
     document.querySelectorAll('#helios-month-chips .park-chip').forEach(btn => {
-        btn.classList.toggle('active', btn.textContent.trim() === labels[monthKey]);
+        btn.classList.toggle('active', btn.getAttribute('data-helios-month') === monthKey);
     });
+    heliosSelectedDate = null;
+    const detail = document.getElementById('helios-day-detail');
+    if (detail) detail.textContent = '';
     renderHeliosRates();
 };
 
+window.selectHeliosDay = function (dateStr) {
+    heliosSelectedDate = dateStr;
+    const detail = document.getElementById('helios-day-detail');
+    const row = heliosByDate[dateStr];
+    if (!detail) return;
+    if (!row) {
+        detail.textContent = `${dateStr} · sem dados`;
+        return;
+    }
+    const hasPrice = !Number.isNaN(row.nightly_rate) && row.nightly_rate > 0;
+    if (!hasPrice) {
+        detail.innerHTML = `<strong>${dateStr}</strong> · ${(row.dow || '')}<br>Indisponível <span class="crowd-source">(${row.status || 'n/a'})</span>`;
+        return;
+    }
+    detail.innerHTML = `<strong>${dateStr}</strong> · ${row.dow || ''}
+        <br>Diária <strong>$${row.nightly_rate.toFixed(0)}</strong>
+        · impostos $${(row.taxes || 0).toFixed(0)}
+        · total <strong>$${(row.total || 0).toFixed(0)}</strong>
+        <span class="crowd-source">(Flexible Rate)</span>`;
+    // refresh selection ring
+    document.querySelectorAll('.helios-day.selected').forEach(el => el.classList.remove('selected'));
+    const cell = document.querySelector(`.helios-day[data-date="${dateStr}"]`);
+    if (cell) cell.classList.add('selected');
+};
+
+function renderHeliosMonthCalendar(monthKey, min, max) {
+    const [yStr, mStr] = monthKey.split('-');
+    const y = Number(yStr);
+    const m = Number(mStr) - 1; // 0-indexed
+    const firstDow = new Date(y, m, 1).getDay();
+    const daysInMonth = new Date(y, m + 1, 0).getDate();
+    const title = HELIOS_MONTH_LABELS[monthKey] || monthKey;
+
+    let html = `<section class="helios-month-card">
+        <h3 class="helios-month-title">${title}</h3>
+        <div class="crowd-dow">${['D','S','T','Q','Q','S','S'].map(d => `<span>${d}</span>`).join('')}</div>
+        <div class="helios-grid">`;
+
+    for (let i = 0; i < firstDow; i++) {
+        html += `<div class="helios-day empty"></div>`;
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${monthKey}-${String(day).padStart(2, '0')}`;
+        const row = heliosByDate[dateStr];
+        const hasPrice = row && !Number.isNaN(row.nightly_rate) && row.nightly_rate > 0;
+        const tier = hasPrice ? heliosPriceTier(row.nightly_rate, min, max) : (row ? 'none' : 'empty-data');
+        const selected = heliosSelectedDate === dateStr ? ' selected' : '';
+        const cheapest = hasPrice && row.nightly_rate === min ? ' cheapest' : '';
+        const priceLabel = hasPrice ? `$${Math.round(row.nightly_rate)}` : '—';
+        const titleAttr = hasPrice
+            ? `${dateStr}: $${row.nightly_rate.toFixed(0)} / noite`
+            : `${dateStr}: sem preço`;
+        html += `<button type="button" class="helios-day ${tier}${selected}${cheapest}" data-date="${dateStr}"
+            onclick="selectHeliosDay('${dateStr}')" title="${titleAttr}">
+            <span class="helios-day-num">${day}</span>
+            <span class="helios-day-price">${priceLabel}</span>
+        </button>`;
+    }
+
+    html += `</div></section>`;
+    return html;
+}
+
 function renderHeliosRates() {
-    const tbody = document.getElementById('helios-tbody');
+    const host = document.getElementById('helios-calendars');
     const summary = document.getElementById('helios-summary');
-    if (!tbody || !summary) return;
+    if (!host || !summary) return;
 
-    const rows = heliosRows.filter(r =>
-        heliosMonthFilter === 'all' || r.date.startsWith(heliosMonthFilter)
+    if (!heliosRows.length) {
+        summary.textContent = 'Nenhum preço carregado.';
+        host.innerHTML = '';
+        return;
+    }
+
+    const months = heliosMonthFilter === 'all'
+        ? HELIOS_MONTHS
+        : HELIOS_MONTHS.filter(m => m === heliosMonthFilter);
+
+    const viewRows = heliosRows.filter(r =>
+        months.some(m => r.date.startsWith(m)) && !Number.isNaN(r.nightly_rate) && r.nightly_rate > 0
     );
-
-    if (!rows.length) {
-        summary.textContent = 'No rate data loaded.';
-        tbody.innerHTML = '';
-        return;
-    }
-
-    const priced = rows.filter(r => !Number.isNaN(r.nightly_rate) && r.nightly_rate > 0);
-    if (!priced.length) {
-        summary.innerHTML = `<div class="helios-stat"><span class="label">Days</span><span class="value">${rows.length}</span></div>`;
-        tbody.innerHTML = rows.map(r => `<tr>
-            <td>${r.date}</td>
-            <td>${(r.dow || '').slice(0, 3)}</td>
-            <td colspan="3">${r.status || 'unavailable'}</td>
-        </tr>`).join('');
-        return;
-    }
-
-    const rates = priced.map(r => r.nightly_rate);
+    // Color scale against all loaded rates so months stay comparable
+    const allPriced = heliosRows.filter(r => !Number.isNaN(r.nightly_rate) && r.nightly_rate > 0);
+    const rates = allPriced.map(r => r.nightly_rate);
     const min = Math.min(...rates);
     const max = Math.max(...rates);
-    const avg = rates.reduce((a, b) => a + b, 0) / rates.length;
+    const viewRates = viewRows.map(r => r.nightly_rate);
+    const viewMin = viewRates.length ? Math.min(...viewRates) : min;
+    const viewMax = viewRates.length ? Math.max(...viewRates) : max;
+    const viewAvg = viewRates.length
+        ? viewRates.reduce((a, b) => a + b, 0) / viewRates.length
+        : 0;
 
     summary.innerHTML = `
-        <div class="helios-stat"><span class="label">Cheapest</span><span class="value">$${min.toFixed(0)}</span></div>
-        <div class="helios-stat"><span class="label">Average</span><span class="value">$${avg.toFixed(0)}</span></div>
-        <div class="helios-stat"><span class="label">Highest</span><span class="value">$${max.toFixed(0)}</span></div>
+        <div class="helios-stat"><span class="label">Mais barato</span><span class="value">$${viewMin.toFixed(0)}</span></div>
+        <div class="helios-stat"><span class="label">Média</span><span class="value">$${viewAvg.toFixed(0)}</span></div>
+        <div class="helios-stat"><span class="label">Mais caro</span><span class="value">$${viewMax.toFixed(0)}</span></div>
     `;
 
-    const lowCut = min + (max - min) * 0.25;
-    const highCut = min + (max - min) * 0.75;
-
-    tbody.innerHTML = rows.map(r => {
-        const hasPrice = !Number.isNaN(r.nightly_rate) && r.nightly_rate > 0;
-        const weekend = r.dow === 'Friday' || r.dow === 'Saturday' || r.dow === 'Sunday';
-        if (!hasPrice) {
-            return `<tr class="${weekend ? 'weekend' : ''}">
-                <td>${r.date}</td>
-                <td>${(r.dow || '').slice(0, 3)}</td>
-                <td colspan="3" style="color:var(--text-dim)">Unavailable</td>
-            </tr>`;
-        }
-        const tier = r.nightly_rate <= lowCut ? 'cheap' : (r.nightly_rate >= highCut ? 'pricey' : '');
-        const mark = r.nightly_rate === min ? ' ★' : '';
-        return `<tr class="${tier} ${weekend ? 'weekend' : ''}">
-            <td>${r.date}</td>
-            <td>${r.dow.slice(0, 3)}</td>
-            <td>$${r.nightly_rate.toFixed(0)}${mark}</td>
-            <td>$${(r.taxes || 0).toFixed(0)}</td>
-            <td>$${(r.total || 0).toFixed(0)}</td>
-        </tr>`;
-    }).join('');
+    host.innerHTML = months.map(m => renderHeliosMonthCalendar(m, min, max)).join('');
 }
 
 // --- ROTEIRO INTERATIVO (companheiro de parque) ---
