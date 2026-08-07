@@ -103,7 +103,6 @@
           "first": false
         }
       ],
-      "mustDo": [],
       "meals": {
         "lunch": {
           "when": "conforme voo",
@@ -125,6 +124,20 @@
         "Configure offline maps do hotel→Epic",
         "Baixe apps Universal + Disney + SeaWorld",
         "Durma cedo — Epic Dia 1 amanhã"
+      ],
+      "afterMain": [
+        {
+          "id": "market",
+          "name": "Aurora Market / lojinhas do hotel",
+          "land": "Helios",
+          "tip": "Se sobrar energia"
+        },
+        {
+          "id": "walk",
+          "name": "Caminhada leve em Celestial Park",
+          "land": "Epic acesso",
+          "tip": "Só reconhecer o caminho de amanhã"
+        }
       ]
     },
     {
@@ -181,36 +194,6 @@
           "first": false
         }
       ],
-      "mustDo": [
-        {
-          "id": "mkart",
-          "name": "Mario Kart: Bowser's Challenge",
-          "land": "Super Nintendo World",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "yoshi",
-          "name": "Yoshi's Adventure",
-          "land": "Super Nintendo World",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "mine",
-          "name": "Mine-Cart Madness",
-          "land": "Super Nintendo World",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "toad",
-          "name": "Toadette's Café / lojas Nintendo",
-          "land": "Super Nintendo World",
-          "tip": "",
-          "first": false
-        }
-      ],
       "meals": {
         "lunch": {
           "when": "12:00–13:30",
@@ -232,6 +215,32 @@
         "Entre pelo acesso do Helios se disponível",
         "Express Pass só se a fila do Mario Kart explodir",
         "Marque as atrações na checklist abaixo"
+      ],
+      "afterMain": [
+        {
+          "id": "toad_shop",
+          "name": "Lojas Super Nintendo World",
+          "land": "Super Nintendo World",
+          "tip": "Merch depois das rides"
+        },
+        {
+          "id": "mario_photo",
+          "name": "Fotos nos arcos / pipes",
+          "land": "Super Nintendo World",
+          "tip": ""
+        },
+        {
+          "id": "constellation",
+          "name": "Carousel / área central Celestial",
+          "land": "Celestial Park",
+          "tip": "Passeio leve no fim"
+        },
+        {
+          "id": "unicorn_peek",
+          "name": "Unicorn Academy (se der tempo)",
+          "land": "Epic",
+          "tip": "Só se Nintendo já estiver fechado"
+        }
       ]
     },
     {
@@ -288,36 +297,6 @@
           "first": false
         }
       ],
-      "mustDo": [
-        {
-          "id": "mom",
-          "name": "Ministry of Magic experiences",
-          "land": "Ministry of Magic",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "stardust",
-          "name": "Stardust Racers",
-          "land": "Celestial Park",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "berk",
-          "name": "Isle of Berk (passeio completo)",
-          "land": "Isle of Berk",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "unicorn",
-          "name": "Unicorn Academy / Dark Universe peek",
-          "land": "conforme mapa",
-          "tip": "Se aberto e com tempo",
-          "first": false
-        }
-      ],
       "meals": {
         "lunch": {
           "when": "12:00–13:30",
@@ -338,6 +317,32 @@
       "tips": [
         "Priorize single rider se disponível em Stardust",
         "Fotos em Berk no fim da tarde (luz boa)"
+      ],
+      "afterMain": [
+        {
+          "id": "dark_universe",
+          "name": "Dark Universe walkthrough",
+          "land": "Dark Universe",
+          "tip": "Explorar depois das headliners"
+        },
+        {
+          "id": "berk_meet",
+          "name": "Meet & greets / shows Berk",
+          "land": "Isle of Berk",
+          "tip": ""
+        },
+        {
+          "id": "celestial_night",
+          "name": "Luzes Celestial Park",
+          "land": "Celestial Park",
+          "tip": "Fim de tarde / noite"
+        },
+        {
+          "id": "nintendo_extra",
+          "name": "Volta rápida no Nintendo se faltar algo",
+          "land": "Super Nintendo World",
+          "tip": ""
+        }
       ]
     },
     {
@@ -394,29 +399,6 @@
           "first": false
         }
       ],
-      "mustDo": [
-        {
-          "id": "gap",
-          "name": "Completar checklist Epic",
-          "land": "Epic",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "photo",
-          "name": "Sessão de fotos nas terras favoritas",
-          "land": "Epic",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "merch",
-          "name": "Compras seletivas",
-          "land": "Epic",
-          "tip": "",
-          "first": false
-        }
-      ],
       "meals": {
         "lunch": {
           "when": "12:30",
@@ -437,6 +419,32 @@
       "tips": [
         "Usem este dia como buffer de filas",
         "Durmam cedo: amanhã Diagon Alley"
+      ],
+      "afterMain": [
+        {
+          "id": "photo_lands",
+          "name": "Sessão de fotos nas terras favoritas",
+          "land": "Epic",
+          "tip": ""
+        },
+        {
+          "id": "shop_select",
+          "name": "Compras seletivas",
+          "land": "Epic",
+          "tip": "Deixe pro fim do dia"
+        },
+        {
+          "id": "revisit_stardust",
+          "name": "Mais uma volta no Stardust",
+          "land": "Celestial Park",
+          "tip": "Se a fila estiver boa"
+        },
+        {
+          "id": "snack_crawl",
+          "name": "Snack crawl Celestial",
+          "land": "Celestial Park",
+          "tip": "Sem pressa"
+        }
       ]
     },
     {
@@ -507,50 +515,6 @@
           "first": false
         }
       ],
-      "mustDo": [
-        {
-          "id": "gringotts",
-          "name": "Escape from Gringotts",
-          "land": "Diagon Alley",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "diagwalk",
-          "name": "Diagon Alley (explorar)",
-          "land": "Diagon Alley",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "mummy",
-          "name": "Revenge of the Mummy",
-          "land": "New York",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "mib",
-          "name": "Men in Black",
-          "land": "World Expo",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "tf",
-          "name": "Transformers",
-          "land": "Production Central",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "rrr",
-          "name": "Rip Ride Rockit",
-          "land": "Production Central",
-          "tip": "",
-          "first": false
-        }
-      ],
       "meals": {
         "lunch": {
           "when": "12:00–13:30",
@@ -571,6 +535,38 @@
       "tips": [
         "App Universal para tempos de fila",
         "CityWalk depois — sem pressa de voltar"
+      ],
+      "afterMain": [
+        {
+          "id": "et",
+          "name": "E.T. Adventure",
+          "land": "Woody Woodpecker's KidZone",
+          "tip": "Clássico depois das headliners"
+        },
+        {
+          "id": "mummy_photo",
+          "name": "Fotos em Diagon Alley",
+          "land": "Diagon Alley",
+          "tip": "Sem fila das rides"
+        },
+        {
+          "id": "horror",
+          "name": "Halloween Horror / casa temática se aberta",
+          "land": "USF",
+          "tip": "Só se estiver no parque"
+        },
+        {
+          "id": "minion",
+          "name": "Despicable Me Minion Mayhem",
+          "land": "Minion Land",
+          "tip": "Boa pra fechar o dia"
+        },
+        {
+          "id": "citywalk",
+          "name": "CityWalk à noite",
+          "land": "CityWalk",
+          "tip": "Passeio pós-parque"
+        }
       ]
     },
     {
@@ -634,43 +630,6 @@
           "first": false
         }
       ],
-      "mustDo": [
-        {
-          "id": "hagrid",
-          "name": "Hagrid's Motorbike Adventure",
-          "land": "Hogsmeade",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "velo",
-          "name": "VelociCoaster",
-          "land": "Jurassic",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "hulk",
-          "name": "Incredible Hulk Coaster",
-          "land": "Marvel",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "spidey",
-          "name": "Spider-Man",
-          "land": "Marvel",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "river",
-          "name": "Jurassic River Adventure",
-          "land": "Jurassic",
-          "tip": "",
-          "first": false
-        }
-      ],
       "meals": {
         "lunch": {
           "when": "12:30",
@@ -691,6 +650,38 @@
       "tips": [
         "Último dia Universal na janela de 7 dias",
         "Single rider no Hagrid's só se aceitarem separar"
+      ],
+      "afterMain": [
+        {
+          "id": "raptor",
+          "name": "Raptor Encounter / área Jurassic",
+          "land": "Jurassic Park",
+          "tip": "Depois de Veloci + River"
+        },
+        {
+          "id": "cat",
+          "name": "The Cat in the Hat",
+          "land": "Seuss Landing",
+          "tip": "Leve / fila curta"
+        },
+        {
+          "id": "popeye",
+          "name": "Popeye & Bluto's Bilge-Rat Barges",
+          "land": "Toon Lagoon",
+          "tip": "Se estiver calor"
+        },
+        {
+          "id": "doctoom",
+          "name": "Doctor Doom's Fearfall",
+          "land": "Marvel",
+          "tip": "Extra de Marvel"
+        },
+        {
+          "id": "hogs_shop",
+          "name": "Lojas Hogsmeade",
+          "land": "Hogsmeade",
+          "tip": "Compras no fim"
+        }
       ]
     },
     {
@@ -747,43 +738,6 @@
           "first": false
         }
       ],
-      "mustDo": [
-        {
-          "id": "gotg",
-          "name": "Guardians Cosmic Rewind",
-          "land": "World Discovery",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "soarin",
-          "name": "Soarin'",
-          "land": "World Nature",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "remy",
-          "name": "Remy's Ratatouille Adventure",
-          "land": "France",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "frozen",
-          "name": "Frozen Ever After",
-          "land": "Norway",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "test",
-          "name": "Test Track (se aberto)",
-          "land": "World Discovery",
-          "tip": "",
-          "first": false
-        }
-      ],
       "meals": {
         "lunch": {
           "when": "12:00",
@@ -804,6 +758,38 @@
       "tips": [
         "1º dia Disney — abre a janela de 7 dias",
         "Confirmem Virtual Queue do Guardians no app"
+      ],
+      "afterMain": [
+        {
+          "id": "spaceship",
+          "name": "Spaceship Earth",
+          "land": "World Celebration",
+          "tip": "Clássico calmo"
+        },
+        {
+          "id": "living",
+          "name": "Living with the Land",
+          "land": "World Nature",
+          "tip": "Boa depois do Soarin'"
+        },
+        {
+          "id": "mexico",
+          "name": "Gran Fiesta Tour",
+          "land": "Mexico",
+          "tip": "Passeio de barco leve"
+        },
+        {
+          "id": "japan",
+          "name": "Japan pavilion walk + doces",
+          "land": "Japan",
+          "tip": "World Showcase"
+        },
+        {
+          "id": "harmonious",
+          "name": "Encanto / fogos do Showcase se houver",
+          "land": "World Showcase",
+          "tip": "Feche o dia"
+        }
       ]
     },
     {
@@ -853,22 +839,6 @@
           "first": false
         }
       ],
-      "mustDo": [
-        {
-          "id": "church",
-          "name": "Igreja",
-          "land": "OICC",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "rest",
-          "name": "Descanso real",
-          "land": "Helios",
-          "tip": "",
-          "first": false
-        }
-      ],
       "meals": {
         "lunch": {
           "when": "após culto",
@@ -889,6 +859,20 @@
       "tips": [
         "Não façam parque hoje — buffer físico",
         "Amanhã Hollywood Studios cedo"
+      ],
+      "afterMain": [
+        {
+          "id": "springs_shop",
+          "name": "Lojinhas Disney Springs",
+          "land": "Disney Springs",
+          "tip": "Sem pressa"
+        },
+        {
+          "id": "lake",
+          "name": "Passeio no lago / boardwalk",
+          "land": "Disney Springs",
+          "tip": ""
+        }
       ]
     },
     {
@@ -945,36 +929,6 @@
           "first": false
         }
       ],
-      "mustDo": [
-        {
-          "id": "rise",
-          "name": "Rise of the Resistance",
-          "land": "Batuu",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "slinky",
-          "name": "Slinky Dog Dash",
-          "land": "Toy Story Land",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "tot",
-          "name": "Tower of Terror",
-          "land": "Sunset Blvd",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "mmrr",
-          "name": "Runaway Railway",
-          "land": "Hollywood Blvd",
-          "tip": "",
-          "first": false
-        }
-      ],
       "meals": {
         "lunch": {
           "when": "12:30",
@@ -995,6 +949,38 @@
       "tips": [
         "LL/Genie+ vale muito em DHS se comprarem",
         "Rise é inegociável"
+      ],
+      "afterMain": [
+        {
+          "id": "toy_alien",
+          "name": "Alien Swirling Saucers",
+          "land": "Toy Story Land",
+          "tip": "Depois do Slinky"
+        },
+        {
+          "id": "rockn",
+          "name": "Rock 'n' Roller Coaster",
+          "land": "Sunset Boulevard",
+          "tip": "Se a energia aguentar"
+        },
+        {
+          "id": "batman",
+          "name": "Star Tours",
+          "land": "Echo Lake",
+          "tip": "Extra Star Wars"
+        },
+        {
+          "id": "indy",
+          "name": "Indiana Jones Epic Stunt (se no horário)",
+          "land": "Indiana",
+          "tip": "Show"
+        },
+        {
+          "id": "galaxy_edge",
+          "name": "Andar em Batuu / lojas",
+          "land": "Batuu",
+          "tip": "Depois do Rise"
+        }
       ]
     },
     {
@@ -1051,36 +1037,6 @@
           "first": false
         }
       ],
-      "mustDo": [
-        {
-          "id": "fop",
-          "name": "Flight of Passage",
-          "land": "Pandora",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "navi",
-          "name": "Na'vi River Journey",
-          "land": "Pandora",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "safari",
-          "name": "Kilimanjaro Safaris",
-          "land": "Africa",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "everest",
-          "name": "Expedition Everest",
-          "land": "Asia",
-          "tip": "",
-          "first": false
-        }
-      ],
       "meals": {
         "lunch": {
           "when": "12:00",
@@ -1101,6 +1057,38 @@
       "tips": [
         "Parque fecha mais cedo que os outros",
         "Priorizem outdoor de manhã"
+      ],
+      "afterMain": [
+        {
+          "id": "dinoland",
+          "name": "TriceraTop Spin / Dino area",
+          "land": "DinoLand",
+          "tip": "Leve"
+        },
+        {
+          "id": "bird",
+          "name": "Festival of the Lion King",
+          "land": "Africa",
+          "tip": "Show — encaixe após Safari"
+        },
+        {
+          "id": "gorilla",
+          "name": "Gorilla Falls Exploration Trail",
+          "land": "Africa",
+          "tip": "Caminhada"
+        },
+        {
+          "id": "mahinga",
+          "name": "Maharajah Jungle Trek",
+          "land": "Asia",
+          "tip": "Caminhada"
+        },
+        {
+          "id": "flight_of_passage_shop",
+          "name": "Windtraders / loja Pandora",
+          "land": "Pandora",
+          "tip": "Merch no fim"
+        }
       ]
     },
     {
@@ -1164,43 +1152,6 @@
           "first": false
         }
       ],
-      "mustDo": [
-        {
-          "id": "tron",
-          "name": "TRON Lightcycle / Run",
-          "land": "Tomorrowland",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "7d",
-          "name": "Seven Dwarfs Mine Train",
-          "land": "Fantasyland",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "space",
-          "name": "Space Mountain",
-          "land": "Tomorrowland",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "haunt",
-          "name": "Haunted Mansion",
-          "land": "Liberty Square",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "pirates",
-          "name": "Pirates of the Caribbean",
-          "land": "Adventureland",
-          "tip": "",
-          "first": false
-        }
-      ],
       "meals": {
         "lunch": {
           "when": "12:00",
@@ -1221,6 +1172,44 @@
       "tips": [
         "Último dia Disney na janela de 7 dias",
         "TRON vale LL individual se a fila estiver absurda"
+      ],
+      "afterMain": [
+        {
+          "id": "buzz",
+          "name": "Buzz Lightyear Space Ranger Spin",
+          "land": "Tomorrowland",
+          "tip": "Depois de TRON/Space"
+        },
+        {
+          "id": "peter",
+          "name": "Peter Pan's Flight",
+          "land": "Fantasyland",
+          "tip": "Clássico"
+        },
+        {
+          "id": "carousel",
+          "name": "Prince Charming Carrousel",
+          "land": "Fantasyland",
+          "tip": ""
+        },
+        {
+          "id": "jungle",
+          "name": "Jungle Cruise",
+          "land": "Adventureland",
+          "tip": "Se a fila estiver ok"
+        },
+        {
+          "id": "peoplemover",
+          "name": "Tomorrowland Transit Authority",
+          "land": "Tomorrowland",
+          "tip": "Descanso sentado"
+        },
+        {
+          "id": "mainstreet",
+          "name": "Main Street browsing",
+          "land": "Main Street",
+          "tip": "Antes dos fogos"
+        }
       ]
     },
     {
@@ -1277,36 +1266,6 @@
           "first": false
         }
       ],
-      "mustDo": [
-        {
-          "id": "mako",
-          "name": "Mako",
-          "land": "SeaWorld",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "pipe",
-          "name": "Pipeline",
-          "land": "SeaWorld",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "ice",
-          "name": "Ice Breaker",
-          "land": "SeaWorld",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "inf",
-          "name": "Infinity Falls",
-          "land": "SeaWorld",
-          "tip": "",
-          "first": false
-        }
-      ],
       "meals": {
         "lunch": {
           "when": "12:30",
@@ -1327,6 +1286,38 @@
       "tips": [
         "Horários oficiais já puxados do calendário do parque",
         "Amanhã sair cedo pro ônibus Busch"
+      ],
+      "afterMain": [
+        {
+          "id": "kraken",
+          "name": "Kraken",
+          "land": "SeaWorld",
+          "tip": "Depois das 3 headliners"
+        },
+        {
+          "id": "antarctic",
+          "name": "Antarctica: Empire of the Penguin",
+          "land": "SeaWorld",
+          "tip": ""
+        },
+        {
+          "id": "shark_enc",
+          "name": "Shark Encounter walkthrough",
+          "land": "SeaWorld",
+          "tip": ""
+        },
+        {
+          "id": "dolphin",
+          "name": "Dolphin show / habitats",
+          "land": "SeaWorld",
+          "tip": "Conforme horário do app"
+        },
+        {
+          "id": "sky",
+          "name": "Sky Tower (se aberta)",
+          "land": "SeaWorld",
+          "tip": "Vista"
+        }
       ]
     },
     {
@@ -1397,36 +1388,6 @@
           "first": false
         }
       ],
-      "mustDo": [
-        {
-          "id": "gwazi",
-          "name": "Iron Gwazi",
-          "land": "Busch",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "montu",
-          "name": "Montu",
-          "land": "Busch",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "sheikra",
-          "name": "SheiKra",
-          "land": "Busch",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "cheetah",
-          "name": "Cheetah Hunt",
-          "land": "Busch",
-          "tip": "",
-          "first": false
-        }
-      ],
       "meals": {
         "lunch": {
           "when": "12:00",
@@ -1448,6 +1409,32 @@
         "Tampa ≈ 1h20 de carro",
         "Se o voo for cedo à noite, cortem atrações e priorizem Iron Gwazi + Montu",
         "Compras só se sobrar tempo real"
+      ],
+      "afterMain": [
+        {
+          "id": "kumba",
+          "name": "Kumba",
+          "land": "Busch",
+          "tip": "Depois de Gwazi/Montu/SheiKra"
+        },
+        {
+          "id": "scorpion",
+          "name": "Scorpion",
+          "land": "Busch",
+          "tip": ""
+        },
+        {
+          "id": "congo",
+          "name": "Congo River Rapids",
+          "land": "Busch",
+          "tip": "Se estiver calor"
+        },
+        {
+          "id": "serengeti",
+          "name": "Serengeti Plain viewing",
+          "land": "Busch",
+          "tip": "Se der tempo antes do aeroporto"
+        }
       ]
     }
   ]

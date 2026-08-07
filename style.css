@@ -2197,6 +2197,30 @@ body.admin-active #edit-btn-wrapper {
     border-color: rgba(52, 211, 153, 0.5);
 }
 
+.roteiro-section-tag {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #0f172a;
+    background: color-mix(in srgb, var(--park, #fbbf24) 85%, white);
+    vertical-align: middle;
+}
+.roteiro-section-progress {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-dim);
+}
+.roteiro-after-hint {
+    margin: 0 0 10px;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+}
 .roteiro-checklist { display: flex; flex-direction: column; gap: 8px; }
 .roteiro-check-item {
     display: flex;
@@ -2208,6 +2232,17 @@ body.admin-active #edit-btn-wrapper {
     border: 1px solid var(--glass-border);
     font-size: 0.84rem;
     color: var(--text);
+}
+.roteiro-check-item span {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+.roteiro-after-tip {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    line-height: 1.35;
 }
 .roteiro-check-item.checked { opacity: 0.55; }
 .roteiro-check-item input { margin-top: 2px; accent-color: #34d399; }
