@@ -479,8 +479,26 @@ window.openRoteiroModal = async function () {
     if (modal) {
         modal.style.display = 'flex';
         document.body.classList.add('no-scroll');
-        await Promise.all([ensureRoteiroData(), ensureHeliosData()]);
+        await ensureRoteiroData();
         renderRoteiro();
+    }
+};
+
+window.openGastosModal = async function () {
+    const modal = document.getElementById('gastos-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.classList.add('no-scroll');
+        await Promise.all([ensureRoteiroData(), ensureHeliosData()]);
+        renderGastos();
+    }
+};
+
+window.closeGastosModal = function () {
+    const modal = document.getElementById('gastos-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.classList.remove('no-scroll');
     }
 };
 
@@ -527,7 +545,8 @@ window.closeLightbox = function () {
         const crowds = document.getElementById('crowds-modal');
         const helios = document.getElementById('helios-modal');
         const roteiro = document.getElementById('roteiro-modal');
-        const anyOpen = [airbnb, crowds, helios, roteiro].some(el => el && el.style.display === 'flex');
+        const gastos = document.getElementById('gastos-modal');
+        const anyOpen = [airbnb, crowds, helios, roteiro, gastos].some(el => el && el.style.display === 'flex');
         if (!anyOpen) {
             document.body.classList.remove('no-scroll');
         }
@@ -1482,51 +1501,78 @@ function computeRoteiroHotelStay() {
     };
 }
 
-function renderRoteiroHotelCost() {
+function renderGastos() {
+    const body = document.getElementById('gastos-body');
+    if (!body) return;
+
     const stay = computeRoteiroHotelStay();
-    if (!stay) return '';
+    if (!stay) {
+        body.innerHTML = `<p class="gastos-empty">Sem dados de hotel no roteiro.</p>`;
+        return;
+    }
 
     const rows = stay.nights.map(n => {
         const price = n.total != null ? formatMoneyUSDExact(n.total) : '—';
-        const room = n.nightly != null ? formatMoneyUSD(n.nightly) : '';
-        return `<div class="roteiro-hotel-night">
-            <span class="roteiro-hotel-night-date">${formatDateBR(n.date)} <em>${(n.dow || '').slice(0, 3)}</em></span>
-            <span class="roteiro-hotel-night-room">${room ? room + ' + tax' : ''}</span>
-            <strong>${price}</strong>
-        </div>`;
+        const room = n.nightly != null ? formatMoneyUSD(n.nightly) : '—';
+        return `<li class="gastos-night">
+            <span class="gastos-night-date">${formatDateBR(n.date)}</span>
+            <span class="gastos-night-dow">${(n.dow || '').slice(0, 3)}</span>
+            <span class="gastos-night-room">${room}</span>
+            <strong class="gastos-night-total">${price}</strong>
+        </li>`;
     }).join('');
 
-    return `
-        <section class="roteiro-hotel-cost">
-            <div class="roteiro-hotel-cost-head">
+    const hotelShort = (stay.name || 'Helios').replace(', a Loews Hotel', '');
+
+    body.innerHTML = `
+        <p class="gastos-intro">Estimativa com base nas noites do roteiro e nas diárias Flexible Rate do Helios.</p>
+
+        <section class="gastos-card">
+            <div class="gastos-card-top">
                 <div>
-                    <p class="roteiro-hotel-label">Custo do hotel (roteiro)</p>
-                    <h4>${stay.name.replace(', a Loews Hotel', '')}</h4>
-                    <p class="roteiro-hotel-dates">${formatDateBR(stay.checkin)} → ${formatDateBR(stay.checkout)} · ${stay.nightsCount} noites</p>
+                    <p class="gastos-eyebrow">Hotel</p>
+                    <h3>${hotelShort}</h3>
+                    <p class="gastos-meta">${formatDateBR(stay.checkin)} → ${formatDateBR(stay.checkout)} · ${stay.nightsCount} noites</p>
                 </div>
-                <div class="roteiro-hotel-total">
-                    <span>Total c/ impostos</span>
+                <div class="gastos-hero-total">
+                    <span>Total</span>
                     <strong>${formatMoneyUSDExact(stay.total)}</strong>
                 </div>
             </div>
-            <div class="roteiro-hotel-stats">
-                <div><span>Diárias</span><strong>${formatMoneyUSDExact(stay.roomTotal)}</strong></div>
-                <div><span>Impostos</span><strong>${stay.taxesTotal != null ? formatMoneyUSDExact(stay.taxesTotal) : '—'}</strong></div>
-                <div><span>Média/noite</span><strong>${stay.avg != null ? formatMoneyUSD(stay.avg) : '—'}</strong></div>
-            </div>
-            <details class="roteiro-hotel-breakdown">
-                <summary>Ver diária por noite</summary>
-                <div class="roteiro-hotel-nights">${rows}</div>
-                <p class="roteiro-hotel-note">${stay.rateNote}${stay.fromCsv ? '' : ' · valores do roteiro'}</p>
+
+            <dl class="gastos-stats">
+                <div>
+                    <dt>Diárias</dt>
+                    <dd>${formatMoneyUSDExact(stay.roomTotal)}</dd>
+                </div>
+                <div>
+                    <dt>Impostos</dt>
+                    <dd>${stay.taxesTotal != null ? formatMoneyUSDExact(stay.taxesTotal) : '—'}</dd>
+                </div>
+                <div>
+                    <dt>Média / noite</dt>
+                    <dd>${stay.avg != null ? formatMoneyUSD(stay.avg) : '—'}</dd>
+                </div>
+            </dl>
+
+            <details class="gastos-breakdown">
+                <summary>Diária por noite</summary>
+                <ul class="gastos-nights">${rows}</ul>
+                <p class="gastos-note">${stay.rateNote}${stay.fromCsv ? '' : ' · valores do roteiro'}</p>
             </details>
-        </section>`;
+
+            <button type="button" class="gastos-link-btn" onclick="closeGastosModal(); openHeliosModal();">
+                Ver calendário de diárias
+            </button>
+        </section>
+    `;
 }
 
 function renderRoteiro() {
     const body = document.getElementById('roteiro-body');
     if (!body) return;
     if (!roteiroData) {
-        body.innerHTML = '<p class="roteiro-loading">Could not load itinerary.</p>';
+        body.innerHTML = '<p class="roteiro-loading">Não foi possível carregar o roteiro.</p>';
         return;
     }
 
@@ -1536,17 +1582,14 @@ function renderRoteiro() {
         const done = dayProgress(d);
         const pct = done.total ? Math.round(100 * done.done / done.total) : 0;
         return `<button type="button" class="roteiro-chip ${active}" onclick="selectRoteiroDay(${i})">
-            <span class="roteiro-chip-emoji">${d.emoji || '📅'}</span>
-            <span class="roteiro-chip-short">${d.short || d.dow.slice(0,3)}</span>
-            <span class="roteiro-chip-date">${d.date.slice(5)}</span>
+            <span class="roteiro-chip-short">${d.short || d.dow.slice(0, 3)}</span>
+            <span class="roteiro-chip-date">${formatDateBR(d.date)}</span>
             <span class="roteiro-chip-bar"><i style="width:${pct}%"></i></span>
         </button>`;
     }).join('');
 
     body.innerHTML = `
         <div class="roteiro-companion-top">
-            <p class="roteiro-kicker">${roteiroData.subtitle || 'Companheiro de parque'}</p>
-            ${renderRoteiroHotelCost()}
             <div class="roteiro-chip-row" id="roteiro-chip-row">${chips}</div>
         </div>
         <div id="roteiro-day-detail"></div>
@@ -1590,8 +1633,8 @@ function renderRoteiroDayDetail() {
 
     const address = p.address
         ? `<a class="roteiro-address" href="${p.mapsUrl || '#'}" target="_blank" rel="noopener">
-            <span>📍 ${p.address}</span>
-            <span class="roteiro-maps-cta">Abrir mapa</span>
+            <span>${p.address}</span>
+            <span class="roteiro-maps-cta">Mapa</span>
            </a>`
         : '';
 
@@ -1625,11 +1668,11 @@ function renderRoteiroDayDetail() {
     }).join('');
 
     const meals = d.meals || {};
-    const mealCard = (key, label, emoji) => {
+    const mealCard = (key, label) => {
         const m = meals[key];
         if (!m) return '';
         return `<div class="roteiro-meal">
-            <div class="roteiro-meal-top"><span>${emoji} ${label}</span><strong>${m.when || ''}</strong></div>
+            <div class="roteiro-meal-top"><span>${label}</span><strong>${m.when || ''}</strong></div>
             <div class="roteiro-meal-where">${m.where || ''}</div>
             <div class="roteiro-meal-what">${m.what || ''}</div>
         </div>`;
@@ -1641,8 +1684,8 @@ function renderRoteiroDayDetail() {
         <section class="roteiro-day-panel" style="--park:${color}">
             <div class="roteiro-day-hero">
                 <div class="roteiro-day-hero-text">
-                    <span class="roteiro-day-when">${d.dow} · ${d.date}</span>
-                    <h3>${d.emoji || ''} ${d.title}</h3>
+                    <span class="roteiro-day-when">${d.dow} · ${formatDateBR(d.date)}</span>
+                    <h3>${d.title}</h3>
                     <p>${d.strategy || ''}</p>
                 </div>
                 <div class="roteiro-progress" aria-label="Progresso">
@@ -1654,7 +1697,7 @@ function renderRoteiroDayDetail() {
             ${address}
             <div class="roteiro-section">
                 <div class="roteiro-section-head">
-                    <h4>Ordem do dia <span class="roteiro-section-tag">faça primeiro</span></h4>
+                    <h4>Ordem do dia</h4>
                     <button type="button" class="roteiro-linkish" onclick="resetRoteiroDayChecks('${d.date}')">Reset</button>
                 </div>
                 <div class="roteiro-order">${orderList || '<p class="roteiro-empty">Sem ordem definida</p>'}</div>
@@ -1664,18 +1707,17 @@ function renderRoteiroDayDetail() {
                     <h4>Depois das principais</h4>
                     <span class="roteiro-section-progress">${afterDone}/${afterMain.length}</span>
                 </div>
-                <p class="roteiro-after-hint">Só depois de terminar a ordem do dia — ou se sobrar tempo / fila curta.</p>
                 <div class="roteiro-checklist">${afterList || '<p class="roteiro-empty">Sem extras para este dia.</p>'}</div>
             </div>
             <div class="roteiro-section">
                 <h4>Comer</h4>
                 <div class="roteiro-meals">
-                    ${mealCard('lunch', 'Almoço', '🍽️')}
-                    ${mealCard('snack', 'Lanche', '🥨')}
-                    ${mealCard('dinner', 'Jantar', '🌙')}
+                    ${mealCard('lunch', 'Almoço')}
+                    ${mealCard('snack', 'Lanche')}
+                    ${mealCard('dinner', 'Jantar')}
                 </div>
             </div>
-            ${tips ? `<div class="roteiro-section"><h4>Dicas do dia</h4><ul class="roteiro-tips">${tips}</ul></div>` : ''}
+            ${tips ? `<div class="roteiro-section"><h4>Dicas</h4><ul class="roteiro-tips">${tips}</ul></div>` : ''}
         </section>
     `;
 }
