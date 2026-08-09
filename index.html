@@ -74,25 +74,27 @@
         </header>
 
         <!-- PERMANENT NAVIGATION HEADER -->
-        <h2
-            style="text-align: center; margin-bottom: 20px; font-size: 1.8rem; text-shadow: 0 0 10px rgba(251, 191, 36, 0.3); margin-top: 0;">
-            Trip Guide</h2>
+        <h2 class="trip-guide-title">Trip Guide</h2>
         <div class="quick-links-container" style="position: relative; z-index: 20; margin-bottom: 25px;">
             <div class="icon-btn-wrapper">
-                <button class="icon-btn btn-airbnb" onclick="openAirbnbModal()">🏠</button>
+                <button class="icon-btn btn-airbnb" onclick="openAirbnbModal()" aria-label="Airbnb">⌂</button>
                 <span class="icon-label">Airbnb</span>
             </div>
             <div class="icon-btn-wrapper">
-                <button class="icon-btn btn-crowds" onclick="openCrowdsModal()">📊</button>
+                <button class="icon-btn btn-crowds" onclick="openCrowdsModal()" aria-label="Crowds">◈</button>
                 <span class="icon-label">Crowds</span>
             </div>
             <div class="icon-btn-wrapper">
-                <button class="icon-btn btn-helios" onclick="openHeliosModal()">🏨</button>
+                <button class="icon-btn btn-helios" onclick="openHeliosModal()" aria-label="Helios">◇</button>
                 <span class="icon-label">Helios</span>
             </div>
             <div class="icon-btn-wrapper">
-                <button class="icon-btn btn-roteiro" onclick="openRoteiroModal()">🗺️</button>
+                <button class="icon-btn btn-roteiro" onclick="openRoteiroModal()" aria-label="Roteiro">◎</button>
                 <span class="icon-label">Roteiro</span>
+            </div>
+            <div class="icon-btn-wrapper">
+                <button class="icon-btn btn-gastos" onclick="openGastosModal()" aria-label="Gastos">$</button>
+                <span class="icon-label">Gastos</span>
             </div>
         </div>
 
@@ -104,13 +106,26 @@
     <div id="roteiro-modal" class="modal-overlay">
         <div class="modal-content-wide roteiro-shell">
             <div class="modal-header">
-                <h2 style="margin:0; font-size:1.15rem;">Companheiro 🗺️</h2>
-                <button class="back-modal-btn" onclick="closeRoteiroModal()">← Back</button>
+                <h2 style="margin:0; font-size:1.15rem;">Roteiro</h2>
+                <button class="back-modal-btn" onclick="closeRoteiroModal()">← Voltar</button>
             </div>
             <div class="modal-body-scroll roteiro-body-scroll" id="roteiro-body">
-                <p class="roteiro-loading">Loading itinerary…</p>
+                <p class="roteiro-loading">Carregando roteiro…</p>
             </div>
             <div class="roteiro-next-bar" id="roteiro-next-bar" style="display:none;"></div>
+        </div>
+    </div>
+
+    <!-- Gastos Modal -->
+    <div id="gastos-modal" class="modal-overlay">
+        <div class="modal-content-wide">
+            <div class="modal-header">
+                <h2 style="margin:0; font-size:1.15rem;">Gastos</h2>
+                <button class="back-modal-btn" onclick="closeGastosModal()">← Voltar</button>
+            </div>
+            <div class="modal-body-scroll" id="gastos-body">
+                <p class="gastos-loading">Carregando…</p>
+            </div>
         </div>
     </div>
 
@@ -118,8 +133,8 @@
     <div id="helios-modal" class="modal-overlay">
         <div class="modal-content-wide">
             <div class="modal-header">
-                <h2 style="margin:0; font-size:1.4rem;">Helios — diárias 🏨</h2>
-                <button class="back-modal-btn" onclick="closeHeliosModal()">← Back</button>
+                <h2 style="margin:0; font-size:1.15rem;">Helios</h2>
+                <button class="back-modal-btn" onclick="closeHeliosModal()">← Voltar</button>
             </div>
             <div class="modal-body-scroll" id="helios-body">
                 <p class="helios-intro">Flexible Rate oficial (Standard 2 Queen, 2 adultos) — diária por noite, ago–dez/2026. Verde = mais barato, vermelho = mais caro.</p>
