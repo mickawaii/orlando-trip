@@ -118,35 +118,29 @@
     <div id="helios-modal" class="modal-overlay">
         <div class="modal-content-wide">
             <div class="modal-header">
-                <h2 style="margin:0; font-size:1.4rem;">Helios Rates 🏨</h2>
+                <h2 style="margin:0; font-size:1.4rem;">Helios — diárias 🏨</h2>
                 <button class="back-modal-btn" onclick="closeHeliosModal()">← Back</button>
             </div>
             <div class="modal-body-scroll" id="helios-body">
-                <p class="helios-intro">Official Flexible Rate (Standard 2 Queen, 2 adults) from Universal reservations — Aug through Dec 2026.</p>
-                <div class="helios-summary" id="helios-summary">Loading…</div>
+                <p class="helios-intro">Flexible Rate oficial (Standard 2 Queen, 2 adultos) — diária por noite, ago–dez/2026. Verde = mais barato, vermelho = mais caro.</p>
+                <div class="helios-summary" id="helios-summary">Carregando…</div>
                 <div class="park-chip-row" id="helios-month-chips">
-                    <button type="button" class="park-chip active" onclick="filterHeliosMonth('all')">All</button>
-                    <button type="button" class="park-chip" onclick="filterHeliosMonth('2026-08')">Aug</button>
-                    <button type="button" class="park-chip" onclick="filterHeliosMonth('2026-09')">Sep</button>
-                    <button type="button" class="park-chip" onclick="filterHeliosMonth('2026-10')">Oct</button>
-                    <button type="button" class="park-chip" onclick="filterHeliosMonth('2026-11')">Nov</button>
-                    <button type="button" class="park-chip" onclick="filterHeliosMonth('2026-12')">Dec</button>
+                    <button type="button" class="park-chip active" data-helios-month="all" onclick="filterHeliosMonth('all')">Todos</button>
+                    <button type="button" class="park-chip" data-helios-month="2026-08" onclick="filterHeliosMonth('2026-08')">Ago</button>
+                    <button type="button" class="park-chip" data-helios-month="2026-09" onclick="filterHeliosMonth('2026-09')">Set</button>
+                    <button type="button" class="park-chip" data-helios-month="2026-10" onclick="filterHeliosMonth('2026-10')">Out</button>
+                    <button type="button" class="park-chip" data-helios-month="2026-11" onclick="filterHeliosMonth('2026-11')">Nov</button>
+                    <button type="button" class="park-chip" data-helios-month="2026-12" onclick="filterHeliosMonth('2026-12')">Dez</button>
                 </div>
-                <div class="helios-table-wrap">
-                    <table class="helios-table" id="helios-table">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Day</th>
-                                <th>Nightly</th>
-                                <th>Taxes</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody id="helios-tbody"></tbody>
-                    </table>
+                <div class="helios-legend">
+                    <span><i class="swatch cheap"></i>Barato</span>
+                    <span><i class="swatch mid"></i>Médio</span>
+                    <span><i class="swatch high"></i>Alto</span>
+                    <span><i class="swatch peak"></i>Pico</span>
                 </div>
-                <p class="crowds-attribution">Source: <a href="https://reservations.universalorlando.com/ibe/default.aspx?hotelID=17424&amp;hgID=705&amp;lang=en-us" target="_blank" rel="noopener">reservations.universalorlando.com</a> · rates change; snapshot only.</p>
+                <div class="helios-calendars" id="helios-calendars"></div>
+                <p id="helios-day-detail" class="helios-day-detail"></p>
+                <p class="crowds-attribution">Fonte: <a href="https://reservations.universalorlando.com/ibe/default.aspx?hotelID=17424&amp;hgID=705&amp;lang=en-us" target="_blank" rel="noopener">reservations.universalorlando.com</a> · preços mudam; snapshot apenas.</p>
             </div>
         </div>
     </div>
