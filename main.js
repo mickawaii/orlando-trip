@@ -479,7 +479,7 @@ window.openRoteiroModal = async function () {
     if (modal) {
         modal.style.display = 'flex';
         document.body.classList.add('no-scroll');
-        await ensureRoteiroData();
+        await Promise.all([ensureRoteiroData(), ensureHeliosData()]);
         renderRoteiro();
     }
 };
@@ -1360,6 +1360,108 @@ window.resetRoteiroDayChecks = function (date) {
     renderRoteiro();
 };
 
+function formatMoneyUSD(n) {
+    if (n == null || Number.isNaN(n)) return '—';
+    return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+}
+
+function formatMoneyUSDExact(n) {
+    if (n == null || Number.isNaN(n)) return '—';
+    return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function formatDateBR(iso) {
+    if (!iso) return '—';
+    const [y, m, d] = iso.split('-');
+    return `${d}/${m}`;
+}
+
+function computeRoteiroHotelStay() {
+    const hotel = (roteiroData && roteiroData.hotel) || {};
+    const checkin = hotel.checkin;
+    const checkout = hotel.checkout;
+    if (!checkin || !checkout) return null;
+
+    const byDate = {};
+    heliosRows.forEach(r => { byDate[r.date] = r; });
+
+    const nights = [];
+    const start = new Date(checkin + 'T12:00:00');
+    const end = new Date(checkout + 'T12:00:00');
+    for (let t = start.getTime(); t < end.getTime(); t += 86400000) {
+        const d = new Date(t);
+        const iso = isoDate(d);
+        const row = byDate[iso];
+        nights.push({
+            date: iso,
+            dow: row?.dow || d.toLocaleDateString('en-US', { weekday: 'short' }),
+            nightly: row && !Number.isNaN(row.nightly_rate) ? row.nightly_rate : null,
+            taxes: row && !Number.isNaN(row.taxes) ? row.taxes : null,
+            total: row && !Number.isNaN(row.total) ? row.total : null
+        });
+    }
+
+    const priced = nights.filter(n => n.total != null);
+    const roomTotal = priced.reduce((s, n) => s + (n.nightly || 0), 0);
+    const taxesTotal = priced.reduce((s, n) => s + (n.taxes || 0), 0);
+    const total = priced.reduce((s, n) => s + (n.total || 0), 0);
+    const fromCsv = priced.length === nights.length && nights.length > 0;
+
+    return {
+        name: hotel.name || 'Helios',
+        checkin,
+        checkout,
+        nights,
+        nightsCount: nights.length,
+        roomTotal: fromCsv ? roomTotal : (hotel.room_total ?? hotel.nightly_total),
+        taxesTotal: fromCsv ? taxesTotal : (hotel.taxes_total ?? null),
+        total: fromCsv ? total : (hotel.total_with_tax ?? hotel.nightly_total),
+        avg: fromCsv && nights.length ? total / nights.length : (hotel.nightly_avg ?? null),
+        fromCsv,
+        rateNote: hotel.rate_note || 'Flexible Rate · com impostos'
+    };
+}
+
+function renderRoteiroHotelCost() {
+    const stay = computeRoteiroHotelStay();
+    if (!stay) return '';
+
+    const rows = stay.nights.map(n => {
+        const price = n.total != null ? formatMoneyUSDExact(n.total) : '—';
+        const room = n.nightly != null ? formatMoneyUSD(n.nightly) : '';
+        return `<div class="roteiro-hotel-night">
+            <span class="roteiro-hotel-night-date">${formatDateBR(n.date)} <em>${(n.dow || '').slice(0, 3)}</em></span>
+            <span class="roteiro-hotel-night-room">${room ? room + ' + tax' : ''}</span>
+            <strong>${price}</strong>
+        </div>`;
+    }).join('');
+
+    return `
+        <section class="roteiro-hotel-cost">
+            <div class="roteiro-hotel-cost-head">
+                <div>
+                    <p class="roteiro-hotel-label">Custo do hotel (roteiro)</p>
+                    <h4>${stay.name.replace(', a Loews Hotel', '')}</h4>
+                    <p class="roteiro-hotel-dates">${formatDateBR(stay.checkin)} → ${formatDateBR(stay.checkout)} · ${stay.nightsCount} noites</p>
+                </div>
+                <div class="roteiro-hotel-total">
+                    <span>Total c/ impostos</span>
+                    <strong>${formatMoneyUSDExact(stay.total)}</strong>
+                </div>
+            </div>
+            <div class="roteiro-hotel-stats">
+                <div><span>Diárias</span><strong>${formatMoneyUSDExact(stay.roomTotal)}</strong></div>
+                <div><span>Impostos</span><strong>${stay.taxesTotal != null ? formatMoneyUSDExact(stay.taxesTotal) : '—'}</strong></div>
+                <div><span>Média/noite</span><strong>${stay.avg != null ? formatMoneyUSD(stay.avg) : '—'}</strong></div>
+            </div>
+            <details class="roteiro-hotel-breakdown">
+                <summary>Ver diária por noite</summary>
+                <div class="roteiro-hotel-nights">${rows}</div>
+                <p class="roteiro-hotel-note">${stay.rateNote}${stay.fromCsv ? '' : ' · valores do roteiro'}</p>
+            </details>
+        </section>`;
+}
+
 function renderRoteiro() {
     const body = document.getElementById('roteiro-body');
     if (!body) return;
@@ -1384,6 +1486,7 @@ function renderRoteiro() {
     body.innerHTML = `
         <div class="roteiro-companion-top">
             <p class="roteiro-kicker">${roteiroData.subtitle || 'Companheiro de parque'}</p>
+            ${renderRoteiroHotelCost()}
             <div class="roteiro-chip-row" id="roteiro-chip-row">${chips}</div>
         </div>
         <div id="roteiro-day-detail"></div>

@@ -1960,6 +1960,154 @@ body.admin-active #edit-btn-wrapper {
     color: var(--text-dim);
 }
 
+.roteiro-hotel-cost {
+    margin: 0 0 14px;
+    padding: 14px 14px 12px;
+    border-radius: 16px;
+    border: 1px solid rgba(253, 186, 116, 0.35);
+    background:
+        linear-gradient(145deg, rgba(253, 186, 116, 0.12), rgba(255, 255, 255, 0.03));
+}
+
+.roteiro-hotel-cost-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.roteiro-hotel-label {
+    margin: 0 0 2px;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #fdba74;
+    font-weight: 700;
+}
+
+.roteiro-hotel-cost h4 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.25;
+}
+
+.roteiro-hotel-dates {
+    margin: 4px 0 0;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+}
+
+.roteiro-hotel-total {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.roteiro-hotel-total span {
+    display: block;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    margin-bottom: 2px;
+}
+
+.roteiro-hotel-total strong {
+    font-size: 1.25rem;
+    color: #fdba74;
+    letter-spacing: -0.02em;
+}
+
+.roteiro-hotel-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.roteiro-hotel-stats > div {
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 8px 6px;
+    text-align: center;
+}
+
+.roteiro-hotel-stats span {
+    display: block;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    margin-bottom: 3px;
+}
+
+.roteiro-hotel-stats strong {
+    font-size: 0.82rem;
+    color: var(--text);
+}
+
+.roteiro-hotel-breakdown {
+    margin-top: 10px;
+}
+
+.roteiro-hotel-breakdown summary {
+    cursor: pointer;
+    font-size: 0.78rem;
+    color: #fdba74;
+    font-weight: 600;
+    list-style: none;
+    user-select: none;
+}
+
+.roteiro-hotel-breakdown summary::-webkit-details-marker { display: none; }
+
+.roteiro-hotel-breakdown summary::before {
+    content: '▸ ';
+}
+
+.roteiro-hotel-breakdown[open] summary::before {
+    content: '▾ ';
+}
+
+.roteiro-hotel-nights {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.roteiro-hotel-night {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 8px;
+    align-items: baseline;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    font-size: 0.78rem;
+}
+
+.roteiro-hotel-night-date em {
+    font-style: normal;
+    color: var(--text-dim);
+    margin-left: 4px;
+}
+
+.roteiro-hotel-night-room {
+    color: var(--text-dim);
+    font-size: 0.7rem;
+}
+
+.roteiro-hotel-night strong {
+    color: #fdba74;
+    font-variant-numeric: tabular-nums;
+}
+
+.roteiro-hotel-note {
+    margin: 8px 0 0;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    line-height: 1.35;
+}
+
 .roteiro-chip-row {
     display: flex;
     gap: 8px;
