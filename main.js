@@ -479,7 +479,7 @@ window.openRoteiroModal = async function () {
     if (modal) {
         modal.style.display = 'flex';
         document.body.classList.add('no-scroll');
-        await ensureRoteiroData();
+        await Promise.all([ensureRoteiroData(), ensureHeliosData()]);
         renderRoteiro();
     }
 };
@@ -1360,6 +1360,108 @@ window.resetRoteiroDayChecks = function (date) {
     renderRoteiro();
 };
 
+function formatMoneyUSD(n) {
+    if (n == null || Number.isNaN(n)) return '—';
+    return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+}
+
+function formatMoneyUSDExact(n) {
+    if (n == null || Number.isNaN(n)) return '—';
+    return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function formatDateBR(iso) {
+    if (!iso) return '—';
+    const [y, m, d] = iso.split('-');
+    return `${d}/${m}`;
+}
+
+function computeRoteiroHotelStay() {
+    const hotel = (roteiroData && roteiroData.hotel) || {};
+    const checkin = hotel.checkin;
+    const checkout = hotel.checkout;
+    if (!checkin || !checkout) return null;
+
+    const byDate = {};
+    heliosRows.forEach(r => { byDate[r.date] = r; });
+
+    const nights = [];
+    const start = new Date(checkin + 'T12:00:00');
+    const end = new Date(checkout + 'T12:00:00');
+    for (let t = start.getTime(); t < end.getTime(); t += 86400000) {
+        const d = new Date(t);
+        const iso = isoDate(d);
+        const row = byDate[iso];
+        nights.push({
+            date: iso,
+            dow: row?.dow || d.toLocaleDateString('en-US', { weekday: 'short' }),
+            nightly: row && !Number.isNaN(row.nightly_rate) ? row.nightly_rate : null,
+            taxes: row && !Number.isNaN(row.taxes) ? row.taxes : null,
+            total: row && !Number.isNaN(row.total) ? row.total : null
+        });
+    }
+
+    const priced = nights.filter(n => n.total != null);
+    const roomTotal = priced.reduce((s, n) => s + (n.nightly || 0), 0);
+    const taxesTotal = priced.reduce((s, n) => s + (n.taxes || 0), 0);
+    const total = priced.reduce((s, n) => s + (n.total || 0), 0);
+    const fromCsv = priced.length === nights.length && nights.length > 0;
+
+    return {
+        name: hotel.name || 'Helios',
+        checkin,
+        checkout,
+        nights,
+        nightsCount: nights.length,
+        roomTotal: fromCsv ? roomTotal : (hotel.room_total ?? hotel.nightly_total),
+        taxesTotal: fromCsv ? taxesTotal : (hotel.taxes_total ?? null),
+        total: fromCsv ? total : (hotel.total_with_tax ?? hotel.nightly_total),
+        avg: fromCsv && nights.length ? total / nights.length : (hotel.nightly_avg ?? null),
+        fromCsv,
+        rateNote: hotel.rate_note || 'Flexible Rate · com impostos'
+    };
+}
+
+function renderRoteiroHotelCost() {
+    const stay = computeRoteiroHotelStay();
+    if (!stay) return '';
+
+    const rows = stay.nights.map(n => {
+        const price = n.total != null ? formatMoneyUSDExact(n.total) : '—';
+        const room = n.nightly != null ? formatMoneyUSD(n.nightly) : '';
+        return `<div class="roteiro-hotel-night">
+            <span class="roteiro-hotel-night-date">${formatDateBR(n.date)} <em>${(n.dow || '').slice(0, 3)}</em></span>
+            <span class="roteiro-hotel-night-room">${room ? room + ' + tax' : ''}</span>
+            <strong>${price}</strong>
+        </div>`;
+    }).join('');
+
+    return `
+        <section class="roteiro-hotel-cost">
+            <div class="roteiro-hotel-cost-head">
+                <div>
+                    <p class="roteiro-hotel-label">Custo do hotel (roteiro)</p>
+                    <h4>${stay.name.replace(', a Loews Hotel', '')}</h4>
+                    <p class="roteiro-hotel-dates">${formatDateBR(stay.checkin)} → ${formatDateBR(stay.checkout)} · ${stay.nightsCount} noites</p>
+                </div>
+                <div class="roteiro-hotel-total">
+                    <span>Total c/ impostos</span>
+                    <strong>${formatMoneyUSDExact(stay.total)}</strong>
+                </div>
+            </div>
+            <div class="roteiro-hotel-stats">
+                <div><span>Diárias</span><strong>${formatMoneyUSDExact(stay.roomTotal)}</strong></div>
+                <div><span>Impostos</span><strong>${stay.taxesTotal != null ? formatMoneyUSDExact(stay.taxesTotal) : '—'}</strong></div>
+                <div><span>Média/noite</span><strong>${stay.avg != null ? formatMoneyUSD(stay.avg) : '—'}</strong></div>
+            </div>
+            <details class="roteiro-hotel-breakdown">
+                <summary>Ver diária por noite</summary>
+                <div class="roteiro-hotel-nights">${rows}</div>
+                <p class="roteiro-hotel-note">${stay.rateNote}${stay.fromCsv ? '' : ' · valores do roteiro'}</p>
+            </details>
+        </section>`;
+}
+
 function renderRoteiro() {
     const body = document.getElementById('roteiro-body');
     if (!body) return;
@@ -1384,6 +1486,7 @@ function renderRoteiro() {
     body.innerHTML = `
         <div class="roteiro-companion-top">
             <p class="roteiro-kicker">${roteiroData.subtitle || 'Companheiro de parque'}</p>
+            ${renderRoteiroHotelCost()}
             <div class="roteiro-chip-row" id="roteiro-chip-row">${chips}</div>
         </div>
         <div id="roteiro-day-detail"></div>
@@ -1394,7 +1497,7 @@ function renderRoteiro() {
 
 function dayProgress(day) {
     const map = loadChecklist();
-    const items = [...(day.order || []), ...(day.mustDo || [])];
+    const items = [...(day.order || []), ...(day.afterMain || [])];
     // unique by id
     const seen = new Set();
     const uniq = [];
@@ -1446,17 +1549,18 @@ function renderRoteiroDayDetail() {
         </button>`;
     }).join('');
 
-    // mustDo checklist unique
+    // afterMain = extras after finishing order (never duplicates of principais)
     const orderIds = new Set((d.order || []).map(a => a.id));
-    const extraMust = (d.mustDo || []).filter(a => a?.id && !orderIds.has(a.id));
-    const mustList = [...(d.order || []), ...extraMust].reduce((acc, a) => {
-        if (!a?.id || acc.find(x => x.id === a.id)) return acc;
-        acc.push(a); return acc;
-    }, []).map(a => {
+    const afterMain = (d.afterMain || []).filter(a => a?.id && !orderIds.has(a.id));
+    const afterDone = afterMain.filter(a => map[checkKey(d.date, a.id)]).length;
+    const afterList = afterMain.map(a => {
         const checked = map[checkKey(d.date, a.id)] ? 'checked' : '';
         return `<label class="roteiro-check-item ${checked}">
             <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleRoteiroAttr('${d.date}','${a.id}')" />
-            <span><strong>${a.name}</strong>${a.land ? ` · ${a.land}` : ''}</span>
+            <span>
+                <strong>${a.name}</strong>${a.land ? ` · ${a.land}` : ''}
+                ${a.tip ? `<small class="roteiro-after-tip">${a.tip}</small>` : ''}
+            </span>
         </label>`;
     }).join('');
 
@@ -1490,14 +1594,18 @@ function renderRoteiroDayDetail() {
             ${address}
             <div class="roteiro-section">
                 <div class="roteiro-section-head">
-                    <h4>Ordem do dia</h4>
+                    <h4>Ordem do dia <span class="roteiro-section-tag">faça primeiro</span></h4>
                     <button type="button" class="roteiro-linkish" onclick="resetRoteiroDayChecks('${d.date}')">Reset</button>
                 </div>
                 <div class="roteiro-order">${orderList || '<p class="roteiro-empty">Sem ordem definida</p>'}</div>
             </div>
             <div class="roteiro-section">
-                <h4>Lista de atrações</h4>
-                <div class="roteiro-checklist">${mustList || '<p class="roteiro-empty">—</p>'}</div>
+                <div class="roteiro-section-head">
+                    <h4>Depois das principais</h4>
+                    <span class="roteiro-section-progress">${afterDone}/${afterMain.length}</span>
+                </div>
+                <p class="roteiro-after-hint">Só depois de terminar a ordem do dia — ou se sobrar tempo / fila curta.</p>
+                <div class="roteiro-checklist">${afterList || '<p class="roteiro-empty">Sem extras para este dia.</p>'}</div>
             </div>
             <div class="roteiro-section">
                 <h4>Comer</h4>
@@ -1517,14 +1625,21 @@ function renderRoteiroNextBar() {
     if (!bar || !roteiroData) return;
     const d = roteiroData.days[roteiroDayIndex];
     const map = loadChecklist();
-    const next = (d.order || []).find(a => a?.id && !map[checkKey(d.date, a.id)]);
-    if (!next) {
+    const nextMain = (d.order || []).find(a => a?.id && !map[checkKey(d.date, a.id)]);
+    if (nextMain) {
         bar.style.display = 'flex';
-        bar.innerHTML = `<span>🎉 Dia completo — ou quase! Revisem a checklist.</span>`;
+        bar.innerHTML = `<span class="roteiro-next-label">Próxima</span><strong>${nextMain.name}</strong>${nextMain.land ? `<em>${nextMain.land}</em>` : ''}`;
+        return;
+    }
+    const orderIds = new Set((d.order || []).map(a => a.id));
+    const nextAfter = (d.afterMain || []).find(a => a?.id && !orderIds.has(a.id) && !map[checkKey(d.date, a.id)]);
+    if (nextAfter) {
+        bar.style.display = 'flex';
+        bar.innerHTML = `<span class="roteiro-next-label">Depois</span><strong>${nextAfter.name}</strong>${nextAfter.land ? `<em>${nextAfter.land}</em>` : ''}`;
         return;
     }
     bar.style.display = 'flex';
-    bar.innerHTML = `<span class="roteiro-next-label">Próxima</span><strong>${next.name}</strong>${next.land ? `<em>${next.land}</em>` : ''}`;
+    bar.innerHTML = `<span>Dia completo — principais e extras feitos.</span>`;
 }
 
 // Global start
