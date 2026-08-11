@@ -31,6 +31,12 @@ let tinkTimer = null;
 window.initApp = async function () {
     initMagicTrigger();
     restoreAdminMode();
+    try {
+        await ensureRoteiroData();
+        renderHomeToday();
+    } catch (e) {
+        console.warn('home today', e);
+    }
 };
 
 function restoreAdminMode() {
@@ -43,38 +49,23 @@ function restoreAdminMode() {
 }
 
 function initMagicTrigger() {
-    const tink = document.getElementById('tinkerbell-header');
-    if (!tink) return;
-
-    tink.style.cursor = 'pointer'; // Hint it's interactive
-    tink.addEventListener('click', () => {
+    const brand = document.querySelector('.app-header h1');
+    if (!brand) return;
+    brand.addEventListener('click', () => {
         tinkClicks++;
         clearTimeout(tinkTimer);
-
-        if (tinkClicks === 3) {
-            const password = prompt("Enter Magic Password ✨");
+        if (tinkClicks === 5) {
+            const password = prompt('Senha admin');
             if (password === '1004') {
-                alert("Access Granted! Magic Unlocked. 🏰");
                 isMagicMode = true;
-                localStorage.setItem('disney_admin_mode', 'true'); // Persist admin status
-
-                // Toggle UI state for CSS override
+                localStorage.setItem('disney_admin_mode', 'true');
                 document.body.classList.add('admin-active');
-
-                // Show Indicator
                 const indicator = document.getElementById('admin-indicator');
                 if (indicator) indicator.style.display = 'block';
-
-                showBreakdown(currentActivePerson); // Refresh to show admin toggles
-            } else {
-                alert("Incorrect Password. Try again if you have the magic! ✨");
             }
             tinkClicks = 0;
         }
-
-        tinkTimer = setTimeout(() => {
-            tinkClicks = 0;
-        }, 2000);
+        tinkTimer = setTimeout(() => { tinkClicks = 0; }, 2000);
     });
 }
 
@@ -510,48 +501,9 @@ window.closeRoteiroModal = function () {
     }
 };
 
-window.openAirbnbModal = function () {
-    const modal = document.getElementById('airbnb-modal');
-    if (modal) {
-        modal.style.display = 'flex';
-        document.body.classList.add('no-scroll');
-    }
-};
 
-window.closeAirbnbModal = function () {
-    const modal = document.getElementById('airbnb-modal');
-    if (modal) {
-        modal.style.display = 'none';
-        document.body.classList.remove('no-scroll');
-    }
-};
 
-window.openLightbox = function (src) {
-    const modal = document.getElementById('lightbox-modal');
-    const img = document.getElementById('lightbox-img');
-    if (modal && img) {
-        img.src = src;
-        modal.style.display = 'flex';
-        document.body.classList.add('no-scroll');
-    }
-};
 
-window.closeLightbox = function () {
-    const modal = document.getElementById('lightbox-modal');
-    if (modal) {
-        modal.style.display = 'none';
-        // Only remove no-scroll if no other modal is open
-        const airbnb = document.getElementById('airbnb-modal');
-        const crowds = document.getElementById('crowds-modal');
-        const helios = document.getElementById('helios-modal');
-        const roteiro = document.getElementById('roteiro-modal');
-        const gastos = document.getElementById('gastos-modal');
-        const anyOpen = [airbnb, crowds, helios, roteiro, gastos].some(el => el && el.style.display === 'flex');
-        if (!anyOpen) {
-            document.body.classList.remove('no-scroll');
-        }
-    }
-};
 
 function setupSubscriptions() {
     _supabase.channel('cloud-sync')
@@ -900,7 +852,7 @@ window.toggleDetails = function () {
 };
 
 // Countdown Logic
-const flightTime = new Date('January 11, 2026 10:11:00').getTime();
+const flightTime = new Date('November 29, 2026 08:00:00').getTime();
 
 function updateCountdown() {
     const now = new Date().getTime();
@@ -924,76 +876,12 @@ function updateCountdown() {
     if (distance < 0) {
         clearInterval(countdownTimer);
         const el = document.getElementById('flight-countdown');
-        if (el) el.innerHTML = "<h3>It's Disney Time! ✨✈️✨</h3>";
+        if (el) el.innerHTML = "<h3>Viagem em andamento</h3>";
     }
 }
 
 const countdownTimer = setInterval(updateCountdown, 1000);
 updateCountdown();
-
-// Pixie Dust Animation
-const canvas = document.getElementById('pixie-dust');
-if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-
-    function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-
-    window.addEventListener('resize', resize);
-    resize();
-
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2 + 0.5;
-            this.speedX = Math.random() * 0.5 - 0.25;
-            this.speedY = Math.random() * 0.5 - 0.25;
-            this.opacity = Math.random();
-            this.opacityChange = Math.random() * 0.02 + 0.01;
-        }
-
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            this.opacity += this.opacityChange;
-            if (this.opacity > 1 || this.opacity < 0) this.opacityChange *= -1;
-
-            if (this.x > canvas.width) this.x = 0;
-            if (this.x < 0) this.x = canvas.width;
-            if (this.y > canvas.height) this.y = 0;
-            if (this.y < 0) this.y = canvas.height;
-        }
-
-        draw() {
-            ctx.fillStyle = `rgba(251, 191, 36, ${Math.max(0, this.opacity * 0.6)})`;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-
-    function init() {
-        for (let i = 0; i < 80; i++) {
-            particles.push(new Particle());
-        }
-    }
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
-            p.update();
-            p.draw();
-        });
-        requestAnimationFrame(animate);
-    }
-
-    init();
-    animate();
-}
 
 // --- PARK CROWD CALENDAR ---
 const CROWD_PARKS = [
@@ -1014,9 +902,9 @@ const CROWD_LEVEL_FROM_SCORE = (score) => {
 };
 
 let crowdState = {
-    parkSlug: 'magic-kingdom',
-    year: new Date().getFullYear(),
-    month: new Date().getMonth(), // 0-indexed
+    parkSlug: 'epic-universe',
+    year: 2026,
+    month: 10, // November (0-indexed) — janela da viagem
     observed: {}, // slug -> { 'YYYY-MM-DD': { level, avgWait, samples } }
     loaded: false
 };
@@ -1411,6 +1299,27 @@ async function ensureRoteiroData() {
         console.error('Roteiro load failed', e);
         roteiroData = null;
     }
+}
+
+
+function renderHomeToday() {
+    const body = document.getElementById('home-today-body');
+    if (!body || !roteiroData) return;
+    const today = isoDate(new Date());
+    const days = roteiroData.days || [];
+    let day = days.find(d => d.date === today);
+    if (!day) {
+        // nearest upcoming
+        day = days.find(d => d.date >= today) || days[days.length - 1];
+    }
+    if (!day) {
+        body.textContent = 'Roteiro indisponível.';
+        return;
+    }
+    const label = day.date === today ? 'Hoje' : formatDateBR(day.date);
+    body.innerHTML = `<strong>${label} · ${day.dow}</strong><br>${day.title}<br><span class="home-today-focus">${day.strategy || ''}</span>`;
+    const idx = days.indexOf(day);
+    if (idx >= 0) roteiroDayIndex = idx;
 }
 
 window.selectRoteiroDay = function (idx) {
