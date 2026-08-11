@@ -1,34 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disney World 2026 Tracker</title>
-    <meta name="description"
-        content="Your magical real-time itinerary and expense tracker for the 2026 Disney World trip.">
-
-    <!-- Open Graph / Link Preview Tags -->
-    <meta property="og:title" content="Orlando Trip Info - Click Here! 🏰">
-    <meta property="og:description" content="Click to view our itinerary, expenses, and countdown! ✨">
-    <meta property="og:image" content="https://orlando-trip.vercel.app/images/trio.png">
-    <meta property="og:url" content="https://orlando-trip.vercel.app">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Orlando 2026</title>
+    <meta name="description" content="Companheiro de parque — roteiro, lotação, hotel e gastos da viagem a Orlando.">
+    <meta property="og:title" content="Orlando 2026">
+    <meta property="og:description" content="Roteiro, lotação, Helios e gastos — pronto para usar no parque.">
+    <meta property="og:url" content="https://orlando-trip-seven.vercel.app">
     <meta property="og:type" content="website">
-
-    <!-- Twitter Card Tags (Helps with large image display in some apps) -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Orlando Trip Info - Click Here! 🏰">
-    <meta name="twitter:description" content="Click to view our itinerary, expenses, and countdown! ✨">
-    <meta name="twitter:image" content="https://orlando-trip.vercel.app/images/trio.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Poppins:wght@700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="style.css">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#f4f6f8">
     <link rel="manifest" href="manifest.json">
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 </head>
@@ -36,78 +25,70 @@
 <body>
     <div id="orientation-lock">
         <div class="lock-content">
-            <div class="lock-icon">📱</div>
-            <h2>Please Rotate to Portrait</h2>
-            <p>This experience is optimized for vertical viewing.</p>
+            <h2>Gire para retrato</h2>
+            <p>O app funciona melhor na vertical.</p>
         </div>
     </div>
-    <canvas id="pixie-dust"></canvas>
-    <div class="container">
-        <header>
-            <div id="admin-indicator"
-                style="display: none; color: #34d399; font-size: 0.85rem; font-weight: 700; text-align: center; margin-bottom: 10px; text-shadow: 0 0 10px rgba(52, 211, 153, 0.6);">
-                🟢 Admin Mode Active
-            </div>
-            <img src="images/tinkerbell.png" id="tinkerbell-header" class="character-img" alt="Tinker Bell">
-            <img src="images/trio.png" id="trio-hero" class="character-img" alt="Mickey Trio">
-            <div class="dates">January 11 - 15, 2026</div>
-            <h1>Disney World Magic</h1>
 
-            <div class="countdown-container" style="margin: 15px 0;">
+    <div class="app">
+        <header class="app-header">
+            <div id="admin-indicator" class="admin-pill" style="display:none;">Admin</div>
+            <p class="app-kicker">Viagem · Nov–Dez 2026</p>
+            <h1>Orlando</h1>
+            <p class="app-dates">29/11 → 12/12 · Helios Grand Hotel</p>
+
+            <div class="countdown-row" aria-label="Contagem regressiva">
                 <div class="countdown-item">
                     <span class="countdown-value" id="days">00</span>
-                    <span class="countdown-label">Days</span>
+                    <span class="countdown-label">dias</span>
                 </div>
                 <div class="countdown-item">
                     <span class="countdown-value" id="hours">00</span>
-                    <span class="countdown-label">Hours</span>
+                    <span class="countdown-label">horas</span>
                 </div>
                 <div class="countdown-item">
                     <span class="countdown-value" id="minutes">00</span>
-                    <span class="countdown-label">Mins</span>
+                    <span class="countdown-label">min</span>
                 </div>
                 <div class="countdown-item">
                     <span class="countdown-value" id="seconds">00</span>
-                    <span class="countdown-label">Secs</span>
+                    <span class="countdown-label">seg</span>
                 </div>
             </div>
         </header>
 
-        <!-- PERMANENT NAVIGATION HEADER -->
-        <h2 class="trip-guide-title">Trip Guide</h2>
-        <div class="quick-links-container" style="position: relative; z-index: 20; margin-bottom: 25px;">
-            <div class="icon-btn-wrapper">
-                <button class="icon-btn btn-airbnb" onclick="openAirbnbModal()" aria-label="Airbnb">⌂</button>
-                <span class="icon-label">Airbnb</span>
-            </div>
-            <div class="icon-btn-wrapper">
-                <button class="icon-btn btn-crowds" onclick="openCrowdsModal()" aria-label="Crowds">◈</button>
-                <span class="icon-label">Crowds</span>
-            </div>
-            <div class="icon-btn-wrapper">
-                <button class="icon-btn btn-helios" onclick="openHeliosModal()" aria-label="Helios">◇</button>
-                <span class="icon-label">Helios</span>
-            </div>
-            <div class="icon-btn-wrapper">
-                <button class="icon-btn btn-roteiro" onclick="openRoteiroModal()" aria-label="Roteiro">◎</button>
-                <span class="icon-label">Roteiro</span>
-            </div>
-            <div class="icon-btn-wrapper">
-                <button class="icon-btn btn-gastos" onclick="openGastosModal()" aria-label="Gastos">$</button>
-                <span class="icon-label">Gastos</span>
-            </div>
-        </div>
+        <nav class="app-nav" aria-label="Seções">
+            <button type="button" class="nav-tile nav-roteiro" onclick="openRoteiroModal()">
+                <span class="nav-tile-label">Roteiro</span>
+                <span class="nav-tile-hint">Checklist do dia</span>
+            </button>
+            <button type="button" class="nav-tile nav-crowds" onclick="openCrowdsModal()">
+                <span class="nav-tile-label">Lotação</span>
+                <span class="nav-tile-hint">Dias mais leves</span>
+            </button>
+            <button type="button" class="nav-tile nav-helios" onclick="openHeliosModal()">
+                <span class="nav-tile-label">Helios</span>
+                <span class="nav-tile-hint">Diárias do hotel</span>
+            </button>
+            <button type="button" class="nav-tile nav-gastos" onclick="openGastosModal()">
+                <span class="nav-tile-label">Gastos</span>
+                <span class="nav-tile-hint">Custo da estadia</span>
+            </button>
+        </nav>
 
-        <!-- DYNAMIC CONTENT AREA -->
-        <div id="content-area" style="position: relative; z-index: 10;"></div>
+        <section class="home-today" id="home-today">
+            <p class="home-today-label">Hoje no roteiro</p>
+            <p class="home-today-body" id="home-today-body">Abra o Roteiro para ver o dia.</p>
+            <button type="button" class="home-today-cta" onclick="openRoteiroModal()">Abrir roteiro</button>
+        </section>
     </div>
 
-    <!-- Roteiro Nov/Dez Modal -->
+    <!-- Roteiro -->
     <div id="roteiro-modal" class="modal-overlay">
         <div class="modal-content-wide roteiro-shell">
             <div class="modal-header">
-                <h2 style="margin:0; font-size:1.15rem;">Roteiro</h2>
-                <button class="back-modal-btn" onclick="closeRoteiroModal()">← Voltar</button>
+                <h2>Roteiro</h2>
+                <button class="back-modal-btn" onclick="closeRoteiroModal()">Fechar</button>
             </div>
             <div class="modal-body-scroll roteiro-body-scroll" id="roteiro-body">
                 <p class="roteiro-loading">Carregando roteiro…</p>
@@ -116,12 +97,12 @@
         </div>
     </div>
 
-    <!-- Gastos Modal -->
+    <!-- Gastos -->
     <div id="gastos-modal" class="modal-overlay">
         <div class="modal-content-wide">
             <div class="modal-header">
-                <h2 style="margin:0; font-size:1.15rem;">Gastos</h2>
-                <button class="back-modal-btn" onclick="closeGastosModal()">← Voltar</button>
+                <h2>Gastos</h2>
+                <button class="back-modal-btn" onclick="closeGastosModal()">Fechar</button>
             </div>
             <div class="modal-body-scroll" id="gastos-body">
                 <p class="gastos-loading">Carregando…</p>
@@ -129,15 +110,15 @@
         </div>
     </div>
 
-    <!-- Helios Rates Modal -->
+    <!-- Helios -->
     <div id="helios-modal" class="modal-overlay">
         <div class="modal-content-wide">
             <div class="modal-header">
-                <h2 style="margin:0; font-size:1.15rem;">Helios</h2>
-                <button class="back-modal-btn" onclick="closeHeliosModal()">← Voltar</button>
+                <h2>Helios</h2>
+                <button class="back-modal-btn" onclick="closeHeliosModal()">Fechar</button>
             </div>
             <div class="modal-body-scroll" id="helios-body">
-                <p class="helios-intro">Flexible Rate oficial (Standard 2 Queen, 2 adultos) — diária por noite, ago–dez/2026. Verde = mais barato, vermelho = mais caro.</p>
+                <p class="helios-intro">Flexible Rate (Standard 2 Queen, 2 adultos) — ago–dez/2026. Verde = mais barato, vermelho = mais caro.</p>
                 <div class="helios-summary" id="helios-summary">Carregando…</div>
                 <div class="park-chip-row" id="helios-month-chips">
                     <button type="button" class="park-chip active" data-helios-month="all" onclick="filterHeliosMonth('all')">Todos</button>
@@ -155,176 +136,36 @@
                 </div>
                 <div class="helios-calendars" id="helios-calendars"></div>
                 <p id="helios-day-detail" class="helios-day-detail"></p>
-                <p class="crowds-attribution">Fonte: <a href="https://reservations.universalorlando.com/ibe/default.aspx?hotelID=17424&amp;hgID=705&amp;lang=en-us" target="_blank" rel="noopener">reservations.universalorlando.com</a> · preços mudam; snapshot apenas.</p>
+                <p class="crowds-attribution">Fonte: <a href="https://reservations.universalorlando.com/ibe/default.aspx?hotelID=17424&amp;hgID=705&amp;lang=en-us" target="_blank" rel="noopener">reservations.universalorlando.com</a> · snapshot.</p>
             </div>
         </div>
     </div>
 
-    <!-- Crowds Modal -->
+    <!-- Crowds / Lotação -->
     <div id="crowds-modal" class="modal-overlay">
         <div class="modal-content-wide">
             <div class="modal-header">
-                <h2 style="margin:0; font-size:1.4rem;">Park Crowds 📊</h2>
-                <button class="back-modal-btn" onclick="closeCrowdsModal()">← Back</button>
+                <h2>Lotação</h2>
+                <button class="back-modal-btn" onclick="closeCrowdsModal()">Fechar</button>
             </div>
             <div class="modal-body-scroll" id="crowds-body">
-                <p class="crowds-intro">Pick a park to see which days are lighter or packed. Green = quieter, red = busiest.</p>
+                <p class="crowds-intro">Escolha o parque. Verde = mais leve, vermelho = mais cheio.</p>
                 <div class="park-chip-row" id="park-chip-row"></div>
                 <div class="crowd-month-nav">
-                    <button type="button" class="crowd-nav-btn" onclick="shiftCrowdMonth(-1)" aria-label="Previous month">‹</button>
+                    <button type="button" class="crowd-nav-btn" onclick="shiftCrowdMonth(-1)" aria-label="Mês anterior">‹</button>
                     <h3 id="crowd-month-label" class="crowd-month-label"></h3>
-                    <button type="button" class="crowd-nav-btn" onclick="shiftCrowdMonth(1)" aria-label="Next month">›</button>
+                    <button type="button" class="crowd-nav-btn" onclick="shiftCrowdMonth(1)" aria-label="Próximo mês">›</button>
                 </div>
                 <div class="crowd-legend">
-                    <span><i class="swatch light"></i>Light</span>
-                    <span><i class="swatch moderate"></i>Moderate</span>
-                    <span><i class="swatch busy"></i>Busy</span>
-                    <span><i class="swatch packed"></i>Packed</span>
+                    <span><i class="swatch light"></i>Leve</span>
+                    <span><i class="swatch moderate"></i>Moderado</span>
+                    <span><i class="swatch busy"></i>Cheio</span>
+                    <span><i class="swatch packed"></i>Lotado</span>
                 </div>
                 <div class="crowd-calendar" id="crowd-calendar"></div>
                 <p id="crowd-day-detail" class="crowd-day-detail"></p>
-                <p class="crowds-attribution">Observed days from <a href="https://ropedropnews.com" target="_blank" rel="noopener">Rope Drop News</a> (CC BY 4.0). Future days are estimates for planning.</p>
+                <p class="crowds-attribution">Dados observados: <a href="https://ropedropnews.com" target="_blank" rel="noopener">Rope Drop News</a>. Dias futuros são estimativas.</p>
             </div>
-        </div>
-    </div>
-
-    <!-- Airbnb Modal -->
-    <div id="airbnb-modal" class="modal-overlay">
-        <div class="modal-content-wide">
-            <div class="modal-header">
-                <h2 style="margin:0; font-size:1.4rem;">Airbnb Reservation 🏠</h2>
-                <button class="back-modal-btn" onclick="closeAirbnbModal()">← Back</button>
-            </div>
-            <div class="modal-body-scroll">
-                <h4 style="color: var(--accent); margin-bottom: 15px;">Airbnb Receipt 🧾</h4>
-                <img src="images/airbnb_receipt.png"
-                    style="width: 100%; border-radius: 12px; margin-bottom: 30px; cursor: pointer;" alt="Airbnb Receipt"
-                    onclick="openLightbox(this.src)">
-
-                <h4 style="color: var(--accent); margin-bottom: 25px;">House Highlights 🏠✨</h4>
-
-                <div class="gallery-section">
-                    <h5 class="room-title">Living Room 🛋️</h5>
-                    <div class="photo-gallery">
-                        <img src="images/house_living_1.png" class="gallery-item" alt="Living Room 1"
-                            onclick="openLightbox(this.src)">
-                        <img src="images/house_living_2.png" class="gallery-item" alt="Living Room 2"
-                            onclick="openLightbox(this.src)">
-                        <img src="images/house_living_3.png" class="gallery-item" alt="Living Room 3"
-                            onclick="openLightbox(this.src)">
-                        <img src="images/house_living_4.png" class="gallery-item" alt="Living Room 4"
-                            onclick="openLightbox(this.src)">
-                    </div>
-                </div>
-
-                <div class="gallery-section">
-                    <h5 class="room-title">Kitchen & Dining 🍳🍽️</h5>
-                    <div class="photo-gallery">
-                        <img src="images/house_kitchen_1.png" class="gallery-item" alt="Kitchen 1"
-                            onclick="openLightbox(this.src)">
-                        <img src="images/house_kitchen_2.png" class="gallery-item" alt="Kitchen 2"
-                            onclick="openLightbox(this.src)">
-                        <img src="images/house_dining_1.png" class="gallery-item" alt="Dining 1"
-                            onclick="openLightbox(this.src)">
-                        <img src="images/house_dining_2.png" class="gallery-item" alt="Dining 2"
-                            onclick="openLightbox(this.src)">
-                        <img src="images/house_dining_3.png" class="gallery-item" alt="Dining 3"
-                            onclick="openLightbox(this.src)">
-                    </div>
-                </div>
-
-                <div class="gallery-section">
-                    <h5 class="room-title">Bedroom 1 🛏️</h5>
-                    <div class="photo-gallery">
-                        <img src="images/house_bed1_1.png" class="gallery-item" alt="Bedroom 1-1"
-                            onclick="openLightbox(this.src)">
-                        <img src="images/house_bed1_2.png" class="gallery-item" alt="Bedroom 1-2"
-                            onclick="openLightbox(this.src)">
-                        <img src="images/house_bed1_3.png" class="gallery-item" alt="Bedroom 1-3"
-                            onclick="openLightbox(this.src)">
-                        <img src="images/house_bed1_4.png" class="gallery-item" alt="Bedroom 1-4"
-                            onclick="openLightbox(this.src)">
-                    </div>
-                </div>
-
-                <div class="gallery-section">
-                    <h5 class="room-title">Bedroom 2 🛌</h5>
-                    <div class="photo-gallery">
-                        <img src="images/house_bed2_1.png" class="gallery-item" alt="Bedroom 2"
-                            onclick="openLightbox(this.src)">
-                    </div>
-                </div>
-
-                <div class="gallery-section">
-                    <h5 class="room-title">Bedroom 3 🛌</h5>
-                    <div class="photo-gallery">
-                        <img src="images/house_bed3_1.png" class="gallery-item" alt="Bedroom 3-1"
-                            onclick="openLightbox(this.src)">
-                        <img src="images/house_bed3_2.png" class="gallery-item" alt="Bedroom 3-2"
-                            onclick="openLightbox(this.src)">
-                    </div>
-                </div>
-
-                <div class="gallery-section">
-                    <h5 class="room-title">Bathroom 1 🚿</h5>
-                    <div class="photo-gallery">
-                        <img src="images/house_bath1_1.png" class="gallery-item" alt="Bathroom 1-1"
-                            onclick="openLightbox(this.src)">
-                        <img src="images/house_bath1_2.png" class="gallery-item" alt="Bathroom 1-2"
-                            onclick="openLightbox(this.src)">
-                    </div>
-                </div>
-
-                <div class="gallery-section">
-                    <h5 class="room-title">Bathroom 2 🚿</h5>
-                    <div class="photo-gallery">
-                        <img src="images/house_bath2_1.png" class="gallery-item" alt="Bathroom 2"
-                            onclick="openLightbox(this.src)">
-                    </div>
-                </div>
-
-                <div class="gallery-section">
-                    <h5 class="room-title">Bathroom 3 🚿</h5>
-                    <div class="photo-gallery">
-                        <img src="images/house_bath3_1.png" class="gallery-item" alt="Bathroom 3"
-                            onclick="openLightbox(this.src)">
-                    </div>
-                </div>
-
-                <div class="gallery-section">
-                    <h5 class="room-title">Work & Laundry 💻🧺</h5>
-                    <div class="photo-gallery">
-                        <img src="images/house_workspace.png" class="gallery-item" alt="Workspace"
-                            onclick="openLightbox(this.src)">
-                        <img src="images/house_laundry.png" class="gallery-item" alt="Laundry Area"
-                            onclick="openLightbox(this.src)">
-                    </div>
-                </div>
-
-                <div class="gallery-section">
-                    <h5 class="room-title">Exterior & Pool 🏊‍♂️✨</h5>
-                    <div class="photo-gallery">
-                        <img src="images/house_exterior_1.png" class="gallery-item" alt="Exterior 1"
-                            onclick="openLightbox(this.src)">
-                        <img src="images/house_exterior_2.png" class="gallery-item" alt="Exterior 2"
-                            onclick="openLightbox(this.src)">
-                        <img src="images/house_exterior_3.jpg" class="gallery-item" alt="Exterior 3"
-                            onclick="openLightbox(this.src)">
-                        <img src="images/house_pool_1.png" class="gallery-item" alt="Pool 1"
-                            onclick="openLightbox(this.src)">
-                        <img src="images/house_pool_2.png" class="gallery-item" alt="Pool 2"
-                            onclick="openLightbox(this.src)">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Lightbox Modal -->
-    <div id="lightbox-modal" class="modal-overlay" style="z-index: 3000;">
-        <div class="lightbox-content">
-            <button class="close-modal-btn lightbox-close" onclick="closeLightbox()">✕</button>
-            <img id="lightbox-img" src="" alt="Full Screen Image">
         </div>
     </div>
 
@@ -332,4 +173,3 @@
 </body>
 
 </html>
-<!-- Sync: Alexvela1224@gmail.com -->
