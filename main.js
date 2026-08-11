@@ -887,10 +887,13 @@ updateCountdown();
 const CROWD_PARKS = [
     { slug: 'magic-kingdom', name: 'Magic Kingdom', short: 'MK' },
     { slug: 'epcot', name: 'EPCOT', short: 'EPCOT' },
-    { slug: 'hollywood-studios', name: "Hollywood Studios", short: 'DHS' },
+    { slug: 'hollywood-studios', name: 'Hollywood Studios', short: 'DHS' },
     { slug: 'animal-kingdom', name: 'Animal Kingdom', short: 'AK' },
     { slug: 'epic-universe', name: 'Epic Universe', short: 'Epic' },
-    { slug: 'islands-of-adventure', name: 'Islands of Adventure', short: 'IoA' }
+    { slug: 'universal-studios', name: 'Universal Studios', short: 'USF' },
+    { slug: 'islands-of-adventure', name: 'Islands of Adventure', short: 'IoA' },
+    { slug: 'seaworld', name: 'SeaWorld', short: 'SW' },
+    { slug: 'busch-gardens', name: 'Busch Gardens', short: 'Busch' }
 ];
 
 const CROWD_LEVEL_ORDER = { Light: 1, Moderate: 2, Busy: 3, Packed: 4 };
@@ -905,7 +908,7 @@ let crowdState = {
     parkSlug: 'epic-universe',
     year: 2026,
     month: 10, // November (0-indexed) — janela da viagem
-    observed: {}, // slug -> { 'YYYY-MM-DD': { level, avgWait, samples } }
+    observed: {}, // slug -> { 'YYYY-MM-DD': { level, avgWait, samples, source, pct, predicted } }
     loaded: false
 };
 
@@ -915,7 +918,10 @@ const PARK_WEEKDAY_BIAS = {
     'hollywood-studios': [3.2, 3.0, 3.1, 3.2, 3.4, 3.8, 3.9],
     'animal-kingdom': [2.4, 2.1, 2.2, 2.3, 2.5, 3.1, 3.2],
     'epic-universe': [3.8, 3.6, 3.7, 3.7, 3.9, 4.3, 4.4],
-    'islands-of-adventure': [2.9, 2.6, 2.7, 2.8, 3.0, 3.5, 3.6]
+    'islands-of-adventure': [2.9, 2.6, 2.7, 2.8, 3.0, 3.5, 3.6],
+    'universal-studios': [2.9, 2.6, 2.7, 2.8, 3.0, 3.5, 3.6],
+    'seaworld': [2.7, 2.4, 2.5, 2.6, 2.8, 3.3, 3.4],
+    'busch-gardens': [2.8, 2.5, 2.6, 2.7, 2.9, 3.4, 3.5]
 };
 
 function isoDate(d) {
@@ -927,16 +933,27 @@ function isoDate(d) {
 
 function parseCrowdCsv(text) {
     const map = {};
-    const lines = text.trim().split(/\r?\n/).slice(1);
-    for (const line of lines) {
+    const lines = text.trim().split(/\r?\n/);
+    if (lines.length < 2) return map;
+    const headers = lines[0].split(',').map(h => h.trim());
+    for (const line of lines.slice(1)) {
         if (!line.trim()) continue;
-        const [date, level, avg, samples] = line.split(',');
+        const cols = line.split(',');
+        const row = {};
+        headers.forEach((h, i) => { row[h] = cols[i]; });
+        const date = row.date;
+        const level = row.crowd_level;
         if (!date || !level) continue;
+        const predicted = row.predicted === '1' || String(row.source || '').startsWith('forecast');
+        const sourceName = row.source || (predicted ? 'forecast' : 'queue-times');
         map[date] = {
             level: level.trim(),
-            avgWait: avg ? Number(avg) : null,
-            samples: samples ? Number(samples) : null,
-            source: 'observed'
+            avgWait: row.average_wait_min ? Number(row.average_wait_min) : null,
+            samples: row.samples ? Number(row.samples) : null,
+            pct: row.crowd_pct ? Number(row.crowd_pct) : null,
+            predicted,
+            source: predicted ? 'forecast' : 'observed',
+            sourceName
         };
     }
     return map;
@@ -1045,9 +1062,14 @@ window.selectCrowdDay = function (dateStr) {
     const park = CROWD_PARKS.find(p => p.slug === crowdState.parkSlug);
     const detail = document.getElementById('crowd-day-detail');
     if (!detail) return;
-    const wait = info.avgWait != null ? ` · avg wait ~${Math.round(info.avgWait)} min` : '';
-    const src = info.source === 'observed' ? 'Observed' : 'Estimate';
-    detail.innerHTML = `<strong>${dateStr}</strong> · ${park.name}<br>${info.level}${wait} <span class="crowd-source">(${src})</span>`;
+    const pct = info.pct != null ? ` · índice ${Math.round(info.pct)}%` : '';
+    const wait = info.avgWait != null ? ` · espera méd. ~${Math.round(info.avgWait)} min` : '';
+    let src = 'Estimativa local';
+    if (info.sourceName === 'queue-times') src = info.predicted ? 'Queue-Times (previsto)' : 'Queue-Times';
+    else if (String(info.sourceName || '').startsWith('forecast')) src = 'Previsão (QT ano anterior + Theme Parks Guide)';
+    else if (info.source === 'observed') src = 'Observado';
+    else if (info.source === 'forecast') src = 'Previsão';
+    detail.innerHTML = `<strong>${dateStr}</strong> · ${park.name}<br>${info.level}${pct}${wait}<br><span class="crowd-source">${src}</span>`;
 };
 
 function renderCrowdCalendar() {
@@ -1057,14 +1079,14 @@ function renderCrowdCalendar() {
 
     const y = crowdState.year;
     const m = crowdState.month;
-    const monthName = new Date(y, m, 1).toLocaleString('en-US', { month: 'long', year: 'numeric' });
-    label.textContent = monthName;
+    const monthName = new Date(y, m, 1).toLocaleString('pt-BR', { month: 'long', year: 'numeric' });
+    label.textContent = monthName.charAt(0).toUpperCase() + monthName.slice(1);
 
     const firstDow = new Date(y, m, 1).getDay();
     const daysInMonth = new Date(y, m + 1, 0).getDate();
     const todayStr = isoDate(new Date());
 
-    let html = `<div class="crowd-dow">${['S','M','T','W','T','F','S'].map(d => `<span>${d}</span>`).join('')}</div><div class="crowd-grid">`;
+    let html = `<div class="crowd-dow">${['D','S','T','Q','Q','S','S'].map(d => `<span>${d}</span>`).join('')}</div><div class="crowd-grid">`;
 
     for (let i = 0; i < firstDow; i++) {
         html += `<div class="crowd-cell empty"></div>`;
@@ -1073,10 +1095,11 @@ function renderCrowdCalendar() {
     for (let day = 1; day <= daysInMonth; day++) {
         const dateStr = `${y}-${String(m + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
         const info = getCrowdForDay(crowdState.parkSlug, dateStr);
-        const levelClass = info.level.toLowerCase();
+        const levelClass = (info.level || 'Moderate').toLowerCase();
         const isToday = dateStr === todayStr ? ' today' : '';
-        const estimated = info.source === 'estimate' ? ' estimated' : '';
-        html += `<button type="button" class="crowd-cell ${levelClass}${isToday}${estimated}" onclick="selectCrowdDay('${dateStr}')" title="${info.level}">
+        const estimated = (info.source === 'estimate' || info.predicted || info.source === 'forecast') ? ' estimated' : '';
+        const title = info.pct != null ? `${info.level} · ${Math.round(info.pct)}%` : info.level;
+        html += `<button type="button" class="crowd-cell ${levelClass}${isToday}${estimated}" onclick="selectCrowdDay('${dateStr}')" title="${title}">
             <span class="crowd-day-num">${day}</span>
             <span class="crowd-level-dot"></span>
         </button>`;

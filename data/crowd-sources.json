@@ -1,0 +1,101 @@
+{
+  "scraped_at": "2026-08-11T20:48:30Z",
+  "primary_source": "https://queue-times.com/",
+  "attribution": "Powered by Queue-Times.com",
+  "secondary": [
+    "Theme Parks Guide 2026 seasonal windows (Thanksgiving / early Dec)",
+    "Prior-year Queue-Times month aligned to Thanksgiving for missing 2026 months"
+  ],
+  "parks": {
+    "magic-kingdom": {
+      "file": "magic-kingdom.csv",
+      "days": 234,
+      "queue_times_days": 173,
+      "forecast_days": 61,
+      "range": [
+        "2025-11-01",
+        "2026-12-31"
+      ]
+    },
+    "epcot": {
+      "file": "epcot.csv",
+      "days": 234,
+      "queue_times_days": 173,
+      "forecast_days": 61,
+      "range": [
+        "2025-11-01",
+        "2026-12-31"
+      ]
+    },
+    "hollywood-studios": {
+      "file": "hollywood-studios.csv",
+      "days": 234,
+      "queue_times_days": 173,
+      "forecast_days": 61,
+      "range": [
+        "2025-11-01",
+        "2026-12-31"
+      ]
+    },
+    "animal-kingdom": {
+      "file": "animal-kingdom.csv",
+      "days": 234,
+      "queue_times_days": 173,
+      "forecast_days": 61,
+      "range": [
+        "2025-11-01",
+        "2026-12-31"
+      ]
+    },
+    "islands-of-adventure": {
+      "file": "islands-of-adventure.csv",
+      "days": 214,
+      "queue_times_days": 153,
+      "forecast_days": 61,
+      "range": [
+        "2025-11-01",
+        "2026-12-31"
+      ]
+    },
+    "universal-studios": {
+      "file": "universal-studios.csv",
+      "days": 214,
+      "queue_times_days": 153,
+      "forecast_days": 61,
+      "range": [
+        "2025-11-01",
+        "2026-12-31"
+      ]
+    },
+    "epic-universe": {
+      "file": "epic-universe.csv",
+      "days": 164,
+      "queue_times_days": 103,
+      "forecast_days": 61,
+      "range": [
+        "2025-11-01",
+        "2026-12-31"
+      ]
+    },
+    "seaworld": {
+      "file": "seaworld.csv",
+      "days": 245,
+      "queue_times_days": 245,
+      "forecast_days": 0,
+      "range": [
+        "2025-11-01",
+        "2026-12-31"
+      ]
+    },
+    "busch-gardens": {
+      "file": "busch-gardens.csv",
+      "days": 245,
+      "queue_times_days": 245,
+      "forecast_days": 0,
+      "range": [
+        "2025-11-01",
+        "2026-12-31"
+      ]
+    }
+  }
+}

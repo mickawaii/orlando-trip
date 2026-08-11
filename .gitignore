@@ -1,6 +1,2 @@
-.DS_Store
-*.log
-.vercel
-.env
-.env.*
-node_modules/
+# Raw HTML dumps from crowd scrapers (regenerate with scripts/scrape_crowd_calendars.py)
+data/crowd-raw/
