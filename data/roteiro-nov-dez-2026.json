@@ -1,6 +1,6 @@
 {
   "title": "Orlando 2026 — Companheiro de Parque",
-  "subtitle": "Hotel barato · janelas de ingresso · dias anti-crowd · checklist",
+  "subtitle": "Prioridade crowd: Epic → AK → USF → IoA → DHS · janelas de ingresso",
   "hotel": {
     "name": "Universal Helios Grand Hotel, a Loews Hotel",
     "checkin": "2026-11-29",
@@ -21,17 +21,17 @@
       "product": "3-Day Park-to-Park + 2 Days Free",
       "window_days": 7,
       "parks_used": [
+        "Epic Universe",
+        "Universal Studios Florida",
         "Islands of Adventure",
         "Epic Universe",
-        "Epic Universe",
-        "Epic Universe",
-        "Universal Studios Florida"
+        "Epic Universe"
       ],
-      "first_use": "2026-11-30",
-      "last_use": "2026-12-04",
-      "span_days": 5,
+      "first_use": "2026-12-01",
+      "last_use": "2026-12-07",
+      "span_days": 7,
       "ok": true,
-      "note": "Usa os 5 dias do ingresso (3+2 free): IoA + Epic x3 + USF. Epic evita 30/11 (Packed)."
+      "note": "Epic nos 3 dias mais leves factíveis (1, 5 e 7/12). USF e IoA nos dias leves 2–3/12. Span=7."
     },
     "disney": {
       "product": "3-Park Ticket (sem Magic Kingdom)",
@@ -41,11 +41,11 @@
         "Hollywood Studios",
         "EPCOT"
       ],
-      "first_use": "2026-12-05",
-      "last_use": "2026-12-09",
-      "span_days": 5,
+      "first_use": "2026-12-08",
+      "last_use": "2026-12-10",
+      "span_days": 3,
       "ok": true,
-      "note": "Sem MK: AK + DHS + EPCOT. Dia 7/12 livre. Comprar ingresso de 3 parques (não precisa do 4-Park)."
+      "note": "AK no melhor dia restante após Epic; DHS no dia ~1%; EPCOT fecha a janela."
     },
     "seaworld_busch": {
       "product": "SeaWorld + Busch Combo",
@@ -54,10 +54,11 @@
         "SeaWorld Orlando",
         "Busch Gardens Tampa Bay"
       ],
-      "first_use": "2026-12-10",
+      "first_use": "2026-11-30",
       "last_use": "2026-12-11",
-      "span_days": 2,
-      "ok": true
+      "span_days": 12,
+      "ok": true,
+      "note": "SeaWorld no dia pós-chegada (~3% QT). Busch no dia antes do voo."
     }
   },
   "days": [
@@ -77,7 +78,7 @@
         "hoursSource": "típico dez — confirme no app oficial",
         "color": "#fdba74"
       },
-      "strategy": "Dia leve: check-in, explorar o hotel e recuperar do voo.",
+      "strategy": "Dia leve: check-in Helios e recuperar do voo. Amanhã SeaWorld (dia bem leve na lotação).",
       "order": [
         {
           "id": "checkin",
@@ -104,7 +105,7 @@
           "id": "rooftop",
           "name": "Rooftop bar",
           "land": "Hotel",
-          "tip": "Drink leve — amanhã é Islands of Adventure",
+          "tip": "Drink leve — amanhã SeaWorld cedo",
           "first": false
         }
       ],
@@ -126,9 +127,9 @@
         }
       },
       "tips": [
-        "Configure offline maps do hotel→Universal",
-        "Baixe apps Universal + Disney + SeaWorld",
-        "Durma cedo — IoA amanhã (Epic começa terça)"
+        "Configure apps Universal + Disney + SeaWorld",
+        "Durma cedo — SeaWorld amanhã e Epic na terça",
+        "Epic começa terça (melhor dia de lotação da viagem)"
       ],
       "afterMain": [
         {
@@ -148,116 +149,109 @@
     {
       "date": "2026-11-30",
       "dow": "Segunda",
-      "emoji": "🦖",
-      "short": "IoA",
+      "emoji": "🌊",
+      "short": "SeaWorld",
       "type": "park",
-      "title": "Islands of Adventure",
+      "title": "SeaWorld Orlando",
       "parkInfo": {
-        "name": "Islands of Adventure",
-        "address": "6000 Universal Blvd, Orlando, FL 32819",
-        "mapsUrl": "https://maps.google.com/?q=Universal%20Islands%20of%20Adventure",
+        "name": "SeaWorld Orlando",
+        "address": "7007 Sea World Dr, Orlando, FL 32821",
+        "mapsUrl": "https://maps.google.com/?q=SeaWorld%20Orlando",
         "opens": "09:00",
-        "closes": "21:00",
-        "hoursSource": "típico dez — confirme no app oficial",
-        "color": "#34d399"
+        "closes": "19:00",
+        "hoursSource": "ThemeParks Wiki",
+        "color": "#22d3ee"
       },
-      "strategy": "Rope drop Hagrid's. Em seguida VelociCoaster. Hulk quando a fila baixar. Segunda pós-Thanksgiving: melhor que Epic neste dia.",
+      "strategy": "Coasters primeiro (Mako, Pipeline, Ice Breaker). Segunda pós-Thanksgiving: SeaWorld bem leve (~3%).",
       "order": [
         {
-          "id": "hagrid",
-          "name": "Hagrid's Magical Creatures Motorbike Adventure",
-          "land": "Hogsmeade",
-          "tip": "Rope drop — fila explode rápido",
+          "id": "mako",
+          "name": "Mako",
+          "land": "SeaWorld",
+          "tip": "Rope drop",
           "first": true
         },
         {
-          "id": "velo",
-          "name": "VelociCoaster",
-          "land": "Jurassic Park / Isla",
-          "tip": "Em seguida",
-          "first": false
-        },
-        {
-          "id": "hulk",
-          "name": "The Incredible Hulk Coaster",
-          "land": "Marvel Super Hero Island",
+          "id": "pipe",
+          "name": "Pipeline",
+          "land": "SeaWorld",
           "tip": "",
           "first": false
         },
         {
-          "id": "spidey",
-          "name": "The Amazing Adventures of Spider-Man",
-          "land": "Marvel",
+          "id": "ice",
+          "name": "Ice Breaker",
+          "land": "SeaWorld",
           "tip": "",
           "first": false
         },
         {
-          "id": "river",
-          "name": "Jurassic Park River Adventure",
-          "land": "Jurassic Park",
-          "tip": "",
+          "id": "inf",
+          "name": "Infinity Falls",
+          "land": "SeaWorld",
+          "tip": "Boa na tarde",
           "first": false
         },
         {
-          "id": "hogwarts",
-          "name": "Hogwarts Express de volta / Hogsmeade",
-          "land": "Hogsmeade",
-          "tip": "Fechem o dia em Hogsmeade",
+          "id": "shows",
+          "name": "Shows / orcas schedule no app",
+          "land": "SeaWorld",
+          "tip": "Encaixem 1–2 shows",
           "first": false
         }
       ],
       "meals": {
         "lunch": {
           "when": "12:30",
-          "where": "Mythos",
-          "what": "Um dos melhores do Universal — tentem chegar cedo na fila"
+          "where": "Sharks Underwater Grill",
+          "what": "Almoço com vista do aquário (reserva se possível)"
         },
         "snack": {
-          "when": "15:30",
-          "where": "Hogsmeade",
-          "what": "Butterbeer"
+          "when": "15:00",
+          "where": "no parque",
+          "what": "Água + snack"
         },
         "dinner": {
-          "when": "18:30",
-          "where": "Mythos (se não almoçaram) ou CityWalk",
-          "what": "Jantar leve — amanhã começa o bloco Epic"
+          "when": "18:00–20:00",
+          "where": "Helios / CityWalk",
+          "what": "Jantar leve — amanhã Epic rope drop"
         }
       },
       "tips": [
-        "Evitar Epic hoje (estimativa Packed pós-Thanksgiving)",
-        "Express Pass só se a fila do Hagrid's estiver absurda",
-        "Amanhã Epic Dia 1 (Nintendo) — dormirem cedo"
+        "Dia escolhido pela lotação baixa no Queue-Times",
+        "Amanhã Epic Dia 1 (Nintendo) — rope drop",
+        "Não forcem — reservem energia pro bloco Universal"
       ],
       "afterMain": [
         {
-          "id": "raptor",
-          "name": "Raptor Encounter / área Jurassic",
-          "land": "Jurassic Park",
-          "tip": "Depois de Veloci + River"
+          "id": "kraken",
+          "name": "Kraken",
+          "land": "SeaWorld",
+          "tip": "Depois das 3 headliners"
         },
         {
-          "id": "cat",
-          "name": "The Cat in the Hat",
-          "land": "Seuss Landing",
-          "tip": "Leve / fila curta"
+          "id": "antarctic",
+          "name": "Antarctica: Empire of the Penguin",
+          "land": "SeaWorld",
+          "tip": ""
         },
         {
-          "id": "popeye",
-          "name": "Popeye & Bluto's Bilge-Rat Barges",
-          "land": "Toon Lagoon",
-          "tip": "Se estiver calor"
+          "id": "shark_enc",
+          "name": "Shark Encounter walkthrough",
+          "land": "SeaWorld",
+          "tip": ""
         },
         {
-          "id": "doctoom",
-          "name": "Doctor Doom's Fearfall",
-          "land": "Marvel",
-          "tip": "Extra de Marvel"
+          "id": "dolphin",
+          "name": "Dolphin show / habitats",
+          "land": "SeaWorld",
+          "tip": "Conforme horário do app"
         },
         {
-          "id": "hogs_shop",
-          "name": "Lojas Hogsmeade",
-          "land": "Hogsmeade",
-          "tip": "Compras no fim"
+          "id": "sky",
+          "name": "Sky Tower (se aberta)",
+          "land": "SeaWorld",
+          "tip": "Vista"
         }
       ]
     },
@@ -277,7 +271,7 @@
         "hoursSource": "típico dez — confirme no app oficial",
         "color": "#f59e0b"
       },
-      "strategy": "Rope drop em Super Nintendo World. Feche as headliners de Nintendo antes do almoço; tarde explore Celestial Park.",
+      "strategy": "Rope drop Super Nintendo World. Terça ~1% no índice QT — um dos melhores dias possíveis pro Epic.",
       "order": [
         {
           "id": "mkart",
@@ -333,9 +327,9 @@
         }
       },
       "tips": [
-        "Rope drop Nintendo — Mario Kart primeiro",
-        "Celestial Park no fim da tarde",
-        "Amanhã Epic Dia 2 (Magia + Berk)"
+        "Prioridade #1 do roteiro: Epic no dia mais leve",
+        "Mario Kart primeiro",
+        "Amanhã USF (também dia muito leve)"
       ],
       "afterMain": [
         {
@@ -367,211 +361,6 @@
     {
       "date": "2026-12-02",
       "dow": "Quarta",
-      "emoji": "🌌",
-      "short": "Epic 2",
-      "type": "park",
-      "title": "Epic Universe — Dia 2 (Magia + Berk)",
-      "parkInfo": {
-        "name": "Epic Universe",
-        "address": "Universal Epic Universe, Orlando, FL 32819",
-        "mapsUrl": "https://maps.google.com/?q=Universal%20Epic%20Universe%20Orlando",
-        "opens": "09:00",
-        "closes": "21:00",
-        "hoursSource": "típico dez — confirme no app oficial",
-        "color": "#f59e0b"
-      },
-      "strategy": "Comece em Ministry of Magic, depois Stardust Racers e Isle of Berk.",
-      "order": [
-        {
-          "id": "mom",
-          "name": "Ministry of Magic / Harry Potter land",
-          "land": "Ministry of Magic",
-          "tip": "Rope drop na headliner da terra",
-          "first": true
-        },
-        {
-          "id": "stardust",
-          "name": "Stardust Racers",
-          "land": "Celestial Park",
-          "tip": "Coaster — vá cedo ou no fim da tarde",
-          "first": false
-        },
-        {
-          "id": "berk",
-          "name": "Isle of Berk rides + show",
-          "land": "Isle of Berk",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "httyd",
-          "name": "Hiccup's Wing Gliders / atrações Berk",
-          "land": "Isle of Berk",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "repeat_nintendo",
-          "name": "Repeteco Nintendo se faltar algo",
-          "land": "Super Nintendo World",
-          "tip": "",
-          "first": false
-        }
-      ],
-      "meals": {
-        "lunch": {
-          "when": "12:00–13:30",
-          "where": "Flame / Berk dining",
-          "what": "Almoço em Berk ou flame grill"
-        },
-        "snack": {
-          "when": "16:00",
-          "where": "Ministry / Celestial",
-          "what": "Butterbeer-style treat se tiver"
-        },
-        "dinner": {
-          "when": "19:00",
-          "where": "Atlantic",
-          "what": "Jantar com vista Celestial Park"
-        }
-      },
-      "tips": [
-        "Priorize single rider se disponível em Stardust",
-        "Fotos em Berk no fim da tarde (luz boa)"
-      ],
-      "afterMain": [
-        {
-          "id": "dark_universe",
-          "name": "Dark Universe walkthrough",
-          "land": "Dark Universe",
-          "tip": "Explorar depois das headliners"
-        },
-        {
-          "id": "berk_meet",
-          "name": "Meet & greets / shows Berk",
-          "land": "Isle of Berk",
-          "tip": ""
-        },
-        {
-          "id": "celestial_night",
-          "name": "Luzes Celestial Park",
-          "land": "Celestial Park",
-          "tip": "Fim de tarde / noite"
-        },
-        {
-          "id": "nintendo_extra",
-          "name": "Volta rápida no Nintendo se faltar algo",
-          "land": "Super Nintendo World",
-          "tip": ""
-        }
-      ]
-    },
-    {
-      "date": "2026-12-03",
-      "dow": "Quinta",
-      "emoji": "🌌",
-      "short": "Epic 3",
-      "type": "park",
-      "title": "Epic Universe — Dia 3 (Repeteco)",
-      "parkInfo": {
-        "name": "Epic Universe",
-        "address": "Universal Epic Universe, Orlando, FL 32819",
-        "mapsUrl": "https://maps.google.com/?q=Universal%20Epic%20Universe%20Orlando",
-        "opens": "09:00",
-        "closes": "21:00",
-        "hoursSource": "típico dez — confirme no app oficial",
-        "color": "#f59e0b"
-      },
-      "strategy": "Dia flexível: fechar o que faltou, repetir favoritos e curtir o parque sem pressa.",
-      "order": [
-        {
-          "id": "gap",
-          "name": "Tudo que ficou unchecked nos Dias 1–2",
-          "land": "Epic",
-          "tip": "Abra a checklist e ataque o restante",
-          "first": true
-        },
-        {
-          "id": "fav1",
-          "name": "Repetir favorito #1",
-          "land": "Epic",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "fav2",
-          "name": "Repetir favorito #2",
-          "land": "Epic",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "shop",
-          "name": "Lojas + merch",
-          "land": "Epic",
-          "tip": "Deixe compras pro fim",
-          "first": false
-        },
-        {
-          "id": "night",
-          "name": "Celestial Park à noite",
-          "land": "Celestial Park",
-          "tip": "Feche a trilogia Epic com calma",
-          "first": false
-        }
-      ],
-      "meals": {
-        "lunch": {
-          "when": "12:30",
-          "where": "à escolha no parque",
-          "what": "Repita o que mais gostaram"
-        },
-        "snack": {
-          "when": "15:30",
-          "where": "Celestial",
-          "what": "Lanche leve"
-        },
-        "dinner": {
-          "when": "19:00",
-          "where": "Helios",
-          "what": "Jantar leve — amanhã USF"
-        }
-      },
-      "tips": [
-        "Fechem o que faltou nos 3 dias de Epic",
-        "Amanhã Universal Studios Florida",
-        "Guardem energia — sexta USF pode estar Busy"
-      ],
-      "afterMain": [
-        {
-          "id": "photo_lands",
-          "name": "Sessão de fotos nas terras favoritas",
-          "land": "Epic",
-          "tip": ""
-        },
-        {
-          "id": "shop_select",
-          "name": "Compras seletivas",
-          "land": "Epic",
-          "tip": "Deixe pro fim do dia"
-        },
-        {
-          "id": "revisit_stardust",
-          "name": "Mais uma volta no Stardust",
-          "land": "Celestial Park",
-          "tip": "Se a fila estiver boa"
-        },
-        {
-          "id": "snack_crawl",
-          "name": "Snack crawl Celestial",
-          "land": "Celestial Park",
-          "tip": "Sem pressa"
-        }
-      ]
-    },
-    {
-      "date": "2026-12-04",
-      "dow": "Sexta",
       "emoji": "🎢",
       "short": "USF",
       "type": "park",
@@ -585,7 +374,7 @@
         "hoursSource": "típico dez — confirme no app oficial",
         "color": "#38bdf8"
       },
-      "strategy": "Rope drop Diagon Alley (Gringotts). Hogwarts Express no fim do dia ou quando a fila estiver boa.",
+      "strategy": "Rope drop Diagon Alley (Gringotts). Quarta ~1% no QT — ótimo dia pro USF.",
       "order": [
         {
           "id": "gringotts",
@@ -650,14 +439,14 @@
         },
         "dinner": {
           "when": "18:30–20:00",
-          "where": "Helios / CityWalk",
-          "what": "Jantar — amanhã Disney (AK)"
+          "where": "CityWalk / Helios",
+          "what": "Jantar — amanhã IoA"
         }
       },
       "tips": [
-        "Gringotts no rope drop",
+        "Prioridade #3: USF no segundo melhor dia disponível",
         "Hogwarts Express se a fila permitir",
-        "Amanhã Animal Kingdom (melhor opção pro sábado)"
+        "Amanhã Islands of Adventure"
       ],
       "afterMain": [
         {
@@ -693,111 +482,311 @@
       ]
     },
     {
-      "date": "2026-12-05",
-      "dow": "Sábado",
-      "emoji": "🐘",
-      "short": "AK",
+      "date": "2026-12-03",
+      "dow": "Quinta",
+      "emoji": "🦖",
+      "short": "IoA",
       "type": "park",
-      "title": "Animal Kingdom",
+      "title": "Islands of Adventure",
       "parkInfo": {
-        "name": "Animal Kingdom",
-        "address": "2901 Osceola Pkwy, Bay Lake, FL 32830",
-        "mapsUrl": "https://maps.google.com/?q=Disney%20Animal%20Kingdom",
+        "name": "Islands of Adventure",
+        "address": "6000 Universal Blvd, Orlando, FL 32819",
+        "mapsUrl": "https://maps.google.com/?q=Universal%20Islands%20of%20Adventure",
         "opens": "09:00",
-        "closes": "19:00",
+        "closes": "21:00",
         "hoursSource": "típico dez — confirme no app oficial",
-        "color": "#a3e635"
+        "color": "#34d399"
       },
-      "strategy": "Flight of Passage no rope drop. Safari antes do meio-dia. Sábado: AK costuma ser o Disney menos pesado.",
+      "strategy": "Rope drop Hagrid's → VelociCoaster. Quinta ~6% no QT.",
       "order": [
         {
-          "id": "fop",
-          "name": "Avatar Flight of Passage",
-          "land": "Pandora",
-          "tip": "Rope drop",
+          "id": "hagrid",
+          "name": "Hagrid's Magical Creatures Motorbike Adventure",
+          "land": "Hogsmeade",
+          "tip": "Rope drop — fila explode rápido",
           "first": true
         },
         {
-          "id": "navi",
-          "name": "Na'vi River Journey",
-          "land": "Pandora",
+          "id": "velo",
+          "name": "VelociCoaster",
+          "land": "Jurassic Park / Isla",
+          "tip": "Em seguida",
+          "first": false
+        },
+        {
+          "id": "hulk",
+          "name": "The Incredible Hulk Coaster",
+          "land": "Marvel Super Hero Island",
           "tip": "",
           "first": false
         },
         {
-          "id": "safari",
-          "name": "Kilimanjaro Safaris",
-          "land": "Africa",
-          "tip": "Manhã!",
-          "first": false
-        },
-        {
-          "id": "everest",
-          "name": "Expedition Everest",
-          "land": "Asia",
+          "id": "spidey",
+          "name": "The Amazing Adventures of Spider-Man",
+          "land": "Marvel",
           "tip": "",
           "first": false
         },
         {
-          "id": "kali",
-          "name": "Kali River Rapids (opcional / calor)",
-          "land": "Asia",
+          "id": "river",
+          "name": "Jurassic Park River Adventure",
+          "land": "Jurassic Park",
+          "tip": "",
+          "first": false
+        },
+        {
+          "id": "hogwarts",
+          "name": "Hogwarts Express de volta / Hogsmeade",
+          "land": "Hogsmeade",
+          "tip": "Fechem o dia em Hogsmeade",
+          "first": false
+        }
+      ],
+      "meals": {
+        "lunch": {
+          "when": "12:30",
+          "where": "Mythos",
+          "what": "Um dos melhores do Universal — tentem chegar cedo na fila"
+        },
+        "snack": {
+          "when": "15:30",
+          "where": "Hogsmeade",
+          "what": "Butterbeer"
+        },
+        "dinner": {
+          "when": "18:30–20:00",
+          "where": "Helios / CityWalk",
+          "what": "Jantar calmo — amanhã folga"
+        }
+      },
+      "tips": [
+        "Prioridade #4: IoA em dia leve",
+        "Amanhã dia livre (recupera antes do Epic 2 no sábado)",
+        "Express Pass só se Hagrid's estiver absurdo"
+      ],
+      "afterMain": [
+        {
+          "id": "raptor",
+          "name": "Raptor Encounter / área Jurassic",
+          "land": "Jurassic Park",
+          "tip": "Depois de Veloci + River"
+        },
+        {
+          "id": "cat",
+          "name": "The Cat in the Hat",
+          "land": "Seuss Landing",
+          "tip": "Leve / fila curta"
+        },
+        {
+          "id": "popeye",
+          "name": "Popeye & Bluto's Bilge-Rat Barges",
+          "land": "Toon Lagoon",
+          "tip": "Se estiver calor"
+        },
+        {
+          "id": "doctoom",
+          "name": "Doctor Doom's Fearfall",
+          "land": "Marvel",
+          "tip": "Extra de Marvel"
+        },
+        {
+          "id": "hogs_shop",
+          "name": "Lojas Hogsmeade",
+          "land": "Hogsmeade",
+          "tip": "Compras no fim"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-04",
+      "dow": "Sexta",
+      "emoji": "🌴",
+      "short": "Livre",
+      "type": "rest",
+      "title": "Dia livre",
+      "parkInfo": {
+        "name": "Helios / Orlando",
+        "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+        "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+        "opens": null,
+        "closes": null,
+        "hoursSource": "",
+        "color": "#94a3b8"
+      },
+      "strategy": "Folga no meio do bloco Universal. Piscina/Helios — sábado volta Epic (dia ~1%).",
+      "order": [
+        {
+          "id": "sleep",
+          "name": "Acordar sem alarme (se der)",
+          "land": "Hotel",
+          "tip": "Aproveitem o ritmo baixo",
+          "first": true
+        },
+        {
+          "id": "pool",
+          "name": "Piscina / spa Helios",
+          "land": "Hotel",
+          "tip": "",
+          "first": false
+        },
+        {
+          "id": "errands",
+          "name": "Lavanderia / repor snacks / power banks",
+          "land": "Hotel",
+          "tip": "",
+          "first": false
+        },
+        {
+          "id": "optional_out",
+          "name": "Saída opcional: Disney Springs ou outlets",
+          "land": "Orlando",
+          "tip": "Só se tiverem vontade — sem obrigação",
+          "first": false
+        }
+      ],
+      "meals": {
+        "lunch": {
+          "when": "12:00–14:00",
+          "where": "Helios / CityWalk / Springs",
+          "what": "Almoço tranquilo"
+        },
+        "snack": {
+          "when": "tarde",
+          "where": "Hotel",
+          "what": "Café / fruta"
+        },
+        "dinner": {
+          "when": "19:00–20:30",
+          "where": "Helios / CityWalk",
+          "what": "Jantar leve — amanhã Epic cedo"
+        }
+      },
+      "tips": [
+        "Recupera pernas entre IoA e Epic 2",
+        "Amanhã Epic Dia 2 (Magia + Berk)",
+        "Lavanderia / power banks"
+      ],
+      "afterMain": [
+        {
+          "id": "movie",
+          "name": "Filme no quarto / rooftop quieto",
+          "land": "Helios",
+          "tip": ""
+        },
+        {
+          "id": "photo",
+          "name": "Fotos no hotel / Celestial Park",
+          "land": "Helios",
+          "tip": "Sem fila"
+        },
+        {
+          "id": "springs",
+          "name": "Disney Springs (se quiserem ambiente Disney sem parque)",
+          "land": "Disney Springs",
+          "tip": "Lojas + jantar — sem ticket"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-05",
+      "dow": "Sábado",
+      "emoji": "🌌",
+      "short": "Epic 2",
+      "type": "park",
+      "title": "Epic Universe — Dia 2 (Magia + Berk)",
+      "parkInfo": {
+        "name": "Epic Universe",
+        "address": "Universal Epic Universe, Orlando, FL 32819",
+        "mapsUrl": "https://maps.google.com/?q=Universal%20Epic%20Universe%20Orlando",
+        "opens": "09:00",
+        "closes": "21:00",
+        "hoursSource": "típico dez — confirme no app oficial",
+        "color": "#f59e0b"
+      },
+      "strategy": "Ministry of Magic → Stardust → Berk. Sábado ~1% no Epic (raro) — aproveitem.",
+      "order": [
+        {
+          "id": "mom",
+          "name": "Ministry of Magic / Harry Potter land",
+          "land": "Ministry of Magic",
+          "tip": "Rope drop na headliner da terra",
+          "first": true
+        },
+        {
+          "id": "stardust",
+          "name": "Stardust Racers",
+          "land": "Celestial Park",
+          "tip": "Coaster — vá cedo ou no fim da tarde",
+          "first": false
+        },
+        {
+          "id": "berk",
+          "name": "Isle of Berk rides + show",
+          "land": "Isle of Berk",
+          "tip": "",
+          "first": false
+        },
+        {
+          "id": "httyd",
+          "name": "Hiccup's Wing Gliders / atrações Berk",
+          "land": "Isle of Berk",
+          "tip": "",
+          "first": false
+        },
+        {
+          "id": "repeat_nintendo",
+          "name": "Repeteco Nintendo se faltar algo",
+          "land": "Super Nintendo World",
           "tip": "",
           "first": false
         }
       ],
       "meals": {
         "lunch": {
-          "when": "12:00",
-          "where": "Satu'li Canteen",
-          "what": "Bowls em Pandora"
+          "when": "12:00–13:30",
+          "where": "Flame / Berk dining",
+          "what": "Almoço em Berk ou flame grill"
         },
         "snack": {
-          "when": "15:00",
-          "where": "Africa / Asia",
-          "what": "Sorvete / snack do parque"
+          "when": "16:00",
+          "where": "Ministry / Celestial",
+          "what": "Butterbeer-style treat se tiver"
         },
         "dinner": {
-          "when": "18:00–20:00",
-          "where": "volta Helios",
-          "what": "Jantar calmo — amanhã é dia leve"
+          "when": "19:00",
+          "where": "Atlantic",
+          "what": "Jantar com vista Celestial Park"
         }
       },
       "tips": [
-        "Sábado — AK é a escolha anti-crowd do roteiro",
-        "Safari cedo (animais mais ativos)",
-        "Amanhã igreja + descanso"
+        "Segundo dia Epic no melhor índice possível",
+        "Amanhã igreja + descanso",
+        "Segunda fecha o Epic (Dia 3)"
       ],
       "afterMain": [
         {
-          "id": "dinoland",
-          "name": "TriceraTop Spin / Dino area",
-          "land": "DinoLand",
-          "tip": "Leve"
+          "id": "dark_universe",
+          "name": "Dark Universe walkthrough",
+          "land": "Dark Universe",
+          "tip": "Explorar depois das headliners"
         },
         {
-          "id": "bird",
-          "name": "Festival of the Lion King",
-          "land": "Africa",
-          "tip": "Show — encaixe após Safari"
+          "id": "berk_meet",
+          "name": "Meet & greets / shows Berk",
+          "land": "Isle of Berk",
+          "tip": ""
         },
         {
-          "id": "gorilla",
-          "name": "Gorilla Falls Exploration Trail",
-          "land": "Africa",
-          "tip": "Caminhada"
+          "id": "celestial_night",
+          "name": "Luzes Celestial Park",
+          "land": "Celestial Park",
+          "tip": "Fim de tarde / noite"
         },
         {
-          "id": "mahinga",
-          "name": "Maharajah Jungle Trek",
-          "land": "Asia",
-          "tip": "Caminhada"
-        },
-        {
-          "id": "flight_of_passage_shop",
-          "name": "Windtraders / loja Pandora",
-          "land": "Pandora",
-          "tip": "Merch no fim"
+          "id": "nintendo_extra",
+          "name": "Volta rápida no Nintendo se faltar algo",
+          "land": "Super Nintendo World",
+          "tip": ""
         }
       ]
     },
@@ -861,14 +850,14 @@
         },
         "dinner": {
           "when": "19:00",
-          "where": "The Boathouse OU Wine Bar George (Disney Springs)",
-          "what": "Jantar leve — amanhã é dia livre"
+          "where": "Helios",
+          "what": "Jantar leve — amanhã Epic"
         }
       },
       "tips": [
-        "Manhã na igreja; tarde recuperação no Helios",
-        "Amanhã dia livre (sem Magic Kingdom)",
-        "Lavem roupa / recarreguem power banks"
+        "Manhã na igreja; tarde recuperação",
+        "Amanhã Epic Dia 3 (repeteco) — último dia Universal",
+        "Ingresso Universal: janela 1–7/12"
       ],
       "afterMain": [
         {
@@ -888,96 +877,218 @@
     {
       "date": "2026-12-07",
       "dow": "Segunda",
-      "emoji": "🌴",
-      "short": "Livre",
-      "type": "rest",
-      "title": "Dia livre",
+      "emoji": "🌌",
+      "short": "Epic 3",
+      "type": "park",
+      "title": "Epic Universe — Dia 3 (Repeteco)",
       "parkInfo": {
-        "name": "Helios / Orlando",
-        "address": "8505 S Kirkman Rd, Orlando, FL 32819",
-        "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
-        "opens": null,
-        "closes": null,
-        "hoursSource": "",
-        "color": "#94a3b8"
+        "name": "Epic Universe",
+        "address": "Universal Epic Universe, Orlando, FL 32819",
+        "mapsUrl": "https://maps.google.com/?q=Universal%20Epic%20Universe%20Orlando",
+        "opens": "09:00",
+        "closes": "21:00",
+        "hoursSource": "típico dez — confirme no app oficial",
+        "color": "#f59e0b"
       },
-      "strategy": "Sem parque. Recuperar pernas, piscina, compras leves ou Disney Springs — amanhã volta DHS.",
+      "strategy": "Fechem o que faltou / repeteco. Segunda ~7% — ainda leve pro Epic.",
       "order": [
         {
-          "id": "sleep",
-          "name": "Acordar sem alarme (se der)",
-          "land": "Hotel",
-          "tip": "Aproveitem o ritmo baixo",
+          "id": "gap",
+          "name": "Tudo que ficou unchecked nos Dias 1–2",
+          "land": "Epic",
+          "tip": "Abra a checklist e ataque o restante",
           "first": true
         },
         {
-          "id": "pool",
-          "name": "Piscina / spa Helios",
-          "land": "Hotel",
+          "id": "fav1",
+          "name": "Repetir favorito #1",
+          "land": "Epic",
           "tip": "",
           "first": false
         },
         {
-          "id": "errands",
-          "name": "Lavanderia / repor snacks / power banks",
-          "land": "Hotel",
+          "id": "fav2",
+          "name": "Repetir favorito #2",
+          "land": "Epic",
           "tip": "",
           "first": false
         },
         {
-          "id": "optional_out",
-          "name": "Saída opcional: Disney Springs ou outlets",
-          "land": "Orlando",
-          "tip": "Só se tiverem vontade — sem obrigação",
+          "id": "shop",
+          "name": "Lojas + merch",
+          "land": "Epic",
+          "tip": "Deixe compras pro fim",
+          "first": false
+        },
+        {
+          "id": "night",
+          "name": "Celestial Park à noite",
+          "land": "Celestial Park",
+          "tip": "Feche a trilogia Epic com calma",
           "first": false
         }
       ],
       "meals": {
         "lunch": {
-          "when": "12:00–14:00",
-          "where": "Helios / CityWalk / Springs",
-          "what": "Almoço tranquilo"
+          "when": "12:30",
+          "where": "à escolha no parque",
+          "what": "Repita o que mais gostaram"
         },
         "snack": {
-          "when": "tarde",
-          "where": "Hotel",
-          "what": "Café / fruta"
+          "when": "15:30",
+          "where": "Celestial",
+          "what": "Lanche leve"
         },
         "dinner": {
-          "when": "19:00–20:30",
-          "where": "Helios / CityWalk",
-          "what": "Jantar leve — amanhã DHS cedo"
+          "when": "18:30–20:00",
+          "where": "Helios",
+          "what": "Jantar — amanhã AK"
         }
       },
       "tips": [
-        "Sem Magic Kingdom nesta viagem — dia de folga de propósito",
-        "Hidratem e descansem os pés",
-        "Amanhã Hollywood Studios (Rise cedo)"
+        "Último dia do ingresso Universal (janela 7 dias)",
+        "Amanhã Animal Kingdom (prioridade #2)",
+        "Guarde energia pro rope drop do AK"
       ],
       "afterMain": [
         {
-          "id": "movie",
-          "name": "Filme no quarto / rooftop quieto",
-          "land": "Helios",
+          "id": "photo_lands",
+          "name": "Sessão de fotos nas terras favoritas",
+          "land": "Epic",
           "tip": ""
         },
         {
-          "id": "photo",
-          "name": "Fotos no hotel / Celestial Park",
-          "land": "Helios",
-          "tip": "Sem fila"
+          "id": "shop_select",
+          "name": "Compras seletivas",
+          "land": "Epic",
+          "tip": "Deixe pro fim do dia"
         },
         {
-          "id": "springs",
-          "name": "Disney Springs (se quiserem ambiente Disney sem parque)",
-          "land": "Disney Springs",
-          "tip": "Lojas + jantar — sem ticket"
+          "id": "revisit_stardust",
+          "name": "Mais uma volta no Stardust",
+          "land": "Celestial Park",
+          "tip": "Se a fila estiver boa"
+        },
+        {
+          "id": "snack_crawl",
+          "name": "Snack crawl Celestial",
+          "land": "Celestial Park",
+          "tip": "Sem pressa"
         }
       ]
     },
     {
       "date": "2026-12-08",
       "dow": "Terça",
+      "emoji": "🐘",
+      "short": "AK",
+      "type": "park",
+      "title": "Animal Kingdom",
+      "parkInfo": {
+        "name": "Animal Kingdom",
+        "address": "2901 Osceola Pkwy, Bay Lake, FL 32830",
+        "mapsUrl": "https://maps.google.com/?q=Disney%20Animal%20Kingdom",
+        "opens": "09:00",
+        "closes": "19:00",
+        "hoursSource": "típico dez — confirme no app oficial",
+        "color": "#a3e635"
+      },
+      "strategy": "Flight of Passage no rope drop; Safari antes do meio-dia. Melhor dia restante pro AK após priorizar Epic.",
+      "order": [
+        {
+          "id": "fop",
+          "name": "Avatar Flight of Passage",
+          "land": "Pandora",
+          "tip": "Rope drop",
+          "first": true
+        },
+        {
+          "id": "navi",
+          "name": "Na'vi River Journey",
+          "land": "Pandora",
+          "tip": "",
+          "first": false
+        },
+        {
+          "id": "safari",
+          "name": "Kilimanjaro Safaris",
+          "land": "Africa",
+          "tip": "Manhã!",
+          "first": false
+        },
+        {
+          "id": "everest",
+          "name": "Expedition Everest",
+          "land": "Asia",
+          "tip": "",
+          "first": false
+        },
+        {
+          "id": "kali",
+          "name": "Kali River Rapids (opcional / calor)",
+          "land": "Asia",
+          "tip": "",
+          "first": false
+        }
+      ],
+      "meals": {
+        "lunch": {
+          "when": "12:00",
+          "where": "Satu'li Canteen",
+          "what": "Bowls em Pandora"
+        },
+        "snack": {
+          "when": "15:00",
+          "where": "Africa / Asia",
+          "what": "Sorvete / snack do parque"
+        },
+        "dinner": {
+          "when": "18:00–20:00",
+          "where": "volta Helios",
+          "what": "Jantar — amanhã DHS"
+        }
+      },
+      "tips": [
+        "Prioridade #2: AK no melhor dia factível (após Epic)",
+        "Amanhã DHS (~1% — excelente)",
+        "Ingresso Disney: janela 8–10/12"
+      ],
+      "afterMain": [
+        {
+          "id": "dinoland",
+          "name": "TriceraTop Spin / Dino area",
+          "land": "DinoLand",
+          "tip": "Leve"
+        },
+        {
+          "id": "bird",
+          "name": "Festival of the Lion King",
+          "land": "Africa",
+          "tip": "Show — encaixe após Safari"
+        },
+        {
+          "id": "gorilla",
+          "name": "Gorilla Falls Exploration Trail",
+          "land": "Africa",
+          "tip": "Caminhada"
+        },
+        {
+          "id": "mahinga",
+          "name": "Maharajah Jungle Trek",
+          "land": "Asia",
+          "tip": "Caminhada"
+        },
+        {
+          "id": "flight_of_passage_shop",
+          "name": "Windtraders / loja Pandora",
+          "land": "Pandora",
+          "tip": "Merch no fim"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-09",
+      "dow": "Quarta",
       "emoji": "🎬",
       "short": "DHS",
       "type": "park",
@@ -991,7 +1102,7 @@
         "hoursSource": "típico dez — confirme no app oficial",
         "color": "#f87171"
       },
-      "strategy": "Rise of the Resistance o mais cedo possível. Slinky Dog em seguida (Toy Story land lotado).",
+      "strategy": "Rise of the Resistance o mais cedo possível. Quarta ~1% no QT — ótimo dia pro DHS.",
       "order": [
         {
           "id": "rise",
@@ -1047,7 +1158,7 @@
         }
       },
       "tips": [
-        "Rise of the Resistance o mais cedo possível",
+        "Prioridade #5: DHS no dia mais leve disponível",
         "Slinky Dog em seguida",
         "Amanhã EPCOT"
       ],
@@ -1085,8 +1196,8 @@
       ]
     },
     {
-      "date": "2026-12-09",
-      "dow": "Quarta",
+      "date": "2026-12-10",
+      "dow": "Quinta",
       "emoji": "🌐",
       "short": "EPCOT",
       "type": "park",
@@ -1100,7 +1211,7 @@
         "hoursSource": "típico dez — confirme no app oficial",
         "color": "#60a5fa"
       },
-      "strategy": "Guardians cedo (Virtual Queue / LL se tiver). Remy e Frozen antes do World Showcase lotar à noite.",
+      "strategy": "Guardians cedo (VQ/LL). Remy e Frozen antes do Showcase lotar.",
       "order": [
         {
           "id": "gotg",
@@ -1152,13 +1263,13 @@
         "dinner": {
           "when": "19:00–21:00",
           "where": "World Showcase / Helios",
-          "what": "Jantar — amanhã SeaWorld"
+          "what": "Jantar — amanhã Busch cedo"
         }
       },
       "tips": [
-        "Quarta — EPCOT em dia Moderate no estimador",
-        "World Showcase à noite",
-        "Amanhã SeaWorld; depois Busch (sem voo no mesmo dia)"
+        "Último dia Disney (janela 8–10/12)",
+        "Amanhã Busch (sem voo no mesmo dia)",
+        "World Showcase à noite se der"
       ],
       "afterMain": [
         {
@@ -1194,115 +1305,6 @@
       ]
     },
     {
-      "date": "2026-12-10",
-      "dow": "Quinta",
-      "emoji": "🌊",
-      "short": "SeaWorld",
-      "type": "park",
-      "title": "SeaWorld Orlando",
-      "parkInfo": {
-        "name": "SeaWorld Orlando",
-        "address": "7007 Sea World Dr, Orlando, FL 32821",
-        "mapsUrl": "https://maps.google.com/?q=SeaWorld%20Orlando",
-        "opens": "09:00",
-        "closes": "19:00",
-        "hoursSource": "ThemeParks Wiki",
-        "color": "#22d3ee"
-      },
-      "strategy": "Coasters primeiro (Mako, Pipeline, Ice Breaker). Infinity Falls quando esquentar.",
-      "order": [
-        {
-          "id": "mako",
-          "name": "Mako",
-          "land": "SeaWorld",
-          "tip": "Rope drop",
-          "first": true
-        },
-        {
-          "id": "pipe",
-          "name": "Pipeline",
-          "land": "SeaWorld",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "ice",
-          "name": "Ice Breaker",
-          "land": "SeaWorld",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "inf",
-          "name": "Infinity Falls",
-          "land": "SeaWorld",
-          "tip": "Boa na tarde",
-          "first": false
-        },
-        {
-          "id": "shows",
-          "name": "Shows / orcas schedule no app",
-          "land": "SeaWorld",
-          "tip": "Encaixem 1–2 shows",
-          "first": false
-        }
-      ],
-      "meals": {
-        "lunch": {
-          "when": "12:30",
-          "where": "Sharks Underwater Grill",
-          "what": "Almoço com vista do aquário (reserva se possível)"
-        },
-        "snack": {
-          "when": "15:00",
-          "where": "no parque",
-          "what": "Água + snack"
-        },
-        "dinner": {
-          "when": "18:00",
-          "where": "volta Orlando / Helios",
-          "what": "Jantar leve — amanhã Tampa (dia cheio)"
-        }
-      },
-      "tips": [
-        "Coasters primeiro (Mako, Pipeline, Ice Breaker)",
-        "Amanhã Busch o dia todo — sem voo",
-        "Confirmar ônibus gratuito Helios→Busch na véspera"
-      ],
-      "afterMain": [
-        {
-          "id": "kraken",
-          "name": "Kraken",
-          "land": "SeaWorld",
-          "tip": "Depois das 3 headliners"
-        },
-        {
-          "id": "antarctic",
-          "name": "Antarctica: Empire of the Penguin",
-          "land": "SeaWorld",
-          "tip": ""
-        },
-        {
-          "id": "shark_enc",
-          "name": "Shark Encounter walkthrough",
-          "land": "SeaWorld",
-          "tip": ""
-        },
-        {
-          "id": "dolphin",
-          "name": "Dolphin show / habitats",
-          "land": "SeaWorld",
-          "tip": "Conforme horário do app"
-        },
-        {
-          "id": "sky",
-          "name": "Sky Tower (se aberta)",
-          "land": "SeaWorld",
-          "tip": "Vista"
-        }
-      ]
-    },
-    {
       "date": "2026-12-11",
       "dow": "Sexta",
       "emoji": "🦁",
@@ -1318,7 +1320,7 @@
         "hoursSource": "ThemeParks Wiki",
         "color": "#fb923c"
       },
-      "strategy": "Dia cheio em Tampa. Saiam cedo do Helios (ônibus gratuito se houver). Iron Gwazi e Montu primeiro; voltem à noite para o hotel — voo só amanhã.",
+      "strategy": "Dia cheio em Tampa. Iron Gwazi e Montu primeiro. Volta ao Helios — voo só amanhã.",
       "order": [
         {
           "id": "bus",
@@ -1381,9 +1383,9 @@
         }
       },
       "tips": [
-        "Tampa ≈ 1h20 de carro / ônibus",
-        "Sem pressa de aeroporto — aproveitem o parque até o fim",
-        "Check-out e voo só amanhã (12/12)"
+        "Busch ≠ dia do voo",
+        "Tampa ≈ 1h20",
+        "Check-out e voo amanhã (12/12)"
       ],
       "afterMain": [
         {
@@ -1476,9 +1478,9 @@
         }
       },
       "tips": [
-        "Sem parque hoje — ritmo calmo",
-        "Confirmar horário do shuttle/Uber com folga",
-        "Documentos e adapters na mala de mão"
+        "Sem parque hoje",
+        "Margem generosa para o MCO",
+        "Documentos na mala de mão"
       ],
       "afterMain": [
         {
@@ -1495,5 +1497,18 @@
         }
       ]
     }
-  ]
+  ],
+  "crowd_optimization": {
+    "method": "lexicographic priority on Queue-Times pct",
+    "priority": [
+      "Epic×3",
+      "Animal Kingdom",
+      "USF",
+      "IoA",
+      "DHS"
+    ],
+    "priority_crowd_sum_pct": 41.0,
+    "previous_priority_sum_pct": 174.5,
+    "source": "data/*.csv (Queue-Times + forecast)"
+  }
 }
