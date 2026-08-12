@@ -851,8 +851,8 @@ window.toggleDetails = function () {
     }
 };
 
-// Countdown Logic
-const flightTime = new Date('November 29, 2026 08:00:00').getTime();
+// Countdown Logic — partida sugerida GRU ~08:30 (hora local SP)
+const flightTime = new Date('2026-11-29T08:30:00-03:00').getTime();
 
 function updateCountdown() {
     const now = new Date().getTime();
@@ -1345,9 +1345,34 @@ function renderHomeToday() {
     if (idx >= 0) roteiroDayIndex = idx;
 }
 
+function syncRoteiroChipActive() {
+    const row = document.getElementById('roteiro-chip-row');
+    if (!row) return;
+    row.querySelectorAll('.roteiro-chip').forEach((chip, i) => {
+        chip.classList.toggle('active', i === roteiroDayIndex);
+    });
+}
+
+function syncRoteiroChipProgress() {
+    const row = document.getElementById('roteiro-chip-row');
+    if (!row || !roteiroData) return;
+    const chips = row.querySelectorAll('.roteiro-chip');
+    (roteiroData.days || []).forEach((d, i) => {
+        const chip = chips[i];
+        if (!chip) return;
+        const done = dayProgress(d);
+        const pct = done.total ? Math.round(100 * done.done / done.total) : 0;
+        const bar = chip.querySelector('.roteiro-chip-bar i');
+        if (bar) bar.style.width = `${pct}%`;
+    });
+}
+
 window.selectRoteiroDay = function (idx) {
     roteiroDayIndex = idx;
-    renderRoteiro();
+    // Não recria o carrossel — senão o scrollLeft volta pra 0
+    syncRoteiroChipActive();
+    renderRoteiroDayDetail();
+    renderRoteiroNextBar();
     const body = document.getElementById('roteiro-body');
     if (body) body.scrollTop = 0;
 };
@@ -1359,6 +1384,7 @@ window.toggleRoteiroAttr = function (date, id) {
     saveChecklist(map);
     renderRoteiroDayDetail();
     renderRoteiroNextBar();
+    syncRoteiroChipProgress();
 };
 
 window.resetRoteiroDayChecks = function (date) {
@@ -1368,7 +1394,9 @@ window.resetRoteiroDayChecks = function (date) {
         if (k.startsWith(date + '::')) delete map[k];
     });
     saveChecklist(map);
-    renderRoteiro();
+    renderRoteiroDayDetail();
+    renderRoteiroNextBar();
+    syncRoteiroChipProgress();
 };
 
 function formatMoneyUSD(n) {
@@ -1508,6 +1536,9 @@ function renderRoteiro() {
         return;
     }
 
+    const prevRow = document.getElementById('roteiro-chip-row');
+    const savedScroll = prevRow ? prevRow.scrollLeft : 0;
+
     const days = roteiroData.days;
     const chips = days.map((d, i) => {
         const active = i === roteiroDayIndex ? 'active' : '';
@@ -1526,6 +1557,8 @@ function renderRoteiro() {
         </div>
         <div id="roteiro-day-detail"></div>
     `;
+    const row = document.getElementById('roteiro-chip-row');
+    if (row && savedScroll) row.scrollLeft = savedScroll;
     renderRoteiroDayDetail();
     renderRoteiroNextBar();
 }
@@ -1545,6 +1578,51 @@ function dayProgress(day) {
     return { done, total: uniq.length, items: uniq };
 }
 
+function renderRoteiroFlightBlock(day) {
+    const flights = roteiroData && roteiroData.flights;
+    if (!flights || !day?.flightKey) return '';
+    const leg = flights[day.flightKey];
+    if (!leg) return '';
+    const pref = leg.preferred || {};
+    const alt = leg.alt || {};
+    const label = day.flightKey === 'outbound' ? 'Ida sugerida' : 'Volta sugerida';
+    const route = `${leg.from || ''} → ${leg.to || ''}`;
+    const arriveExtra = pref.arrive_date
+        ? ` <span class="roteiro-flight-plus">(${formatDateBR(pref.arrive_date)})</span>`
+        : '';
+    const altArriveExtra = alt.arrive_date
+        ? ` <span class="roteiro-flight-plus">(${formatDateBR(alt.arrive_date)})</span>`
+        : '';
+    return `
+        <div class="roteiro-flight">
+            <div class="roteiro-flight-head">
+                <span class="roteiro-flight-label">${label}</span>
+                <strong>${route}</strong>
+                <em>${pref.airline || 'LATAM'} · ${pref.flight || 'direto'}</em>
+            </div>
+            <div class="roteiro-flight-times">
+                <div class="roteiro-flight-leg">
+                    <span>Parte</span>
+                    <strong>${pref.depart || '—'}</strong>
+                    <em>${leg.from || ''}</em>
+                </div>
+                <div class="roteiro-flight-mid">
+                    <span>${pref.duration || 'direto'}</span>
+                    <i aria-hidden="true">→</i>
+                </div>
+                <div class="roteiro-flight-leg">
+                    <span>Chega</span>
+                    <strong>${pref.arrive || '—'}${arriveExtra}</strong>
+                    <em>${leg.to || ''}</em>
+                </div>
+            </div>
+            ${pref.why ? `<p class="roteiro-flight-why">${pref.why}</p>` : ''}
+            ${alt.depart ? `<p class="roteiro-flight-alt"><strong>Alt:</strong> ${alt.depart} → ${alt.arrive || ''}${altArriveExtra}${alt.flight ? ` · ${alt.flight}` : ''}${alt.why ? ` — ${alt.why}` : ''}</p>` : ''}
+            ${leg.airport_arrival ? `<p class="roteiro-flight-note">${leg.airport_arrival}</p>` : ''}
+            ${flights.note ? `<p class="roteiro-flight-note">${flights.note}</p>` : ''}
+        </div>`;
+}
+
 function renderRoteiroDayDetail() {
     const host = document.getElementById('roteiro-day-detail');
     if (!host || !roteiroData) return;
@@ -1553,14 +1631,15 @@ function renderRoteiroDayDetail() {
     const map = loadChecklist();
     const prog = dayProgress(d);
     const color = p.color || '#fbbf24';
+    const isTravel = d.type === 'travel';
 
     const hours = (p.opens && p.closes)
         ? `<div class="roteiro-hours">
-            <div class="roteiro-hour-block"><span>Abre</span><strong>${p.opens}</strong></div>
+            <div class="roteiro-hour-block"><span>${isTravel ? 'Início' : 'Abre'}</span><strong>${p.opens}</strong></div>
             <div class="roteiro-hour-sep">→</div>
-            <div class="roteiro-hour-block"><span>Fecha</span><strong>${p.closes}</strong></div>
+            <div class="roteiro-hour-block"><span>${isTravel ? 'Fim' : 'Fecha'}</span><strong>${p.closes}</strong></div>
            </div>
-           <p class="roteiro-hours-note">Horário: ${p.hoursSource || 'confirmar no app'}</p>`
+           <p class="roteiro-hours-note">${isTravel ? (p.hoursSource || 'timeline do dia') : `Horário: ${p.hoursSource || 'confirmar no app'}`}</p>`
         : '';
 
     const address = p.address
@@ -1611,6 +1690,7 @@ function renderRoteiroDayDetail() {
     };
 
     const tips = (d.tips || []).map(t => `<li>${t}</li>`).join('');
+    const flightHtml = renderRoteiroFlightBlock(d);
 
     host.innerHTML = `
         <section class="roteiro-day-panel" style="--park:${color}">
@@ -1625,6 +1705,7 @@ function renderRoteiroDayDetail() {
                     <span>feitos</span>
                 </div>
             </div>
+            ${flightHtml}
             ${hours}
             ${address}
             <div class="roteiro-section">
