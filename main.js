@@ -1345,9 +1345,34 @@ function renderHomeToday() {
     if (idx >= 0) roteiroDayIndex = idx;
 }
 
+function syncRoteiroChipActive() {
+    const row = document.getElementById('roteiro-chip-row');
+    if (!row) return;
+    row.querySelectorAll('.roteiro-chip').forEach((chip, i) => {
+        chip.classList.toggle('active', i === roteiroDayIndex);
+    });
+}
+
+function syncRoteiroChipProgress() {
+    const row = document.getElementById('roteiro-chip-row');
+    if (!row || !roteiroData) return;
+    const chips = row.querySelectorAll('.roteiro-chip');
+    (roteiroData.days || []).forEach((d, i) => {
+        const chip = chips[i];
+        if (!chip) return;
+        const done = dayProgress(d);
+        const pct = done.total ? Math.round(100 * done.done / done.total) : 0;
+        const bar = chip.querySelector('.roteiro-chip-bar i');
+        if (bar) bar.style.width = `${pct}%`;
+    });
+}
+
 window.selectRoteiroDay = function (idx) {
     roteiroDayIndex = idx;
-    renderRoteiro();
+    // Não recria o carrossel — senão o scrollLeft volta pra 0
+    syncRoteiroChipActive();
+    renderRoteiroDayDetail();
+    renderRoteiroNextBar();
     const body = document.getElementById('roteiro-body');
     if (body) body.scrollTop = 0;
 };
@@ -1359,6 +1384,7 @@ window.toggleRoteiroAttr = function (date, id) {
     saveChecklist(map);
     renderRoteiroDayDetail();
     renderRoteiroNextBar();
+    syncRoteiroChipProgress();
 };
 
 window.resetRoteiroDayChecks = function (date) {
@@ -1368,7 +1394,9 @@ window.resetRoteiroDayChecks = function (date) {
         if (k.startsWith(date + '::')) delete map[k];
     });
     saveChecklist(map);
-    renderRoteiro();
+    renderRoteiroDayDetail();
+    renderRoteiroNextBar();
+    syncRoteiroChipProgress();
 };
 
 function formatMoneyUSD(n) {
@@ -1508,6 +1536,9 @@ function renderRoteiro() {
         return;
     }
 
+    const prevRow = document.getElementById('roteiro-chip-row');
+    const savedScroll = prevRow ? prevRow.scrollLeft : 0;
+
     const days = roteiroData.days;
     const chips = days.map((d, i) => {
         const active = i === roteiroDayIndex ? 'active' : '';
@@ -1526,6 +1557,8 @@ function renderRoteiro() {
         </div>
         <div id="roteiro-day-detail"></div>
     `;
+    const row = document.getElementById('roteiro-chip-row');
+    if (row && savedScroll) row.scrollLeft = savedScroll;
     renderRoteiroDayDetail();
     renderRoteiroNextBar();
 }
