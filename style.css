@@ -870,6 +870,103 @@ a {
     margin-bottom: 12px;
 }
 
+.roteiro-flight {
+    margin-bottom: 14px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--park) 12%, var(--bg)), var(--bg));
+}
+
+.roteiro-flight-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 10px;
+    margin-bottom: 10px;
+}
+
+.roteiro-flight-label {
+    font-size: 0.68rem;
+    font-weight: 750;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    width: 100%;
+}
+
+.roteiro-flight-head strong {
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+}
+
+.roteiro-flight-head em {
+    font-style: normal;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+}
+
+.roteiro-flight-times {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.roteiro-flight-leg span {
+    display: block;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    font-weight: 650;
+}
+
+.roteiro-flight-leg strong {
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.roteiro-flight-plus {
+    font-size: 0.75rem;
+    font-weight: 650;
+    color: var(--text-dim);
+}
+
+.roteiro-flight-leg em {
+    display: block;
+    font-style: normal;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-weight: 650;
+}
+
+.roteiro-flight-mid {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.7rem;
+    font-weight: 650;
+}
+
+.roteiro-flight-mid i {
+    display: block;
+    font-style: normal;
+    font-size: 1.1rem;
+    line-height: 1.2;
+}
+
+.roteiro-flight-why,
+.roteiro-flight-alt,
+.roteiro-flight-note {
+    margin: 4px 0 0;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+}
+
+.roteiro-flight-alt strong {
+    color: var(--text);
+}
+
 .roteiro-address {
     display: flex;
     justify-content: space-between;
