@@ -1109,7 +1109,7 @@ function renderCrowdCalendar() {
     cal.innerHTML = html;
 }
 
-// --- HELIOS HOTEL RATES (scraped Flexible Rate) ---
+// --- HELIOS HOTEL RATES (Universal Orlando snapshot) ---
 let heliosRows = [];
 let heliosByDate = {};
 let heliosMonthFilter = 'all';
@@ -1209,7 +1209,7 @@ window.selectHeliosDay = function (dateStr) {
         <br>Diária <strong>$${row.nightly_rate.toFixed(0)}</strong>
         · impostos $${(row.taxes || 0).toFixed(0)}
         · total <strong>$${(row.total || 0).toFixed(0)}</strong>
-        <span class="crowd-source">(Flexible Rate)</span>`;
+        <span class="crowd-source">(tarifa Universal)</span>`;
     // refresh selection ring
     document.querySelectorAll('.helios-day.selected').forEach(el => el.classList.remove('selected'));
     const cell = document.querySelector(`.helios-day[data-date="${dateStr}"]`);
@@ -1457,7 +1457,7 @@ function computeRoteiroHotelStay() {
         total: fromCsv ? total : (hotel.total_with_tax ?? hotel.nightly_total),
         avg: fromCsv && nights.length ? total / nights.length : (hotel.nightly_avg ?? null),
         fromCsv,
-        rateNote: hotel.rate_note || 'Flexible Rate · com impostos'
+        rateNote: hotel.rate_note || 'Tarifa Universal · com impostos'
     };
 }
 
@@ -1485,7 +1485,7 @@ function renderGastos() {
     const hotelShort = (stay.name || 'Helios').replace(', a Loews Hotel', '');
 
     body.innerHTML = `
-        <p class="gastos-intro">Estimativa com base nas noites do roteiro e nas diárias Flexible Rate do Helios.</p>
+        <p class="gastos-intro">Estimativa com base nas noites do roteiro e nas diárias do Helios (Stay More, Save More 7+ noites para 29/11–12/12).</p>
 
         <section class="gastos-card">
             <div class="gastos-card-top">
