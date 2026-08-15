@@ -2,30 +2,33 @@
   "title": "Orlando 2026 — Companheiro de Parque",
   "subtitle": "Prioridade crowd: Epic → AK → USF → IoA → DHS · janelas de ingresso",
   "flights": {
-    "note": "Sugestões LATAM direto GRU↔MCO (horários típicos — confirme na reserva). Preferência: ida manhã + volta noite.",
-    "source": "FlightConnections / malha LATAM típica 2026",
+    "note": "Sugestões GRU↔MCO (confirme na reserva). Ida: noite de sábado → domingo. Volta: noite de sábado 12/12 → domingo 13/12.",
+    "source": "Malha típica 2026 (LATAM direto = mesmo dia; overnight via Copa/Avianca)",
     "outbound": {
-      "date": "2026-11-29",
+      "date": "2026-11-28",
+      "arrive_date": "2026-11-29",
       "from": "GRU",
       "to": "MCO",
       "preferred": {
-        "airline": "LATAM",
-        "flight": "LA 8126 (típico)",
-        "depart": "08:30",
-        "arrive": "16:20",
-        "duration": "~8h50",
+        "airline": "Copa / Avianca (conexão)",
+        "flight": "overnight típico via PTY ou BOG",
+        "depart": "22:30",
+        "arrive": "14:30+1",
+        "arrive_date": "2026-11-29",
+        "duration": "~16–18h c/ conexão",
         "tz_note": "GRU UTC−3 · MCO UTC−5",
-        "why": "Chega à tarde: imigração + check-in Helios com folga; amanhã SeaWorld cedo."
+        "why": "Parte sábado à noite, chega domingo à tarde — check-in Helios no domingo; SeaWorld segunda."
       },
       "alt": {
         "airline": "LATAM",
-        "flight": "LA 8186 (típico)",
-        "depart": "11:35",
-        "arrive": "19:30",
-        "duration": "~8h50",
-        "why": "Opção tarde — check-in mais apertado; jantar no hotel."
+        "flight": "LA 8126 (típico) — mesmo dia",
+        "depart": "08:30",
+        "arrive": "16:20",
+        "arrive_date": "2026-11-28",
+        "duration": "~8h50 direto",
+        "why": "Só se quiserem chegar já no sábado (hotel começa domingo — bagagem/early check-in)."
       },
-      "airport_arrival": "Chegar no GRU ~3h antes (internacional)."
+      "airport_arrival": "Chegar no GRU ~3h antes (internacional) no sábado."
     },
     "return": {
       "date": "2026-12-12",
@@ -114,44 +117,115 @@
   },
   "days": [
     {
-      "date": "2026-11-29",
-      "dow": "Domingo",
+      "date": "2026-11-28",
+      "dow": "Sábado",
       "emoji": "✈️",
-      "short": "GRU→MCO",
+      "short": "Saída SP",
       "type": "travel",
-      "title": "São Paulo → Orlando + Helios",
+      "title": "São Paulo → Orlando (noite)",
       "flightKey": "outbound",
       "parkInfo": {
-        "name": "GRU → MCO → Helios",
+        "name": "GRU → voo overnight",
         "address": "Aeroporto Internacional de Guarulhos (GRU)",
         "mapsUrl": "https://maps.google.com/?q=Aeroporto%20Internacional%20de%20Guarulhos",
-        "opens": "05:30",
-        "closes": "22:00",
-        "hoursSource": "timeline sugerida do dia (não horário de parque)",
+        "opens": "19:00",
+        "closes": "23:59",
+        "hoursSource": "timeline sugerida do dia (partida noturna)",
         "color": "#fdba74"
       },
-      "strategy": "Saída de São Paulo (GRU) no voo da manhã LATAM → MCO à tarde. Check-in Helios e recuperar. Amanhã SeaWorld (~3%).",
+      "strategy": "Dia de saída em São Paulo. Embarque noturno no GRU; voo overnight / conexão. Chegada em Orlando só amanhã (domingo).",
       "order": [
         {
-          "id": "gru_arrive",
-          "name": "Chegar ao GRU (~05:30)",
+          "id": "pack",
+          "name": "Fechar malas + documentos",
           "land": "São Paulo",
-          "tip": "3h antes do voo internacional; check-in online na véspera",
+          "tip": "Passaporte, ESTA/visto, voucher Helios, apps offline",
           "first": true
         },
         {
-          "id": "depart_gru",
-          "name": "Embarque GRU → MCO (~08:30)",
-          "land": "LATAM direto",
-          "tip": "Sugestão preferida LA 8126 · alt. ~11:35 se não pegar o da manhã",
+          "id": "gru_arrive",
+          "name": "Chegar ao GRU (~19:30)",
+          "land": "São Paulo",
+          "tip": "3h antes do internacional; check-in online na véspera",
           "first": false
         },
         {
+          "id": "depart_gru",
+          "name": "Embarque GRU (~22:30)",
+          "land": "Voo overnight",
+          "tip": "Sugestão: conexão Copa (PTY) ou Avianca (BOG) · LATAM direto só no mesmo dia",
+          "first": false
+        },
+        {
+          "id": "inflight",
+          "name": "Noite a bordo / conexão",
+          "land": "Voo",
+          "tip": "Durmam o que der — amanhã imigração + Helios",
+          "first": false
+        }
+      ],
+      "meals": {
+        "lunch": {
+          "when": "12:00–14:00",
+          "where": "São Paulo",
+          "what": "Almoço normal em casa / caminho"
+        },
+        "snack": {
+          "when": "aeroporto",
+          "where": "GRU",
+          "what": "Água + lanche leve"
+        },
+        "dinner": {
+          "when": "a bordo / conexão",
+          "where": "voo",
+          "what": "Refeição de bordo"
+        }
+      },
+      "tips": [
+        "Partida sábado à noite · chegada Orlando domingo",
+        "LATAM direto é manhã→tarde no mesmo dia — use só se mudarem o plano",
+        "Configure apps Universal + Disney + SeaWorld no wifi de casa"
+      ],
+      "afterMain": [
+        {
+          "id": "exchange",
+          "name": "Câmbio / cartão viagem (se faltar)",
+          "land": "São Paulo",
+          "tip": "Antes de sair de casa"
+        },
+        {
+          "id": "apps",
+          "name": "Baixar boarding pass + offline maps",
+          "land": "GRU",
+          "tip": ""
+        }
+      ]
+    },
+    {
+      "date": "2026-11-29",
+      "dow": "Domingo",
+      "emoji": "🏨",
+      "short": "Chegada",
+      "type": "travel",
+      "title": "Chegada MCO + Helios",
+      "flightKey": "outbound",
+      "parkInfo": {
+        "name": "MCO → Helios",
+        "address": "Orlando International Airport (MCO)",
+        "mapsUrl": "https://maps.google.com/?q=Orlando%20International%20Airport",
+        "opens": "12:00",
+        "closes": "22:00",
+        "hoursSource": "timeline sugerida do dia (chegada domingo)",
+        "color": "#fdba74"
+      },
+      "strategy": "Chegada Orlando no domingo (voo saiu sábado à noite). Imigração + Uber até Helios, check-in e recuperar. Amanhã SeaWorld (~3%).",
+      "order": [
+        {
           "id": "arrive_mco",
-          "name": "Chegada MCO (~16:20) + imigração",
+          "name": "Chegada MCO (~14:30) + imigração",
           "land": "Orlando",
           "tip": "Global Entry/Mobile Passport se tiverem; bagagem + Uber/Lyft ~25–40 min até Helios",
-          "first": false
+          "first": true
         },
         {
           "id": "checkin",
@@ -177,13 +251,13 @@
       ],
       "meals": {
         "lunch": {
-          "when": "a bordo / ~12:00",
-          "where": "voo LATAM",
-          "what": "Refeição de bordo + água"
+          "when": "voo / conexão / MCO",
+          "where": "a bordo ou aeroporto",
+          "what": "Algo leve"
         },
         "snack": {
-          "when": "chegada / tarde",
-          "where": "MCO ou Helios",
+          "when": "tarde",
+          "where": "Helios",
           "what": "Café / fruta no quarto"
         },
         "dinner": {
@@ -193,10 +267,9 @@
         }
       },
       "tips": [
-        "Preferência: voo manhã GRU ~08:30 → MCO ~16:20 (LATAM direto)",
-        "Alternativa: GRU ~11:35 → MCO ~19:30",
-        "Configure apps Universal + Disney + SeaWorld",
-        "Durma cedo — SeaWorld amanhã e Epic na terça"
+        "Voo saiu ontem (sábado) — hoje é dia de chegar e recuperar",
+        "Durma cedo — SeaWorld amanhã e Epic na terça",
+        "Configure apps se ainda não fez"
       ],
       "afterMain": [
         {

@@ -851,8 +851,8 @@ window.toggleDetails = function () {
     }
 };
 
-// Countdown Logic — partida sugerida GRU ~08:30 (hora local SP)
-const flightTime = new Date('2026-11-29T08:30:00-03:00').getTime();
+// Countdown Logic — partida sugerida GRU sábado ~22:30 (hora local SP)
+const flightTime = new Date('2026-11-28T22:30:00-03:00').getTime();
 
 function updateCountdown() {
     const now = new Date().getTime();
@@ -1587,6 +1587,10 @@ function renderRoteiroFlightBlock(day) {
     const alt = leg.alt || {};
     const label = day.flightKey === 'outbound' ? 'Ida sugerida' : 'Volta sugerida';
     const route = `${leg.from || ''} → ${leg.to || ''}`;
+    const showDepartDate = leg.date && pref.arrive_date && leg.date !== pref.arrive_date;
+    const departExtra = showDepartDate
+        ? ` <span class="roteiro-flight-plus">(${formatDateBR(leg.date)})</span>`
+        : '';
     const arriveExtra = pref.arrive_date
         ? ` <span class="roteiro-flight-plus">(${formatDateBR(pref.arrive_date)})</span>`
         : '';
@@ -1603,7 +1607,7 @@ function renderRoteiroFlightBlock(day) {
             <div class="roteiro-flight-times">
                 <div class="roteiro-flight-leg">
                     <span>Parte</span>
-                    <strong>${pref.depart || '—'}</strong>
+                    <strong>${pref.depart || '—'}${departExtra}</strong>
                     <em>${leg.from || ''}</em>
                 </div>
                 <div class="roteiro-flight-mid">
