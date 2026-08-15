@@ -208,7 +208,6 @@
       "short": "Chegada",
       "type": "travel",
       "title": "Chegada MCO + Helios",
-      "flightKey": "outbound",
       "parkInfo": {
         "name": "MCO → Helios",
         "address": "Orlando International Airport (MCO)",
