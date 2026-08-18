@@ -21,12 +21,6 @@
           "tip": "ESTA no site oficial CBP. Print/PDF no celular e na nuvem. Sem ESTA não embarca."
         },
         {
-          "id": "voos",
-          "due": "2026-08-31",
-          "title": "Confirmar voos ida e volta",
-          "tip": "Ida: sábado 28/11 noite → domingo 29/11. Volta: sábado 12/12 noite. Preferir conexão com folga; seguro de atraso."
-        },
-        {
           "id": "helios",
           "due": "2026-08-31",
           "title": "Confirmar Helios 29/11–12/12",
@@ -41,9 +35,72 @@
       ]
     },
     {
+      "id": "passagens",
+      "title": "Passagens — quando fica mais barato",
+      "blurb": "GRU↔MCO, ida 28/11 noite e volta 12/12. Vocês estão na janela boa (~3 meses). Depois de meados de setembro, Thanksgiving + dezembro costumam encarecer.",
+      "items": [
+        {
+          "id": "voos_alerta",
+          "due": "2026-08-20",
+          "when": "Hoje: alerta no Google Flights",
+          "title": "Ativar alerta GRU–MCO 28/11 → 12/12",
+          "tip": "Google Flights → Acompanhar preços. Comparar LATAM direto (mesmo dia) vs Copa/Avianca overnight. Terça e quarta de manhã (BR) costumam mostrar promo."
+        },
+        {
+          "id": "voos",
+          "due": "2026-09-05",
+          "when": "Melhor compra: agora → 05/09",
+          "title": "Comprar ida e volta (janela mais barata)",
+          "tip": "Internacional: 3–5 meses antes, ou 8–12 semanas (05/09–03/10). Vocês já estão nisso. Travar se o Google marcar preço baixo. Folga na conexão da ida."
+        },
+        {
+          "id": "voos_limite",
+          "due": "2026-09-15",
+          "when": "Não esperar depois de 15/09",
+          "title": "Último momento bom antes do Thanksgiving",
+          "tip": "Thanksgiving 2026 é 26/11; vocês voam 28/11. Depois de ~15/09 a tarifa dessa semana costuma só subir. Se ainda não comprou, compra."
+        }
+      ]
+    },
+    {
+      "id": "uni_dining",
+      "title": "Restaurantes Universal / Helios — já abre",
+      "blurb": "Janela ~6 meses: dá para reservar agora (ago/2026) no app Universal ou Resy. Helios tem prioridade, mas mesa cativa evita fila.",
+      "items": [
+        {
+          "id": "uni_flora",
+          "due": "2026-08-31",
+          "when": "Reservar já (Resy)",
+          "title": "Flora Taverna — jantar 29/11",
+          "tip": "Chegada. Resy do Helios. Café da manhã dos dias Epic também vale se quiserem sentar."
+        },
+        {
+          "id": "uni_leaky",
+          "due": "2026-08-31",
+          "when": "Reservar já (app Universal)",
+          "title": "Leaky Cauldron — almoço 02/12 (USF)",
+          "tip": "App/site Universal, até 6 meses. Se lotar, Fortescue / to go."
+        },
+        {
+          "id": "uni_mythos",
+          "due": "2026-08-31",
+          "when": "Reservar já (app Universal)",
+          "title": "Mythos — almoço 03/12 (IoA)",
+          "tip": "Um dos mais disputados do Universal. Se não rolar, Confisco Grille."
+        },
+        {
+          "id": "uni_epic",
+          "due": "2026-08-31",
+          "when": "Reservar já (app Universal)",
+          "title": "Atlantic ou Blue Dragon — 01, 05 ou 07/12 (Epic)",
+          "tip": "Só esses dois no Epic pegam reserva. Um jantar no meio da trilogia Epic já resolve."
+        }
+      ]
+    },
+    {
       "id": "60d",
       "title": "60 dias — até 29/09",
-      "blurb": "Seguro, apps e contas. Janela de restaurantes Disney abre em outubro.",
+      "blurb": "Seguro, apps e contas. Disney dining é o bloco seguinte (outubro, 6h ET).",
       "items": [
         {
           "id": "seguro",
@@ -56,26 +113,49 @@
           "due": "2026-09-29",
           "title": "Criar/entrar nas contas Universal + Disney + SeaWorld",
           "tip": "Mesmo e-mail nos dois celulares. Vincular ingressos quando tiverem. Testar login já."
+        }
+      ]
+    },
+    {
+      "id": "disney_dining",
+      "title": "Restaurantes Disney — 6h ET (7h Brasília)",
+      "blurb": "Off-site (Helios): um dia por vez, exatamente 60 dias antes. App My Disney Experience logado às 6h ET. Vocês não têm o 60+10 de hotel Disney.",
+      "items": [
+        {
+          "id": "disney_satuli",
+          "due": "2026-10-09",
+          "when": "Reservar 09/10 · 7h Brasília",
+          "title": "Satu’li Canteen — almoço 08/12 (AK)",
+          "tip": "60 dias antes do 08/12. Bowls em Pandora. Se perder a janela, tenta cancelamento 48h antes."
         },
         {
-          "id": "agenda_dining",
-          "due": "2026-09-29",
-          "title": "Alarme: reservas de restaurante Disney",
-          "tip": "Abre 60 dias antes, 6h ET. Flora 29/11 → 01/10. Satu’li 08/12 → 09/10. Via Napoli 09/12 → 10/10. Sci-Fi 10/12 → 11/10."
+          "id": "disney_via",
+          "due": "2026-10-10",
+          "when": "Reservar 10/10 · 7h Brasília",
+          "title": "Via Napoli — almoço 09/12 (EPCOT)",
+          "tip": "60 dias antes do EPCOT. Plano B: Space 220 Lounge (ainda mais disputado) ou walk-up no Showcase."
+        },
+        {
+          "id": "disney_scifi",
+          "due": "2026-10-11",
+          "when": "Reservar 11/10 · 7h Brasília",
+          "title": "Sci-Fi Dine-In — almoço 10/12 (DHS)",
+          "tip": "60 dias antes do Hollywood Studios. Drive-in temático. Plano B: Docking Bay 7 / ABC Commissary."
+        },
+        {
+          "id": "dining_book",
+          "due": "2026-10-11",
+          "when": "Até 11/10",
+          "title": "Conferir se todas as mesas Disney estão no app",
+          "tip": "Satu’li, Via Napoli, Sci-Fi. Se alguma falhou, entrar todo dia — cancelamento solta mesa."
         }
       ]
     },
     {
       "id": "45d",
       "title": "45–30 dias — 14/10 a 29/10",
-      "blurb": "Celular, carro e reservas que somem.",
+      "blurb": "Celular, carro e imigração.",
       "items": [
-        {
-          "id": "dining_book",
-          "due": "2026-10-11",
-          "title": "Reservar restaurantes (Disney + Helios)",
-          "tip": "Prioridade: Satu’li, Sci-Fi, Via Napoli, Flora Taverna. Mythos (03/12) se ainda quiserem. Universal/Epic: Atlantic walk-up ou app."
-        },
         {
           "id": "esim",
           "due": "2026-10-29",
@@ -105,7 +185,7 @@
           "id": "epa",
           "due": "2026-11-14",
           "title": "Confirmar Early Park Admission do Helios",
-          "tip": "É o pulo de vocês no Epic sem Express. Ver no app Universal quais dias EPA vale (1, 5 e 7/12)."
+          "tip": "É o pulo de vocês no Epic sem Express. Ver no app Universal quais dias EPA vale (1, 5 e 7/12). Não precisa reservar atração — chegar no rope drop."
         },
         {
           "id": "ingressos",
@@ -155,12 +235,48 @@
           "due": "2026-11-21",
           "title": "Um pouco de dólar em espécie",
           "tip": "Gorjeta, gorjeta de mala, emergência. O resto no cartão. Não levar maço."
+        }
+      ]
+    },
+    {
+      "id": "atracoes",
+      "title": "Atrações — Lightning Lane e fila virtual",
+      "blurb": "Helios ≠ hotel Disney: Lightning Lane abre 3 dias antes, 7h ET (9h Brasília em dezembro). Universal: EPA + VQ no próprio dia. Express só se a fila estiver absurda (Hagrid’s).",
+      "items": [
+        {
+          "id": "ll_ak",
+          "due": "2026-12-05",
+          "when": "Reservar 05/12 · 9h Brasília",
+          "title": "Lightning Lane AK — Flight of Passage",
+          "tip": "3 dias antes do 08/12. Multi Pass + Individual se FoP estiver separado. Sem hotel Disney = sem janela de 7 dias."
         },
         {
-          "id": "ll_plan",
-          "due": "2026-11-21",
-          "title": "Combinado Lightning Lane / VQ",
-          "tip": "No dia: Guardians (EPCOT 09/12) e Rise (DHS 10/12) cedo no app. Mario Kart no Epic: conferir se ainda tem fila virtual."
+          "id": "ll_epcot",
+          "due": "2026-12-06",
+          "when": "Reservar 06/12 · 9h Brasília",
+          "title": "Lightning Lane EPCOT — Guardians / Remy",
+          "tip": "3 dias antes do 09/12. Guardians muitas vezes é Individual + VQ no dia (7h e 13h ET). Pegar os dois."
+        },
+        {
+          "id": "ll_dhs",
+          "due": "2026-12-07",
+          "when": "Reservar 07/12 · 9h Brasília",
+          "title": "Lightning Lane DHS — Rise + Slinky",
+          "tip": "3 dias antes do 10/12. Rise costuma ser Individual Lane. Slinky no Multi Pass."
+        },
+        {
+          "id": "vq_epic",
+          "due": "2026-12-01",
+          "when": "No dia · rope drop Epic",
+          "title": "VQ / standby Nintendo — 01, 05 e 07/12",
+          "tip": "Mario Kart: conferir no app se ainda tem fila virtual. Senão, EPA Helios + rope drop. Não dá para reservar semanas antes."
+        },
+        {
+          "id": "vq_guardians",
+          "due": "2026-12-09",
+          "when": "No dia 09/12 · 7h ET",
+          "title": "Virtual queue Guardians (EPCOT)",
+          "tip": "Mesmo com Lightning Lane, entrar na VQ de manhã. Segunda leva ~13h ET se perder a primeira."
         }
       ]
     },

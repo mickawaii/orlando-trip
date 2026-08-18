@@ -1819,13 +1819,9 @@ function updatePreparoNavHint() {
     }
     const map = loadPreparoChecks();
     const done = items.filter(it => map[it.id]).length;
-    const next = items.find(it => !map[it.id]);
-    if (done === items.length) {
-        hint.textContent = `${done}/${items.length} · tudo feito`;
-        return;
-    }
+    const next = items.filter(it => !map[it.id]).sort((a, b) => (a.due || '').localeCompare(b.due || ''))[0];
     hint.textContent = next
-        ? `${done}/${items.length} · até ${formatDateBR(next.due)}`
+        ? `${done}/${items.length} · ${next.when || ('até ' + formatDateBR(next.due))}`
         : `${done}/${items.length} feitos`;
 }
 
@@ -1859,18 +1855,19 @@ function renderPreparo() {
     const map = loadPreparoChecks();
     const items = allPreparoItems();
     const done = items.filter(it => map[it.id]).length;
-    const next = items.find(it => !map[it.id]);
+    const next = items.filter(it => !map[it.id]).sort((a, b) => (a.due || '').localeCompare(b.due || ''))[0];
 
     const groupsHtml = (preparoData.groups || []).map(g => {
         const list = (g.items || []).map(it => {
             const checked = map[it.id] ? 'checked' : '';
             const tone = map[it.id] ? '' : preparoDueTone(it.due);
+            const whenLabel = it.when || `até ${formatDateBR(it.due)}`;
             return `<label class="preparo-item ${checked}">
                 <input type="checkbox" ${checked ? 'checked' : ''} onchange="togglePreparoItem('${it.id}')" />
                 <span class="preparo-item-body">
                     <span class="preparo-item-title">${it.title}</span>
                     <span class="preparo-item-meta">
-                        <span class="preparo-due ${tone}">até ${formatDateBR(it.due)}</span>
+                        <span class="preparo-due ${tone}">${whenLabel}</span>
                     </span>
                     ${it.tip ? `<small class="preparo-item-tip">${it.tip}</small>` : ''}
                 </span>
@@ -1889,7 +1886,7 @@ function renderPreparo() {
         <p class="preparo-intro">${preparoData.subtitle || ''}</p>
         <div class="preparo-progress-head">
             <strong>${done}/${items.length} feitos</strong>
-            <span>${next ? `Próximo: até ${formatDateBR(next.due)}` : 'Tudo tickado'}</span>
+            <span>${next ? `Próximo: ${next.when || ('até ' + formatDateBR(next.due))}` : 'Tudo tickado'}</span>
         </div>
         ${groupsHtml}
     `;
