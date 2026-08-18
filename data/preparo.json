@@ -209,7 +209,110 @@
           "id": "malas",
           "due": "2026-11-14",
           "title": "Começar mala: frio + chuva",
-          "tip": "Dezembro em Orlando: manhã fria, tarde ok, chuva rápida. Capa leve, palmilha, power bank, tomada, remédios na mão."
+          "tip": "Camada fria no CORPO (não na pochete). Capa de chuva fina vai na pochete — ver bloco Pochete."
+        }
+      ]
+    },
+    {
+      "id": "pochete_comprar",
+      "title": "Pochete — o que comprar (até 14/11)",
+      "blurb": "Uma pochete só, kit do casal. Celulares, óculos e casaco ficam no corpo. Dezembro em Orlando é fresco: ventilador é opcional; água, sol e chuva não.",
+      "items": [
+        {
+          "id": "buy_pochete",
+          "due": "2026-11-14",
+          "when": "Comprar até 14/11",
+          "title": "Pochete impermeável (1,5–2 L, 2 zíperes)",
+          "tip": "No peito ou na cintura, na FRENTE nas filas. Anti-furto e não bate na perna. Testar com o kit em casa."
+        },
+        {
+          "id": "buy_hooks",
+          "due": "2026-11-14",
+          "when": "Comprar até 14/11",
+          "title": "2 ganchos de bolsa (plástico, tipo stroller hook)",
+          "tip": "Prendem na alça. Servem pra pendurar a pochete na cadeira do restaurante, no locker e no bin da montanha-russa — sem pôr no chão."
+        },
+        {
+          "id": "buy_bottle",
+          "due": "2026-11-14",
+          "when": "Comprar até 14/11",
+          "title": "Garrafa dobrável 500 ml (silicone) + mosquetão",
+          "tip": "Vazia no GRU; enche nas fontes. NÃO entra na pochete — vai clipada na alça. Rígida de 1 L não cabe no kit."
+        },
+        {
+          "id": "buy_spf",
+          "due": "2026-11-14",
+          "when": "Comprar até 14/11",
+          "title": "Protetor em stick ou mini 30 ml (FPS 50)",
+          "tip": "Stick ocupa menos e não vaza. Um para os dois. Rosto/orelha/nuca a cada 2 h. Frasco grande fica no hotel."
+        },
+        {
+          "id": "buy_poncho",
+          "due": "2026-11-14",
+          "when": "Comprar até 14/11",
+          "title": "2 capas de chuva de bolso (plástico fino)",
+          "tip": "Tamanho de um baralho cada. Dezembro chove rápido. Capa de casaco grosso não cabe."
+        },
+        {
+          "id": "buy_power",
+          "due": "2026-11-14",
+          "when": "Comprar até 14/11",
+          "title": "Power bank slim (5–10 mil mAh) + cabo curto",
+          "tip": "Um só, compartilhado. Cubo grosso não fecha o zíper. Cabo de 20 cm."
+        },
+        {
+          "id": "buy_fan",
+          "due": "2026-11-14",
+          "when": "Opcional — só se for chato",
+          "title": "Ventilador: só se for fino de pescoço/clip",
+          "tip": "Dezembro raramente pede. Se quiserem: 1 USB chato, clipado FORA. Ventilador de mão grosso = não cabe. Priorizem água + sombra."
+        }
+      ]
+    },
+    {
+      "id": "pochete_dia",
+      "title": "Pochete — o que cabe no dia (montar na véspera)",
+      "blurb": "Regra: se não couber com o zíper fechando fácil, não vai. Telefone no bolso de cada um.",
+      "items": [
+        {
+          "id": "pack_inside",
+          "due": "2026-11-29",
+          "when": "DENTRO da pochete",
+          "slot": "dentro",
+          "title": "Kit interno (os dois)",
+          "tip": "Stick de protetor · 2 capas finas · power bank slim + cabo · 4 band-aids · 4 analgésicos · 2 dramina (coaster) · lencinho · hidratante labial · elástico de cabelo · mini desodorante roll-on · US$ 20 em notas · chave do quarto / cartão reserva."
+        },
+        {
+          "id": "pack_clip",
+          "due": "2026-11-29",
+          "when": "CLIPADO na alça",
+          "slot": "clip",
+          "title": "Garrafa dobrável + 2 ganchos + mosquetão",
+          "tip": "Garrafa vazia/amassada na entrada, encher depois. Ganchos: cadeira, locker, bin. Opcional: ventilador clip. Nada de squeeze rígido."
+        },
+        {
+          "id": "pack_body",
+          "due": "2026-11-29",
+          "when": "NO CORPO (não na pochete)",
+          "slot": "corpo",
+          "title": "Celular, óculos, casaco leve, Magic/ingresso no app",
+          "tip": "Um celular cada no bolso com zíper ou capinha de braço. Passaporte fica no COFRE do Helios nos dias de parque. Óculos de sol no topo da cabeça."
+        },
+        {
+          "id": "pack_wet",
+          "due": "2026-11-29",
+          "when": "Dias que molham",
+          "slot": "dentro",
+          "title": "Saco zip + capinha (Kali / River / Infinity Falls)",
+          "tip": "1 zip médio na pochete. Celular entra no zip naquela fila. Chinelo extra NÃO cabe — vão de tênis que seca ou locker no parque."
+        },
+        {
+          "id": "pack_no",
+          "due": "2026-11-29",
+          "when": "NÃO levar",
+          "slot": "hotel",
+          "title": "O que estoura a pochete (deixa no Helios)",
+          "tip": "Protetor grande · toalha · casaco grosso · tablet · power bank cubo · garrafa rígida · maquiagem · lanche pesado · segundo par de sapato. Compram água/snack no parque se precisar."
         }
       ]
     },
