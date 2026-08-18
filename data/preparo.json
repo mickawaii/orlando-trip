@@ -174,8 +174,9 @@
         {
           "id": "esim",
           "due": "2026-10-29",
-          "title": "eSIM ou roaming dos dois celulares",
-          "tip": "Ativar no MCO. Sem isso não chama Uber nem abre o app do parque. Testar QR em casa."
+          "when": "Instalar em casa no Wi-Fi",
+          "title": "eSIM Nubank Ultravioleta 10 GB (Nu Viagens)",
+          "tip": "App Nubank → avião → eSIM de Viagem → Ativar. 10 GB grátis/ano (EUA incluso). Instalar no titular ANTES de viajar; no MCO só ligar dados em roaming. Chip BR continua no aparelho pra SMS/banco. Marido: hotspot do seu 4G ou pacote extra no app (até +20 GB) — 10 GB pra dois em 14 dias aperta se tiverem Instagram pesado."
         },
         {
           "id": "carro",
@@ -419,7 +420,7 @@
           "id": "helios_pin",
           "due": "2026-11-28",
           "title": "Endereço Helios no Maps (offline)",
-          "tip": "8505 S Kirkman Rd, Orlando, FL 32819. Uber/Lyft no MCO ~25–40 min. Wi-Fi do aeroporto se o eSIM atrasar."
+          "tip": "8505 S Kirkman Rd, Orlando, FL 32819. Uber/Lyft no MCO ~25–40 min. eSIM Nu já instalado; roaming de dados ligado na chegada."
         }
       ]
     }
