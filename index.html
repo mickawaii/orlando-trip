@@ -62,6 +62,10 @@
                 <span class="nav-tile-label">Roteiro</span>
                 <span class="nav-tile-hint">Checklist do dia</span>
             </button>
+            <button type="button" class="nav-tile nav-preparo" onclick="openPreparoModal()">
+                <span class="nav-tile-label">Preparo</span>
+                <span class="nav-tile-hint" id="nav-preparo-hint">Papelada, dinheiro, reservas</span>
+            </button>
             <button type="button" class="nav-tile nav-crowds" onclick="openCrowdsModal()">
                 <span class="nav-tile-label">Lotação</span>
                 <span class="nav-tile-hint">Dias mais leves</span>
@@ -94,6 +98,19 @@
                 <p class="roteiro-loading">Carregando roteiro…</p>
             </div>
             <div class="roteiro-next-bar" id="roteiro-next-bar" style="display:none;"></div>
+        </div>
+    </div>
+
+    <!-- Preparo -->
+    <div id="preparo-modal" class="modal-overlay">
+        <div class="modal-content-wide">
+            <div class="modal-header">
+                <h2>Preparo</h2>
+                <button class="back-modal-btn" onclick="closePreparoModal()">Fechar</button>
+            </div>
+            <div class="modal-body-scroll" id="preparo-body">
+                <p class="preparo-loading">Carregando checklist…</p>
+            </div>
         </div>
     </div>
 

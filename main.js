@@ -34,6 +34,8 @@ window.initApp = async function () {
     try {
         await ensureRoteiroData();
         renderHomeToday();
+        await ensurePreparoData();
+        updatePreparoNavHint();
     } catch (e) {
         console.warn('home today', e);
     }
@@ -495,6 +497,24 @@ window.closeGastosModal = function () {
 
 window.closeRoteiroModal = function () {
     const modal = document.getElementById('roteiro-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.classList.remove('no-scroll');
+    }
+};
+
+window.openPreparoModal = async function () {
+    const modal = document.getElementById('preparo-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.classList.add('no-scroll');
+        await ensurePreparoData();
+        renderPreparo();
+    }
+};
+
+window.closePreparoModal = function () {
+    const modal = document.getElementById('preparo-modal');
     if (modal) {
         modal.style.display = 'none';
         document.body.classList.remove('no-scroll');
@@ -1759,6 +1779,120 @@ function renderRoteiroNextBar() {
     }
     bar.style.display = 'flex';
     bar.innerHTML = `<span>Dia completo — principais e extras feitos.</span>`;
+}
+
+// --- PREPARO (checklist pré-viagem) ---
+let preparoData = null;
+const PREPARO_CHECK_KEY = 'orlando_preparo_checklist_v1';
+
+function loadPreparoChecks() {
+    try { return JSON.parse(localStorage.getItem(PREPARO_CHECK_KEY) || '{}'); }
+    catch { return {}; }
+}
+function savePreparoChecks(map) {
+    localStorage.setItem(PREPARO_CHECK_KEY, JSON.stringify(map));
+}
+
+function allPreparoItems() {
+    if (!preparoData) return [];
+    return (preparoData.groups || []).flatMap(g => (g.items || []).map(it => ({ ...it, group: g.id })));
+}
+
+function preparoDueTone(due) {
+    if (!due) return '';
+    const today = new Date().toISOString().slice(0, 10);
+    if (due < today) return 'overdue';
+    const soon = new Date();
+    soon.setDate(soon.getDate() + 10);
+    const soonIso = soon.toISOString().slice(0, 10);
+    if (due <= soonIso) return 'soon';
+    return '';
+}
+
+function updatePreparoNavHint() {
+    const hint = document.getElementById('nav-preparo-hint');
+    if (!hint) return;
+    const items = allPreparoItems();
+    if (!items.length) {
+        hint.textContent = 'Papelada, dinheiro, reservas';
+        return;
+    }
+    const map = loadPreparoChecks();
+    const done = items.filter(it => map[it.id]).length;
+    const next = items.find(it => !map[it.id]);
+    if (done === items.length) {
+        hint.textContent = `${done}/${items.length} · tudo feito`;
+        return;
+    }
+    hint.textContent = next
+        ? `${done}/${items.length} · até ${formatDateBR(next.due)}`
+        : `${done}/${items.length} feitos`;
+}
+
+async function ensurePreparoData() {
+    if (preparoData) return;
+    try {
+        const res = await fetch('data/preparo.json');
+        if (!res.ok) throw new Error('preparo missing');
+        preparoData = await res.json();
+    } catch (e) {
+        console.error('Preparo load failed', e);
+        preparoData = null;
+    }
+}
+
+window.togglePreparoItem = function (id) {
+    const map = loadPreparoChecks();
+    map[id] = !map[id];
+    savePreparoChecks(map);
+    renderPreparo();
+    updatePreparoNavHint();
+};
+
+function renderPreparo() {
+    const body = document.getElementById('preparo-body');
+    if (!body) return;
+    if (!preparoData) {
+        body.innerHTML = '<p class="preparo-loading">Não foi possível carregar o preparo.</p>';
+        return;
+    }
+    const map = loadPreparoChecks();
+    const items = allPreparoItems();
+    const done = items.filter(it => map[it.id]).length;
+    const next = items.find(it => !map[it.id]);
+
+    const groupsHtml = (preparoData.groups || []).map(g => {
+        const list = (g.items || []).map(it => {
+            const checked = map[it.id] ? 'checked' : '';
+            const tone = map[it.id] ? '' : preparoDueTone(it.due);
+            return `<label class="preparo-item ${checked}">
+                <input type="checkbox" ${checked ? 'checked' : ''} onchange="togglePreparoItem('${it.id}')" />
+                <span class="preparo-item-body">
+                    <span class="preparo-item-title">${it.title}</span>
+                    <span class="preparo-item-meta">
+                        <span class="preparo-due ${tone}">até ${formatDateBR(it.due)}</span>
+                    </span>
+                    ${it.tip ? `<small class="preparo-item-tip">${it.tip}</small>` : ''}
+                </span>
+            </label>`;
+        }).join('');
+        return `<section class="preparo-group">
+            <div class="preparo-group-head">
+                <h3>${g.title}</h3>
+                ${g.blurb ? `<p>${g.blurb}</p>` : ''}
+            </div>
+            ${list}
+        </section>`;
+    }).join('');
+
+    body.innerHTML = `
+        <p class="preparo-intro">${preparoData.subtitle || ''}</p>
+        <div class="preparo-progress-head">
+            <strong>${done}/${items.length} feitos</strong>
+            <span>${next ? `Próximo: até ${formatDateBR(next.due)}` : 'Tudo tickado'}</span>
+        </div>
+        ${groupsHtml}
+    `;
 }
 
 // Global start
