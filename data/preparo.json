@@ -1,0 +1,193 @@
+{
+  "title": "Preparo da viagem",
+  "subtitle": "Checklist até a partida 28/11 · ticke quando fizer",
+  "depart": "2026-11-28",
+  "groups": [
+    {
+      "id": "agora",
+      "title": "Agora — até 31/08",
+      "blurb": "Documentos e reservas-base. Sem isso o resto não segura.",
+      "items": [
+        {
+          "id": "passaporte",
+          "due": "2026-08-31",
+          "title": "Passaportes válidos (os dois)",
+          "tip": "Precisa valer pelo menos até jun/2027 (6 meses depois da volta). Se faltar, agendar renovação já."
+        },
+        {
+          "id": "esta",
+          "due": "2026-08-31",
+          "title": "ESTA (ou visto) aprovado",
+          "tip": "ESTA no site oficial CBP. Print/PDF no celular e na nuvem. Sem ESTA não embarca."
+        },
+        {
+          "id": "voos",
+          "due": "2026-08-31",
+          "title": "Confirmar voos ida e volta",
+          "tip": "Ida: sábado 28/11 noite → domingo 29/11. Volta: sábado 12/12 noite. Preferir conexão com folga; seguro de atraso."
+        },
+        {
+          "id": "helios",
+          "due": "2026-08-31",
+          "title": "Confirmar Helios 29/11–12/12",
+          "tip": "Stay More, Save More (7+ noites). Não encurtar a estadia ou a promo cai. Guardar voucher."
+        },
+        {
+          "id": "cartoes",
+          "due": "2026-08-31",
+          "title": "Cartão em dólar / avisar o banco",
+          "tip": "Cartão sem IOF de compra internacional se tiverem. Avisar viagem EUA nos dois. Levar 2 cartões (um cada)."
+        }
+      ]
+    },
+    {
+      "id": "60d",
+      "title": "60 dias — até 29/09",
+      "blurb": "Seguro, apps e contas. Janela de restaurantes Disney abre em outubro.",
+      "items": [
+        {
+          "id": "seguro",
+          "due": "2026-09-29",
+          "title": "Seguro viagem com atraso/conexão",
+          "tip": "Ida é overnight com conexão: cobrir voo perdido, mala e saúde. Guardar apólice offline."
+        },
+        {
+          "id": "apps_contas",
+          "due": "2026-09-29",
+          "title": "Criar/entrar nas contas Universal + Disney + SeaWorld",
+          "tip": "Mesmo e-mail nos dois celulares. Vincular ingressos quando tiverem. Testar login já."
+        },
+        {
+          "id": "agenda_dining",
+          "due": "2026-09-29",
+          "title": "Alarme: reservas de restaurante Disney",
+          "tip": "Abre 60 dias antes, 6h ET. Flora 29/11 → 01/10. Satu’li 08/12 → 09/10. Via Napoli 09/12 → 10/10. Sci-Fi 10/12 → 11/10."
+        }
+      ]
+    },
+    {
+      "id": "45d",
+      "title": "45–30 dias — 14/10 a 29/10",
+      "blurb": "Celular, carro e reservas que somem.",
+      "items": [
+        {
+          "id": "dining_book",
+          "due": "2026-10-11",
+          "title": "Reservar restaurantes (Disney + Helios)",
+          "tip": "Prioridade: Satu’li, Sci-Fi, Via Napoli, Flora Taverna. Mythos (03/12) se ainda quiserem. Universal/Epic: Atlantic walk-up ou app."
+        },
+        {
+          "id": "esim",
+          "due": "2026-10-29",
+          "title": "eSIM ou roaming dos dois celulares",
+          "tip": "Ativar no MCO. Sem isso não chama Uber nem abre o app do parque. Testar QR em casa."
+        },
+        {
+          "id": "carro",
+          "due": "2026-10-29",
+          "title": "Alugar carro 08–12/12 (ou só 11/12)",
+          "tip": "Disney + Busch a partir do Helios. Mínimo: carro no dia do Busch (Tampa). Pegar no hotel/área Universal se possível."
+        },
+        {
+          "id": "mobile_passport",
+          "due": "2026-10-29",
+          "title": "Mobile Passport (ou Global Entry) no MCO",
+          "tip": "App MPC do CBP. Foto e passaporte cadastrados antes do voo. Domingo de chegada a imigração pode passar de 1h."
+        }
+      ]
+    },
+    {
+      "id": "14d",
+      "title": "14 dias — até 14/11",
+      "blurb": "Logística da semana. Conferir o que depende de horário.",
+      "items": [
+        {
+          "id": "epa",
+          "due": "2026-11-14",
+          "title": "Confirmar Early Park Admission do Helios",
+          "tip": "É o pulo de vocês no Epic sem Express. Ver no app Universal quais dias EPA vale (1, 5 e 7/12)."
+        },
+        {
+          "id": "ingressos",
+          "due": "2026-11-14",
+          "title": "Vincular ingressos nos apps",
+          "tip": "Universal 1–7/12 (span 7, no limite). Disney 8–10/12. SeaWorld+Busch 30/11–11/12. Print da regra de validade."
+        },
+        {
+          "id": "igreja",
+          "due": "2026-11-14",
+          "title": "Confirmar culto 06/12 (horário e campus)",
+          "tip": "Orlando International Christian Church. Anotar endereço no Maps e Uber de volta ao Helios."
+        },
+        {
+          "id": "busch_transfer",
+          "due": "2026-11-14",
+          "title": "Ônibus grátis Busch 11/12 — ou plano B",
+          "tip": "Confirmar horário na véspera no site. Se não encaixar, carro/Uber cedo. Não improvisar de manhã."
+        },
+        {
+          "id": "malas",
+          "due": "2026-11-14",
+          "title": "Começar mala: frio + chuva",
+          "tip": "Dezembro em Orlando: manhã fria, tarde ok, chuva rápida. Capa leve, palmilha, power bank, tomada, remédios na mão."
+        }
+      ]
+    },
+    {
+      "id": "7d",
+      "title": "7 dias — até 21/11",
+      "blurb": "Última conferência. Cópias e late checkout.",
+      "items": [
+        {
+          "id": "late_checkout",
+          "due": "2026-11-21",
+          "title": "Pedir late checkout 12/12",
+          "tip": "Voo ~19:30. Malas na concierge se não der late. Não marcar parque nesse dia."
+        },
+        {
+          "id": "copias",
+          "due": "2026-11-21",
+          "title": "Cópias de passaporte, ESTA e voucher",
+          "tip": "Pasta no Drive/iCloud + foto no celular. Um de vocês leva o original, o outro a cópia impressa."
+        },
+        {
+          "id": "dolar_caixa",
+          "due": "2026-11-21",
+          "title": "Um pouco de dólar em espécie",
+          "tip": "Gorjeta, gorjeta de mala, emergência. O resto no cartão. Não levar maço."
+        },
+        {
+          "id": "ll_plan",
+          "due": "2026-11-21",
+          "title": "Combinado Lightning Lane / VQ",
+          "tip": "No dia: Guardians (EPCOT 09/12) e Rise (DHS 10/12) cedo no app. Mario Kart no Epic: conferir se ainda tem fila virtual."
+        }
+      ]
+    },
+    {
+      "id": "48h",
+      "title": "48h e aeroporto — 26–28/11",
+      "blurb": "Partida sábado ~22:30. GRU 3h antes.",
+      "items": [
+        {
+          "id": "checkin_voo",
+          "due": "2026-11-26",
+          "title": "Check-in online + assentos",
+          "tip": "Baixar boarding pass. Conexão: conferir terminal e tempo mínimo. Plano B se perder o trecho."
+        },
+        {
+          "id": "gru_3h",
+          "due": "2026-11-28",
+          "title": "Chegar no GRU ~19:30",
+          "tip": "Internacional = 3h. Documentos na mão, não na mala despachada. Remédios e um casaco na cabine."
+        },
+        {
+          "id": "helios_pin",
+          "due": "2026-11-28",
+          "title": "Endereço Helios no Maps (offline)",
+          "tip": "8505 S Kirkman Rd, Orlando, FL 32819. Uber/Lyft no MCO ~25–40 min. Wi-Fi do aeroporto se o eSIM atrasar."
+        }
+      ]
+    }
+  ]
+}
