@@ -37,7 +37,7 @@
     {
       "id": "passagens",
       "title": "Passagens — quando fica mais barato",
-      "blurb": "GRU↔MCO, ida 28/11 noite e volta 12/12. Vocês estão na janela boa (~3 meses). Depois de meados de setembro, Thanksgiving + dezembro costumam encarecer.",
+      "blurb": "GRU↔MCO, ida 28/11 noite e volta 12/12. Comprar no Mastercard Black do seguro; emitir o seguro só depois, nesse mesmo cartão.",
       "items": [
         {
           "id": "voos_alerta",
@@ -47,11 +47,25 @@
           "tip": "Google Flights → Acompanhar preços. Comparar LATAM direto (mesmo dia) vs Copa/Avianca overnight. Terça e quarta de manhã (BR) costumam mostrar promo."
         },
         {
+          "id": "voos_black",
+          "due": "2026-09-05",
+          "when": "Antes de pagar",
+          "title": "Separar o Mastercard Black (o do seguro)",
+          "tip": "É esse cartão — não débito, não o outro crédito. Limite pra ida+volta dos dois. Sem pagar nele, o seguro da bandeira não pega."
+        },
+        {
           "id": "voos",
           "due": "2026-09-05",
           "when": "Melhor compra: agora → 05/09",
-          "title": "Comprar ida e volta (janela mais barata)",
-          "tip": "Internacional: 3–5 meses antes, ou 8–12 semanas (05/09–03/10). Vocês já estão nisso. Travar se o Google marcar preço baixo. Folga na conexão da ida."
+          "title": "Comprar ida e volta no Mastercard Black",
+          "tip": "100% da passagem nesse cartão (os dois passageiros). Internacional: janela agora→05/09; não deixar passar 15/09. Folga na conexão da ida. Anotar final do cartão e localizador."
+        },
+        {
+          "id": "seguro_black",
+          "due": "2026-09-06",
+          "when": "Só DEPOIS de comprar",
+          "title": "Emitir o seguro viagem no mesmo Black",
+          "tip": "Portal/app do banco ou Mastercard Black, com o cartão que PAGOU as passagens. Não emitir antes da compra e não usar outro cartão. Incluir os dois, datas 28/11–13/12, localizador. PDF da apólice no celular e na nuvem."
         },
         {
           "id": "voos_limite",
@@ -100,13 +114,14 @@
     {
       "id": "60d",
       "title": "60 dias — até 29/09",
-      "blurb": "Seguro, apps e contas. Disney dining é o bloco seguinte (outubro, 6h ET).",
+      "blurb": "Apps e contas. Seguro da passagem já foi no bloco Black (só depois da compra).",
       "items": [
         {
           "id": "seguro",
           "due": "2026-09-29",
-          "title": "Seguro viagem com atraso/conexão",
-          "tip": "Ida é overnight com conexão: cobrir voo perdido, mala e saúde. Guardar apólice offline."
+          "when": "Conferir apólice Black",
+          "title": "Ver se o Black cobre atraso/conexão; complementar só se faltar",
+          "tip": "Ida é overnight com conexão. Se a apólice do Mastercard Black já cobrir voo perdido, mala e saúde, não comprar outro. Se faltar, aí sim um seguro extra — sem cancelar o do Black."
         },
         {
           "id": "apps_contas",
