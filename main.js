@@ -1870,6 +1870,13 @@ function renderPreparo() {
         const list = (g.items || []).map(it => {
             const checked = map[it.id] ? 'checked' : '';
             const tone = map[it.id] ? '' : preparoDueTone(it.due);
+            const slot = it.slot
+                ? `<span class="preparo-slot preparo-slot-${it.slot}">${
+                    it.slot === 'dentro' ? 'Dentro' :
+                    it.slot === 'clip' ? 'Clip' :
+                    it.slot === 'corpo' ? 'No corpo' : 'Hotel'
+                }</span>`
+                : '';
             const whenLabel = it.when || `até ${formatDateBR(it.due)}`;
             return `<label class="preparo-item ${checked}">
                 <input type="checkbox" ${checked ? 'checked' : ''} onchange="togglePreparoItem('${it.id}')" />
@@ -1877,6 +1884,7 @@ function renderPreparo() {
                     <span class="preparo-item-title">${it.title}</span>
                     <span class="preparo-item-meta">
                         <span class="preparo-due ${tone}">${whenLabel}</span>
+                        ${slot}
                     </span>
                     ${it.tip ? `<small class="preparo-item-tip">${it.tip}</small>` : ''}
                 </span>

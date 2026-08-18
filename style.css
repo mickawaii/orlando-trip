@@ -1376,6 +1376,21 @@ a {
     background: color-mix(in srgb, var(--warn) 10%, #fff);
 }
 
+.preparo-slot {
+    font-size: 0.7rem;
+    font-weight: 750;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+}
+
+.preparo-slot-dentro { background: var(--accent-soft); color: var(--accent); }
+.preparo-slot-clip { background: #fff7ed; color: #9a3412; }
+.preparo-slot-corpo { background: #eff6ff; color: #1d4ed8; }
+.preparo-slot-hotel { background: var(--bg); color: var(--text-dim); }
+
 .preparo-item-tip {
     display: block;
     font-size: 0.8rem;
