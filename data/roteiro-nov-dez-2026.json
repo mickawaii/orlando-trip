@@ -314,35 +314,40 @@
           "name": "Mako",
           "land": "SeaWorld",
           "tip": "Rope drop",
-          "first": true
+          "first": true,
+          "queue": "Rope drop deve ser curto. Hidratar; olhar o recife se a fila passar pelo aquário. No app: horário do próximo show."
         },
         {
           "id": "pipe",
           "name": "Pipeline",
           "land": "SeaWorld",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Fila ao sol — chapéu. Um tira foto da torre, o outro guarda a fila. Checar Pipeline vs Ice no app."
         },
         {
           "id": "ice",
           "name": "Ice Breaker",
           "land": "SeaWorld",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Geralmente anda. Usar a espera pra marcar 1 show no app (não fiquem só no coaster)."
         },
         {
           "id": "inf",
           "name": "Infinity Falls",
           "land": "SeaWorld",
           "tip": "Boa na tarde",
-          "first": false
+          "first": false,
+          "queue": "Vai molhar. Nessa fila: capa no celular, meia extra na mochila, chinelo se tiverem."
         },
         {
           "id": "shows",
           "name": "Shows / orcas schedule no app",
           "land": "SeaWorld",
           "tip": "Encaixem 1–2 shows",
-          "first": false
+          "first": false,
+          "queue": "Não é fila de ride: chegar 10–15 min, escolher lugar juntos, água. Banheiro ANTES de sentar."
         }
       ],
       "meals": {
@@ -372,7 +377,8 @@
           "id": "kraken",
           "name": "Kraken",
           "land": "SeaWorld",
-          "tip": "Depois das 3 headliners"
+          "tip": "Depois das 3 headliners",
+          "queue": "Depois das headliners. Fila curta: hidratar e só."
         },
         {
           "id": "antarctic",
@@ -423,35 +429,40 @@
           "name": "Mario Kart: Bowser's Challenge",
           "land": "Super Nintendo World",
           "tip": "Primeira fila do dia — rope drop",
-          "first": true
+          "first": true,
+          "queue": "Fila é cenário Nintendo (pipes, blocos). Foto no arco, olhar detalhes — não vídeo. Conferir se tem VQ no app."
         },
         {
           "id": "yoshi",
           "name": "Yoshi's Adventure",
           "land": "Super Nintendo World",
           "tip": "Enquanto Nintendo ainda está calmo",
-          "first": false
+          "first": false,
+          "queue": "Fila panorâmica: fotos da land. Combinar o que falta no SNW. Ride leve, boa pra respirar."
         },
         {
           "id": "mine",
           "name": "Mine-Cart Madness",
           "land": "Super Nintendo World",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Olhar os mine carts e a mina. Se a fila estiver longa, um busca água enquanto o switchback permite se reencontrar."
         },
         {
           "id": "celestial",
           "name": "Celestial Park — passeio + fotos",
           "land": "Celestial Park",
           "tip": "Base do hotel: fácil ir/voltar",
-          "first": false
+          "first": false,
+          "queue": "Não é fila — fotos e gelato. Já abrir o app do Stardust / Ministry do dia seguinte."
         },
         {
           "id": "stardust_peek",
           "name": "Stardust Racers (se der tempo)",
           "land": "Celestial Park",
           "tip": "Senão deixa pro Dia 2",
-          "first": false
+          "first": false,
+          "queue": "Fila do coaster com vista do Celestial. Decidir se repetem à noite. Power bank se for a última do dia."
         }
       ],
       "meals": {
@@ -526,49 +537,56 @@
           "name": "Harry Potter and the Escape from Gringotts",
           "land": "Diagon Alley",
           "tip": "Rope drop",
-          "first": true
+          "first": true,
+          "queue": "Diagon Alley É o entretenimento. Vitrines, mármore do banco, goblins. Quase não precisa de celular."
         },
         {
           "id": "diagwalk",
           "name": "Diagon Alley walkthrough + lojas",
           "land": "Diagon Alley",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Andar devagar. Lojas sem pressa. Butterbeer se a fila do Gringotts já foi."
         },
         {
           "id": "mummy",
           "name": "Revenge of the Mummy",
           "land": "New York",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Fila indoor e fria — beber água e descansar pernas. Olhar os hieróglifos."
         },
         {
           "id": "mib",
           "name": "Men in Black Alien Attack",
           "land": "World Expo",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Combinar quem pega qual alien. Fila tem humor; vale prestar atenção nos TVs."
         },
         {
           "id": "tf",
           "name": "Transformers: The Ride-3D",
           "land": "Production Central",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Fila com robôs — foto juntos. Bom momento pra checar espera do Rip Ride no app."
         },
         {
           "id": "rrr",
           "name": "Hollywood Rip Ride Rockit",
           "land": "Production Central",
           "tip": "Se a fila cooperar",
-          "first": false
+          "first": false,
+          "queue": "Ao ar livre. Se ainda escolher música, fazer isso AQUI (não na plataforma)."
         },
         {
           "id": "express",
           "name": "Hogwarts Express → IoA (só ida se quiser)",
           "land": "King's Cross",
           "tip": "Ou deixem pra amanhã no sentido inverso",
-          "first": false
+          "first": false,
+          "queue": "King's Cross: detalhe da estação, foto 9 3/4 só se estiver vazio. Senão sigam."
         }
       ],
       "meals": {
@@ -649,42 +667,48 @@
           "name": "Hagrid's Magical Creatures Motorbike Adventure",
           "land": "Hogsmeade",
           "tip": "Rope drop — fila explode rápido",
-          "first": true
+          "first": true,
+          "queue": "Uma das melhores filas. Floresta, criaturas, abóboras. Olhar tudo. Celular no bolso."
         },
         {
           "id": "velo",
           "name": "VelociCoaster",
           "land": "Jurassic Park / Isla",
           "tip": "Em seguida",
-          "first": false
+          "first": false,
+          "queue": "Se a espera crescer: Raptor Encounter do lado (foto) e voltar. Senão, theming da Isla."
         },
         {
           "id": "hulk",
           "name": "The Incredible Hulk Coaster",
           "land": "Marvel Super Hero Island",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Fila Marvel: foto nas estátuas. Ride intenso — água e prender cabelo/óculos ANTES."
         },
         {
           "id": "spidey",
           "name": "The Amazing Adventures of Spider-Man",
           "land": "Marvel",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Fila em HQ de HQ: arte de quadrinhos. 3D: quem usa óculos de grau leva por cima ou lenti."
         },
         {
           "id": "river",
           "name": "Jurassic Park River Adventure",
           "land": "Jurassic Park",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Molha. Nessa espera: dry bag, chinelo, capinha. Um segura as coisas secas."
         },
         {
           "id": "hogwarts",
           "name": "Hogwarts Express de volta / Hogsmeade",
           "land": "Hogsmeade",
           "tip": "Fechem o dia em Hogsmeade",
-          "first": false
+          "first": false,
+          "queue": "Estação e Hogsmeade. Olhar o castelo; compras no fim, não agora."
         }
       ],
       "meals": {
@@ -855,35 +879,40 @@
           "name": "Ministry of Magic / Harry Potter land",
           "land": "Ministry of Magic",
           "tip": "Rope drop na headliner da terra",
-          "first": true
+          "first": true,
+          "queue": "Fila do Ministério é atração. Memorandos, escritórios, olhar pra cima. Não spoilemar um pro outro."
         },
         {
           "id": "stardust",
           "name": "Stardust Racers",
           "land": "Celestial Park",
           "tip": "Coaster — vá cedo ou no fim da tarde",
-          "first": false
+          "first": false,
+          "queue": "Vista do parque enquanto anda. Combinar Berk vs Nintendo se faltar tempo."
         },
         {
           "id": "berk",
           "name": "Isle of Berk rides + show",
           "land": "Isle of Berk",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Olhar os dragões da land e o horário do show no app. Fila costuma ter sombra."
         },
         {
           "id": "httyd",
           "name": "Hiccup's Wing Gliders / atrações Berk",
           "land": "Isle of Berk",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Mesma land: fotos, hidratação, pernas. Ride mais leve depois do Stardust."
         },
         {
           "id": "repeat_nintendo",
           "name": "Repeteco Nintendo se faltar algo",
           "land": "Super Nintendo World",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Mesma dica do Dia 1: theming > celular. Só repetir o que ficou incompleto."
         }
       ],
       "meals": {
@@ -1042,35 +1071,40 @@
           "name": "Tudo que ficou unchecked nos Dias 1–2",
           "land": "Epic",
           "tip": "Abra a checklist e ataque o restante",
-          "first": true
+          "first": true,
+          "queue": "Na fila: abrir ESTE roteiro e tickar o que falta dos Dias 1–2. É o uso útil do celular."
         },
         {
           "id": "fav1",
           "name": "Repetir favorito #1",
           "land": "Epic",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Repeteco: comparar impressões. Foto que não deu na primeira vez."
         },
         {
           "id": "fav2",
           "name": "Repetir favorito #2",
           "land": "Epic",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Última chance Universal. Se a fila passar de 40 min, pensem se vale ou se vão às lojas."
         },
         {
           "id": "shop",
           "name": "Lojas + merch",
           "land": "Epic",
           "tip": "Deixe compras pro fim",
-          "first": false
+          "first": false,
+          "queue": "Não é fila de ride. Decidir um souvenir cada — evita compra cansada à noite."
         },
         {
           "id": "night",
           "name": "Celestial Park à noite",
           "land": "Celestial Park",
           "tip": "Feche a trilogia Epic com calma",
-          "first": false
+          "first": false,
+          "queue": "Andar sem destino. Luzes. Recarregar o celular pra amanhã no AK."
         }
       ],
       "meals": {
@@ -1145,35 +1179,40 @@
           "name": "Avatar Flight of Passage",
           "land": "Pandora",
           "tip": "Rope drop",
-          "first": true
+          "first": true,
+          "queue": "Fila linda (lab Na’vi, bioluminescência, janela pras montanhas). Quase museu. Celular só se for LL do próximo."
         },
         {
           "id": "navi",
           "name": "Na'vi River Journey",
           "land": "Pandora",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Caverna iluminada, áudio. Andar de mãos dadas e olhar o teto. Ride calma depois do FoP."
         },
         {
           "id": "safari",
           "name": "Kilimanjaro Safaris",
           "land": "Africa",
           "tip": "Manhã!",
-          "first": false
+          "first": false,
+          "queue": "Sol. Chapéu + água. Combinar o que querem ver (girafas, hipo). Manhã = mais animal."
         },
         {
           "id": "everest",
           "name": "Expedition Everest",
           "land": "Asia",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Fila indoor do yeti — fresco, fotos, ler as placas. Bom descanso."
         },
         {
           "id": "kali",
           "name": "Kali River Rapids (opcional / calor)",
           "land": "Asia",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Molha. Preparar bolsa AQUI. Se estiver frio, pulem sem culpa."
         }
       ],
       "meals": {
@@ -1254,35 +1293,40 @@
           "name": "Guardians of the Galaxy: Cosmic Rewind",
           "land": "World Discovery",
           "tip": "Prioridade #1 do dia",
-          "first": true
+          "first": true,
+          "queue": "Fila é museu dos anos 80: brincar de achar referência. Se estiver em VQ, usem o tempo no Showcase curto."
         },
         {
           "id": "soarin",
           "name": "Soarin' Around the World",
           "land": "World Nature",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Fila de aeroporto temático. Checar LL do Remy/Frozen. Banheiro antes — a ride é sentada longa."
         },
         {
           "id": "remy",
           "name": "Remy's Ratatouille Adventure",
           "land": "France",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Olhar buracos de rato e Paris em miniatura. Fila entretém sozinha."
         },
         {
           "id": "frozen",
           "name": "Frozen Ever After",
           "land": "Norway",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Detalhes noruegueses, livros, neve. Foto na fila do castelo, não depois empurrados."
         },
         {
           "id": "showcase",
           "name": "World Showcase loop à noite",
           "land": "World Showcase",
           "tip": "Luzes + doces",
-          "first": false
+          "first": false,
+          "queue": "Não é fila. Comer andando, um prato cada país, sentar quando cansar. App do fogos."
         }
       ],
       "meals": {
@@ -1363,35 +1407,40 @@
           "name": "Star Wars: Rise of the Resistance",
           "land": "Batuu",
           "tip": "Rope drop / boarding group",
-          "first": true
+          "first": true,
+          "queue": "Melhor fila da Disney. Stormtroopers, droids — entrar no jogo. Guarda o celular. Vocês dois."
         },
         {
           "id": "slinky",
           "name": "Slinky Dog Dash",
           "land": "Toy Story Land",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Sol. Sombra do Slinky, água. Andy’s backyard: achar easter eggs. LL se a espera disparar."
         },
         {
           "id": "tot",
           "name": "Twilight Zone Tower of Terror",
           "land": "Sunset Boulevard",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Lobby + biblioteca Twilight Zone. Ler os jornais da fila. Ar-condicionado = pausa."
         },
         {
           "id": "mmrr",
           "name": "Mickey & Minnie's Runaway Railway",
           "land": "Hollywood Boulevard",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Toon, cartazes. Ride leve — bom pra rir juntos depois do Rise."
         },
         {
           "id": "smugglers",
           "name": "Smugglers Run (opcional)",
           "land": "Batuu",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Nessa espera: decidir quem é piloto / atirador. Não discutam isso no cockpit."
         }
       ],
       "meals": {
@@ -1472,42 +1521,48 @@
           "name": "Ônibus gratuito Busch (se disponível)",
           "land": "Transfer",
           "tip": "Confirmar horário na véspera; senão Uber/carro cedo",
-          "first": true
+          "first": true,
+          "queue": "Viagem ~1h20. Podcast, dormir, água. Não gastar perna. Lanche no ônibus, não no parque lotado."
         },
         {
           "id": "gwazi",
           "name": "Iron Gwazi",
           "land": "Busch",
           "tip": "Prioridade #1 no parque",
-          "first": false
+          "first": false,
+          "queue": "Olhar o coaster híbrido. Foto de baixo. Fila ao sol — protetor de novo."
         },
         {
           "id": "montu",
           "name": "Montu",
           "land": "Busch",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Temática egípcia, um pouco de sombra. Invertido: bolso zipado, óculos preso."
         },
         {
           "id": "sheikra",
           "name": "SheiKra",
           "land": "Busch",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Fila com vista do parque. Dive: soltar o celular com o outro se um não quiser andar."
         },
         {
           "id": "cheetah",
           "name": "Cheetah Hunt",
           "land": "Busch",
           "tip": "",
-          "first": false
+          "first": false,
+          "queue": "Se a espera crescer: habitat dos guepardos (quando visível) vale mais que o celular."
         },
         {
           "id": "serengeti",
           "name": "Serengeti Plain / animais",
           "land": "Busch",
           "tip": "Encaixem no meio do dia",
-          "first": false
+          "first": false,
+          "queue": "Não é fila — passeio. Andar devagar, água, um mapa cada. Pausa de coaster."
         }
       ],
       "meals": {
@@ -1537,7 +1592,8 @@
           "id": "kumba",
           "name": "Kumba",
           "land": "Busch",
-          "tip": "Depois de Gwazi/Montu/SheiKra"
+          "tip": "Depois de Gwazi/Montu/SheiKra",
+          "queue": "Clássico à sombra das árvores. Bom se Gwazi estiver longo demais."
         },
         {
           "id": "scorpion",
@@ -1596,7 +1652,8 @@
           "name": "Compras (outlets / I-Drive) se der tempo",
           "land": "Orlando",
           "tip": "Janela até ~15:30–16:00 se voo 19:30",
-          "first": false
+          "first": false,
+          "queue": "Não é fila de ride. Decidir um souvenir cada — evita compra cansada à noite."
         },
         {
           "id": "airport",
@@ -1671,5 +1728,10 @@
     "priority_crowd_sum_pct": 41.0,
     "previous_priority_sum_pct": 174.5,
     "source": "data/*.csv (Queue-Times + forecast)"
-  }
+  },
+  "queue_couple_rules": [
+    "Ao sair de um Lightning Lane / Express, o outro já abre o app e pega o próximo.",
+    "Fila >20 min: água, sombra e theming. Celular só para o app do parque ou este roteiro.",
+    "Um leva o power bank. Os dois no TikTok = bateria morta no Rise."
+  ]
 }

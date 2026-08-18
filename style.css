@@ -1094,6 +1094,44 @@ a {
     color: var(--text-dim);
 }
 
+.roteiro-attr-queue {
+    display: block;
+    margin-top: 6px;
+    line-height: 1.35;
+}
+
+.roteiro-attr-queue span {
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 0.65rem;
+    font-weight: 750;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.roteiro-queue-playbook {
+    margin-bottom: 14px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+}
+
+.roteiro-queue-playbook h4 {
+    margin: 0 0 8px;
+    font-size: 0.82rem;
+}
+
+.roteiro-queue-playbook ul {
+    margin: 0;
+    padding-left: 18px;
+    color: var(--text-dim);
+    font-size: 0.82rem;
+}
+
+.roteiro-queue-playbook li { margin-bottom: 4px; }
+
 .roteiro-attr-check {
     width: 22px;
     height: 22px;

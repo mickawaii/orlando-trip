@@ -1682,6 +1682,7 @@ function renderRoteiroDayDetail() {
                 <strong>${a.name}</strong>
                 ${a.land ? `<em>${a.land}</em>` : ''}
                 ${a.tip ? `<small>${a.tip}</small>` : ''}
+                ${a.queue ? `<small class="roteiro-attr-queue"><span>Na fila</span>${a.queue}</small>` : ''}
             </span>
             <span class="roteiro-attr-check">${checked ? '✓' : ''}</span>
         </button>`;
@@ -1698,6 +1699,7 @@ function renderRoteiroDayDetail() {
             <span>
                 <strong>${a.name}</strong>${a.land ? ` · ${a.land}` : ''}
                 ${a.tip ? `<small class="roteiro-after-tip">${a.tip}</small>` : ''}
+                ${a.queue ? `<small class="roteiro-after-tip roteiro-attr-queue"><span>Na fila</span>${a.queue}</small>` : ''}
             </span>
         </label>`;
     }).join('');
@@ -1713,6 +1715,12 @@ function renderRoteiroDayDetail() {
         </div>`;
     };
 
+    const queueRules = (d.type === 'park' && Array.isArray(roteiroData.queue_couple_rules) && roteiroData.queue_couple_rules.length)
+        ? `<div class="roteiro-queue-playbook">
+                <h4>Na fila, vocês dois</h4>
+                <ul>${roteiroData.queue_couple_rules.map(r => `<li>${r}</li>`).join('')}</ul>
+           </div>`
+        : '';
     const tips = (d.tips || []).map(t => `<li>${t}</li>`).join('');
     const flightHtml = renderRoteiroFlightBlock(d);
 
@@ -1732,6 +1740,7 @@ function renderRoteiroDayDetail() {
             ${flightHtml}
             ${hours}
             ${address}
+            ${queueRules}
             <div class="roteiro-section">
                 <div class="roteiro-section-head">
                     <h4>Ordem do dia</h4>
