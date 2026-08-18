@@ -92,14 +92,14 @@
       "window_days": 7,
       "parks_used": [
         "Animal Kingdom",
-        "Hollywood Studios",
-        "EPCOT"
+        "EPCOT",
+        "Hollywood Studios"
       ],
       "first_use": "2026-12-08",
       "last_use": "2026-12-10",
       "span_days": 3,
       "ok": true,
-      "note": "AK no melhor dia restante após Epic; DHS no dia ~1%; EPCOT fecha a janela."
+      "note": "AK no melhor dia restante após Epic; EPCOT no 9/12 (~9%); DHS fecha a janela (~7%)."
     },
     "seaworld_busch": {
       "product": "SeaWorld + Busch Combo",
@@ -1190,12 +1190,12 @@
         "dinner": {
           "when": "18:00–20:00",
           "where": "volta Helios",
-          "what": "Jantar — amanhã DHS"
+          "what": "Jantar — amanhã EPCOT"
         }
       },
       "tips": [
         "Prioridade #2: AK no melhor dia factível (após Epic)",
-        "Amanhã DHS (~1% — excelente)",
+        "Amanhã EPCOT (~9% — bem mais leve)",
         "Ingresso Disney: janela 8–10/12"
       ],
       "afterMain": [
@@ -1234,115 +1234,6 @@
     {
       "date": "2026-12-09",
       "dow": "Quarta",
-      "emoji": "🎬",
-      "short": "DHS",
-      "type": "park",
-      "title": "Hollywood Studios",
-      "parkInfo": {
-        "name": "Hollywood Studios",
-        "address": "351 S Studio Dr, Lake Buena Vista, FL 32830",
-        "mapsUrl": "https://maps.google.com/?q=Disney%20Hollywood%20Studios",
-        "opens": "09:00",
-        "closes": "21:00",
-        "hoursSource": "típico dez — confirme no app oficial",
-        "color": "#f87171"
-      },
-      "strategy": "Rise of the Resistance o mais cedo possível. Quarta ~1% no QT — ótimo dia pro DHS.",
-      "order": [
-        {
-          "id": "rise",
-          "name": "Star Wars: Rise of the Resistance",
-          "land": "Batuu",
-          "tip": "Rope drop / boarding group",
-          "first": true
-        },
-        {
-          "id": "slinky",
-          "name": "Slinky Dog Dash",
-          "land": "Toy Story Land",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "tot",
-          "name": "Twilight Zone Tower of Terror",
-          "land": "Sunset Boulevard",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "mmrr",
-          "name": "Mickey & Minnie's Runaway Railway",
-          "land": "Hollywood Boulevard",
-          "tip": "",
-          "first": false
-        },
-        {
-          "id": "smugglers",
-          "name": "Smugglers Run (opcional)",
-          "land": "Batuu",
-          "tip": "",
-          "first": false
-        }
-      ],
-      "meals": {
-        "lunch": {
-          "when": "12:30",
-          "where": "Sci-Fi Dine-In Theater",
-          "what": "Burgers no drive-in (reserva se possível)"
-        },
-        "snack": {
-          "when": "15:30",
-          "where": "Toy Story / Batuu",
-          "what": "Blue Milk ou snack TS"
-        },
-        "dinner": {
-          "when": "18:30–20:00",
-          "where": "DHS / Helios",
-          "what": "Jantar — amanhã EPCOT"
-        }
-      },
-      "tips": [
-        "Prioridade #5: DHS no dia mais leve disponível",
-        "Slinky Dog em seguida",
-        "Amanhã EPCOT"
-      ],
-      "afterMain": [
-        {
-          "id": "toy_alien",
-          "name": "Alien Swirling Saucers",
-          "land": "Toy Story Land",
-          "tip": "Depois do Slinky"
-        },
-        {
-          "id": "rockn",
-          "name": "Rock 'n' Roller Coaster",
-          "land": "Sunset Boulevard",
-          "tip": "Se a energia aguentar"
-        },
-        {
-          "id": "batman",
-          "name": "Star Tours",
-          "land": "Echo Lake",
-          "tip": "Extra Star Wars"
-        },
-        {
-          "id": "indy",
-          "name": "Indiana Jones Epic Stunt (se no horário)",
-          "land": "Indiana",
-          "tip": "Show"
-        },
-        {
-          "id": "galaxy_edge",
-          "name": "Andar em Batuu / lojas",
-          "land": "Batuu",
-          "tip": "Depois do Rise"
-        }
-      ]
-    },
-    {
-      "date": "2026-12-10",
-      "dow": "Quinta",
       "emoji": "🌐",
       "short": "EPCOT",
       "type": "park",
@@ -1356,7 +1247,7 @@
         "hoursSource": "típico dez — confirme no app oficial",
         "color": "#60a5fa"
       },
-      "strategy": "Guardians cedo (VQ/LL). Remy e Frozen antes do Showcase lotar.",
+      "strategy": "Guardians cedo (VQ/LL). Remy e Frozen antes do Showcase lotar. Quarta ~9% no QT — bem mais leve que o 10/12.",
       "order": [
         {
           "id": "gotg",
@@ -1408,12 +1299,12 @@
         "dinner": {
           "when": "19:00–21:00",
           "where": "World Showcase / Helios",
-          "what": "Jantar — amanhã Busch cedo"
+          "what": "Jantar — amanhã DHS"
         }
       },
       "tips": [
-        "Último dia Disney (janela 8–10/12)",
-        "Amanhã Busch (sem voo no mesmo dia)",
+        "EPCOT no dia mais leve da janela Disney (~9%)",
+        "Amanhã DHS (~7% — ainda leve)",
         "World Showcase à noite se der"
       ],
       "afterMain": [
@@ -1446,6 +1337,115 @@
           "name": "Encanto / fogos do Showcase se houver",
           "land": "World Showcase",
           "tip": "Feche o dia"
+        }
+      ]
+    },
+    {
+      "date": "2026-12-10",
+      "dow": "Quinta",
+      "emoji": "🎬",
+      "short": "DHS",
+      "type": "park",
+      "title": "Hollywood Studios",
+      "parkInfo": {
+        "name": "Hollywood Studios",
+        "address": "351 S Studio Dr, Lake Buena Vista, FL 32830",
+        "mapsUrl": "https://maps.google.com/?q=Disney%20Hollywood%20Studios",
+        "opens": "09:00",
+        "closes": "21:00",
+        "hoursSource": "típico dez — confirme no app oficial",
+        "color": "#f87171"
+      },
+      "strategy": "Rise of the Resistance o mais cedo possível. Quinta ~7% no QT — ainda leve; EPCOT ficou no dia ~9%.",
+      "order": [
+        {
+          "id": "rise",
+          "name": "Star Wars: Rise of the Resistance",
+          "land": "Batuu",
+          "tip": "Rope drop / boarding group",
+          "first": true
+        },
+        {
+          "id": "slinky",
+          "name": "Slinky Dog Dash",
+          "land": "Toy Story Land",
+          "tip": "",
+          "first": false
+        },
+        {
+          "id": "tot",
+          "name": "Twilight Zone Tower of Terror",
+          "land": "Sunset Boulevard",
+          "tip": "",
+          "first": false
+        },
+        {
+          "id": "mmrr",
+          "name": "Mickey & Minnie's Runaway Railway",
+          "land": "Hollywood Boulevard",
+          "tip": "",
+          "first": false
+        },
+        {
+          "id": "smugglers",
+          "name": "Smugglers Run (opcional)",
+          "land": "Batuu",
+          "tip": "",
+          "first": false
+        }
+      ],
+      "meals": {
+        "lunch": {
+          "when": "12:30",
+          "where": "Sci-Fi Dine-In Theater",
+          "what": "Burgers no drive-in (reserva se possível)"
+        },
+        "snack": {
+          "when": "15:30",
+          "where": "Toy Story / Batuu",
+          "what": "Blue Milk ou snack TS"
+        },
+        "dinner": {
+          "when": "18:30–20:00",
+          "where": "DHS / Helios",
+          "what": "Jantar — amanhã Busch cedo"
+        }
+      },
+      "tips": [
+        "Último dia Disney (janela 8–10/12)",
+        "Prioridade #5: DHS ainda em dia leve (~7%)",
+        "Amanhã Busch (sem voo no mesmo dia)"
+      ],
+      "afterMain": [
+        {
+          "id": "toy_alien",
+          "name": "Alien Swirling Saucers",
+          "land": "Toy Story Land",
+          "tip": "Depois do Slinky"
+        },
+        {
+          "id": "rockn",
+          "name": "Rock 'n' Roller Coaster",
+          "land": "Sunset Boulevard",
+          "tip": "Se a energia aguentar"
+        },
+        {
+          "id": "batman",
+          "name": "Star Tours",
+          "land": "Echo Lake",
+          "tip": "Extra Star Wars"
+        },
+        {
+          "id": "indy",
+          "name": "Indiana Jones Epic Stunt (se no horário)",
+          "land": "Indiana",
+          "tip": "Show"
+        },
+        {
+          "id": "galaxy_edge",
+          "name": "Andar em Batuu / lojas",
+          "land": "Batuu",
+          "tip": "Depois do Rise"
         }
       ]
     },
