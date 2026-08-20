@@ -1,6 +1,6 @@
 {
   "title": "Preparo da viagem",
-  "subtitle": "Checklist até a partida 28/11 · ticke quando fizer",
+  "subtitle": "Checklist até 28/11 · Black do seguro · Nu Global + UV · eSIM 10 GB · pochete única",
   "depart": "2026-11-28",
   "groups": [
     {
@@ -24,13 +24,20 @@
           "id": "helios",
           "due": "2026-08-31",
           "title": "Confirmar Helios 29/11–12/12",
-          "tip": "Stay More, Save More (7+ noites). Não encurtar a estadia ou a promo cai. Guardar voucher."
+          "tip": "Stay More, Save More (7+ noites). Não encurtar. Não remarcar pelo Nu Viagens — Helios já é Universal. Guardar voucher."
         },
         {
           "id": "cartoes",
           "due": "2026-08-31",
-          "title": "Cartão em dólar / avisar o banco",
-          "tip": "Cartão sem IOF de compra internacional se tiverem. Avisar viagem EUA nos dois. Levar 2 cartões (um cada)."
+          "title": "Avisar viagem nos bancos (todos os cartões)",
+          "tip": "Avisar EUA em: Ultravioleta, C6 crédito, Nu/C6 Global, Wise. Sem aviso, compra no parque pode cair."
+        },
+        {
+          "id": "pagamentos_orland",
+          "due": "2026-08-31",
+          "when": "Definir agora",
+          "title": "Ordem dos cartões em Orlando",
+          "tip": "1) Nu Conta Global (spread 0 + IOF 3,5%) no dia a dia. 2) Wise com Rende+ se IOF 1,1% ainda valer. 3) Ultravioleta crédito: mesa/carro/emergência (IOF estornado + ~1,25% cashback; custo ~2,25%). 4) C6 Global = plano B. 5) C6 crédito no exterior = evitar (spread 5,25%+IOF). Passagens NÃO entram aqui — só o Black do seguro."
         }
       ]
     },
@@ -51,21 +58,28 @@
           "due": "2026-09-05",
           "when": "Antes de pagar",
           "title": "Separar o Mastercard Black (o do seguro)",
-          "tip": "É esse cartão — não débito, não o outro crédito. Limite pra ida+volta dos dois. Sem pagar nele, o seguro da bandeira não pega."
+          "tip": "O Mastercard Black cujo benefício de SEGURO VIAGEM vocês vão usar (não o Ultravioleta, se o seguro for do outro). Não débito. Limite pra ida+volta dos dois."
+        },
+        {
+          "id": "voos_nao_nu",
+          "due": "2026-09-05",
+          "when": "Regra fixa",
+          "title": "Não comprar o voo no Nu Viagens",
+          "tip": "O banner 9 pts/$ ou 5% cashback NÃO vale a pena se o seguro exige pagamento no outro Black. Hotel Helios também já está na Universal — não remarcar no Nu."
         },
         {
           "id": "voos",
           "due": "2026-09-05",
           "when": "Melhor compra: agora → 05/09",
           "title": "Comprar ida e volta no Mastercard Black",
-          "tip": "100% da passagem nesse cartão (os dois passageiros). Internacional: janela agora→05/09; não deixar passar 15/09. Folga na conexão da ida. Anotar final do cartão e localizador."
+          "tip": "100% no Black do seguro (os dois). NÃO comprar pelo Nu Viagens / Ultravioleta — o 5% cashback/9 pts não substitui o seguro do Black. Janela agora→05/09; limite 15/09. Folga na conexão. Anotar final do cartão + localizador."
         },
         {
           "id": "seguro_black",
           "due": "2026-09-06",
           "when": "Só DEPOIS de comprar",
           "title": "Emitir o seguro viagem no mesmo Black",
-          "tip": "Portal/app do banco ou Mastercard Black, com o cartão que PAGOU as passagens. Não emitir antes da compra e não usar outro cartão. Incluir os dois, datas 28/11–13/12, localizador. PDF da apólice no celular e na nuvem."
+          "tip": "Portal/app do banco do Black que PAGOU. Não emitir antes. Não usar outro cartão. Os dois, 28/11–13/12, localizador. PDF offline + nuvem."
         },
         {
           "id": "voos_limite",
@@ -114,7 +128,7 @@
     {
       "id": "60d",
       "title": "60 dias — até 29/09",
-      "blurb": "Apps e contas. Seguro da passagem já foi no bloco Black (só depois da compra).",
+      "blurb": "Apps, ingressos e alarmes Disney. Seguro Black já foi no bloco de passagens.",
       "items": [
         {
           "id": "seguro",
@@ -128,6 +142,20 @@
           "due": "2026-09-29",
           "title": "Criar/entrar nas contas Universal + Disney + SeaWorld",
           "tip": "Mesmo e-mail nos dois celulares. Vincular ingressos quando tiverem. Testar login já."
+        },
+        {
+          "id": "alarme_disney",
+          "due": "2026-09-29",
+          "when": "Agendar alarmes",
+          "title": "Alarmes Disney dining 09–11/10 · 7h Brasília",
+          "tip": "Off-site = um dia por vez às 6h ET. 09/10 Satu’li (AK). 10/10 Via Napoli (EPCOT). 11/10 Sci-Fi (DHS). App logado na noite anterior."
+        },
+        {
+          "id": "comprar_ingressos",
+          "due": "2026-09-29",
+          "when": "Até 29/09",
+          "title": "Comprar os 3 ingressos (produtos do roteiro)",
+          "tip": "Universal: 3-Day Park-to-Park + 2 Days Free (janela 1–7/12). Disney: 3 parques SEM Magic Kingdom (8–10/12). SeaWorld + Busch combo (30/11–11/12). Conferir date-based / validade antes de pagar."
         }
       ]
     },
@@ -169,14 +197,21 @@
     {
       "id": "45d",
       "title": "45–30 dias — 14/10 a 29/10",
-      "blurb": "Celular, carro e imigração.",
+      "blurb": "Dólar travado, eSIM Nu, carro e imigração.",
       "items": [
+        {
+          "id": "converter_dolar",
+          "due": "2026-10-29",
+          "when": "Quando o dólar ajudar",
+          "title": "Converter bloco na Nu Conta Global (e opcional Wise Rende+)",
+          "tip": "Nu Global: spread 0 + IOF 3,5% — trava o câmbio pra Uber/lanche. Wise Rende+: só se o app confirmar IOF 1,1% e gasto do saldo investido. Não deixar pra converter no parque no crédito C6."
+        },
         {
           "id": "esim",
           "due": "2026-10-29",
           "when": "Instalar em casa no Wi-Fi",
           "title": "eSIM Nubank Ultravioleta 10 GB (Nu Viagens)",
-          "tip": "App Nubank → avião → eSIM de Viagem → Ativar. 10 GB grátis/ano (EUA incluso). Instalar no titular ANTES de viajar; no MCO só ligar dados em roaming. Chip BR continua no aparelho pra SMS/banco. Marido: hotspot do seu 4G ou pacote extra no app (até +20 GB) — 10 GB pra dois em 14 dias aperta se tiverem Instagram pesado."
+          "tip": "App Nubank → avião → eSIM de Viagem → Ativar. 10 GB/ano, EUA incluso. Instalar no titular Ultravioleta em casa no Wi-Fi; no MCO só roaming de dados. Chip BR fica pra SMS/banco. Marido: hotspot do seu 4G OU pacote extra no app (até +20 GB). 10 GB pra dois em 14 dias aperta com rede social."
         },
         {
           "id": "carro",
@@ -189,6 +224,13 @@
           "due": "2026-10-29",
           "title": "Mobile Passport (ou Global Entry) no MCO",
           "tip": "App MPC do CBP. Foto e passaporte cadastrados antes do voo. Domingo de chegada a imigração pode passar de 1h."
+        },
+        {
+          "id": "marido_dados",
+          "due": "2026-10-29",
+          "when": "Plano do marido",
+          "title": "Definir internet do marido (hotspot ou eSIM extra)",
+          "tip": "O 10 GB Nu é do titular. Combinar: hotspot nos parques OU comprar pacote/eSIM separado. Sem dados os dois = sem Uber/app se o celular dela cair."
         }
       ]
     },
@@ -226,6 +268,13 @@
           "due": "2026-11-14",
           "title": "Começar mala: frio + chuva",
           "tip": "Camada fria no CORPO (não na pochete). Capa de chuva fina vai na pochete — ver bloco Pochete."
+        },
+        {
+          "id": "gru_lounge",
+          "due": "2026-11-14",
+          "when": "Partida 28/11",
+          "title": "Sala VIP Ultravioleta no GRU (T3) — se couber",
+          "tip": "UV Lounge no Terminal 3 + Priority Pass (regras do cartão). Voo ~22:30: se embarque for T3, vale esperar com água/tomada. Confirmar terminal da companhia."
         }
       ]
     },
@@ -288,7 +337,7 @@
     {
       "id": "pochete_dia",
       "title": "Pochete — o que cabe no dia (montar na véspera)",
-      "blurb": "Regra: se não couber com o zíper fechando fácil, não vai. Telefone no bolso de cada um.",
+      "blurb": "Montar na noite de 29/11 no Helios (pra SeaWorld 30/11). Zíper tem que fechar fácil. Celular no bolso de cada um.",
       "items": [
         {
           "id": "pack_inside",
@@ -312,7 +361,7 @@
           "when": "NO CORPO (não na pochete)",
           "slot": "corpo",
           "title": "Celular, óculos, casaco leve, Magic/ingresso no app",
-          "tip": "Um celular cada no bolso com zíper ou capinha de braço. Passaporte fica no COFRE do Helios nos dias de parque. Óculos de sol no topo da cabeça."
+          "tip": "Um celular cada (o dela com eSIM Nu). Passaportes no COFRE Helios nos dias de parque. Óculos no topo da cabeça. Cartão: Nu Global no bolso; UV crédito na pochete só pra mesa/emergência."
         },
         {
           "id": "pack_wet",
@@ -347,7 +396,7 @@
           "id": "copias",
           "due": "2026-11-21",
           "title": "Cópias de passaporte, ESTA e voucher",
-          "tip": "Pasta no Drive/iCloud + foto no celular. Um de vocês leva o original, o outro a cópia impressa."
+          "tip": "Pasta Drive/iCloud + foto no celular. No voo: OS DOIS levam o passaporte ORIGINAL. Cópias são backup no Helios/cofre, não substituto na imigração."
         },
         {
           "id": "dolar_caixa",
@@ -408,13 +457,13 @@
           "id": "checkin_voo",
           "due": "2026-11-26",
           "title": "Check-in online + assentos",
-          "tip": "Baixar boarding pass. Conexão: conferir terminal e tempo mínimo. Plano B se perder o trecho."
+          "tip": "Boarding pass offline. Conexão: terminal + tempo mínimo. Plano B se perder trecho. Documentos na mão (não na mala)."
         },
         {
           "id": "gru_3h",
           "due": "2026-11-28",
           "title": "Chegar no GRU ~19:30",
-          "tip": "Internacional = 3h. Documentos na mão, não na mala despachada. Remédios e um casaco na cabine."
+          "tip": "Internacional = 3h (~19:30). Passaportes dos dois. Remédios + casaco na cabine. eSIM Nu instalado; roaming só ligar no MCO."
         },
         {
           "id": "helios_pin",
