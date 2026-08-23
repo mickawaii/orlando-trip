@@ -1,6 +1,6 @@
 {
   "title": "Preparo da viagem",
-  "subtitle": "Checklist até 28/11 · Black do seguro · Nu Global + UV · eSIM 10 GB · pochete única",
+  "subtitle": "Checklist até 28/11 · Black do seguro · Nu Global + UV · eSIM Nu 10 GB + Nomad 1 GB · pochete única",
   "depart": "2026-11-28",
   "groups": [
     {
@@ -197,7 +197,7 @@
     {
       "id": "45d",
       "title": "45–30 dias — 14/10 a 29/10",
-      "blurb": "Dólar travado, eSIM Nu, carro e imigração.",
+      "blurb": "Dólar travado, eSIM Nu + Nomad, carro e imigração.",
       "items": [
         {
           "id": "converter_dolar",
@@ -211,7 +211,14 @@
           "due": "2026-10-29",
           "when": "Instalar em casa no Wi-Fi",
           "title": "eSIM Nubank Ultravioleta 10 GB (Nu Viagens)",
-          "tip": "App Nubank → avião → eSIM de Viagem → Ativar. 10 GB/ano, EUA incluso. Instalar no titular Ultravioleta em casa no Wi-Fi; no MCO só roaming de dados. Chip BR fica pra SMS/banco. Marido: hotspot do seu 4G OU pacote extra no app (até +20 GB). 10 GB pra dois em 14 dias aperta com rede social."
+          "tip": "App Nubank → avião → eSIM de Viagem → Ativar. 10 GB/ano, EUA incluso. Instalar no titular Ultravioleta em casa no Wi-Fi; no MCO só roaming de dados. Chip BR fica pra SMS/banco. Marido usa o eSIM Nomad 1 GB (item abaixo) — cada um com dados próprios."
+        },
+        {
+          "id": "nomad_marido",
+          "due": "2026-10-29",
+          "when": "Instalar no celular dele no Wi-Fi",
+          "title": "eSIM Nomad 1 GB para o marido (EUA)",
+          "tip": "App Nomad ou site getnomad.app → plano EUA 1 GB (viagem). Comprar e instalar no celular dele em casa no Wi-Fi, antes do GRU. Ativar roaming de dados na chegada no MCO. 1 GB cobre mapas/Uber/apps básicos; Wi-Fi do hotel/parque para o resto. Chip BR dele fica pra SMS/banco."
         },
         {
           "id": "carro",
@@ -228,9 +235,9 @@
         {
           "id": "marido_dados",
           "due": "2026-10-29",
-          "when": "Plano do marido",
-          "title": "Definir internet do marido (hotspot ou eSIM extra)",
-          "tip": "O 10 GB Nu é do titular. Combinar: hotspot nos parques OU comprar pacote/eSIM separado. Sem dados os dois = sem Uber/app se o celular dela cair."
+          "when": "Conferir os dois eSIMs",
+          "title": "Testar Nu (dela) + Nomad 1 GB (dele) antes do voo",
+          "tip": "Os dois com eSIM instalado e chip BR ativo pra banco/SMS. No avião: modo avião; no MCO ligar roaming de dados nos dois. Se o Nomad acabar, Wi-Fi Helios/parque — ou hotspot dela só em emergência."
         }
       ]
     },
@@ -361,7 +368,7 @@
           "when": "NO CORPO (não na pochete)",
           "slot": "corpo",
           "title": "Celular, óculos, casaco leve, Magic/ingresso no app",
-          "tip": "Um celular cada (o dela com eSIM Nu). Passaportes no COFRE Helios nos dias de parque. Óculos no topo da cabeça. Cartão: Nu Global no bolso; UV crédito na pochete só pra mesa/emergência."
+          "tip": "Um celular cada (dela: eSIM Nu 10 GB; dele: Nomad 1 GB). Passaportes no COFRE Helios nos dias de parque. Óculos no topo da cabeça. Cartão: Nu Global no bolso; UV crédito na pochete só pra mesa/emergência."
         },
         {
           "id": "pack_wet",
@@ -463,13 +470,13 @@
           "id": "gru_3h",
           "due": "2026-11-28",
           "title": "Chegar no GRU ~19:30",
-          "tip": "Internacional = 3h (~19:30). Passaportes dos dois. Remédios + casaco na cabine. eSIM Nu instalado; roaming só ligar no MCO."
+          "tip": "Internacional = 3h (~19:30). Passaportes dos dois. Remédios + casaco na cabine. eSIM Nu (dela) + Nomad 1 GB (dele) já instalados; roaming só ligar no MCO."
         },
         {
           "id": "helios_pin",
           "due": "2026-11-28",
           "title": "Endereço Helios no Maps (offline)",
-          "tip": "8505 S Kirkman Rd, Orlando, FL 32819. Uber/Lyft no MCO ~25–40 min. eSIM Nu já instalado; roaming de dados ligado na chegada."
+          "tip": "8505 S Kirkman Rd, Orlando, FL 32819. Uber/Lyft no MCO ~25–40 min. Nu + Nomad instalados; roaming de dados ligado nos dois na chegada."
         }
       ]
     }
