@@ -1,4 +1,6 @@
 // Supabase Configuration
+import { bindItinerarioGlobals, renderItinerarioDay } from './itinerario.js';
+
 const SUPABASE_URL = 'https://cznbsgilnxwanzcixnvq.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_UpQY7XuEBbRDr_7zDdJFwg_eXaNqBTV';
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -31,6 +33,10 @@ let tinkTimer = null;
 window.initApp = async function () {
     initMagicTrigger();
     restoreAdminMode();
+    bindItinerarioGlobals(
+        () => roteiroData?.days?.[roteiroDayIndex] ?? null,
+        () => renderRoteiroDayDetail()
+    );
     try {
         await ensureRoteiroData();
         renderHomeToday();
@@ -501,6 +507,7 @@ window.closeRoteiroModal = function () {
         modal.style.display = 'none';
         document.body.classList.remove('no-scroll');
     }
+    if (typeof window.closeItinMap === 'function') window.closeItinMap();
 };
 
 window.openPreparoModal = async function () {
@@ -1765,7 +1772,11 @@ function renderRoteiroDayDetail() {
             </div>
             ${tips ? `<div class="roteiro-section"><h4>Dicas</h4><ul class="roteiro-tips">${tips}</ul></div>` : ''}
         </section>
+        <div id="itin-day-host"></div>
     `;
+
+    const itinHost = document.getElementById('itin-day-host');
+    if (itinHost) renderItinerarioDay(itinHost, d);
 }
 
 function renderRoteiroNextBar() {

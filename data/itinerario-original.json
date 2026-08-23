@@ -1,0 +1,584 @@
+{
+  "version": 1,
+  "source": "roteiro-nov-dez-2026.json",
+  "generated_note": "Cópia de referência — edições ficam no navegador (localStorage). O roteiro JSON original não é alterado.",
+  "hotel": {
+    "name": "Universal Helios Grand Hotel, a Loews Hotel",
+    "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+    "lat": 28.4689,
+    "lng": -81.4672,
+    "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando"
+  },
+  "days": {
+    "2026-11-28": {
+      "title": "São Paulo → Orlando (noite)",
+      "type": "travel",
+      "stops": [
+        {
+          "id": "2026-11-28-gru",
+          "name": "GRU — embarque",
+          "address": "Aeroporto Internacional de Guarulhos (GRU)",
+          "lat": -23.4356,
+          "lng": -46.4731,
+          "mapsUrl": "https://maps.google.com/?q=Aeroporto%20Internacional%20de%20Guarulhos",
+          "note": "Partida noturna sábado",
+          "kind": "travel"
+        }
+      ]
+    },
+    "2026-11-29": {
+      "title": "Chegada MCO + Helios",
+      "type": "travel",
+      "stops": [
+        {
+          "id": "2026-11-29-mco",
+          "name": "MCO — chegada",
+          "address": "Orlando International Airport (MCO)",
+          "lat": 28.4312,
+          "lng": -81.3081,
+          "mapsUrl": "https://maps.google.com/?q=Orlando%20International%20Airport",
+          "note": "Imigração + bagagem",
+          "kind": "travel"
+        },
+        {
+          "id": "2026-11-29-helios",
+          "name": "Universal Helios Grand Hotel, a Loews Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Check-in",
+          "kind": "hotel"
+        },
+        {
+          "id": "2026-11-29-flora-taverna",
+          "name": "Flora Taverna",
+          "address": "Flora Taverna (Helios)",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Flora%20Taverna%20%28Helios%29",
+          "note": "19:00–21:00 · Jantar de chegada — mediterrâneo",
+          "kind": "meal"
+        }
+      ]
+    },
+    "2026-11-30": {
+      "title": "SeaWorld Orlando",
+      "type": "park",
+      "stops": [
+        {
+          "id": "2026-11-30-helios-out",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Saída do hotel",
+          "kind": "hotel"
+        },
+        {
+          "id": "2026-11-30-main",
+          "name": "SeaWorld Orlando",
+          "address": "7007 Sea World Dr, Orlando, FL 32821",
+          "lat": 28.411,
+          "lng": -81.461,
+          "mapsUrl": "https://maps.google.com/?q=SeaWorld%20Orlando",
+          "note": "Coasters primeiro (Mako, Pipeline, Ice Breaker). Segunda pós-Thanksgiving: SeaWorld bem leve (~3%).",
+          "kind": "main"
+        },
+        {
+          "id": "2026-11-30-sharks-underwater-grill",
+          "name": "Sharks Underwater Grill",
+          "address": "Sharks Underwater Grill",
+          "lat": 28.411,
+          "lng": -81.461,
+          "mapsUrl": "https://maps.google.com/?q=Sharks%20Underwater%20Grill",
+          "note": "12:30 · Almoço com vista do aquário (reserva se possível)",
+          "kind": "meal"
+        },
+        {
+          "id": "2026-11-30-helios-back",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Volta ao hotel",
+          "kind": "hotel"
+        }
+      ]
+    },
+    "2026-12-01": {
+      "title": "Epic Universe — Dia 1 (Nintendo)",
+      "type": "park",
+      "stops": [
+        {
+          "id": "2026-12-01-helios-out",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Saída do hotel",
+          "kind": "hotel"
+        },
+        {
+          "id": "2026-12-01-main",
+          "name": "Epic Universe",
+          "address": "Universal Epic Universe, Orlando, FL 32819",
+          "lat": 28.4317,
+          "lng": -81.4667,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Epic%20Universe%20Orlando",
+          "note": "Rope drop Super Nintendo World. Terça ~1% no índice QT — um dos melhores dias possíveis pro Epic.",
+          "kind": "main"
+        },
+        {
+          "id": "2026-12-01-blue-dragon-pan-asian-restaurant",
+          "name": "Blue Dragon Pan-Asian Restaurant",
+          "address": "Toadette's Café / Blue Dragon",
+          "lat": 28.4317,
+          "lng": -81.4667,
+          "mapsUrl": "https://maps.google.com/?q=Toadette%27s%20Caf%C3%A9%20/%20Blue%20Dragon",
+          "note": "12:00–13:30 · Almoço temático Nintendo ou noodles no Blue Dragon",
+          "kind": "meal"
+        },
+        {
+          "id": "2026-12-01-helios-back",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Volta ao hotel",
+          "kind": "hotel"
+        }
+      ]
+    },
+    "2026-12-02": {
+      "title": "Universal Studios Florida",
+      "type": "park",
+      "stops": [
+        {
+          "id": "2026-12-02-helios-out",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Saída do hotel",
+          "kind": "hotel"
+        },
+        {
+          "id": "2026-12-02-main",
+          "name": "Universal Studios Florida",
+          "address": "6000 Universal Blvd, Orlando, FL 32819",
+          "lat": 28.4744,
+          "lng": -81.4677,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Studios%20Florida",
+          "note": "Rope drop Diagon Alley (Gringotts). Quarta ~1% no QT — ótimo dia pro USF.",
+          "kind": "main"
+        },
+        {
+          "id": "2026-12-02-leaky-cauldron",
+          "name": "Leaky Cauldron",
+          "address": "Leaky Cauldron",
+          "lat": 28.479,
+          "lng": -81.4685,
+          "mapsUrl": "https://maps.google.com/?q=Leaky%20Cauldron",
+          "note": "12:00–13:30 · Fish & chips / pub fare (reserve mentalmente a fila)",
+          "kind": "meal"
+        },
+        {
+          "id": "2026-12-02-helios-back",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Volta ao hotel",
+          "kind": "hotel"
+        }
+      ]
+    },
+    "2026-12-03": {
+      "title": "Islands of Adventure",
+      "type": "park",
+      "stops": [
+        {
+          "id": "2026-12-03-helios-out",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Saída do hotel",
+          "kind": "hotel"
+        },
+        {
+          "id": "2026-12-03-main",
+          "name": "Islands of Adventure",
+          "address": "6000 Universal Blvd, Orlando, FL 32819",
+          "lat": 28.4712,
+          "lng": -81.4707,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Islands%20of%20Adventure",
+          "note": "Rope drop Hagrid's → VelociCoaster. Quinta ~6% no QT.",
+          "kind": "main"
+        },
+        {
+          "id": "2026-12-03-mythos-restaurant",
+          "name": "Mythos Restaurant",
+          "address": "Mythos",
+          "lat": 28.4715,
+          "lng": -81.472,
+          "mapsUrl": "https://maps.google.com/?q=Mythos",
+          "note": "12:30 · Um dos melhores do Universal — tentem chegar cedo na fila",
+          "kind": "meal"
+        },
+        {
+          "id": "2026-12-03-helios-back",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Volta ao hotel",
+          "kind": "hotel"
+        }
+      ]
+    },
+    "2026-12-04": {
+      "title": "Dia livre",
+      "type": "rest",
+      "stops": [
+        {
+          "id": "2026-12-04-main",
+          "name": "Helios / Orlando",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Folga no meio do bloco Universal. Piscina/Helios — sábado volta Epic (dia ~1%).",
+          "kind": "main"
+        },
+        {
+          "id": "2026-12-04-universal-citywalk",
+          "name": "Universal CityWalk",
+          "address": "Helios / CityWalk / Springs",
+          "lat": 28.473,
+          "lng": -81.4665,
+          "mapsUrl": "https://maps.google.com/?q=Helios%20/%20CityWalk%20/%20Springs",
+          "note": "12:00–14:00 · Almoço tranquilo",
+          "kind": "meal"
+        }
+      ]
+    },
+    "2026-12-05": {
+      "title": "Epic Universe — Dia 2 (Magia + Berk)",
+      "type": "park",
+      "stops": [
+        {
+          "id": "2026-12-05-helios-out",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Saída do hotel",
+          "kind": "hotel"
+        },
+        {
+          "id": "2026-12-05-main",
+          "name": "Epic Universe",
+          "address": "Universal Epic Universe, Orlando, FL 32819",
+          "lat": 28.4317,
+          "lng": -81.4667,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Epic%20Universe%20Orlando",
+          "note": "Ministry of Magic → Stardust → Berk. Sábado ~1% no Epic (raro) — aproveitem.",
+          "kind": "main"
+        },
+        {
+          "id": "2026-12-05-helios-back",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Volta ao hotel",
+          "kind": "hotel"
+        }
+      ]
+    },
+    "2026-12-06": {
+      "title": "Igreja + Descanso",
+      "type": "rest",
+      "stops": [
+        {
+          "id": "2026-12-06-helios-out",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Saída do hotel",
+          "kind": "hotel"
+        },
+        {
+          "id": "2026-12-06-helios-grand-hotel",
+          "name": "Helios Grand Hotel",
+          "address": "próximo à igreja / Helios",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=pr%C3%B3ximo%20%C3%A0%20igreja%20/%20Helios",
+          "note": "após culto · Brunch",
+          "kind": "meal"
+        }
+      ]
+    },
+    "2026-12-07": {
+      "title": "Epic Universe — Dia 3 (Repeteco)",
+      "type": "park",
+      "stops": [
+        {
+          "id": "2026-12-07-helios-out",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Saída do hotel",
+          "kind": "hotel"
+        },
+        {
+          "id": "2026-12-07-main",
+          "name": "Epic Universe",
+          "address": "Universal Epic Universe, Orlando, FL 32819",
+          "lat": 28.4317,
+          "lng": -81.4667,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Epic%20Universe%20Orlando",
+          "note": "Fechem o que faltou / repeteco. Segunda ~7% — ainda leve pro Epic.",
+          "kind": "main"
+        },
+        {
+          "id": "2026-12-07-helios-back",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Volta ao hotel",
+          "kind": "hotel"
+        }
+      ]
+    },
+    "2026-12-08": {
+      "title": "Animal Kingdom",
+      "type": "park",
+      "stops": [
+        {
+          "id": "2026-12-08-helios-out",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Saída do hotel",
+          "kind": "hotel"
+        },
+        {
+          "id": "2026-12-08-main",
+          "name": "Animal Kingdom",
+          "address": "2901 Osceola Pkwy, Bay Lake, FL 32830",
+          "lat": 28.3574,
+          "lng": -81.5908,
+          "mapsUrl": "https://maps.google.com/?q=Disney%20Animal%20Kingdom",
+          "note": "Flight of Passage no rope drop; Safari antes do meio-dia. Melhor dia restante pro AK após priorizar Epic.",
+          "kind": "main"
+        },
+        {
+          "id": "2026-12-08-satu-li-canteen",
+          "name": "Satu'li Canteen",
+          "address": "Satu'li Canteen",
+          "lat": 28.3558,
+          "lng": -81.5923,
+          "mapsUrl": "https://maps.google.com/?q=Satu%27li%20Canteen",
+          "note": "12:00 · Bowls em Pandora",
+          "kind": "meal"
+        },
+        {
+          "id": "2026-12-08-helios-back",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Volta ao hotel",
+          "kind": "hotel"
+        }
+      ]
+    },
+    "2026-12-09": {
+      "title": "EPCOT",
+      "type": "park",
+      "stops": [
+        {
+          "id": "2026-12-09-helios-out",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Saída do hotel",
+          "kind": "hotel"
+        },
+        {
+          "id": "2026-12-09-main",
+          "name": "EPCOT",
+          "address": "200 Epcot Center Dr, Lake Buena Vista, FL 32830",
+          "lat": 28.3747,
+          "lng": -81.5494,
+          "mapsUrl": "https://maps.google.com/?q=EPCOT%20Walt%20Disney%20World",
+          "note": "Guardians cedo (VQ/LL). Remy e Frozen antes do Showcase lotar. Quarta ~9% no QT — bem mais leve que o 10/12.",
+          "kind": "main"
+        },
+        {
+          "id": "2026-12-09-via-napoli",
+          "name": "Via Napoli",
+          "address": "Via Napoli (Italy) ou Space 220 Lounge se conseguirem",
+          "lat": 28.3715,
+          "lng": -81.5515,
+          "mapsUrl": "https://maps.google.com/?q=Via%20Napoli%20%28Italy%29%20ou%20Space%20220%20Lounge%20se%20conseguirem",
+          "note": "12:00 · Pizza / space themed",
+          "kind": "meal"
+        },
+        {
+          "id": "2026-12-09-helios-back",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Volta ao hotel",
+          "kind": "hotel"
+        }
+      ]
+    },
+    "2026-12-10": {
+      "title": "Hollywood Studios",
+      "type": "park",
+      "stops": [
+        {
+          "id": "2026-12-10-helios-out",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Saída do hotel",
+          "kind": "hotel"
+        },
+        {
+          "id": "2026-12-10-main",
+          "name": "Hollywood Studios",
+          "address": "351 S Studio Dr, Lake Buena Vista, FL 32830",
+          "lat": 28.3575,
+          "lng": -81.5582,
+          "mapsUrl": "https://maps.google.com/?q=Disney%20Hollywood%20Studios",
+          "note": "Rise of the Resistance o mais cedo possível. Quinta ~7% no QT — ainda leve; EPCOT ficou no dia ~9%.",
+          "kind": "main"
+        },
+        {
+          "id": "2026-12-10-sci-fi-dine-in-theater",
+          "name": "Sci-Fi Dine-In Theater",
+          "address": "Sci-Fi Dine-In Theater",
+          "lat": 28.356,
+          "lng": -81.5595,
+          "mapsUrl": "https://maps.google.com/?q=Sci-Fi%20Dine-In%20Theater",
+          "note": "12:30 · Burgers no drive-in (reserva se possível)",
+          "kind": "meal"
+        },
+        {
+          "id": "2026-12-10-helios-back",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Volta ao hotel",
+          "kind": "hotel"
+        }
+      ]
+    },
+    "2026-12-11": {
+      "title": "Busch Gardens Tampa Bay",
+      "type": "park",
+      "stops": [
+        {
+          "id": "2026-12-11-helios-out",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Saída do hotel",
+          "kind": "hotel"
+        },
+        {
+          "id": "2026-12-11-main",
+          "name": "Busch Gardens Tampa Bay",
+          "address": "10165 N McKinley Dr, Tampa, FL 33612",
+          "lat": 28.037,
+          "lng": -82.4197,
+          "mapsUrl": "https://maps.google.com/?q=Busch%20Gardens%20Tampa",
+          "note": "Dia cheio em Tampa. Iron Gwazi e Montu primeiro. Volta ao Helios — voo só amanhã.",
+          "kind": "main"
+        },
+        {
+          "id": "2026-12-11-busch-gardens-tampa-bay",
+          "name": "Busch Gardens Tampa Bay",
+          "address": "Busch Gardens",
+          "lat": 28.037,
+          "lng": -82.4197,
+          "mapsUrl": "https://maps.google.com/?q=Busch%20Gardens",
+          "note": "12:00 · Almoço rápido no parque",
+          "kind": "meal"
+        },
+        {
+          "id": "2026-12-11-helios-back",
+          "name": "Helios Grand Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Volta ao hotel",
+          "kind": "hotel"
+        }
+      ]
+    },
+    "2026-12-12": {
+      "title": "Check-out + Compras + Voo MCO → GRU",
+      "type": "travel",
+      "stops": [
+        {
+          "id": "2026-12-12-mco",
+          "name": "MCO — chegada",
+          "address": "Orlando International Airport (MCO)",
+          "lat": 28.4312,
+          "lng": -81.3081,
+          "mapsUrl": "https://maps.google.com/?q=Orlando%20International%20Airport",
+          "note": "Imigração + bagagem",
+          "kind": "travel"
+        },
+        {
+          "id": "2026-12-12-helios",
+          "name": "Universal Helios Grand Hotel, a Loews Hotel",
+          "address": "8505 S Kirkman Rd, Orlando, FL 32819",
+          "lat": 28.4689,
+          "lng": -81.4672,
+          "mapsUrl": "https://maps.google.com/?q=Universal%20Helios%20Grand%20Hotel%20Orlando",
+          "note": "Check-in",
+          "kind": "hotel"
+        }
+      ]
+    }
+  }
+}

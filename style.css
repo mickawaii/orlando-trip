@@ -1414,3 +1414,361 @@ a {
         border: 1px solid var(--border);
     }
 }
+
+/* Itinerário editável + mapa */
+#itin-day-host {
+    margin-top: 14px;
+}
+
+.itin-section {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-elevated);
+    padding: 14px;
+}
+
+.itin-section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.itin-section-head h4 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.itin-sub {
+    margin: 4px 0 0;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+}
+
+.itin-head-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.itin-map-btn,
+.itin-edit-toggle {
+    border: 1px solid var(--border);
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: 0.85rem;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+.itin-edit-toggle.active {
+    background: var(--text);
+    color: #fff;
+    border-color: var(--text);
+}
+
+.itin-mode-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.itin-mode-chip {
+    border: 1px solid var(--border);
+    background: var(--bg);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    cursor: pointer;
+}
+
+.itin-mode-chip.active {
+    background: #e11d48;
+    border-color: #e11d48;
+    color: #fff;
+}
+
+.itin-add-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.itin-add-btn,
+.itin-reset-btn {
+    border: 1px dashed var(--border);
+    background: transparent;
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    cursor: pointer;
+}
+
+.itin-reset-btn {
+    color: var(--text-dim);
+}
+
+.itin-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.itin-stop {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.itin-stop-marker {
+    flex: 0 0 28px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #e11d48;
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    cursor: grab;
+}
+
+.itin-stop-card {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 12px;
+    background: var(--bg);
+}
+
+.itin-stop-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.itin-stop-top strong {
+    font-size: 0.95rem;
+}
+
+.itin-stop-addr {
+    margin: 4px 0 0;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+}
+
+.itin-stop-note {
+    margin: 6px 0 0;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+}
+
+.itin-maps-link {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 0.78rem;
+    font-weight: 650;
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.itin-maps-link.block {
+    display: block;
+}
+
+.itin-stop-actions {
+    display: flex;
+    gap: 4px;
+}
+
+.itin-icon-btn {
+    border: none;
+    background: var(--bg-elevated);
+    border-radius: 8px;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.itin-icon-btn.danger {
+    color: #dc2626;
+}
+
+.itin-leg {
+    display: flex;
+    gap: 10px;
+    padding: 4px 0 4px 4px;
+    min-height: 36px;
+}
+
+.itin-leg-line {
+    width: 28px;
+    display: flex;
+    justify-content: center;
+}
+
+.itin-leg-line::before {
+    content: '';
+    width: 2px;
+    background: repeating-linear-gradient(to bottom, var(--border) 0, var(--border) 4px, transparent 4px, transparent 8px);
+    min-height: 100%;
+}
+
+.itin-leg-body {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    padding: 4px 0;
+}
+
+.itin-leg-time {
+    font-weight: 700;
+    color: var(--text);
+}
+
+.itin-leg-dir {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 650;
+}
+
+.itin-leg-src {
+    font-size: 0.68rem;
+    opacity: 0.6;
+}
+
+.itin-empty {
+    color: var(--text-dim);
+    font-size: 0.88rem;
+}
+
+/* Mapa fullscreen */
+.itin-map-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 12000;
+    background: #0f172a;
+}
+
+.itin-map-overlay.open {
+    display: block;
+}
+
+.itin-map-shell {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#itin-map-canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.itin-map-panel {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 16px;
+    padding: 14px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+    max-height: 40vh;
+    overflow-y: auto;
+}
+
+.itin-map-panel-head {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.itin-map-panel-num {
+    flex: 0 0 28px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #e11d48;
+    color: #fff;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+}
+
+.itin-map-panel-head strong {
+    display: block;
+    font-size: 1rem;
+}
+
+.itin-map-panel-head p {
+    margin: 2px 0 0;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+.itin-map-close {
+    margin-left: auto;
+    border: none;
+    background: #f1f5f9;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.itin-map-note,
+.itin-map-leg {
+    margin: 8px 0 0;
+    font-size: 0.82rem;
+    color: #475569;
+}
+
+.itin-map-leg a {
+    color: #2563eb;
+    font-weight: 650;
+}
+
+.itin-map-pin {
+    background: transparent;
+    border: none;
+}
+
+.itin-map-pin span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #e11d48;
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.82rem;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.itin-map-pin.selected span,
+.leaflet-marker-icon.selected .itin-map-pin span {
+    background: #1d4ed8;
+    transform: scale(1.15);
+}
+
