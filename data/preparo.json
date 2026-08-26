@@ -1,6 +1,6 @@
 {
   "title": "Preparo da viagem",
-  "subtitle": "Checklist até 28/11 · orçamento ~US$ 5,5k (2 pax) · Black · Nu Global + UV · eSIM Nu + Nomad · pochete",
+  "subtitle": "Checklist até 28/11 · orçamento ~US$ 5,4k (2 pax) · Black · Nu Global + UV · eSIM Nu + Nomad · pochete",
   "depart": "2026-11-28",
   "groups": [
     {
@@ -44,14 +44,14 @@
     {
       "id": "orcamento",
       "title": "Orçamento em dólar — 2 pessoas",
-      "blurb": "Meta ~US$ 5.500 no cartão + US$ 180 em espécie. Eletrônicos + comer + Uber (SeaWorld barato ~US$ 9/trecho; Disney mais longe) · Busch de ônibus grátis. Detalhe no card acima.",
+      "blurb": "Meta ~US$ 5.400 · Uber mid ~US$ 360 (recalibrado: SeaWorld ~US$ 9/ida; Disney ~US$ 150/3 dias). Busch de ônibus. Detalhe no card.",
       "items": [
         {
           "id": "budget_ler",
           "due": "2026-08-31",
           "when": "Ler o card",
           "title": "Conferir o card “Quanto dólar levar”",
-          "tip": "Mid ~US$ 5.500 (low 4.850 / high 6.250). Hotel e ingressos fora. Eletrônicos ~US$ 2.500; comer ~US$ 2.300; Uber ~US$ 480 (SeaWorld ~US$ 25 RT — simulação ~US$ 9/ida; Disney ~US$ 200 nos 3 dias); extras ~US$ 320."
+          "tip": "Mid ~US$ 5.400. Uber ~US$ 360: SeaWorld ~US$ 23 RT (sua simulação ~US$ 9/ida); Disney ~US$ 150 nos 3 dias (escala por distância); Millenia ~US$ 25; MCO ~US$ 70; buffer US$ 40."
         },
         {
           "id": "budget_electronics",
@@ -71,8 +71,8 @@
           "id": "budget_uber_plan",
           "due": "2026-10-29",
           "when": "Com o bloco de dólar",
-          "title": "Reservar ~US$ 480 pra Uber (fora Universal)",
-          "tip": "Universal: shuttle Helios (grátis). SeaWorld: simulação ~US$ 9/ida → ~US$ 25 RT c/ volta/surge. Disney AK/EPCOT/DHS: ~US$ 200 nos 3 dias (bem mais longe). Também: MCO, igreja, Millenia. Busch: busones grátis."
+          "title": "Reservar ~US$ 360 pra Uber (fora Universal)",
+          "tip": "Recalibrado com Helios→SeaWorld ~US$ 8,95. Disney ~US$ 19–23/ida off-peak (mais longe) · ~US$ 150 nos 3 dias c/ surge. Millenia/igreja baratos. MCO ~US$ 70 RT. Busch: busones."
         },
         {
           "id": "budget_food",
@@ -86,7 +86,7 @@
           "due": "2026-10-29",
           "when": "Quando o dólar ajudar",
           "title": "Travar ~US$ 5.400 na Nu Global (eletrônicos + dia a dia)",
-          "tip": "Meta do card mid sem o cash (~US$ 5.320). Pode parcelar conversões. UV crédito só mesa/emergência. Eletrônicos e Uber no cartão."
+          "tip": "Meta do card mid sem o cash (~US$ 5.220). Pode parcelar. Eletrônicos e Uber no cartão."
         }
       ]
     },
@@ -252,8 +252,8 @@
           "id": "converter_dolar",
           "due": "2026-10-29",
           "when": "Quando o dólar ajudar",
-          "title": "Converter ~US$ 5.320 na Nu Conta Global (ver orçamento)",
-          "tip": "Meta do card mid (eletrônicos + comer + Uber), sem o cash. Nu Global: spread 0 + IOF 3,5%. Wise Rende+ só se IOF 1,1% confirmar. Eletrônicos e Uber no cartão. Ver grupo Orçamento."
+          "title": "Converter ~US$ 5.220 na Nu Conta Global (ver orçamento)",
+          "tip": "Meta do card mid sem o cash. Nu Global: spread 0 + IOF 3,5%. Eletrônicos e Uber no cartão. Ver Orçamento."
         },
         {
           "id": "esim",
@@ -459,7 +459,7 @@
           "id": "dolar_caixa",
           "due": "2026-11-21",
           "title": "Separar ~US$ 150–200 em espécie",
-          "tip": "Só gorjeta (restaurante/mala/Uber) e emergência. Notas de US$ 1 e US$ 5. O resto (~US$ 5.320) fica no Nu Global / UV — ver card de orçamento."
+          "tip": "Só gorjeta e emergência (~US$ 150–200). O resto (~US$ 5.220) no Nu Global / UV."
         }
       ]
     },
@@ -533,18 +533,18 @@
   ],
   "budget": {
     "title": "Quanto dólar levar — 2 pessoas",
-    "subtitle": "Estimativa Nov–Dez/2026 · Helios · restaurantes · Millenia · Uber (SeaWorld ~US$ 9/trecho; Disney mais caro) · Busch de ônibus",
+    "subtitle": "Estimativa Nov–Dez/2026 · Helios · Uber recalibrado com simulação SeaWorld ~US$ 9/ida · Busch de ônibus",
     "people": 2,
     "currency": "USD",
     "tax_note": "Imposto FL/Orange ~6,5% nos eletrônicos. Sem tax-free de turista (não é Europa).",
     "pay_note": "Quase tudo no cartão (Nu Global / UV). Espécie só ~US$ 150–200 pra gorjeta e emergência.",
     "updated": "2026-08-26",
     "totals": {
-      "low": 4850,
-      "mid": 5500,
-      "high": 6250,
+      "low": 4700,
+      "mid": 5400,
+      "high": 6100,
       "cash": 180,
-      "on_card_mid": 5320
+      "on_card_mid": 5220
     },
     "categories": [
       {
@@ -608,44 +608,44 @@
       {
         "id": "uber",
         "label": "Uber / Lyft (fora da Universal)",
-        "low": 360,
-        "mid": 480,
-        "high": 620,
+        "low": 280,
+        "mid": 360,
+        "high": 520,
         "lines": [
           {
             "item": "MCO ↔ Helios (ida + volta)",
             "amount": 70,
-            "note": "~US$ 30–40 cada trecho"
+            "note": "Aeroporto: ~US$ 30–40/trecho (não escala como corrida curta)"
           },
           {
             "item": "SeaWorld ida/volta (30/11)",
-            "amount": 25,
-            "note": "Simulação ~US$ 9 ida off-peak · RT ~US$ 18 + tip/surge volta ≈ US$ 25"
+            "amount": 23,
+            "note": "Sua simulação ~US$ 8,95 ida · RT mid ~US$ 23 c/ volta+tip"
           },
           {
             "item": "Disney AK / EPCOT / DHS (08–10/12)",
-            "amount": 200,
-            "note": "3 dias · ~US$ 55–75 RT cada (bem mais longe que SeaWorld)"
+            "amount": 150,
+            "note": "Âncora SeaWorld×distância: ~US$ 19–23/ida off-peak · ~US$ 45–55 RT/dia c/ surge · 3 dias ≈ US$ 150"
           },
           {
             "item": "Igreja 06/12 ida/volta",
-            "amount": 55,
-            "note": "Depende do campus"
+            "amount": 35,
+            "note": "~US$ 13/ida escalado · RT mid ~US$ 35 (campus pode mudar)"
           },
           {
             "item": "Dia livre: Best Buy + Mall at Millenia",
-            "amount": 45,
-            "note": "2–3 corridas curtas (~US$ 10–15 cada, na faixa do SeaWorld)"
+            "amount": 25,
+            "note": "Mais perto que SeaWorld · 2–3 corridas ~US$ 7–10 cada"
           },
           {
             "item": "Busch Gardens 11/12",
             "amount": 0,
-            "note": "Ônibus/busones grátis — sem Uber/carro"
+            "note": "Ônibus/busones grátis"
           },
           {
-            "item": "Folga / surge / chuva",
-            "amount": 45,
-            "note": "Buffer — saída de parque sobe preço"
+            "item": "Folga / surge forte / chuva",
+            "amount": 40,
+            "note": "Buffer — saída de Disney às vezes dobra"
           }
         ]
       },
@@ -675,17 +675,18 @@
       }
     ],
     "assumptions": [
-      "2 adultos · 29/11–12/12 · Helios (shuttle Universal grátis — sem Uber nos dias Epic/USF/IoA).",
-      "Eletrônicos no Best Buy ou Apple Store do Mall at Millenia (melhor opção perto do Helios).",
-      "Switch 2: preço pós-reajuste 01/09/2026 (US$ 499,99).",
-      "Disney (AK/EPCOT/DHS) de Uber · Busch Gardens de ônibus/busones grátis · sem aluguel de carro.",
-      "Hotel e ingressos NÃO entram neste bloco (já pagos / à parte).",
-      "Pagar eletrônicos e refeições no Nu Global ou UV — não em espécie."
+      "2 adultos · 29/11–12/12 · Helios (shuttle Universal grátis).",
+      "Uber local recalibrado com simulação Helios→SeaWorld ~US$ 8,95 (ago/2026) e distância OSRM.",
+      "Disney é ~2–2,5× mais longe que SeaWorld → ida off-peak ~US$ 19–23, não US$ 35–40.",
+      "Volta de parque: surge ~1,3× no mid; high assume surge forte.",
+      "MCO mantém preço de aeroporto (~US$ 30–40/trecho), não a escala de corrida curta.",
+      "Busch Gardens: ônibus/busones grátis · sem carro.",
+      "Eletrônicos no Best Buy / Apple Millenia. Hotel e ingressos fora deste bloco."
     ],
     "how_to_carry": [
       {
         "label": "No cartão (Nu Global / UV)",
-        "amount": 5320,
+        "amount": 5220,
         "note": "Travar câmbio na Nu Global antes"
       },
       {
