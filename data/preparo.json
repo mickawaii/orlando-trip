@@ -324,7 +324,14 @@
           "id": "malas",
           "due": "2026-11-14",
           "title": "Começar mala: frio + chuva",
-          "tip": "Camada fria no CORPO (não na pochete). Capa de chuva fina vai na pochete — ver bloco Pochete."
+          "tip": "Camada fria no CORPO (não na pochete). Capa de chuva fina vai na pochete — ver bloco Pochete. AirTags: ativar agora (item abaixo) e só colocar na mala no dia do voo."
+        },
+        {
+          "id": "airtags_ativar",
+          "due": "2026-11-14",
+          "when": "Antes de fechar a mala",
+          "title": "Ativar AirTags no Find My (um por mala)",
+          "tip": "App Buscar / Find My → Ativar AirTag → nomear (ex.: Mala dela / Mala dele). Atualizar iOS. Testar bip e localização em casa. Bateria nova se o AirTag for usado."
         },
         {
           "id": "gru_lounge",
@@ -508,8 +515,15 @@
     {
       "id": "48h",
       "title": "48h e aeroporto — 26–28/11",
-      "blurb": "Partida sábado ~22:30. GRU 3h antes.",
+      "blurb": "Partida sábado ~22:30. GRU 3h antes. AirTags nas malas.",
       "items": [
+        {
+          "id": "airtags_malas",
+          "due": "2026-11-28",
+          "when": "Ao fechar as malas pro GRU",
+          "title": "Colocar AirTags nas malas despachadas",
+          "tip": "Um AirTag por mala de porão, no fundo/bolso interno (não no lado de fora). Conferir no Find My que estão online antes de sair de casa. Mala de mão: opcional. Na volta MCO→GRU, repetir."
+        },
         {
           "id": "checkin_voo",
           "due": "2026-11-26",
