@@ -796,6 +796,30 @@ a {
     padding: 16px 14px;
 }
 
+.roteiro-day-topline {
+    --park: var(--accent);
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    padding-left: 10px;
+    border-left: 3px solid var(--park);
+}
+
+.roteiro-day-topline h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.roteiro-day-strategy {
+    margin: 0 0 14px;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+
 .roteiro-day-hero {
     display: flex;
     gap: 12px;
@@ -1591,7 +1615,7 @@ a {
 
 /* Itinerário editável + mapa */
 #itin-day-host {
-    margin-top: 14px;
+    margin: 0 0 14px;
 }
 
 .itin-section {

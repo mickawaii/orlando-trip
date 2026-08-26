@@ -1732,18 +1732,19 @@ function renderRoteiroDayDetail() {
     const flightHtml = renderRoteiroFlightBlock(d);
 
     host.innerHTML = `
-        <section class="roteiro-day-panel" style="--park:${color}">
-            <div class="roteiro-day-hero">
-                <div class="roteiro-day-hero-text">
-                    <span class="roteiro-day-when">${d.dow} · ${formatDateBR(d.date)}</span>
-                    <h3>${d.title}</h3>
-                    <p>${d.strategy || ''}</p>
-                </div>
-                <div class="roteiro-progress" aria-label="Progresso">
-                    <strong>${prog.done}/${prog.total || 0}</strong>
-                    <span>feitos</span>
-                </div>
+        <div class="roteiro-day-topline" style="--park:${color}">
+            <div class="roteiro-day-hero-text">
+                <span class="roteiro-day-when">${d.dow} · ${formatDateBR(d.date)}</span>
+                <h3>${d.title}</h3>
             </div>
+            <div class="roteiro-progress" aria-label="Progresso">
+                <strong>${prog.done}/${prog.total || 0}</strong>
+                <span>feitos</span>
+            </div>
+        </div>
+        <div id="itin-day-host"></div>
+        <section class="roteiro-day-panel" style="--park:${color}">
+            ${d.strategy ? `<p class="roteiro-day-strategy">${d.strategy}</p>` : ''}
             ${flightHtml}
             ${hours}
             ${address}
@@ -1772,7 +1773,6 @@ function renderRoteiroDayDetail() {
             </div>
             ${tips ? `<div class="roteiro-section"><h4>Dicas</h4><ul class="roteiro-tips">${tips}</ul></div>` : ''}
         </section>
-        <div id="itin-day-host"></div>
     `;
 
     const itinHost = document.getElementById('itin-day-host');
