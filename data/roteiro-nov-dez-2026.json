@@ -831,11 +831,18 @@
         }
       },
       "tips": [
+        "Dia livre bom pra Best Buy / Apple no Mall at Millenia (eletrônicos do orçamento) — Uber ~15–20 min do Helios.",
         "Recupera pernas entre IoA e Epic 2",
         "Amanhã Epic Dia 2 (Magia + Berk)",
         "Lavanderia / power banks"
       ],
       "afterMain": [
+        {
+          "id": "millenia_shop",
+          "name": "Best Buy + Mall at Millenia",
+          "land": "Compras",
+          "tip": "Switch 2, iPhone 17 Pro Max 1 TB, AirPods Pro 3 — ver orçamento no Preparo"
+        },
         {
           "id": "movie",
           "name": "Filme no quarto / rooftop quieto",

@@ -1865,6 +1865,52 @@ window.togglePreparoItem = function (id) {
     updatePreparoNavHint();
 };
 
+function renderPreparoBudget() {
+    const b = preparoData && preparoData.budget;
+    if (!b) return '';
+    const t = b.totals || {};
+    const cats = (b.categories || []).map(c => {
+        const lines = (c.lines || []).map(l =>
+            `<li><span>${l.item}</span><strong>US$ ${Number(l.amount).toLocaleString('en-US')}</strong></li>`
+        ).join('');
+        return `<details class="preparo-budget-cat">
+            <summary>
+                <span>${c.label}</span>
+                <strong>US$ ${Number(c.mid).toLocaleString('en-US')}</strong>
+            </summary>
+            <ul>${lines}</ul>
+            <p class="preparo-budget-range">Faixa US$ ${c.low}–${c.high}</p>
+        </details>`;
+    }).join('');
+    const carry = (b.how_to_carry || []).map(h =>
+        `<div class="preparo-budget-carry">
+            <span>${h.label}</span>
+            <strong>US$ ${Number(h.amount).toLocaleString('en-US')}</strong>
+            <em>${h.note || ''}</em>
+        </div>`
+    ).join('');
+    const assumptions = (b.assumptions || []).map(a => `<li>${a}</li>`).join('');
+    return `<section class="preparo-budget">
+        <div class="preparo-budget-hero">
+            <div>
+                <p class="preparo-budget-eyebrow">Orçamento · ${b.people || 2} pessoas</p>
+                <h3>${b.title}</h3>
+                <p class="preparo-budget-sub">${b.subtitle || ''}</p>
+            </div>
+            <div class="preparo-budget-total">
+                <span>Meta mid</span>
+                <strong>US$ ${Number(t.mid).toLocaleString('en-US')}</strong>
+                <em>low ${t.low} · high ${t.high}</em>
+            </div>
+        </div>
+        <div class="preparo-budget-carry-row">${carry}</div>
+        <p class="preparo-budget-pay">${b.pay_note || ''}</p>
+        <p class="preparo-budget-pay">${b.tax_note || ''}</p>
+        <div class="preparo-budget-cats">${cats}</div>
+        ${assumptions ? `<details class="preparo-budget-assumptions"><summary>Premissas</summary><ul>${assumptions}</ul></details>` : ''}
+    </section>`;
+}
+
 function renderPreparo() {
     const body = document.getElementById('preparo-body');
     if (!body) return;
@@ -1912,6 +1958,7 @@ function renderPreparo() {
 
     body.innerHTML = `
         <p class="preparo-intro">${preparoData.subtitle || ''}</p>
+        ${renderPreparoBudget()}
         <div class="preparo-progress-head">
             <strong>${done}/${items.length} feitos</strong>
             <span>${next ? `Próximo: ${next.when || ('até ' + formatDateBR(next.due))}` : 'Tudo tickado'}</span>

@@ -269,6 +269,16 @@
           "mapsUrl": "https://maps.google.com/?q=Helios%20/%20CityWalk%20/%20Springs",
           "note": "12:00–14:00 · Almoço tranquilo",
           "kind": "meal"
+        },
+        {
+          "id": "2026-12-04-millenia",
+          "name": "Mall at Millenia / Best Buy",
+          "address": "4200 Conroy Rd / 4200 Conroy Rd Best Buy, Orlando, FL",
+          "lat": 28.4845,
+          "lng": -81.4314,
+          "mapsUrl": "https://maps.google.com/?q=Best%20Buy%20Mall%20at%20Millenia%20Orlando",
+          "note": "Switch 2 · iPhone · AirPods — ~15–20 min do Helios",
+          "kind": "shopping"
         }
       ]
     },
