@@ -1525,9 +1525,9 @@
       "order": [
         {
           "id": "bus",
-          "name": "Ônibus gratuito Busch (se disponível)",
+          "name": "Ônibus/busones grátis Busch",
           "land": "Transfer",
-          "tip": "Confirmar horário na véspera; senão Uber/carro cedo",
+          "tip": "Confirmar horário na véspera; sem carro — plano B só se cancelar",
           "first": true,
           "queue": "Viagem ~1h20. Podcast, dormir, água. Não gastar perna. Lanche no ônibus, não no parque lotado."
         },
@@ -1590,6 +1590,7 @@
         }
       },
       "tips": [
+        "Transporte: ônibus/busones grátis (sem carro). Disney dos dias anteriores foi de Uber.",
         "Busch ≠ dia do voo",
         "Tampa ≈ 1h20",
         "Check-out e voo amanhã (12/12)"

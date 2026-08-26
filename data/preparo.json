@@ -1,6 +1,6 @@
 {
   "title": "Preparo da viagem",
-  "subtitle": "Checklist até 28/11 · orçamento ~US$ 5,6k (2 pax) · Black · Nu Global + UV · eSIM Nu + Nomad · pochete",
+  "subtitle": "Checklist até 28/11 · orçamento ~US$ 5,65k (2 pax) · Black · Nu Global + UV · eSIM Nu + Nomad · pochete",
   "depart": "2026-11-28",
   "groups": [
     {
@@ -44,14 +44,14 @@
     {
       "id": "orcamento",
       "title": "Orçamento em dólar — 2 pessoas",
-      "blurb": "Meta ~US$ 5.600 no cartão + US$ 180 em espécie. Eletrônicos + comer do roteiro + Uber fora da Universal + carro Disney/Busch. Detalhe no card acima.",
+      "blurb": "Meta ~US$ 5.650 no cartão + US$ 180 em espécie. Eletrônicos + comer + Uber (Disney/SeaWorld/Millenia) · Busch de ônibus grátis. Detalhe no card acima.",
       "items": [
         {
           "id": "budget_ler",
           "due": "2026-08-31",
           "when": "Ler o card",
           "title": "Conferir o card “Quanto dólar levar”",
-          "tip": "Mid ~US$ 5.600 (low 5.050 / high 6.400). Hotel e ingressos fora. Eletrônicos ~US$ 2.500 c/ tax; comer ~US$ 2.300; Uber+carro ~US$ 680; extras ~US$ 320."
+          "tip": "Mid ~US$ 5.650 (low 5.000 / high 6.400). Hotel e ingressos fora. Eletrônicos ~US$ 2.500 c/ tax; comer ~US$ 2.300; Uber ~US$ 550 (inclui Disney); Busch = ônibus grátis; extras ~US$ 320."
         },
         {
           "id": "budget_electronics",
@@ -71,8 +71,8 @@
           "id": "budget_uber_plan",
           "due": "2026-10-29",
           "when": "Com o bloco de dólar",
-          "title": "Reservar ~US$ 380 pra Uber (fora Universal)",
-          "tip": "Universal: shuttle Helios (grátis). Uber: MCO↔Helios, SeaWorld 30/11, igreja 06/12, Millenia/Best Buy, folga. Disney+Busch: carro (item aluguel). Se não alugar, some ~US$ 200 de Uber Disney."
+          "title": "Reservar ~US$ 550 pra Uber (fora Universal)",
+          "tip": "Universal: shuttle Helios (grátis). Uber: MCO↔Helios, SeaWorld 30/11, Disney AK/EPCOT/DHS 08–10/12, igreja 06/12, Millenia/Best Buy. Busch 11/12: ônibus/busones grátis — não precisa Uber nem carro."
         },
         {
           "id": "budget_food",
@@ -86,7 +86,7 @@
           "due": "2026-10-29",
           "when": "Quando o dólar ajudar",
           "title": "Travar ~US$ 5.400 na Nu Global (eletrônicos + dia a dia)",
-          "tip": "Meta do card mid sem o cash. Pode parcelar conversões. UV crédito só mesa/carro/emergência. Não converter o maço todo em espécie — eletrônicos e Uber no cartão."
+          "tip": "Meta do card mid sem o cash (~US$ 5.470). Pode parcelar conversões. UV crédito só mesa/emergência. Não converter o maço todo em espécie — eletrônicos e Uber no cartão."
         }
       ]
     },
@@ -246,14 +246,14 @@
     {
       "id": "45d",
       "title": "45–30 dias — 14/10 a 29/10",
-      "blurb": "Dólar travado, eSIM Nu + Nomad, carro e imigração.",
+      "blurb": "Dólar travado, eSIM Nu + Nomad, imigração — sem carro.",
       "items": [
         {
           "id": "converter_dolar",
           "due": "2026-10-29",
           "when": "Quando o dólar ajudar",
-          "title": "Converter ~US$ 5.400 na Nu Conta Global (ver orçamento)",
-          "tip": "Meta do card mid (eletrônicos + comer + Uber + carro), sem o cash. Nu Global: spread 0 + IOF 3,5%. Wise Rende+ só se IOF 1,1% confirmar. Eletrônicos e Uber no cartão — não no dinheiro. Ver grupo Orçamento."
+          "title": "Converter ~US$ 5.470 na Nu Conta Global (ver orçamento)",
+          "tip": "Meta do card mid (eletrônicos + comer + Uber Disney/etc.), sem o cash. Nu Global: spread 0 + IOF 3,5%. Wise Rende+ só se IOF 1,1% confirmar. Eletrônicos e Uber no cartão — não no dinheiro. Ver grupo Orçamento."
         },
         {
           "id": "esim",
@@ -270,10 +270,11 @@
           "tip": "App Nomad ou site getnomad.app → plano EUA 1 GB (viagem). Comprar e instalar no celular dele em casa no Wi-Fi, antes do GRU. Ativar roaming de dados na chegada no MCO. 1 GB cobre mapas/Uber/apps básicos; Wi-Fi do hotel/parque para o resto. Chip BR dele fica pra SMS/banco."
         },
         {
-          "id": "carro",
+          "id": "busch_busones",
           "due": "2026-10-29",
-          "title": "Alugar carro 08–12/12 (ou só 11/12)",
-          "tip": "Disney 08–10/12 + Busch 11/12 a partir do Helios. Orçar ~US$ 300 (aluguel+gas+estacionamento) no bloco de dólar. Mínimo: carro no dia do Busch (Tampa). Pegar no hotel/área Universal se possível."
+          "title": "Confirmar ônibus/busones grátis Busch 11/12",
+          "tip": "Sem aluguel de carro. Busch vai de ônibus/busones grátis (SeaWorld/Busch). Anotar horário de ida e volta no Maps. Disney (08–10/12) é Uber — já no orçamento. Plano B só se o ônibus cancelar: Uber cedo (~caro até Tampa) ou remarcar.",
+          "when": "Até 29/10 · confirmar de novo na véspera"
         },
         {
           "id": "mobile_passport",
@@ -316,8 +317,8 @@
         {
           "id": "busch_transfer",
           "due": "2026-11-14",
-          "title": "Ônibus grátis Busch 11/12 — ou plano B",
-          "tip": "Confirmar horário na véspera no site. Se não encaixar, carro/Uber cedo. Não improvisar de manhã."
+          "title": "Ônibus/busones Busch 11/12 — confirmar horário",
+          "tip": "Confirmar na véspera no site/app. Sem carro. Se não rolar, plano B Uber bem cedo (Tampa é caro) — não improvisar de manhã."
         },
         {
           "id": "malas",
@@ -458,7 +459,7 @@
           "id": "dolar_caixa",
           "due": "2026-11-21",
           "title": "Separar ~US$ 150–200 em espécie",
-          "tip": "Só gorjeta (restaurante/mala/Uber) e emergência. Notas de US$ 1 e US$ 5. O resto (~US$ 5.400) fica no Nu Global / UV — ver card de orçamento."
+          "tip": "Só gorjeta (restaurante/mala/Uber) e emergência. Notas de US$ 1 e US$ 5. O resto (~US$ 5.470) fica no Nu Global / UV — ver card de orçamento."
         }
       ]
     },
@@ -532,18 +533,18 @@
   ],
   "budget": {
     "title": "Quanto dólar levar — 2 pessoas",
-    "subtitle": "Estimativa Nov–Dez/2026 · Helios · restaurantes do roteiro · Best Buy/Millenia · Uber fora da Universal",
+    "subtitle": "Estimativa Nov–Dez/2026 · Helios · restaurantes do roteiro · Best Buy/Millenia · Uber (Disney/SeaWorld/etc.) · Busch de ônibus grátis",
     "people": 2,
     "currency": "USD",
     "tax_note": "Imposto FL/Orange ~6,5% nos eletrônicos. Sem tax-free de turista (não é Europa).",
     "pay_note": "Quase tudo no cartão (Nu Global / UV). Espécie só ~US$ 150–200 pra gorjeta e emergência.",
     "updated": "2026-08-26",
     "totals": {
-      "low": 5050,
-      "mid": 5600,
+      "low": 5000,
+      "mid": 5650,
       "high": 6400,
       "cash": 180,
-      "on_card_mid": 5420
+      "on_card_mid": 5470
     },
     "categories": [
       {
@@ -607,9 +608,9 @@
       {
         "id": "uber",
         "label": "Uber / Lyft (fora da Universal)",
-        "low": 280,
-        "mid": 380,
-        "high": 520,
+        "low": 420,
+        "mid": 550,
+        "high": 700,
         "lines": [
           {
             "item": "MCO ↔ Helios (ida + volta)",
@@ -622,9 +623,9 @@
             "note": "Helios ↔ SeaWorld"
           },
           {
-            "item": "Disney AK / EPCOT / DHS (se sem carro)",
-            "amount": 0,
-            "note": "Zerar se alugar carro 08–12/12 — senão ~US$ 180–220 RT×3"
+            "item": "Disney AK / EPCOT / DHS (08–10/12)",
+            "amount": 200,
+            "note": "3 dias · ~US$ 55–75 RT cada · sem carro"
           },
           {
             "item": "Igreja 06/12 ida/volta",
@@ -637,33 +638,14 @@
             "note": "2–3 corridas (~15–25 min do Helios)"
           },
           {
+            "item": "Busch Gardens 11/12",
+            "amount": 0,
+            "note": "Ônibus/busones grátis — sem Uber/carro"
+          },
+          {
             "item": "Folga / surge / chuva",
             "amount": 50,
             "note": "Buffer"
-          }
-        ]
-      },
-      {
-        "id": "car",
-        "label": "Carro Disney + Busch (08–12/12)",
-        "low": 220,
-        "mid": 300,
-        "high": 380,
-        "lines": [
-          {
-            "item": "Aluguel ~4–5 dias",
-            "amount": 200,
-            "note": "Econômico · pegar perto do Helios"
-          },
-          {
-            "item": "Gasolina Helios → Disney → Busch → MCO",
-            "amount": 50,
-            "note": "Tampa é ~1h20"
-          },
-          {
-            "item": "Estacionamento Disney/Busch",
-            "amount": 50,
-            "note": "~US$ 30/dia Disney se não for preferencial"
           }
         ]
       },
@@ -696,14 +678,14 @@
       "2 adultos · 29/11–12/12 · Helios (shuttle Universal grátis — sem Uber nos dias Epic/USF/IoA).",
       "Eletrônicos no Best Buy ou Apple Store do Mall at Millenia (melhor opção perto do Helios).",
       "Switch 2: preço pós-reajuste 01/09/2026 (US$ 499,99).",
-      "Disney + Busch de carro alugado; se for tudo de Uber, some ~US$ 200 e tire o carro.",
+      "Disney (AK/EPCOT/DHS) de Uber · Busch Gardens de ônibus/busones grátis · sem aluguel de carro.",
       "Hotel e ingressos NÃO entram neste bloco (já pagos / à parte).",
       "Pagar eletrônicos e refeições no Nu Global ou UV — não em espécie."
     ],
     "how_to_carry": [
       {
         "label": "No cartão (Nu Global / UV)",
-        "amount": 5420,
+        "amount": 5470,
         "note": "Travar câmbio na Nu Global antes"
       },
       {
