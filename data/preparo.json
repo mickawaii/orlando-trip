@@ -27,12 +27,6 @@
           "tip": "Stay More, Save More (7+ noites). Não encurtar. Não remarcar pelo Nu Viagens — Helios já é Universal. Guardar voucher."
         },
         {
-          "id": "cartoes",
-          "due": "2026-08-31",
-          "title": "Avisar viagem nos bancos (todos os cartões)",
-          "tip": "Avisar EUA em: Ultravioleta, C6 crédito, Nu/C6 Global, Wise. Sem aviso, compra no parque pode cair."
-        },
-        {
           "id": "pagamentos_orland",
           "due": "2026-08-31",
           "when": "Definir agora",
@@ -515,8 +509,15 @@
     {
       "id": "48h",
       "title": "48h e aeroporto — 26–28/11",
-      "blurb": "Partida sábado ~22:30. GRU 3h antes. AirTags nas malas.",
+      "blurb": "Partida sábado ~22:30. GRU 3h antes. AirTags nas malas. Aviso de viagem nos cartões: 24–27/11.",
       "items": [
+        {
+          "id": "cartoes",
+          "due": "2026-11-27",
+          "when": "24–27/11",
+          "title": "Avisar viagem nos bancos (todos os cartões)",
+          "tip": "Janela 24–27/11 (não muito antes). Avisar EUA em: Ultravioleta, C6 crédito, Nu/C6 Global, Wise. Sem aviso, compra no parque pode cair."
+        },
         {
           "id": "airtags_malas",
           "due": "2026-11-28",
