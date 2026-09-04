@@ -272,9 +272,9 @@
         {
           "id": "busch_busones",
           "due": "2026-10-29",
-          "title": "Confirmar ônibus/busones grátis Busch 11/12",
-          "tip": "Sem aluguel de carro. Busch vai de ônibus/busones grátis (SeaWorld/Busch). Anotar horário de ida e volta no Maps. Disney (08–10/12) é Uber — já no orçamento. Plano B só se o ônibus cancelar: Uber cedo (~caro até Tampa) ou remarcar.",
-          "when": "Até 29/10 · confirmar de novo na véspera"
+          "title": "Ônibus Busch 11/12 — Doubletree 08:30 (já reservado)",
+          "tip": "Pickup: Doubletree Universal, 5780 Major Blvd. Embarque 08:30 (Mears grátis). Uber Helios→Doubletree ~08:00–08:15. Volta no mesmo ponto. Cancelar até 5h do dia se não forem (taxa no-show). Conferir horário de volta na reserva.",
+          "when": "11/12 · 08:30"
         },
         {
           "id": "mobile_passport",
@@ -317,8 +317,9 @@
         {
           "id": "busch_transfer",
           "due": "2026-11-14",
-          "title": "Ônibus/busones Busch 11/12 — confirmar horário",
-          "tip": "Confirmar na véspera no site/app. Sem carro. Se não rolar, plano B Uber bem cedo (Tampa é caro) — não improvisar de manhã."
+          "title": "Ônibus Busch 11/12 — Doubletree 08:30 (já reservado)",
+          "tip": "Pickup: Doubletree Universal, 5780 Major Blvd. Embarque 08:30 (Mears grátis). Uber Helios→Doubletree ~08:00–08:15. Volta no mesmo ponto. Cancelar até 5h do dia se não forem (taxa no-show). Conferir horário de volta na reserva.",
+          "when": "11/12 · 08:30"
         },
         {
           "id": "malas",
