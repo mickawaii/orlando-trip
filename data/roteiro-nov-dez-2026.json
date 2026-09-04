@@ -1522,15 +1522,31 @@
         "hoursSource": "ThemeParks Wiki",
         "color": "#fb923c"
       },
-      "strategy": "Dia cheio em Tampa. Iron Gwazi e Montu primeiro. Volta ao Helios — voo só amanhã.",
+      "strategy": "Dia cheio em Tampa. Uber Helios → Doubletree Universal (5780 Major Blvd) pro ônibus Mears 08:30. Iron Gwazi e Montu primeiro. Volta no mesmo ponto + Uber ao Helios.",
       "order": [
         {
-          "id": "bus",
-          "name": "Ônibus/busones grátis Busch",
+          "id": "uber_doubletree",
+          "name": "Uber Helios → Doubletree Universal",
           "land": "Transfer",
-          "tip": "Confirmar horário na véspera; sem carro — plano B só se cancelar",
+          "tip": "5780 Major Blvd · sair ~08:00–08:15 (~4 min / ~US$ 8–12)",
           "first": true,
-          "queue": "Viagem ~1h20. Podcast, dormir, água. Não gastar perna. Lanche no ônibus, não no parque lotado."
+          "queue": "Só conferir Maps e cartão ARQ/Wise. Não atrasar — ônibus 08:30."
+        },
+        {
+          "id": "doubletree_pickup",
+          "name": "Embarque ônibus Busch 08:30",
+          "land": "Doubletree Universal",
+          "tip": "5780 Major Blvd, Orlando, FL 32819 · Mears grátis (reserva feita). Chegar ~08:15. Cancelar até 5h se não forem (taxa no-show).",
+          "first": false,
+          "queue": "Viagem ~1h20. Podcast, dormir, água. Não gastar perna."
+        },
+        {
+          "id": "bus",
+          "name": "Chegada Busch Gardens",
+          "land": "Tampa",
+          "tip": "Entrar e ir direto pra Iron Gwazi",
+          "first": false,
+          "queue": "Banheiro + água na entrada. Rope drop mental nos coasters."
         },
         {
           "id": "gwazi",
@@ -1591,7 +1607,7 @@
         }
       },
       "tips": [
-        "Transporte: ônibus/busones grátis (sem carro). Disney dos dias anteriores foi de Uber.",
+        "Pickup: Doubletree Universal, 5780 Major Blvd · ônibus 08:30 (Mears). Volta no mesmo ponto.",
         "Busch ≠ dia do voo",
         "Tampa ≈ 1h20",
         "Check-out e voo amanhã (12/12)"
