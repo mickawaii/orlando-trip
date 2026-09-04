@@ -1,6 +1,6 @@
 {
   "title": "Preparo da viagem",
-  "subtitle": "Checklist até 28/11 · orçamento ~US$ 5,35k (2 pax) · Black · Nu Global + UV · eSIM Nu + Nomad · pochete",
+  "subtitle": "Checklist até 28/11 · orçamento ~US$ 5,35k (2 pax) · Black · ARQ #1 + Wise #2 · eSIM Nu + Nomad · pochete",
   "depart": "2026-11-28",
   "groups": [
     {
@@ -27,17 +27,11 @@
           "tip": "Stay More, Save More (7+ noites). Não encurtar. Não remarcar pelo Nu Viagens — Helios já é Universal. Guardar voucher."
         },
         {
-          "id": "cartoes",
-          "due": "2026-08-31",
-          "title": "Avisar viagem nos bancos (todos os cartões)",
-          "tip": "Avisar EUA em: Ultravioleta, C6 crédito, Nu/C6 Global, Wise. Sem aviso, compra no parque pode cair."
-        },
-        {
           "id": "pagamentos_orland",
           "due": "2026-08-31",
           "when": "Definir agora",
-          "title": "Ordem dos cartões em Orlando",
-          "tip": "1) Nu Conta Global (spread 0 + IOF 3,5%) no dia a dia. 2) Wise com Rende+ se IOF 1,1% ainda valer. 3) Ultravioleta crédito: mesa/carro/emergência (IOF estornado + ~1,25% cashback; custo ~2,25%). 4) C6 Global = plano B. 5) C6 crédito no exterior = evitar (spread 5,25%+IOF). Passagens NÃO entram aqui — só o Black do seguro."
+          "title": "Ordem dos cartões em Orlando (ARQ primeiro)",
+          "tip": "1) ARQ (USDc) — prioridade #1: menor taxa de conversão, mais dólares por real. 2) Wise — prioridade #2 (Rende+ se IOF 1,1% ainda valer). 3) Nu Conta Global (spread 0 + IOF 3,5%). 4) Ultravioleta crédito: mesa/carro/emergência (IOF estornado + ~1,25% cashback). 5) C6 Global = plano B. 6) C6 crédito no exterior = evitar. Passagens NÃO entram aqui — só o Black do seguro."
         }
       ]
     },
@@ -58,7 +52,7 @@
           "due": "2026-12-04",
           "when": "Dia livre 04/12 (ou outro rest)",
           "title": "Comprar Switch 2 + iPhone 17 Pro Max 1 TB + AirPods Pro 3",
-          "tip": "Best Buy (4200 Conroy Rd) ou Apple Store no Mall at Millenia — ~15–20 min de Uber do Helios. Orçar US$ 2.500 c/ 6,5% tax (499+1599+249+tax). Pagar Nu Global ou UV. Pedir caixa/nota fiscal pra mala de mão na volta."
+          "tip": "Best Buy (4200 Conroy Rd) ou Apple Store no Mall at Millenia — ~15–20 min de Uber do Helios. Orçar US$ 2.500 c/ 6,5% tax (499+1599+249+tax). Pagar ARQ primeiro; senão Wise; Nu Global ou UV se precisar. Pedir caixa/nota fiscal pra mala de mão na volta."
         },
         {
           "id": "budget_millenia",
@@ -79,14 +73,14 @@
           "due": "2026-10-29",
           "when": "Com o bloco de dólar",
           "title": "Reservar ~US$ 2.300 pra comer (casal)",
-          "tip": "Cobre Mythos, Sharks, Flora, Leaky, Satu’li, Via Napoli, Sci-Fi, Atlantic, snacks e jantares leves. Mesa boa ~US$ 80–110/casal; quick service ~US$ 45–65. Gorjeta 15–20% no cartão ou espécie."
+          "tip": "Cobre Mythos, Sharks, Flora, Satu’li, Via Napoli, Sci-Fi, Atlantic, snacks e jantares leves. Mesa boa ~US$ 80–110/casal; quick service ~US$ 45–65. Gorjeta 15–20% no cartão ou espécie."
         },
         {
           "id": "budget_converter",
           "due": "2026-10-29",
           "when": "Quando o dólar ajudar",
-          "title": "Travar ~US$ 5.400 na Nu Global (eletrônicos + dia a dia)",
-          "tip": "Meta do card mid sem o cash (~US$ 5.170). Pode parcelar. Eletrônicos e Uber no cartão."
+          "title": "Travar dólares no ARQ, depois Wise (Nu se precisar)",
+          "tip": "1º ARQ (melhor conversão). 2º Wise. Completar com Nu Global se ainda faltar. Meta mid sem cash (~US$ 5.170). Eletrônicos e Uber no ARQ/Wise — não em espécie."
         }
       ]
     },
@@ -150,13 +144,6 @@
           "when": "Reservar já (Resy)",
           "title": "Flora Taverna — jantar 29/11",
           "tip": "Chegada. Resy do Helios. Café da manhã dos dias Epic também vale se quiserem sentar."
-        },
-        {
-          "id": "uni_leaky",
-          "due": "2026-08-31",
-          "when": "Reservar já (app Universal)",
-          "title": "Leaky Cauldron — almoço 02/12 (USF)",
-          "tip": "App/site Universal, até 6 meses. Se lotar, Fortescue / to go."
         },
         {
           "id": "uni_mythos",
@@ -252,8 +239,8 @@
           "id": "converter_dolar",
           "due": "2026-10-29",
           "when": "Quando o dólar ajudar",
-          "title": "Converter ~US$ 5.170 na Nu Conta Global (ver orçamento)",
-          "tip": "Meta do card mid sem o cash. Nu Global: spread 0 + IOF 3,5%. Eletrônicos e Uber no cartão. Ver Orçamento."
+          "title": "Converter bloco no ARQ, depois Wise (Nu se faltar)",
+          "tip": "ARQ primeiro (menor taxa). Wise em segundo. Nu Global só se ainda precisar. Meta mid sem cash. Eletrônicos e Uber no ARQ/Wise. Ver Orçamento."
         },
         {
           "id": "esim",
@@ -425,7 +412,7 @@
           "when": "NO CORPO (não na pochete)",
           "slot": "corpo",
           "title": "Celular, óculos, casaco leve, Magic/ingresso no app",
-          "tip": "Um celular cada (dela: eSIM Nu 10 GB; dele: Nomad 1 GB). Passaportes no COFRE Helios nos dias de parque. Óculos no topo da cabeça. Cartão: Nu Global no bolso; UV crédito na pochete só pra mesa/emergência."
+          "tip": "Um celular cada (dela: eSIM Nu 10 GB; dele: Nomad 1 GB). Passaportes no COFRE Helios nos dias de parque. Óculos no topo da cabeça. Cartão: ARQ no bolso (#1); Wise (#2); Nu Global de backup; UV crédito na pochete só pra mesa/emergência."
         },
         {
           "id": "pack_wet",
@@ -466,7 +453,7 @@
           "id": "dolar_caixa",
           "due": "2026-11-21",
           "title": "Separar ~US$ 150–200 em espécie",
-          "tip": "Só gorjeta e emergência (~US$ 150–200). O resto (~US$ 5.170) no Nu Global / UV."
+          "tip": "Só gorjeta e emergência (~US$ 150–200). O resto (~US$ 5.170) no ARQ / Wise / UV."
         }
       ]
     },
@@ -515,8 +502,15 @@
     {
       "id": "48h",
       "title": "48h e aeroporto — 26–28/11",
-      "blurb": "Partida sábado ~22:30. GRU 3h antes. AirTags nas malas.",
+      "blurb": "Partida sábado ~22:30. GRU 3h antes. AirTags nas malas. Aviso de viagem nos cartões: 24–27/11.",
       "items": [
+        {
+          "id": "cartoes",
+          "due": "2026-11-27",
+          "when": "24–27/11",
+          "title": "Avisar viagem nos bancos (todos os cartões)",
+          "tip": "Janela 24–27/11 (não muito antes). Avisar EUA em: ARQ, Ultravioleta, C6 crédito, Nu/C6 Global, Wise. Sem aviso, compra no parque pode cair."
+        },
         {
           "id": "airtags_malas",
           "due": "2026-11-28",
@@ -551,7 +545,7 @@
     "people": 2,
     "currency": "USD",
     "tax_note": "Imposto FL/Orange ~6,5% nos eletrônicos. Sem tax-free de turista (não é Europa).",
-    "pay_note": "Quase tudo no cartão (Nu Global / UV). Espécie só ~US$ 150–200 pra gorjeta e emergência.",
+    "pay_note": "Prioridade ARQ (#1), depois Wise (#2). Nu Global / UV se precisar. Espécie só ~US$ 150–200 pra gorjeta e emergência.",
     "updated": "2026-08-26",
     "totals": {
       "low": 4600,
@@ -598,7 +592,7 @@
         "high": 2800,
         "lines": [
           {
-            "item": "Mesas do roteiro (Mythos, Sharks, Flora, Via Napoli, Sci-Fi, Leaky, Satu’li, Atlantic…)",
+            "item": "Mesas do roteiro (Mythos, Sharks, Flora, Via Napoli, Sci-Fi, Satu’li, Atlantic…)",
             "amount": 1400,
             "note": "~US$ 55–110/mesa × casal"
           },
@@ -689,6 +683,7 @@
       }
     ],
     "assumptions": [
+      "ARQ (USDc) #1 e Wise #2: menor custo de conversão BRL→USD; Nu Global depois.",
       "2 adultos · 29/11–12/12 · Helios (shuttle Universal grátis).",
       "Uber local recalibrado com simulação Helios→SeaWorld ~US$ 8,95 (ago/2026) e distância OSRM.",
       "Disney é ~2–2,5× mais longe que SeaWorld → ida off-peak ~US$ 19–23, não US$ 35–40.",
@@ -699,9 +694,9 @@
     ],
     "how_to_carry": [
       {
-        "label": "No cartão (Nu Global / UV)",
+        "label": "No ARQ / Wise / UV",
         "amount": 5170,
-        "note": "Travar câmbio na Nu Global antes"
+        "note": "ARQ primeiro; Wise segundo; Nu se precisar"
       },
       {
         "label": "Espécie (caixa / câmbio)",
