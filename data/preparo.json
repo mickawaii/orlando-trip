@@ -73,7 +73,7 @@
           "due": "2026-10-29",
           "when": "Com o bloco de dólar",
           "title": "Reservar ~US$ 2.300 pra comer (casal)",
-          "tip": "Cobre Mythos, Sharks, Flora, Leaky, Satu’li, Via Napoli, Sci-Fi, Atlantic, snacks e jantares leves. Mesa boa ~US$ 80–110/casal; quick service ~US$ 45–65. Gorjeta 15–20% no cartão ou espécie."
+          "tip": "Cobre Mythos, Sharks, Flora, Satu’li, Via Napoli, Sci-Fi, Atlantic, snacks e jantares leves. Mesa boa ~US$ 80–110/casal; quick service ~US$ 45–65. Gorjeta 15–20% no cartão ou espécie."
         },
         {
           "id": "budget_converter",
@@ -144,13 +144,6 @@
           "when": "Reservar já (Resy)",
           "title": "Flora Taverna — jantar 29/11",
           "tip": "Chegada. Resy do Helios. Café da manhã dos dias Epic também vale se quiserem sentar."
-        },
-        {
-          "id": "uni_leaky",
-          "due": "2026-08-31",
-          "when": "Reservar já (app Universal)",
-          "title": "Leaky Cauldron — almoço 02/12 (USF)",
-          "tip": "App/site Universal, até 6 meses. Se lotar, Fortescue / to go."
         },
         {
           "id": "uni_mythos",
@@ -599,7 +592,7 @@
         "high": 2800,
         "lines": [
           {
-            "item": "Mesas do roteiro (Mythos, Sharks, Flora, Via Napoli, Sci-Fi, Leaky, Satu’li, Atlantic…)",
+            "item": "Mesas do roteiro (Mythos, Sharks, Flora, Via Napoli, Sci-Fi, Satu’li, Atlantic…)",
             "amount": 1400,
             "note": "~US$ 55–110/mesa × casal"
           },

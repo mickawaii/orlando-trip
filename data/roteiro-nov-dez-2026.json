@@ -593,7 +593,7 @@
         "lunch": {
           "when": "12:00–13:30",
           "where": "Leaky Cauldron",
-          "what": "Fish & chips / pub fare (reserve mentalmente a fila)"
+          "what": "Fish & chips / pub fare — sem reserva no app (walk-up / fila)"
         },
         "snack": {
           "when": "15:30",
@@ -607,6 +607,7 @@
         }
       },
       "tips": [
+        "Leaky Cauldron: não aparece pra reservar no app — ir walk-up / aceitar fila ou Fortescue to-go.",
         "Prioridade #3: USF no segundo melhor dia disponível",
         "Hogwarts Express se a fila permitir",
         "Amanhã Islands of Adventure"
