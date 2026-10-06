@@ -6,7 +6,7 @@
     "usd_brl_comercial": 4.97,
     "usd_brl_turismo": 5.22,
     "usd_brl_efetivo": 5.4,
-    "note": "Cotação 06/10/2026: comercial ~R$4,97 · turismo venda ~R$5,22 · efetivo cartão ~R$5,40 (turismo + IOF 3,5%). Compra em reais (Decolar/Seus Ingressos) evita IOF/spread."
+    "note": "Cotação 06/10/2026: comercial ~R$4,97 · turismo venda ~R$5,22 · efetivo cartão ~R$5,40 (turismo + IOF 3,5%). Compra em reais (Decolar/CVC/Seus Ingressos) evita IOF/spread."
   },
   "needs": [
     {
@@ -57,6 +57,22 @@
           "best_for_br": true,
           "link": "https://www.decolar.com/viagens/imperdiveis/universal",
           "notes": "Parcelamento em reais. Selecione início 01/12."
+        },
+        {
+          "id": "uni-cvc",
+          "seller": "CVC",
+          "usd": 482,
+          "brl": 2605,
+          "price_source": "brl",
+          "tax_note": "R$ 2.605 a partir de (vitrine 02/11) · taxas inclusas. Em outra vitrine: R$ 2.742. Pix −3%.",
+          "promo": "3 dias Park to Park + 2 Dias Grátis + Epic",
+          "meliuz": "Sem cashback Méliuz confirmado p/ CVC",
+          "meliuz_pct": 0,
+          "livelo": "Sem parceria estável vista",
+          "br_ok": true,
+          "best_for_br": false,
+          "link": "https://www.cvc.com.br/lp/promocoes/universal-epic-universe",
+          "notes": "Botão Compre no Site. Confirme start 01/12 — dez pode subir vs vitrine out/nov. Alt: cvc.com.br/lp/promocoes/ingressos"
         },
         {
           "id": "uni-seusingressos",
@@ -166,6 +182,22 @@
           "notes": "Pagar em reais + parcelar. Melhor caminho se o preço da data fechar perto do piso."
         },
         {
+          "id": "dis-cvc",
+          "seller": "CVC",
+          "usd": 597,
+          "brl": 3224,
+          "price_source": "brl",
+          "tax_note": "R$ 3.224 a partir de (vitrine 01/11) · taxas inclusas · 8x. Pix −3%. Em out: até R$ 3.344.",
+          "promo": "Disney 3 Dias Básico (1 parque/dia)",
+          "meliuz": "Sem cashback Méliuz confirmado p/ CVC",
+          "meliuz_pct": 0,
+          "livelo": "Sem parceria estável vista",
+          "br_ok": true,
+          "best_for_br": false,
+          "link": "https://www.cvc.com.br/destinos/disney",
+          "notes": "Mais caro que Decolar na vitrine. Só vale se cupom/12x ou loja bater preço. Selecione 08/12."
+        },
+        {
           "id": "dis-undercover",
           "seller": "Undercover Tourist",
           "usd": 391,
@@ -241,6 +273,22 @@
           "notes": "Melhor custo do roteiro. Reserve o shuttle Busch: buschgardens.mears.com"
         },
         {
+          "id": "sw-cvc",
+          "seller": "CVC",
+          "usd": null,
+          "brl": null,
+          "price_source": "check",
+          "tax_note": "Não achei ingresso SeaWorld/Busch na vitrine online de ingressos.",
+          "promo": "—",
+          "meliuz": "—",
+          "meliuz_pct": 0,
+          "livelo": "—",
+          "br_ok": "check",
+          "best_for_br": false,
+          "link": "https://www.cvc.com.br/dicas-de-viagem/parques/seaworld-parks-viva-ferias-incriveis/",
+          "notes": "Só conteúdo/blog. Se existir, costuma ser via loja/consultor — peça orçamento."
+        },
+        {
           "id": "sw-decolar",
           "seller": "Decolar",
           "usd": null,
@@ -281,6 +329,10 @@
       "detail": "Hoje ~1% cashback listado na página Decolar do Méliuz (06/10/2026). Ative antes de comprar. Regras: ingressos podem ter exclusão — leia o regulamento da loja."
     },
     {
+      "name": "CVC Pix",
+      "detail": "Várias ofertas CVC de ingresso anunciam 3% OFF no Pix. Não achei cashback Méliuz estável para CVC."
+    },
+    {
       "name": "Méliuz × Expedia",
       "detail": "Expedia é loja parceira. Cupons de hotel/voo ≠ cashback garantido em ingresso. Página de tickets Universal da Expedia é US/Canada — pouco útil pro BR."
     },
@@ -298,9 +350,9 @@
     }
   ],
   "decision": [
-    "Universal: priorize Decolar (R$ em mãos, Méliuz 1%) ou Seus Ingressos se quiser Livelo 3 pts/R$. Evite Undercover/Expedia US&Canada.",
-    "Disney: abra Decolar com data 08/12 e Undercover lado a lado — compre o menor total efetivo (Decolar já em R$; Undercover USD×5,40).",
-    "SeaWorld+Busch: compre no site oficial o 2-Day 2-Park (~US$106) — é o deal mais claro do roteiro.",
+    "Universal: priorize Decolar (R$ em mãos, Méliuz 1%) ou Seus Ingressos se quiser Livelo 3 pts/R$. CVC tem o 3+2 (~R$2.605+) mas veio mais caro que Decolar na vitrine.",
+    "Disney: Decolar e Undercover batem CVC com folga na vitrine (CVC ~R$3.224 vs Decolar a partir de R$2.188).",
+    "SeaWorld+Busch: site oficial (~US$106). CVC não lista o combo online — só via loja, se houver.",
     "Antes de pagar: ative Méliuz, cheque Livelo/Esfera do dia, e confirme start date 01/12 (Universal) e 08/12 (Disney)."
   ]
 }
