@@ -219,6 +219,16 @@ a {
     color: #9a3412;
 }
 
+.nav-ingressos {
+    grid-column: 1 / -1;
+    border-color: color-mix(in srgb, #0369a1 30%, var(--border));
+    background: linear-gradient(180deg, #ffffff 0%, #eef6fb 140%);
+}
+
+.nav-ingressos .nav-tile-label {
+    color: #0369a1;
+}
+
 /* Home today */
 .home-today {
     background: var(--bg-elevated);
@@ -1968,5 +1978,321 @@ a {
 .leaflet-marker-icon.selected .itin-map-pin span {
     background: #1d4ed8;
     transform: scale(1.15);
+}
+
+/* Ingressos — comparação */
+.ingressos-loading,
+.ingressos-empty {
+    color: var(--text-dim);
+}
+
+.ingressos-intro {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+}
+
+.ingressos-updated {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    margin: -4px 0 14px;
+}
+
+.ingressos-needs {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.ingressos-need {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    padding: 10px 12px;
+}
+
+.ingressos-need strong {
+    display: block;
+    font-size: 0.92rem;
+    font-weight: 750;
+}
+
+.ingressos-need span {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-top: 2px;
+}
+
+.ingressos-banner {
+    border: 1px solid color-mix(in srgb, var(--ok) 35%, var(--border));
+    background: linear-gradient(180deg, #ffffff 0%, #eefaf4 100%);
+    border-radius: var(--radius);
+    padding: 14px 14px 12px;
+    margin-bottom: 16px;
+}
+
+.ingressos-banner h3 {
+    margin: 0 0 6px;
+    font-size: 0.98rem;
+    color: var(--ok);
+}
+
+.ingressos-banner p {
+    margin: 0;
+    font-size: 0.84rem;
+    color: var(--text-dim);
+}
+
+.ingressos-fx {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin: 0 0 16px;
+    line-height: 1.45;
+}
+
+.ingressos-chips {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-bottom: 14px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.ingressos-chip {
+    flex: 0 0 auto;
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 0.82rem;
+    font-weight: 650;
+    color: var(--text-dim);
+    cursor: pointer;
+}
+
+.ingressos-chip.active {
+    border-color: #0369a1;
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.ingressos-product {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-elevated);
+    padding: 16px 14px;
+    margin-bottom: 14px;
+}
+
+.ingressos-product-head h3 {
+    margin: 0 0 4px;
+    font-size: 1.05rem;
+    font-weight: 780;
+}
+
+.ingressos-product-covers {
+    margin: 0 0 6px;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+}
+
+.ingressos-product-why {
+    margin: 0 0 12px;
+    font-size: 0.84rem;
+}
+
+.ingressos-promo-pill {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 750;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ok);
+    background: #ecfdf5;
+    border-radius: 999px;
+    padding: 4px 8px;
+    margin-bottom: 10px;
+}
+
+.ingressos-table-wrap {
+    overflow-x: auto;
+    margin: 0 -2px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.ingressos-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 520px;
+    font-size: 0.8rem;
+}
+
+.ingressos-table th {
+    text-align: left;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-dim);
+    font-weight: 700;
+    padding: 8px 8px 8px 0;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+.ingressos-table td {
+    padding: 12px 8px 12px 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+}
+
+.ingressos-table tr:last-child td {
+    border-bottom: none;
+}
+
+.ingressos-table tr.best td {
+    background: color-mix(in srgb, #e0f2fe 55%, transparent);
+}
+
+.ingressos-seller {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 110px;
+}
+
+.ingressos-seller strong {
+    font-weight: 750;
+}
+
+.ingressos-badge {
+    display: inline-block;
+    width: fit-content;
+    font-size: 0.65rem;
+    font-weight: 750;
+    border-radius: 6px;
+    padding: 2px 6px;
+}
+
+.ingressos-badge-best {
+    background: #0369a1;
+    color: #fff;
+}
+
+.ingressos-badge-no {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.ingressos-price {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.ingressos-price strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 800;
+}
+
+.ingressos-price em {
+    display: block;
+    font-style: normal;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+}
+
+.ingressos-extras {
+    font-size: 0.74rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+    min-width: 140px;
+}
+
+.ingressos-extras b {
+    color: var(--text);
+    font-weight: 650;
+}
+
+.ingressos-buy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: #0369a1;
+    color: #fff !important;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.78rem;
+    white-space: nowrap;
+}
+
+.ingressos-buy:active {
+    transform: scale(0.98);
+}
+
+.ingressos-notes {
+    margin: 4px 0 0;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    max-width: 160px;
+}
+
+.ingressos-section {
+    margin-top: 8px;
+    margin-bottom: 14px;
+}
+
+.ingressos-section h3 {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+}
+
+.ingressos-tips {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+}
+
+.ingressos-tips li {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    padding: 10px 12px;
+    font-size: 0.84rem;
+}
+
+.ingressos-tips li strong {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 0.86rem;
+}
+
+.ingressos-decision {
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+    padding: 14px;
+}
+
+.ingressos-decision h3 {
+    margin: 0 0 8px;
+    color: var(--accent);
+}
+
+.ingressos-decision ol {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 0.84rem;
+    display: grid;
+    gap: 6px;
+}
+
+.ingressos-disclaimer {
+    margin-top: 14px;
+    font-size: 0.72rem;
+    color: var(--text-dim);
 }
 
