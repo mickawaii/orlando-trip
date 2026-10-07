@@ -1,0 +1,406 @@
+{
+  "updated": "2026-10-07",
+  "title": "Ingressos — comparação",
+  "subtitle": "Preços rechecados em 07/10/2026 para o roteiro 30/11–11/12. Adulto 10+. Confirme a data no checkout.",
+  "fx": {
+    "usd_brl_comercial": 4.99,
+    "usd_brl_turismo": 5.17,
+    "usd_brl_efetivo": 5.35,
+    "note": "Cotação 07/10/2026: comercial ~R$4,99 · turismo venda ~R$5,17 · efetivo cartão ~R$5,35 (turismo + IOF 3,5%). Compra em reais (Decolar/CVC/VMZ/Seus Ingressos) evita IOF/spread. Recheck tarde 07/10: Universal Decolar R$2.540 (era R$2.448 em 06/10); Disney 3 dias Decolar R$2.183 (era R$2.188 em 06/10 / R$2.270 mais cedo hoje)."
+  },
+  "needs": [
+    {
+      "id": "seaworld-busch",
+      "label": "SeaWorld + Busch",
+      "dates": "30/11 + 11/12",
+      "ticket": "2-Day 2-Park (janela 14 dias)"
+    },
+    {
+      "id": "universal",
+      "label": "Universal (5 dias)",
+      "dates": "01–07/12",
+      "ticket": "3-Day Park-to-Park + 2 Free (Epic ×3, USF, IoA)"
+    },
+    {
+      "id": "disney",
+      "label": "Disney (3 dias)",
+      "dates": "08–10/12",
+      "ticket": "3-Day Base (AK, EPCOT, DHS — 1 parque/dia)"
+    }
+  ],
+  "promo_banner": {
+    "title": "Promoção ativa: Universal compre 3, ganhe 2",
+    "body": "5 dias de parque (Park-to-Park + Epic) pelo preço de 3, em janela de 7 dias. Cobre o bloco 01–07/12 do roteiro. Volcano Bay está fechado nessa época — não precisa da versão com água."
+  },
+  "products": [
+    {
+      "id": "universal",
+      "name": "Universal — 3 dias PTP + 2 grátis",
+      "short": "Universal",
+      "covers": "Epic 01 · USF 02 · IoA 03 · Epic 05 · Epic 07",
+      "start_date": "2026-12-01",
+      "promo": "Compre 3, ganhe 2",
+      "why": "Casa com o roteiro: 5 usos em 7 dias. Park-to-Park inclui Hogwarts Express.",
+      "offers": [
+        {
+          "id": "uni-decolar",
+          "seller": "Decolar",
+          "usd": 475,
+          "brl": 2540,
+          "price_source": "brl",
+          "tax_note": "Vitrine 07/10: a partir de R$2.540 (era R$2.448 em 06/10). Sem IOF/spread.",
+          "promo": "3+2 Park-to-Park + Epic",
+          "meliuz": "1% cashback (ativar Decolar no Méliuz)",
+          "meliuz_pct": 1,
+          "livelo": "Campanhas flash (já teve 10 pts/R$). Hoje: checar Livelo → Decolar",
+          "br_ok": true,
+          "best_for_br": true,
+          "link": "https://www.decolar.com/viagens/imperdiveis/universal",
+          "notes": "Subiu ~R$92 vs ontem. Selecione início 01/12 no checkout."
+        },
+        {
+          "id": "uni-vmz",
+          "seller": "VMZ Viagens",
+          "usd": null,
+          "brl": null,
+          "price_source": "check",
+          "tax_note": "Preço só no checkout com data (reservas.vmzviagens.com.br). Em R$, sem IOF.",
+          "promo": "3 Dias Park to Park + 2 Dias GRÁTIS + Epic",
+          "meliuz": "Sem",
+          "meliuz_pct": 0,
+          "livelo": "Sem parceria estável vista",
+          "br_ok": true,
+          "best_for_br": false,
+          "link": "https://reservas.vmzviagens.com.br/",
+          "notes": "Parceira oficial Universal no BR. Catálogo: vmzviagens.com.br/ingressos-universal-orlando · escolha start 01/12 e compare com Decolar R$2.540."
+        },
+        {
+          "id": "uni-cvc",
+          "seller": "CVC",
+          "usd": 487,
+          "brl": 2605,
+          "price_source": "brl",
+          "tax_note": "R$ 2.605 a partir de (vitrine 02/11) · taxas inclusas. Em outra vitrine: R$ 2.742. Pix −3%.",
+          "promo": "3 dias Park to Park + 2 Dias Grátis + Epic",
+          "meliuz": "Sem cashback Méliuz confirmado p/ CVC",
+          "meliuz_pct": 0,
+          "livelo": "Sem parceria estável vista",
+          "br_ok": true,
+          "best_for_br": false,
+          "link": "https://www.cvc.com.br/lp/promocoes/universal-epic-universe",
+          "notes": "Botão Compre no Site. Confirme start 01/12 — dez pode subir vs vitrine out/nov. Alt: cvc.com.br/lp/promocoes/ingressos"
+        },
+        {
+          "id": "uni-seusingressos",
+          "seller": "Seus Ingressos",
+          "usd": null,
+          "brl": null,
+          "price_source": "check",
+          "tax_note": "Preço sobe ao escolher 01/12 no checkout.",
+          "promo": "3+2 Park-to-Park + Epic",
+          "meliuz": "Sem cashback Méliuz conhecido",
+          "meliuz_pct": 0,
+          "livelo": "3 pts Livelo / R$ (Especial Orlando)",
+          "br_ok": true,
+          "best_for_br": false,
+          "link": "https://seusingressos.com.br/p/promo-universal-3-dias/",
+          "notes": "Blockout: 18–28/11 e 18/12–03/01. 01/12 ok. Parceiro Livelo."
+        },
+        {
+          "id": "uni-oficial",
+          "seller": "Oficial Universal",
+          "usd": 427,
+          "brl": 2284,
+          "price_source": "usd_from",
+          "tax_note": "A partir de ~US$85/dia (US$427) + imposto FL ~6,5%. Em cartão BR some IOF/spread.",
+          "promo": "Get 2 Days Free with 3-Day Ticket",
+          "meliuz": "Sem",
+          "meliuz_pct": 0,
+          "livelo": "Sem",
+          "br_ok": true,
+          "best_for_br": false,
+          "link": "https://www.universalorlando.com/web/en/us/tickets-packages/offers/ticketoffer",
+          "notes": "Preço dinâmico — confira calendário com start 01/12."
+        },
+        {
+          "id": "uni-getaway",
+          "seller": "Get Away Today",
+          "usd": 379,
+          "brl": 2028,
+          "price_source": "usd_from",
+          "tax_note": "A partir de US$379 + tax (piso). Revendedor autorizado; costuma bater Undercover.",
+          "promo": "Buy 3, Get 2 FREE",
+          "meliuz": "Sem",
+          "meliuz_pct": 0,
+          "livelo": "Sem",
+          "br_ok": "check",
+          "best_for_br": false,
+          "link": "https://www.getawaytoday.com/tickets/universal-orlando-resort",
+          "notes": "Confirme se vende para endereço BR antes de pagar."
+        },
+        {
+          "id": "uni-undercover",
+          "seller": "Undercover Tourist",
+          "usd": 411,
+          "brl": 2199,
+          "price_source": "usd_final",
+          "tax_note": "US$375 + tax ≈ US$410,87 final (adulto).",
+          "promo": "3-Day PTP + 2 Days FREE",
+          "meliuz": "Sem",
+          "meliuz_pct": 0,
+          "livelo": "Sem",
+          "br_ok": false,
+          "best_for_br": false,
+          "link": "https://www.undercovertourist.com/orlando/universal-orlando-resort/",
+          "notes": "⚠️ Só residentes EUA/Canadá. Não serve pra passaporte BR."
+        },
+        {
+          "id": "uni-expedia",
+          "seller": "Expedia",
+          "usd": 512,
+          "brl": 2739,
+          "price_source": "usd_final",
+          "tax_note": "Recheck 07/10: 01–07/12 ainda mostra 3-Day PTP regular US$512,26 (com taxas) — promo 3+2 não listada. US/CA only.",
+          "promo": "Lista US/Canada; promo 3+2 pode não listar",
+          "meliuz": "Loja parceira — % de cashback em ingressos: checar no app",
+          "meliuz_pct": null,
+          "livelo": "Sem",
+          "br_ok": false,
+          "best_for_br": false,
+          "link": "https://www.expedia.com/things-to-do/universal-orlando-resort-theme-park-tickets-us-canada.a449578.activity-details?startDate=2026-12-01&endDate=2026-12-07",
+          "notes": "⚠️ Página marcada US & Canada only. Não priorizar."
+        }
+      ]
+    },
+    {
+      "id": "disney",
+      "name": "Disney — 3 dias Base",
+      "short": "Disney",
+      "covers": "Animal Kingdom 08 · EPCOT 09 · Hollywood Studios 10",
+      "start_date": "2026-12-08",
+      "promo": "Sem promo 3+1 ativa p/ dez/2026",
+      "why": "1 parque/dia basta (sem Park Hopper). MK não está no roteiro — o 3-Day Base deixa escolher AK/EPCOT/DHS.",
+      "offers": [
+        {
+          "id": "dis-decolar",
+          "seller": "Decolar",
+          "usd": 408,
+          "brl": 2183,
+          "price_source": "brl",
+          "tax_note": "Vitrine tarde 07/10: a partir de R$2.183 adulto (era R$2.188 em 06/10; manhã 07/10 chegou a R$2.270). Dez pode subir — selecione 08/12.",
+          "promo": "Cupons Disney (ex. QUERO10MAGIA) vão e voltam — checar checkout",
+          "meliuz": "1% cashback (ativar Decolar no Méliuz)",
+          "meliuz_pct": 1,
+          "livelo": "Campanhas flash Decolar/Esfera; cupom Livelo já deu R$400 OFF",
+          "br_ok": true,
+          "best_for_br": true,
+          "link": "https://www.decolar.com/viagens/imperdiveis/disney",
+          "notes": "Voltou perto do piso de ontem. Pagar em reais + parcelar + Méliuz 1%."
+        },
+        {
+          "id": "dis-vmz",
+          "seller": "VMZ Viagens",
+          "usd": null,
+          "brl": null,
+          "price_source": "check",
+          "tax_note": "Preço sobe ao informar 08/12 no buscador/reservas. Em R$, sem IOF.",
+          "promo": "3 dias Disney Base (1 parque/dia)",
+          "meliuz": "Sem",
+          "meliuz_pct": 0,
+          "livelo": "Sem parceria estável vista",
+          "br_ok": true,
+          "best_for_br": false,
+          "link": "https://reservas.vmzviagens.com.br/",
+          "notes": "Catálogo: vmzviagens.com.br/ingressos-disney-orlando · compare o R$ da data com Decolar (a partir de R$2.183) e Undercover (~US$391)."
+        },
+        {
+          "id": "dis-cvc",
+          "seller": "CVC",
+          "usd": 603,
+          "brl": 3224,
+          "price_source": "brl",
+          "tax_note": "R$ 3.224 a partir de (vitrine 01/11) · taxas inclusas · 8x. Pix −3%. Em out: até R$ 3.344.",
+          "promo": "Disney 3 Dias Básico (1 parque/dia)",
+          "meliuz": "Sem cashback Méliuz confirmado p/ CVC",
+          "meliuz_pct": 0,
+          "livelo": "Sem parceria estável vista",
+          "br_ok": true,
+          "best_for_br": false,
+          "link": "https://www.cvc.com.br/destinos/disney",
+          "notes": "Mais caro que Decolar na vitrine. Só vale se cupom/12x ou loja bater preço. Selecione 08/12."
+        },
+        {
+          "id": "dis-undercover",
+          "seller": "Undercover Tourist",
+          "usd": 391,
+          "brl": 2092,
+          "price_source": "usd_final",
+          "tax_note": "Recheck 07/10: US$357,23 + tax ≈ US$391,41 final (+ US$20 DiningDollars).",
+          "promo": "Desconto vs gate + crédito dining",
+          "meliuz": "Sem",
+          "meliuz_pct": 0,
+          "livelo": "Sem",
+          "br_ok": true,
+          "best_for_br": false,
+          "link": "https://www.undercovertourist.com/orlando/walt-disney-world-resort/",
+          "notes": "Disney costuma aceitar comprador internacional. Compare o total com Decolar+IOF zero."
+        },
+        {
+          "id": "dis-oficial",
+          "seller": "Oficial Disney",
+          "usd": 534,
+          "brl": 2857,
+          "price_source": "usd_from",
+          "tax_note": "Referência: 3-Day Base ~US$533 (out) a ~US$569 (pico 28/12) + 6,5% tax. 08–10/12 deve ficar no meio.",
+          "promo": "4-Park Magic não cobre dez/2026",
+          "meliuz": "Sem",
+          "meliuz_pct": 0,
+          "livelo": "Sem",
+          "br_ok": true,
+          "best_for_br": false,
+          "link": "https://disneyworld.disney.go.com/tickets/",
+          "notes": "Pagar em USD no cartão = IOF 3,5% + spread. Só se precisar do oficial."
+        },
+        {
+          "id": "dis-expedia",
+          "seller": "Expedia",
+          "usd": null,
+          "brl": null,
+          "price_source": "check",
+          "tax_note": "Preço por data no checkout.",
+          "promo": "—",
+          "meliuz": "Parceira — ativar e ler regras (ingressos podem ficar de fora)",
+          "meliuz_pct": null,
+          "livelo": "Sem",
+          "br_ok": "check",
+          "best_for_br": false,
+          "link": "https://www.expedia.com/Destination-Services.d6054289.Travel-Guide-Activities",
+          "notes": "Geralmente não bate Undercover/Decolar em Disney."
+        }
+      ]
+    },
+    {
+      "id": "seaworld-busch",
+      "name": "SeaWorld + Busch — 2 dias / 2 parques",
+      "short": "SeaWorld+Busch",
+      "covers": "SeaWorld 30/11 · Busch Gardens 11/12",
+      "start_date": "2026-11-30",
+      "promo": "2 visitas / ~US$53 por dia",
+      "why": "2ª visita em até 14 dias da 1ª — 30/11→11/12 = 11 dias. Shuttle Mears Orlando↔Tampa incluso no multi-park.",
+      "offers": [
+        {
+          "id": "sw-oficial",
+          "seller": "Oficial SeaWorld",
+          "usd": 106,
+          "brl": 567,
+          "price_source": "usd",
+          "tax_note": "Recheck 07/10 oficial: ainda US$106 total (~US$53/dia) + tax/fees.",
+          "promo": "Two-Day Two Park Ticket",
+          "meliuz": "Sem",
+          "meliuz_pct": 0,
+          "livelo": "Sem",
+          "br_ok": true,
+          "best_for_br": true,
+          "link": "https://seaworld.com/orlando/tickets/",
+          "notes": "Melhor custo do roteiro. Reserve o shuttle Busch: buschgardens.mears.com"
+        },
+        {
+          "id": "sw-vmz",
+          "seller": "VMZ Viagens",
+          "usd": null,
+          "brl": null,
+          "price_source": "check",
+          "tax_note": "Tem PROMO 2 entradas SeaWorld/Busch/Aquatica (c/ refeição). Preço no checkout.",
+          "promo": "02 entradas — SeaWorld, Busch ou Aquatica (+ dining em promo)",
+          "meliuz": "Sem",
+          "meliuz_pct": 0,
+          "livelo": "Sem",
+          "br_ok": true,
+          "best_for_br": false,
+          "link": "https://reservas.vmzviagens.com.br/",
+          "notes": "Catálogo: vmzviagens.com.br/ingressos-seaworld-busch-gardens-discovery-cove · só vale se R$ < oficial ~US$106×5,35≈R$567."
+        },
+        {
+          "id": "sw-cvc",
+          "seller": "CVC",
+          "usd": null,
+          "brl": null,
+          "price_source": "check",
+          "tax_note": "Não achei ingresso SeaWorld/Busch na vitrine online de ingressos.",
+          "promo": "—",
+          "meliuz": "—",
+          "meliuz_pct": 0,
+          "livelo": "—",
+          "br_ok": "check",
+          "best_for_br": false,
+          "link": "https://www.cvc.com.br/dicas-de-viagem/parques/seaworld-parks-viva-ferias-incriveis/",
+          "notes": "Só conteúdo/blog. Se existir, costuma ser via loja/consultor — peça orçamento."
+        },
+        {
+          "id": "sw-decolar",
+          "seller": "Decolar",
+          "usd": null,
+          "brl": null,
+          "price_source": "check",
+          "tax_note": "Buscar combo SeaWorld/Busch no checkout Decolar.",
+          "promo": "Cupons SEA20WORLD (20%) já expiraram — checar se voltou",
+          "meliuz": "1% cashback (ativar Decolar)",
+          "meliuz_pct": 1,
+          "livelo": "Campanhas pontuais",
+          "br_ok": true,
+          "best_for_br": false,
+          "link": "https://www.decolar.com/atracoes/",
+          "notes": "Só vale se o R$ final + cashback ficar < oficial convertido."
+        },
+        {
+          "id": "sw-undercover",
+          "seller": "Undercover Tourist",
+          "usd": null,
+          "brl": null,
+          "price_source": "check",
+          "tax_note": "Revendedor SeaWorld/Busch — comparar vs US$106 oficial.",
+          "promo": "—",
+          "meliuz": "Sem",
+          "meliuz_pct": 0,
+          "livelo": "Sem",
+          "br_ok": true,
+          "best_for_br": false,
+          "link": "https://www.undercovertourist.com/orlando/seaworld-orlando/",
+          "notes": "Oficial já está agressivo; Undercover só se tiver cupom extra."
+        }
+      ]
+    }
+  ],
+  "cashback_points": [
+    {
+      "name": "Méliuz × Decolar",
+      "detail": "Recheck 07/10: Decolar segue com ~1% cashback no Méliuz (ativar antes). Regras: ingressos podem ter exclusão — leia o regulamento da loja."
+    },
+    {
+      "name": "CVC Pix",
+      "detail": "Várias ofertas CVC de ingresso anunciam 3% OFF no Pix. Não achei cashback Méliuz estável para CVC."
+    },
+    {
+      "name": "Méliuz × Expedia",
+      "detail": "Expedia é loja parceira. Cupons de hotel/voo ≠ cashback garantido em ingresso. Página de tickets Universal da Expedia é US/Canada — pouco útil pro BR."
+    },
+    {
+      "name": "Livelo × Seus Ingressos",
+      "detail": "Especial Orlando: 3 pontos Livelo por real em ingressos Universal. Melhor acúmulo estável visto agora."
+    },
+    {
+      "name": "Livelo / Esfera × Decolar",
+      "detail": "Campanhas flash (10 pts/R$) em Universal/Disney — duram horas/dias. Vale abrir Livelo e Esfera no dia da compra."
+    },
+    {
+      "name": "Vivo × Decolar",
+      "detail": "Não achei benefício contínuo Vivo Valoriza → Decolar para ingressos. Houve sorteio Resgates Inesquecíveis Universal (pacote viagem), não desconto de ticket."
+    }
+  ],
+  "decision": [
+    "Universal (07/10 tarde): Decolar a partir de R$2.540 (+R$92 vs 06/10). Compare VMZ no reservas.vmzviagens.com.br com start 01/12 antes de fechar.",
+    "Disney (07/10 tarde): Decolar 3 dias a partir de R$2.183 (caiu vs R$2.270 da manhã; vs R$2.188 em 06/10). Undercover ~US$391 final ≈ R$2.092 a R$5,35 — ainda próximo; Decolar ganha por zero IOF + Méliuz 1%.",
+    "SeaWorld+Busch: oficial ainda US$106 (~R$567 efetivo). VMZ tem combo 2 entradas — só compre se o R$ do checkout bater o oficial.",
+    "Câmbio efetivo hoje ~R$5,35/US$ (turismo+IOF). Compra em R$ (Decolar/VMZ/CVC) continua melhor pra evitar IOF."
+  ]
+}

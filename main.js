@@ -528,6 +528,24 @@ window.closePreparoModal = function () {
     }
 };
 
+window.openIngressosModal = async function () {
+    const modal = document.getElementById('ingressos-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.classList.add('no-scroll');
+        await ensureIngressosData();
+        renderIngressos();
+    }
+};
+
+window.closeIngressosModal = function () {
+    const modal = document.getElementById('ingressos-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.classList.remove('no-scroll');
+    }
+};
+
 
 
 
@@ -1964,6 +1982,190 @@ function renderPreparo() {
             <span>${next ? `Próximo: ${next.when || ('até ' + formatDateBR(next.due))}` : 'Tudo tickado'}</span>
         </div>
         ${groupsHtml}
+    `;
+}
+
+let ingressosData = null;
+let ingressosFilter = 'all';
+
+async function ensureIngressosData() {
+    if (ingressosData) return;
+    try {
+        const res = await fetch('data/ingressos-comparacao.json');
+        if (!res.ok) throw new Error('ingressos missing');
+        ingressosData = await res.json();
+    } catch (e) {
+        console.error('Ingressos load failed', e);
+        ingressosData = null;
+    }
+}
+
+function formatIngressosMoneyUSD(n) {
+    if (n == null || Number.isNaN(Number(n))) return '—';
+    return `US$ ${Number(n).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+}
+
+function formatIngressosMoneyBRL(n) {
+    if (n == null || Number.isNaN(Number(n))) return '—';
+    return `R$ ${Number(n).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
+}
+
+function ingressosBrlForOffer(offer, fx) {
+    if (offer.brl != null) return offer.brl;
+    if (offer.usd != null && fx?.usd_brl_efetivo) {
+        return Math.round(offer.usd * fx.usd_brl_efetivo);
+    }
+    return null;
+}
+
+function ingressosUsdForOffer(offer, fx) {
+    if (offer.usd != null) return offer.usd;
+    if (offer.brl != null && fx?.usd_brl_efetivo) {
+        return Math.round(offer.brl / fx.usd_brl_efetivo);
+    }
+    return null;
+}
+
+function renderIngressosOfferRow(offer, fx) {
+    const usd = ingressosUsdForOffer(offer, fx);
+    const brl = ingressosBrlForOffer(offer, fx);
+    const best = offer.best_for_br ? 'best' : '';
+    const badge = offer.best_for_br
+        ? '<span class="ingressos-badge ingressos-badge-best">Melhor p/ BR</span>'
+        : (offer.br_ok === false
+            ? '<span class="ingressos-badge ingressos-badge-no">Não p/ BR</span>'
+            : '');
+    const pricePrimary = offer.price_source === 'brl' || (offer.brl != null && offer.usd == null)
+        ? formatIngressosMoneyBRL(brl)
+        : formatIngressosMoneyUSD(usd);
+    const priceSecondary = offer.price_source === 'brl' || (offer.brl != null && offer.usd == null)
+        ? (usd != null ? `≈ ${formatIngressosMoneyUSD(usd)}` : 'confirme no site')
+        : (brl != null ? `≈ ${formatIngressosMoneyBRL(brl)}` : 'confirme no site');
+    const meliuz = offer.meliuz || '—';
+    const livelo = offer.livelo || '—';
+    const promo = offer.promo || '—';
+    const notes = offer.notes ? `<p class="ingressos-notes">${offer.notes}</p>` : '';
+    const tax = offer.tax_note ? `<p class="ingressos-notes">${offer.tax_note}</p>` : '';
+    return `<tr class="${best}">
+        <td>
+            <div class="ingressos-seller">
+                <strong>${offer.seller}</strong>
+                ${badge}
+            </div>
+        </td>
+        <td>
+            <div class="ingressos-price">
+                <strong>${pricePrimary}</strong>
+                <em>${priceSecondary}</em>
+            </div>
+            ${tax}
+        </td>
+        <td>
+            <div class="ingressos-extras">
+                <div><b>Promo:</b> ${promo}</div>
+                <div><b>Méliuz:</b> ${meliuz}</div>
+                <div><b>Livelo:</b> ${livelo}</div>
+            </div>
+            ${notes}
+        </td>
+        <td>
+            <a class="ingressos-buy" href="${offer.link}" target="_blank" rel="noopener">Comprar</a>
+        </td>
+    </tr>`;
+}
+
+function renderIngressosProduct(product, fx) {
+    const rows = (product.offers || []).map(o => renderIngressosOfferRow(o, fx)).join('');
+    return `<section class="ingressos-product" data-product="${product.id}">
+        <div class="ingressos-product-head">
+            ${product.promo ? `<span class="ingressos-promo-pill">${product.promo}</span>` : ''}
+            <h3>${product.name}</h3>
+            <p class="ingressos-product-covers">${product.covers || ''}</p>
+            ${product.why ? `<p class="ingressos-product-why">${product.why}</p>` : ''}
+        </div>
+        <div class="ingressos-table-wrap">
+            <table class="ingressos-table">
+                <thead>
+                    <tr>
+                        <th>Onde</th>
+                        <th>Preço / pessoa</th>
+                        <th>Economia</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>${rows}</tbody>
+            </table>
+        </div>
+    </section>`;
+}
+
+window.filterIngressos = function (id) {
+    ingressosFilter = id || 'all';
+    renderIngressos();
+};
+
+function renderIngressos() {
+    const body = document.getElementById('ingressos-body');
+    if (!body) return;
+    if (!ingressosData) {
+        body.innerHTML = '<p class="ingressos-empty">Não foi possível carregar a comparação de ingressos.</p>';
+        return;
+    }
+
+    const fx = ingressosData.fx || {};
+    const needs = (ingressosData.needs || []).map(n =>
+        `<div class="ingressos-need">
+            <strong>${n.label} · ${n.dates}</strong>
+            <span>${n.ticket}</span>
+        </div>`
+    ).join('');
+
+    const banner = ingressosData.promo_banner
+        ? `<div class="ingressos-banner">
+            <h3>${ingressosData.promo_banner.title}</h3>
+            <p>${ingressosData.promo_banner.body}</p>
+           </div>`
+        : '';
+
+    const chips = [
+        { id: 'all', label: 'Tudo' },
+        ...(ingressosData.products || []).map(p => ({ id: p.id, label: p.short || p.name }))
+    ].map(c =>
+        `<button type="button" class="ingressos-chip ${ingressosFilter === c.id ? 'active' : ''}" onclick="filterIngressos('${c.id}')">${c.label}</button>`
+    ).join('');
+
+    const products = (ingressosData.products || [])
+        .filter(p => ingressosFilter === 'all' || p.id === ingressosFilter)
+        .map(p => renderIngressosProduct(p, fx))
+        .join('');
+
+    const cashback = (ingressosData.cashback_points || []).map(c =>
+        `<li><strong>${c.name}</strong>${c.detail}</li>`
+    ).join('');
+
+    const decision = (ingressosData.decision || []).map(d => `<li>${d}</li>`).join('');
+
+    const updated = ingressosData.updated
+        ? ingressosData.updated.split('-').reverse().join('/')
+        : '—';
+
+    body.innerHTML = `
+        <p class="ingressos-intro">${ingressosData.subtitle || ''}</p>
+        <p class="ingressos-updated">Pesquisa em ${updated} · adulto 10+</p>
+        <div class="ingressos-needs">${needs}</div>
+        ${banner}
+        <p class="ingressos-fx">${fx.note || ''}</p>
+        <div class="ingressos-chips">${chips}</div>
+        ${products}
+        <section class="ingressos-section">
+            <h3>Cashback &amp; pontos</h3>
+            <ul class="ingressos-tips">${cashback}</ul>
+        </section>
+        <section class="ingressos-decision">
+            <h3>Como decidir</h3>
+            <ol>${decision}</ol>
+        </section>
+        <p class="ingressos-disclaimer">Preços mudam por data e estoque. Links abrem o checkout oficial/revendedor — confirme valor final, impostos e elegibilidade (passaporte BR) antes de pagar.</p>
     `;
 }
 

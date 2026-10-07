@@ -79,6 +79,10 @@
                 <span class="nav-tile-label">Gastos</span>
                 <span class="nav-tile-hint">Custo da estadia</span>
             </button>
+            <button type="button" class="nav-tile nav-ingressos" onclick="openIngressosModal()">
+                <span class="nav-tile-label">Ingressos</span>
+                <span class="nav-tile-hint">Comparar preços e links</span>
+            </button>
         </nav>
 
         <section class="home-today" id="home-today">
@@ -124,6 +128,19 @@
             </div>
             <div class="modal-body-scroll" id="gastos-body">
                 <p class="gastos-loading">Carregando…</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ingressos / comparação -->
+    <div id="ingressos-modal" class="modal-overlay">
+        <div class="modal-content-wide">
+            <div class="modal-header">
+                <h2>Ingressos</h2>
+                <button class="back-modal-btn" onclick="closeIngressosModal()">Fechar</button>
+            </div>
+            <div class="modal-body-scroll" id="ingressos-body">
+                <p class="ingressos-loading">Carregando comparação…</p>
             </div>
         </div>
     </div>
