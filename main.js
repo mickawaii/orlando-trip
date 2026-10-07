@@ -2000,6 +2000,15 @@ async function ensureIngressosData() {
     }
 }
 
+function ingressosPartySize() {
+    const n = Number(ingressosData?.party_size);
+    return Number.isFinite(n) && n > 0 ? n : 2;
+}
+
+function ingressosPartyLabel() {
+    return ingressosData?.party_label || `${ingressosPartySize()} adultos`;
+}
+
 function formatIngressosMoneyUSD(n) {
     if (n == null || Number.isNaN(Number(n))) return '—';
     return `US$ ${Number(n).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
@@ -2008,6 +2017,11 @@ function formatIngressosMoneyUSD(n) {
 function formatIngressosMoneyBRL(n) {
     if (n == null || Number.isNaN(Number(n))) return '—';
     return `R$ ${Number(n).toLocaleString('pt-BR', { maximumFractionDigits: 0 })}`;
+}
+
+function ingressosScale(n, party) {
+    if (n == null || Number.isNaN(Number(n))) return null;
+    return Math.round(Number(n) * party);
 }
 
 function ingressosBrlForOffer(offer, fx) {
@@ -2026,21 +2040,102 @@ function ingressosUsdForOffer(offer, fx) {
     return null;
 }
 
-function renderIngressosOfferRow(offer, fx) {
-    const usd = ingressosUsdForOffer(offer, fx);
-    const brl = ingressosBrlForOffer(offer, fx);
+function ingressosPreferBrl(offer) {
+    return offer.price_source === 'brl' || (offer.brl != null && offer.usd == null);
+}
+
+function ingressosPricedOffers(product, fx) {
+    return (product.offers || []).filter(o =>
+        o.br_ok !== false && (ingressosBrlForOffer(o, fx) != null || ingressosUsdForOffer(o, fx) != null)
+    );
+}
+
+function ingressosBestOffer(product, fx) {
+    const priced = ingressosPricedOffers(product, fx);
+    if (!priced.length) return null;
+    const marked = priced.find(o => o.best_for_br);
+    if (marked) return marked;
+    return priced.slice().sort((a, b) => {
+        const ba = ingressosBrlForOffer(a, fx) ?? Infinity;
+        const bb = ingressosBrlForOffer(b, fx) ?? Infinity;
+        return ba - bb;
+    })[0];
+}
+
+function renderIngressosTripSummary(fx, party) {
+    const rows = (ingressosData.products || []).map(product => {
+        const best = ingressosBestOffer(product, fx);
+        if (!best) {
+            return `<div class="ingressos-summary-row">
+                <div>
+                    <strong>${product.short || product.name}</strong>
+                    <span>sem preço fechado — conferir no site</span>
+                </div>
+                <em>—</em>
+            </div>`;
+        }
+        const brl1 = ingressosBrlForOffer(best, fx);
+        const brl = ingressosScale(brl1, party);
+        const cashTxt = best.meliuz_pct
+            ? ` · Méliuz ~${formatIngressosMoneyBRL(Math.round((brl || 0) * best.meliuz_pct / 100))}`
+            : '';
+        return `<div class="ingressos-summary-row">
+            <div>
+                <strong>${product.short || product.name}</strong>
+                <span>${best.seller}<span class="ingressos-summary-cash">${cashTxt}</span></span>
+            </div>
+            <em>${formatIngressosMoneyBRL(brl)}</em>
+        </div>`;
+    }).join('');
+
+    const totals = (ingressosData.products || []).reduce((acc, product) => {
+        const best = ingressosBestOffer(product, fx);
+        if (!best) return acc;
+        const brl = ingressosScale(ingressosBrlForOffer(best, fx), party);
+        if (brl != null) acc.brl += brl;
+        return acc;
+    }, { brl: 0 });
+
+    return `<section class="ingressos-summary" aria-label="Total estimado para ${ingressosPartyLabel()}">
+        <div class="ingressos-summary-head">
+            <h3>Total do roteiro · ${ingressosPartyLabel()}</h3>
+            <p>Soma das melhores opções BR com preço (1 por bloco). VMZ/checkout sem cotação ficam de fora.</p>
+        </div>
+        <div class="ingressos-summary-rows">${rows}</div>
+        <div class="ingressos-summary-total">
+            <span>Estimativa ${ingressosPartyLabel()}</span>
+            <strong>${formatIngressosMoneyBRL(totals.brl)}</strong>
+        </div>
+    </section>`;
+}
+
+function renderIngressosOfferRow(offer, fx, party) {
+    const usd1 = ingressosUsdForOffer(offer, fx);
+    const brl1 = ingressosBrlForOffer(offer, fx);
+    const usd = ingressosScale(usd1, party);
+    const brl = ingressosScale(brl1, party);
     const best = offer.best_for_br ? 'best' : '';
     const badge = offer.best_for_br
         ? '<span class="ingressos-badge ingressos-badge-best">Melhor p/ BR</span>'
         : (offer.br_ok === false
             ? '<span class="ingressos-badge ingressos-badge-no">Não p/ BR</span>'
             : '');
-    const pricePrimary = offer.price_source === 'brl' || (offer.brl != null && offer.usd == null)
-        ? formatIngressosMoneyBRL(brl)
-        : formatIngressosMoneyUSD(usd);
-    const priceSecondary = offer.price_source === 'brl' || (offer.brl != null && offer.usd == null)
-        ? (usd != null ? `≈ ${formatIngressosMoneyUSD(usd)}` : 'confirme no site')
-        : (brl != null ? `≈ ${formatIngressosMoneyBRL(brl)}` : 'confirme no site');
+    const preferBrl = ingressosPreferBrl(offer);
+    const pricePrimary = brl == null && usd == null
+        ? 'Ver no site'
+        : (preferBrl
+            ? formatIngressosMoneyBRL(brl)
+            : formatIngressosMoneyUSD(usd));
+    const perPerson = preferBrl
+        ? (brl1 != null ? `${formatIngressosMoneyBRL(brl1)} / pessoa` : null)
+        : (usd1 != null ? `${formatIngressosMoneyUSD(usd1)} / pessoa` : null);
+    const altTotal = preferBrl
+        ? (usd != null ? `≈ ${formatIngressosMoneyUSD(usd)} p/ ${party}` : null)
+        : (brl != null ? `≈ ${formatIngressosMoneyBRL(brl)} p/ ${party}` : null);
+    const secondaryBits = [perPerson, altTotal].filter(Boolean);
+    const priceSecondary = secondaryBits.length
+        ? secondaryBits.join(' · ')
+        : 'confirme no site';
     const meliuz = offer.meliuz || '—';
     const livelo = offer.livelo || '—';
     const promo = offer.promo || '—';
@@ -2074,21 +2169,27 @@ function renderIngressosOfferRow(offer, fx) {
     </tr>`;
 }
 
-function renderIngressosProduct(product, fx) {
-    const rows = (product.offers || []).map(o => renderIngressosOfferRow(o, fx)).join('');
+function renderIngressosProduct(product, fx, party) {
+    const rows = (product.offers || []).map(o => renderIngressosOfferRow(o, fx, party)).join('');
+    const best = ingressosBestOffer(product, fx);
+    const bestBrl = best ? ingressosScale(ingressosBrlForOffer(best, fx), party) : null;
+    const bestLine = best && bestBrl != null
+        ? `<p class="ingressos-product-best">Melhor p/ BR agora: <strong>${best.seller} · ${formatIngressosMoneyBRL(bestBrl)}</strong> p/ ${party}</p>`
+        : '';
     return `<section class="ingressos-product" data-product="${product.id}">
         <div class="ingressos-product-head">
             ${product.promo ? `<span class="ingressos-promo-pill">${product.promo}</span>` : ''}
             <h3>${product.name}</h3>
             <p class="ingressos-product-covers">${product.covers || ''}</p>
             ${product.why ? `<p class="ingressos-product-why">${product.why}</p>` : ''}
+            ${bestLine}
         </div>
         <div class="ingressos-table-wrap">
             <table class="ingressos-table">
                 <thead>
                     <tr>
                         <th>Onde</th>
-                        <th>Preço / pessoa</th>
+                        <th>Total ${party} pessoas</th>
                         <th>Economia</th>
                         <th></th>
                     </tr>
@@ -2113,6 +2214,8 @@ function renderIngressos() {
     }
 
     const fx = ingressosData.fx || {};
+    const party = ingressosPartySize();
+    const partyLabel = ingressosPartyLabel();
     const needs = (ingressosData.needs || []).map(n =>
         `<div class="ingressos-need">
             <strong>${n.label} · ${n.dates}</strong>
@@ -2136,7 +2239,7 @@ function renderIngressos() {
 
     const products = (ingressosData.products || [])
         .filter(p => ingressosFilter === 'all' || p.id === ingressosFilter)
-        .map(p => renderIngressosProduct(p, fx))
+        .map(p => renderIngressosProduct(p, fx, party))
         .join('');
 
     const cashback = (ingressosData.cashback_points || []).map(c =>
@@ -2151,7 +2254,8 @@ function renderIngressos() {
 
     body.innerHTML = `
         <p class="ingressos-intro">${ingressosData.subtitle || ''}</p>
-        <p class="ingressos-updated">Pesquisa em ${updated} · adulto 10+</p>
+        <p class="ingressos-updated">Pesquisa em ${updated} · preços já calculados p/ ${partyLabel}</p>
+        ${renderIngressosTripSummary(fx, party)}
         <div class="ingressos-needs">${needs}</div>
         ${banner}
         <p class="ingressos-fx">${fx.note || ''}</p>
@@ -2165,7 +2269,7 @@ function renderIngressos() {
             <h3>Como decidir</h3>
             <ol>${decision}</ol>
         </section>
-        <p class="ingressos-disclaimer">Preços mudam por data e estoque. Links abrem o checkout oficial/revendedor — confirme valor final, impostos e elegibilidade (passaporte BR) antes de pagar.</p>
+        <p class="ingressos-disclaimer">Totais = preço unitário × ${party}. Preços mudam por data e estoque. Links abrem o checkout — confirme valor final, impostos e elegibilidade (passaporte BR) antes de pagar.</p>
     `;
 }
 
