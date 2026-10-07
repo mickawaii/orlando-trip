@@ -1,7 +1,9 @@
 {
   "updated": "2026-10-07",
   "title": "Ingressos — comparação",
-  "subtitle": "Preços rechecados em 07/10/2026 para o roteiro 30/11–11/12. Adulto 10+. Confirme a data no checkout.",
+  "subtitle": "Preços para 2 adultos (10+) no roteiro 30/11–11/12. Valores da tabela já são o total do casal — o por pessoa fica embaixo. Confirme a data no checkout.",
+  "party_size": 2,
+  "party_label": "2 adultos",
   "fx": {
     "usd_brl_comercial": 4.99,
     "usd_brl_turismo": 5.17,
@@ -398,9 +400,9 @@
     }
   ],
   "decision": [
-    "Universal (07/10 tarde): Decolar a partir de R$2.540 (+R$92 vs 06/10). Compare VMZ no reservas.vmzviagens.com.br com start 01/12 antes de fechar.",
-    "Disney (07/10 tarde): Decolar 3 dias a partir de R$2.183 (caiu vs R$2.270 da manhã; vs R$2.188 em 06/10). Undercover ~US$391 final ≈ R$2.092 a R$5,35 — ainda próximo; Decolar ganha por zero IOF + Méliuz 1%.",
-    "SeaWorld+Busch: oficial ainda US$106 (~R$567 efetivo). VMZ tem combo 2 entradas — só compre se o R$ do checkout bater o oficial.",
-    "Câmbio efetivo hoje ~R$5,35/US$ (turismo+IOF). Compra em R$ (Decolar/VMZ/CVC) continua melhor pra evitar IOF."
+    "Universal (07/10): Decolar R$2.540/pessoa → R$5.080 o casal. Compare VMZ (reservas.vmzviagens.com.br) com start 01/12 antes de fechar.",
+    "Disney (07/10): Decolar R$2.183/pessoa → R$4.366 o casal. Undercover ~US$391/pessoa ≈ R$4.184 o casal a R$5,35 — Decolar ainda ganha com zero IOF + Méliuz 1%.",
+    "SeaWorld+Busch: oficial US$106/pessoa → ~R$1.134 o casal (efetivo). VMZ só vale se o checkout dos 2 ficar mais barato.",
+    "Câmbio efetivo ~R$5,35/US$. Compra em R$ (Decolar/VMZ/CVC) evita IOF. Totais na tela já são ×2 adultos."
   ]
 }
