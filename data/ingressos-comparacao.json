@@ -1,12 +1,12 @@
 {
-  "updated": "2026-10-06",
+  "updated": "2026-10-07",
   "title": "Ingressos — comparação",
-  "subtitle": "Preços pesquisados para o roteiro 30/11–11/12. Adulto 10+. Confirme a data no checkout.",
+  "subtitle": "Preços rechecados em 07/10/2026 para o roteiro 30/11–11/12. Adulto 10+. Confirme a data no checkout.",
   "fx": {
-    "usd_brl_comercial": 4.97,
-    "usd_brl_turismo": 5.22,
-    "usd_brl_efetivo": 5.4,
-    "note": "Cotação 06/10/2026: comercial ~R$4,97 · turismo venda ~R$5,22 · efetivo cartão ~R$5,40 (turismo + IOF 3,5%). Compra em reais (Decolar/CVC/Seus Ingressos) evita IOF/spread."
+    "usd_brl_comercial": 4.99,
+    "usd_brl_turismo": 5.17,
+    "usd_brl_efetivo": 5.35,
+    "note": "Cotação 07/10/2026: comercial ~R$4,99 · turismo venda ~R$5,17 · efetivo cartão ~R$5,35 (turismo + IOF 3,5%). Compra em reais (Decolar/CVC/VMZ/Seus Ingressos) evita IOF/spread. Decolar subiu vs 06/10 (Universal R$2.448→R$2.540; Disney R$2.188→R$2.270)."
   },
   "needs": [
     {
@@ -45,10 +45,10 @@
         {
           "id": "uni-decolar",
           "seller": "Decolar",
-          "usd": 453,
-          "brl": 2448,
+          "usd": 475,
+          "brl": 2540,
           "price_source": "brl",
-          "tax_note": "Preço em R$ no site (a partir de). Sem IOF/spread.",
+          "tax_note": "Vitrine 07/10: a partir de R$2.540 (era R$2.448 em 06/10). Sem IOF/spread.",
           "promo": "3+2 Park-to-Park + Epic",
           "meliuz": "1% cashback (ativar Decolar no Méliuz)",
           "meliuz_pct": 1,
@@ -56,12 +56,28 @@
           "br_ok": true,
           "best_for_br": true,
           "link": "https://www.decolar.com/viagens/imperdiveis/universal",
-          "notes": "Parcelamento em reais. Selecione início 01/12."
+          "notes": "Subiu ~R$92 vs ontem. Selecione início 01/12 no checkout."
+        },
+        {
+          "id": "uni-vmz",
+          "seller": "VMZ Viagens",
+          "usd": null,
+          "brl": null,
+          "price_source": "check",
+          "tax_note": "Preço só no checkout com data (reservas.vmzviagens.com.br). Em R$, sem IOF.",
+          "promo": "3 Dias Park to Park + 2 Dias GRÁTIS + Epic",
+          "meliuz": "Sem",
+          "meliuz_pct": 0,
+          "livelo": "Sem parceria estável vista",
+          "br_ok": true,
+          "best_for_br": false,
+          "link": "https://reservas.vmzviagens.com.br/",
+          "notes": "Parceira oficial Universal no BR. Catálogo: vmzviagens.com.br/ingressos-universal-orlando · escolha start 01/12 e compare com Decolar R$2.540."
         },
         {
           "id": "uni-cvc",
           "seller": "CVC",
-          "usd": 482,
+          "usd": 487,
           "brl": 2605,
           "price_source": "brl",
           "tax_note": "R$ 2.605 a partir de (vitrine 02/11) · taxas inclusas. Em outra vitrine: R$ 2.742. Pix −3%.",
@@ -94,7 +110,7 @@
           "id": "uni-oficial",
           "seller": "Oficial Universal",
           "usd": 427,
-          "brl": 2306,
+          "brl": 2284,
           "price_source": "usd_from",
           "tax_note": "A partir de ~US$85/dia (US$427) + imposto FL ~6,5%. Em cartão BR some IOF/spread.",
           "promo": "Get 2 Days Free with 3-Day Ticket",
@@ -110,7 +126,7 @@
           "id": "uni-getaway",
           "seller": "Get Away Today",
           "usd": 379,
-          "brl": 2047,
+          "brl": 2028,
           "price_source": "usd_from",
           "tax_note": "A partir de US$379 + tax (piso). Revendedor autorizado; costuma bater Undercover.",
           "promo": "Buy 3, Get 2 FREE",
@@ -126,7 +142,7 @@
           "id": "uni-undercover",
           "seller": "Undercover Tourist",
           "usd": 411,
-          "brl": 2219,
+          "brl": 2199,
           "price_source": "usd_final",
           "tax_note": "US$375 + tax ≈ US$410,87 final (adulto).",
           "promo": "3-Day PTP + 2 Days FREE",
@@ -142,9 +158,9 @@
           "id": "uni-expedia",
           "seller": "Expedia",
           "usd": 512,
-          "brl": 2765,
+          "brl": 2739,
           "price_source": "usd_final",
-          "tax_note": "Em 01–07/12 a página US/CA mostrou 3-Day PTP regular US$512,26 (com taxas) — promo 3+2 não apareceu nessas datas.",
+          "tax_note": "Recheck 07/10: 01–07/12 ainda mostra 3-Day PTP regular US$512,26 (com taxas) — promo 3+2 não listada. US/CA only.",
           "promo": "Lista US/Canada; promo 3+2 pode não listar",
           "meliuz": "Loja parceira — % de cashback em ingressos: checar no app",
           "meliuz_pct": null,
@@ -168,10 +184,10 @@
         {
           "id": "dis-decolar",
           "seller": "Decolar",
-          "usd": 405,
-          "brl": 2188,
+          "usd": 424,
+          "brl": 2270,
           "price_source": "brl",
-          "tax_note": "A partir de R$2.188 adulto (piso do site). Datas de dez podem subir — selecione 08/12.",
+          "tax_note": "Vitrine 07/10: a partir de R$2.270 adulto (era R$2.188 em 06/10). Dez pode subir — selecione 08/12.",
           "promo": "Cupons Disney (ex. QUERO10MAGIA) vão e voltam — checar checkout",
           "meliuz": "1% cashback (ativar Decolar no Méliuz)",
           "meliuz_pct": 1,
@@ -179,12 +195,28 @@
           "br_ok": true,
           "best_for_br": true,
           "link": "https://www.decolar.com/viagens/imperdiveis/disney",
-          "notes": "Pagar em reais + parcelar. Melhor caminho se o preço da data fechar perto do piso."
+          "notes": "Subiu ~R$82 vs ontem. Pagar em reais + parcelar + Méliuz 1%."
+        },
+        {
+          "id": "dis-vmz",
+          "seller": "VMZ Viagens",
+          "usd": null,
+          "brl": null,
+          "price_source": "check",
+          "tax_note": "Preço sobe ao informar 08/12 no buscador/reservas. Em R$, sem IOF.",
+          "promo": "3 dias Disney Base (1 parque/dia)",
+          "meliuz": "Sem",
+          "meliuz_pct": 0,
+          "livelo": "Sem parceria estável vista",
+          "br_ok": true,
+          "best_for_br": false,
+          "link": "https://reservas.vmzviagens.com.br/",
+          "notes": "Catálogo: vmzviagens.com.br/ingressos-disney-orlando · compare o R$ da data com Decolar (a partir de R$2.270) e Undercover (~US$391)."
         },
         {
           "id": "dis-cvc",
           "seller": "CVC",
-          "usd": 597,
+          "usd": 603,
           "brl": 3224,
           "price_source": "brl",
           "tax_note": "R$ 3.224 a partir de (vitrine 01/11) · taxas inclusas · 8x. Pix −3%. Em out: até R$ 3.344.",
@@ -201,9 +233,9 @@
           "id": "dis-undercover",
           "seller": "Undercover Tourist",
           "usd": 391,
-          "brl": 2111,
+          "brl": 2092,
           "price_source": "usd_final",
-          "tax_note": "US$357,23 + tax ≈ US$391,41 final (+ US$20 DiningDollars).",
+          "tax_note": "Recheck 07/10: US$357,23 + tax ≈ US$391,41 final (+ US$20 DiningDollars).",
           "promo": "Desconto vs gate + crédito dining",
           "meliuz": "Sem",
           "meliuz_pct": 0,
@@ -217,7 +249,7 @@
           "id": "dis-oficial",
           "seller": "Oficial Disney",
           "usd": 534,
-          "brl": 2884,
+          "brl": 2857,
           "price_source": "usd_from",
           "tax_note": "Referência: 3-Day Base ~US$533 (out) a ~US$569 (pico 28/12) + 6,5% tax. 08–10/12 deve ficar no meio.",
           "promo": "4-Park Magic não cobre dez/2026",
@@ -260,9 +292,9 @@
           "id": "sw-oficial",
           "seller": "Oficial SeaWorld",
           "usd": 106,
-          "brl": 572,
+          "brl": 567,
           "price_source": "usd",
-          "tax_note": "US$106 total (~US$53/dia) + tax/fees. Gate equivalente bem mais alto.",
+          "tax_note": "Recheck 07/10 oficial: ainda US$106 total (~US$53/dia) + tax/fees.",
           "promo": "Two-Day Two Park Ticket",
           "meliuz": "Sem",
           "meliuz_pct": 0,
@@ -271,6 +303,22 @@
           "best_for_br": true,
           "link": "https://seaworld.com/orlando/tickets/",
           "notes": "Melhor custo do roteiro. Reserve o shuttle Busch: buschgardens.mears.com"
+        },
+        {
+          "id": "sw-vmz",
+          "seller": "VMZ Viagens",
+          "usd": null,
+          "brl": null,
+          "price_source": "check",
+          "tax_note": "Tem PROMO 2 entradas SeaWorld/Busch/Aquatica (c/ refeição). Preço no checkout.",
+          "promo": "02 entradas — SeaWorld, Busch ou Aquatica (+ dining em promo)",
+          "meliuz": "Sem",
+          "meliuz_pct": 0,
+          "livelo": "Sem",
+          "br_ok": true,
+          "best_for_br": false,
+          "link": "https://reservas.vmzviagens.com.br/",
+          "notes": "Catálogo: vmzviagens.com.br/ingressos-seaworld-busch-gardens-discovery-cove · só vale se R$ < oficial ~US$106×5,35≈R$567."
         },
         {
           "id": "sw-cvc",
@@ -326,7 +374,7 @@
   "cashback_points": [
     {
       "name": "Méliuz × Decolar",
-      "detail": "Hoje ~1% cashback listado na página Decolar do Méliuz (06/10/2026). Ative antes de comprar. Regras: ingressos podem ter exclusão — leia o regulamento da loja."
+      "detail": "Recheck 07/10: Decolar segue com ~1% cashback no Méliuz (ativar antes). Regras: ingressos podem ter exclusão — leia o regulamento da loja."
     },
     {
       "name": "CVC Pix",
@@ -350,9 +398,9 @@
     }
   ],
   "decision": [
-    "Universal: priorize Decolar (R$ em mãos, Méliuz 1%) ou Seus Ingressos se quiser Livelo 3 pts/R$. CVC tem o 3+2 (~R$2.605+) mas veio mais caro que Decolar na vitrine.",
-    "Disney: Decolar e Undercover batem CVC com folga na vitrine (CVC ~R$3.224 vs Decolar a partir de R$2.188).",
-    "SeaWorld+Busch: site oficial (~US$106). CVC não lista o combo online — só via loja, se houver.",
-    "Antes de pagar: ative Méliuz, cheque Livelo/Esfera do dia, e confirme start date 01/12 (Universal) e 08/12 (Disney)."
+    "Universal (07/10): Decolar a partir de R$2.540 (+R$92 vs ontem). Compare VMZ no reservas.vmzviagens.com.br com a mesma data 01/12 antes de fechar.",
+    "Disney (07/10): Decolar a partir de R$2.270 (+R$82 vs ontem). Undercover ainda ~US$391 final — converta a R$5,35 e veja se bate Decolar/VMZ.",
+    "SeaWorld+Busch: oficial ainda US$106. VMZ tem combo 2 entradas — peça cotação e só compre se ficar mais barato em R$.",
+    "Câmbio efetivo hoje ~R$5,35/US$ (turismo+IOF). Compra em R$ (Decolar/VMZ/CVC) continua melhor pra evitar IOF."
   ]
 }
