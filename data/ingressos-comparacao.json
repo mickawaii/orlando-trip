@@ -6,7 +6,7 @@
     "usd_brl_comercial": 4.99,
     "usd_brl_turismo": 5.17,
     "usd_brl_efetivo": 5.35,
-    "note": "Cotação 07/10/2026: comercial ~R$4,99 · turismo venda ~R$5,17 · efetivo cartão ~R$5,35 (turismo + IOF 3,5%). Compra em reais (Decolar/CVC/VMZ/Seus Ingressos) evita IOF/spread. Decolar subiu vs 06/10 (Universal R$2.448→R$2.540; Disney R$2.188→R$2.270)."
+    "note": "Cotação 07/10/2026: comercial ~R$4,99 · turismo venda ~R$5,17 · efetivo cartão ~R$5,35 (turismo + IOF 3,5%). Compra em reais (Decolar/CVC/VMZ/Seus Ingressos) evita IOF/spread. Recheck tarde 07/10: Universal Decolar R$2.540 (era R$2.448 em 06/10); Disney 3 dias Decolar R$2.183 (era R$2.188 em 06/10 / R$2.270 mais cedo hoje)."
   },
   "needs": [
     {
@@ -184,10 +184,10 @@
         {
           "id": "dis-decolar",
           "seller": "Decolar",
-          "usd": 424,
-          "brl": 2270,
+          "usd": 408,
+          "brl": 2183,
           "price_source": "brl",
-          "tax_note": "Vitrine 07/10: a partir de R$2.270 adulto (era R$2.188 em 06/10). Dez pode subir — selecione 08/12.",
+          "tax_note": "Vitrine tarde 07/10: a partir de R$2.183 adulto (era R$2.188 em 06/10; manhã 07/10 chegou a R$2.270). Dez pode subir — selecione 08/12.",
           "promo": "Cupons Disney (ex. QUERO10MAGIA) vão e voltam — checar checkout",
           "meliuz": "1% cashback (ativar Decolar no Méliuz)",
           "meliuz_pct": 1,
@@ -195,7 +195,7 @@
           "br_ok": true,
           "best_for_br": true,
           "link": "https://www.decolar.com/viagens/imperdiveis/disney",
-          "notes": "Subiu ~R$82 vs ontem. Pagar em reais + parcelar + Méliuz 1%."
+          "notes": "Voltou perto do piso de ontem. Pagar em reais + parcelar + Méliuz 1%."
         },
         {
           "id": "dis-vmz",
@@ -211,7 +211,7 @@
           "br_ok": true,
           "best_for_br": false,
           "link": "https://reservas.vmzviagens.com.br/",
-          "notes": "Catálogo: vmzviagens.com.br/ingressos-disney-orlando · compare o R$ da data com Decolar (a partir de R$2.270) e Undercover (~US$391)."
+          "notes": "Catálogo: vmzviagens.com.br/ingressos-disney-orlando · compare o R$ da data com Decolar (a partir de R$2.183) e Undercover (~US$391)."
         },
         {
           "id": "dis-cvc",
@@ -398,9 +398,9 @@
     }
   ],
   "decision": [
-    "Universal (07/10): Decolar a partir de R$2.540 (+R$92 vs ontem). Compare VMZ no reservas.vmzviagens.com.br com a mesma data 01/12 antes de fechar.",
-    "Disney (07/10): Decolar a partir de R$2.270 (+R$82 vs ontem). Undercover ainda ~US$391 final — converta a R$5,35 e veja se bate Decolar/VMZ.",
-    "SeaWorld+Busch: oficial ainda US$106. VMZ tem combo 2 entradas — peça cotação e só compre se ficar mais barato em R$.",
+    "Universal (07/10 tarde): Decolar a partir de R$2.540 (+R$92 vs 06/10). Compare VMZ no reservas.vmzviagens.com.br com start 01/12 antes de fechar.",
+    "Disney (07/10 tarde): Decolar 3 dias a partir de R$2.183 (caiu vs R$2.270 da manhã; vs R$2.188 em 06/10). Undercover ~US$391 final ≈ R$2.092 a R$5,35 — ainda próximo; Decolar ganha por zero IOF + Méliuz 1%.",
+    "SeaWorld+Busch: oficial ainda US$106 (~R$567 efetivo). VMZ tem combo 2 entradas — só compre se o R$ do checkout bater o oficial.",
     "Câmbio efetivo hoje ~R$5,35/US$ (turismo+IOF). Compra em R$ (Decolar/VMZ/CVC) continua melhor pra evitar IOF."
   ]
 }
